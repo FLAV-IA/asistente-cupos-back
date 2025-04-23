@@ -5,7 +5,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 @Component
-@NoArgsConstructor
 public class PromptTemplateProvider {
   private ClasspathResourceLoader loader;
 
@@ -14,12 +13,12 @@ public class PromptTemplateProvider {
   }
 
   public Resource systemResource() {
-    String systemPathName = "prompts/system-template.md";
+    String systemPathName = "prompt/system-template.md";
     return loader.comoRecurso(systemPathName);
   }
 
   public Resource userResource() {
-    String userPathName = "prompts/user-template.md";
+    String userPathName = "prompt/user-template.md";
     return loader.comoRecurso(userPathName);
   }
 }

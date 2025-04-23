@@ -95,3 +95,6 @@ tasks.register('setupCodeStyle', Copy) {
 tasks.named('idea') {
     dependsOn 'setupCodeStyle'
 }
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

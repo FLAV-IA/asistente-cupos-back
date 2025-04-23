@@ -23,20 +23,20 @@ class PeticionInscripcionCsvAdapterTest {
 
   @Test
   void convierteArchivoCsvEnUnaListaDePeticiones() throws Exception {
-    MockMultipartFile archivo = generarArchivo("Juan Perez,123,Mat101,true",
-      "Maria Gomez,456,Mat102,false");
+    MockMultipartFile archivo = generarArchivo("45072112,Bases de Datos,\"C1,C2\",1035",
+      "40946592,Matematica 1,\"C2\",8003N");
 
     List<PeticionInscripcion> peticiones = adapter.convertir(archivo);
 
     assertThat(peticiones).hasSize(2);
-    assertThat(peticiones.get(0).getEstudiante().getNombre()).isEqualTo("Juan Perez");
-    assertThat(peticiones.get(1).getEstudiante().getLegajo()).isEqualTo("456");
+    assertThat(peticiones.get(0).getMateria()).isEqualTo("Bases de Datos");
+    assertThat(peticiones.get(1).getEstudiante().getLegajo()).isEqualTo("40946592");
   }
 
   private MockMultipartFile generarArchivo(String unEstudiante, String otroEstudiante) throws IOException {
     File tempCsv = tempDir.resolve("peticiones.csv").toFile();
     try (FileWriter writer = new FileWriter(tempCsv)) {
-      writer.write("nombre,legajo,materia,correlativa\n");
+      writer.write("legajo,materia,comision,codigoMateria\n");
       writer.write(unEstudiante + "\n");
       writer.write(otroEstudiante + "\n");
     }

@@ -1,5 +1,6 @@
 package com.edu.asistenteCupos.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,15 +22,24 @@ public class HistoriaAcademica {
 
   @OneToOne
   @JoinColumn(name = "legajo_estudiante", referencedColumnName = "legajo", unique = true)
+  @JsonBackReference
+
   private Estudiante estudiante;
 
   private int insc3;
-  private int inscAct;
+  private String inscAct;
   private int aprobUlt;
   private int inscTot;
   private int aprobTot;
   private int restantes;
   private String correlativas;
+  private String curso1c;
+  private String aprob1c;
+  private String curso2c;
+  private String aprob2c;
+  private Double coeficiente;
+
+
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
           name = "historia_academica_anotadas",
