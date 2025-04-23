@@ -23,13 +23,12 @@ public class HistoriaAcademica {
   @JoinColumn(name = "legajo_estudiante", referencedColumnName = "legajo", unique = true)
   private Estudiante estudiante;
 
-  private int insc3;
-  private int inscAct;
-  private int aprobUlt;
-  private int inscTot;
-  private int aprobTot;
-  private int restantes;
-  private String correlativas;
+  private int cantInscripciones3CursadasPrevias;
+  private int cantAprobadas3CursadasPrevias;
+  private int cantInscripcionesHistoricas;
+  private int cantMateriasAprobadasHistoricas;
+  private int cantMateriasRestantes;
+  private Boolean cumpleCorrelatividad;
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
           name = "historia_academica_anotadas",
@@ -37,6 +36,6 @@ public class HistoriaAcademica {
           inverseJoinColumns = @JoinColumn(name = "anotadas_codigo"),
           uniqueConstraints = @UniqueConstraint(columnNames = {"historia_academica_id_historia_academica", "anotadas_codigo"})
   )
-  private Set<Materia> anotadas = new HashSet<>();
+  private Set<Materia> materiasActuales = new HashSet<>();
 
 }

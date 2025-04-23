@@ -38,27 +38,25 @@ public class EstudianteAcademicaSeeder {
         String nombre = row[1].trim();
         String mail = row[2].trim();
         int insc3 = Integer.parseInt(row[3].trim());
-        int inscAct = Integer.parseInt(row[4].trim());
-        int aprobUlt = Integer.parseInt(row[5].trim());
-        int inscTot = Integer.parseInt(row[6].trim());
-        int aprobTot = Integer.parseInt(row[7].trim());
-        int restantes = Integer.parseInt(row[8].trim());
-        String correlativas = row[9].trim();
-        String[] anotadas = row[10].trim().split(",");
+        int aprobUlt = Integer.parseInt(row[4].trim());
+        int inscTot = Integer.parseInt(row[5].trim());
+        int aprobTot = Integer.parseInt(row[6].trim());
+        int restantes = Integer.parseInt(row[7].trim());
+        Boolean cumpleCorrelatividad = Boolean.valueOf(row[8]);
+        String[] anotadas = row[9].trim().split(",");
 
         Set<Materia> materiasAnotadas = Arrays.stream(anotadas).map(materia->this.materiaRepository.findByCodigo(materia).orElseThrow(()->new RuntimeException("No se encontro la materia con el codigo: "+materia)))
                 .collect(Collectors.toSet());
-        HistoriaAcademica historiaAcademica = HistoriaAcademica.builder().insc3(insc3)
-                .inscAct(inscAct)
-                .aprobUlt(aprobUlt)
-                .inscTot(inscTot)
-                .aprobTot(aprobTot)
-                .restantes(restantes)
-                .correlativas(correlativas)
-                .anotadas(materiasAnotadas)
+        HistoriaAcademica historiaAcademica = HistoriaAcademica.builder().cantInscripciones3CursadasPrevias(insc3)
+                .cantAprobadas3CursadasPrevias(aprobUlt)
+                .cantInscripcionesHistoricas(inscTot)
+                .cantMateriasAprobadasHistoricas(aprobTot)
+                .cantMateriasRestantes(restantes)
+                .cumpleCorrelatividad(cumpleCorrelatividad)
+                .materiasActuales(materiasAnotadas)
                 .build();
         Estudiante estudiante = Estudiante.builder().legajo(legajo)
-                                .nombre(nombre).build();
+                                .nombre(nombre).mail(mail).build();
         historiaAcademica.setEstudiante(estudiante);
         estudiante.setHistoriaAcademica(historiaAcademica);
         return estudiante;

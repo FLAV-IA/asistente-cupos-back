@@ -29,10 +29,10 @@ public class EstudianteSeederTest {
                 Materia.builder().codigo("80005").build(),
                 Materia.builder().codigo("80000").build()
         );
-        HistoriaAcademica historiaAcedemica1 = HistoriaAcademica.builder().insc3(2)
-                .inscAct(0).aprobUlt(1).inscTot(6).aprobTot(3).restantes(5).correlativas("Si").anotadas(materiasCorrelativas).build();
-        HistoriaAcademica historiaAcedemica2 = HistoriaAcademica.builder().insc3(2)
-                .inscAct(0).aprobUlt(1).inscTot(6).aprobTot(3).restantes(5).correlativas("Si").anotadas(materiasCorrelativas).build();
+        HistoriaAcademica historiaAcedemica1 = HistoriaAcademica.builder().cantInscripciones3CursadasPrevias(2)
+                .cantAprobadas3CursadasPrevias(1).cantInscripcionesHistoricas(6).cantMateriasAprobadasHistoricas(3).cantMateriasRestantes(5).cumpleCorrelatividad(true).materiasActuales(materiasCorrelativas).build();
+        HistoriaAcademica historiaAcedemica2 = HistoriaAcademica.builder().cantInscripciones3CursadasPrevias(2)
+                .cantAprobadas3CursadasPrevias(1).cantInscripcionesHistoricas(6).cantMateriasAprobadasHistoricas(3).cantMateriasRestantes(5).cumpleCorrelatividad(true).materiasActuales(materiasCorrelativas).build();
 
         Estudiante estudiante1 = Estudiante.builder().legajo("101").historiaAcademica(historiaAcedemica1).build();
         Estudiante estudiante2 = Estudiante.builder().legajo("100").historiaAcademica(historiaAcedemica2).build();
@@ -46,7 +46,7 @@ public class EstudianteSeederTest {
         List<Estudiante> all = estudianteRepositoryInMemory.findAll();
         assertThat(all).hasSize(2);
         Estudiante estudianteBuscado = estudianteRepositoryInMemory.findByCodigo("100").orElseThrow();
-        assertThat(estudianteBuscado.getHistoriaAcademica().getAprobUlt()).isEqualTo(1);
+        assertThat(estudianteBuscado.getHistoriaAcademica().getCantAprobadas3CursadasPrevias()).isEqualTo(1);
 
     }
 
