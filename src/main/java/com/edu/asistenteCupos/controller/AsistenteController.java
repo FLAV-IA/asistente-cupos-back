@@ -2,6 +2,7 @@ package com.edu.asistenteCupos.controller;
 
 import com.edu.asistenteCupos.controller.dto.PeticionesInscripcionDTO;
 import com.edu.asistenteCupos.controller.dto.SugerenciaInscripcionDto;
+import com.edu.asistenteCupos.domain.Estudiante;
 import com.edu.asistenteCupos.domain.PeticionInscripcion;
 import com.edu.asistenteCupos.domain.SugerenciaInscripcion;
 import com.edu.asistenteCupos.mapper.PeticionInscripcionMapper;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -62,11 +64,18 @@ class AsistenteController {
   }
 
   @PostMapping("/ver-prompt")
-  public ResponseEntity<String> verPrompt(@RequestBody PeticionesInscripcionDTO peticionesDTO) {
+  public ResponseEntity<String> verPrompt(@RequestParam(required = false) MultipartFile file) {
     try {
-      List<PeticionInscripcion> peticiones = peticionInscripcionMapper.toPeticionInscripcionList(
-        peticionesDTO.peticiones());
-      peticiones.stream().forEach(peticion -> mantenedorAlumno.obtenerAlumno( peticion.getEstudiante().getLegajo()));
+      List<PeticionInscripcion> peticiones = peticionInscripcionCsvAdapter.convertir(file);
+
+      peticiones.stream().forEach(peticion ->
+      {
+        Optional<Estudiante> estudiante = mantenedorAlumno.obtenerAlumno(peticion.getEstudiante().getLegajo());
+        if(estudiante.isPresent()) {
+          peticion.setEstudiante(estudiante.get());                }
+      });
+
+
 
       return ResponseEntity.ok(asistenteDeInscripcion.mostrarPrompt(peticiones));
     } catch (Exception e) {
