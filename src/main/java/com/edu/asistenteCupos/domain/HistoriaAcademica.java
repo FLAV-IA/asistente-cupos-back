@@ -25,18 +25,13 @@ public class HistoriaAcademica {
   @JsonBackReference
   private Estudiante estudiante;
 
-  private int insc3;
-  private String inscAct;
-  private int aprobUlt;
   private int inscTot;
-  private int aprobTot;
-  private int restantes;
-  private String correlativas;
   private String curso1c;
   private String aprob1c;
   private String curso2c;
   private String aprob2c;
   private Double coeficiente;
+  private Boolean cumpleCorrelatividad;
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
