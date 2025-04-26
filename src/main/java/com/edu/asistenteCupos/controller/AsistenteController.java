@@ -37,7 +37,7 @@ class AsistenteController {
     try {
       List<PeticionInscripcion> peticiones = peticionInscripcionCsvAdapter.convertir(file);
 
-      peticiones.stream().forEach(peticion -> mantenedorAlumno.obtenerAlumno( peticion.getEstudiante().getLegajo()));
+      peticiones.forEach(peticion -> mantenedorAlumno.obtenerAlumno( peticion.getEstudiante().getLegajo()));
       List<SugerenciaInscripcion> sugerencias = asistenteDeInscripcion.sugerirInscripcion(peticiones);
 
       List<SugerenciaInscripcionDto> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(

@@ -27,7 +27,11 @@ public interface PeticionInscripcionMapper {
 
   HistoriaAcademica toHistoriaAcademica(HistoriaAcademicaDTO dto);
 
-  @Mappings({@Mapping(source = "nombre", target = "estudiante.nombre"), @Mapping(source = "legajo", target = "estudiante.legajo"), @Mapping(source = ".", target = "estudiante.historiaAcademica", qualifiedByName = "fromCsvToHistoria"), @Mapping(expression = "java(Arrays.asList(csvDto.getComisiones().split(\",\")))", target = "comisiones"), @Mapping(source = "materia", target = "materia"), @Mapping(source = "correlativa", target = "cumpleCorrelativa")})
+  @Mappings({@Mapping(source = "nombre", target = "estudiante.nombre"), @Mapping(source = "legajo", target = "estudiante.legajo"),
+    @Mapping(source = ".", target = "estudiante.historiaAcademica", qualifiedByName = "fromCsvToHistoria"),
+    @Mapping(expression = "java(Arrays.asList(csvDto.getComisiones().split(\",\")))", target = "comisiones"),
+    @Mapping(source = "materia", target = "materia"),
+    @Mapping(source = "correlativa", target = "cumpleCorrelativa")})
   PeticionInscripcion toPeticionInscripcion(PeticionInscripcionCsvDTO csvDto);
 
   @Named("fromCsvToHistoria")

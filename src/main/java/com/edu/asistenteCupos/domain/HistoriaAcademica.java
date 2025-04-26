@@ -39,5 +39,5 @@ public class HistoriaAcademica {
     inverseJoinColumns = @JoinColumn(name = "codigo_de_materia"),
     uniqueConstraints = @UniqueConstraint(columnNames = {"id_historia_academica", "codigo_de_materia"})
   )
-  private Set<Materia> inscripcionesActuales = new HashSet<>();
+  private Set<Materia> inscripcionesActuales;
 }
