@@ -15,11 +15,16 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class EstudianteSeederTest {
-
   @Test
   void cargaAlumnoConHistoriaAcademicaDesdeCSVDeTest() throws Exception {
     MateriaRepository materiaRepositoryInMemory = new MateriaRepositoryInMemory();
+    materiaRepositoryInMemory.save(Materia.builder().codigo("646").nombre("Intro Test").build());
+    materiaRepositoryInMemory.save(Materia.builder().codigo("487").nombre("Intro Test").build());
+    materiaRepositoryInMemory.save(Materia.builder().codigo("1038").nombre("Intro Test").build());
+    materiaRepositoryInMemory.save(Materia.builder().codigo("1035").nombre("Intro Test").build());
     materiaRepositoryInMemory.save(Materia.builder().codigo("1041").nombre("Intro Test").build());
+    materiaRepositoryInMemory.save(Materia.builder().codigo("1042").nombre("Intro Test").build());
+    materiaRepositoryInMemory.save(Materia.builder().codigo("1048").nombre("Intro Test").build());
     materiaRepositoryInMemory.save(
       Materia.builder().codigo("1046").nombre("Avanzado Test").build());
     EstudianteRepository estudianteRepositoryInMemory = new EstudianteRepositoryInMemory();

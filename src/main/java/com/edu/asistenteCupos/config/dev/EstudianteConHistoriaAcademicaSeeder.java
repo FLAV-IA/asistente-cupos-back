@@ -1,6 +1,7 @@
 package com.edu.asistenteCupos.config.dev;
 
 import com.edu.asistenteCupos.Utils.ClasspathResourceLoader;
+import com.edu.asistenteCupos.domain.Cursada;
 import com.edu.asistenteCupos.domain.Estudiante;
 import com.edu.asistenteCupos.domain.HistoriaAcademica;
 import com.edu.asistenteCupos.domain.Materia;
@@ -15,9 +16,12 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Configuration
 @RequiredArgsConstructor
@@ -37,7 +41,6 @@ public class EstudianteConHistoriaAcademicaSeeder {
       estudianteRepository.save(estudiante);
     }
     log.info("Se cargaron [{}] estudiantes con su historia academica.", rows.size() - 1);
-
   }
 
   private Estudiante obtenerEstudiante(String[] row) {
@@ -49,23 +52,44 @@ public class EstudianteConHistoriaAcademicaSeeder {
 
   private HistoriaAcademica obtenerHistoriaAcademica(String[] row) {
     Double coeficiente = Double.parseDouble(row[4].trim().equals("-") ? "0" : row[4].trim());
-    int inscTot = Integer.parseInt(row[5].trim());
-    String inscAct = row[6].trim();
-    String insc1C2024 = row[7].trim();
-    String aprob1C2024 = row[8].trim();
-    String insc2C2024 = row[9].trim();
-    String aprob2C2024 = row[10].trim();
+    int totalInscripcionesHistoricas = Integer.parseInt(row[5].trim());
+    String inscripcionesActuales = row[6].trim();
+    int totalHistoricasAprobadas = 0;
 
-    Set<Materia> materiasAnotadas = inscAct.equals("-") ? new java.util.HashSet<>() : Arrays
-      .stream(inscAct.split(",")).map(
-        materia -> this.materiaRepository.findByCodigo(materia.replace('"', ' ').replace(" ", ""))
-                                         .orElseThrow(() -> new RuntimeException(
-                                           "No se encontro la materia con el codigo: " + row[0] +
-                                             "materia" + materia))).collect(Collectors.toSet());
-    return HistoriaAcademica.builder().totalInscripcionesHistoricas(inscTot).aprob1c(aprob1C2024)
-                            .aprob2c(aprob2C2024).curso1c(insc1C2024).curso2c(insc2C2024)
-                            .coeficiente(coeficiente).inscripcionesActuales(materiasAnotadas).build();
+    Set<Materia> materiasAnotadas = parsearMaterias(inscripcionesActuales, Collectors.toSet());
 
+    List<Cursada> cursadasAnterioresC12024 = construirCursadas(row[7].trim(), row[8].trim());
+    List<Cursada> cursadasAnterioresC22024 = construirCursadas(row[9].trim(), row[10].trim());
+    List<Cursada> cursadasAnteriores = Stream
+      .concat(cursadasAnterioresC12024.stream(), cursadasAnterioresC22024.stream()).toList();
+
+    return HistoriaAcademica.builder().totalInscripcionesHistoricas(totalInscripcionesHistoricas)
+                            .totalHistoricasAprobadas(totalHistoricasAprobadas)
+                            .cursadasAnteriores(cursadasAnteriores).coeficiente(coeficiente)
+                            .inscripcionesActuales(materiasAnotadas).build();
+  }
+
+  /**
+   * ?
+   *
+   * @param inscriptas string separado por comas que representa las materias inscriptas para un cuatrimestre
+   * @param aprobadas  string separado por comas que representa las materias aprobadas para un cuatrimestre
+   * @return la lista de cursadas
+   */
+  private List<Cursada> construirCursadas(String inscriptas, String aprobadas) {
+    List<Materia> materiasCursadas = parsearMaterias(inscriptas, Collectors.toList());
+    List<Materia> materiasaprobadas = parsearMaterias(aprobadas, Collectors.toList());
+    return materiasCursadas.stream().map(
+      materia -> Cursada.builder().materia(materia).fueAprobada(materiasaprobadas.contains(materia))
+                        .build()).collect(Collectors.toList());
+  }
+
+  private <T extends Collection<Materia>> T parsearMaterias(String materias, Collector<Materia, ?, T> collector) {
+    return (materias.equals("-") ? Stream.<Materia>empty() : Arrays.stream(materias.split(",")).map(
+      codigoMateria -> materiaRepository
+        .findByCodigo(codigoMateria.replace("\"", "").replace(" ", "")).orElseThrow(
+          () -> new RuntimeException(
+            "No se encontró la materia con el código: " + codigoMateria)))).collect(collector);
   }
 
   @Bean

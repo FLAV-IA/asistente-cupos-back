@@ -20,23 +20,17 @@ public class HistoriaAcademica {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long idHistoriaAcademica;
+  private int totalInscripcionesHistoricas;
+  private int totalHistoricasAprobadas;
+  private Double coeficiente;
 
   @OneToOne
   @JoinColumn(name = "legajo_de_estudiante", referencedColumnName = "legajo", unique = true)
   @JsonBackReference
   private Estudiante estudiante;
 
-  private int totalInscripcionesHistoricas;
-  private Double coeficiente;
-  private Boolean cumpleCorrelatividad;
-
-  @OneToMany
-  private List<Materia> ultimasCursadas;
-
-  private String curso1c;
-  private String aprob1c;
-  private String curso2c;
-  private String aprob2c;
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Cursada> cursadasAnteriores;
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
