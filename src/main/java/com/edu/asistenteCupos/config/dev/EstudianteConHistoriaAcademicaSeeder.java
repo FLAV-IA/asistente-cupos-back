@@ -62,9 +62,9 @@ public class EstudianteConHistoriaAcademicaSeeder {
                                          .orElseThrow(() -> new RuntimeException(
                                            "No se encontro la materia con el codigo: " + row[0] +
                                              "materia" + materia))).collect(Collectors.toSet());
-    return HistoriaAcademica.builder().inscTot(inscTot).aprob1c(aprob1C2024)
+    return HistoriaAcademica.builder().totalInscripcionesHistoricas(inscTot).aprob1c(aprob1C2024)
                             .aprob2c(aprob2C2024).curso1c(insc1C2024).curso2c(insc2C2024)
-                            .coeficiente(coeficiente).anotadas(materiasAnotadas).build();
+                            .coeficiente(coeficiente).inscripcionesActuales(materiasAnotadas).build();
 
   }
 
