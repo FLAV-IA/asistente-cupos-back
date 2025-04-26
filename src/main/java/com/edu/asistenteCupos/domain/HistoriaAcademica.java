@@ -17,13 +17,12 @@ import java.util.Set;
 @Builder
 public class HistoriaAcademica {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY) 
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long idHistoriaAcademica;
 
   @OneToOne
   @JoinColumn(name = "legajo_estudiante", referencedColumnName = "legajo", unique = true)
   @JsonBackReference
-
   private Estudiante estudiante;
 
   private int insc3;
@@ -39,7 +38,6 @@ public class HistoriaAcademica {
   private String aprob2c;
   private Double coeficiente;
 
-
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
           name = "historia_academica_anotadas",
@@ -48,5 +46,4 @@ public class HistoriaAcademica {
           uniqueConstraints = @UniqueConstraint(columnNames = {"historia_academica_id_historia_academica", "anotadas_codigo"})
   )
   private Set<Materia> anotadas = new HashSet<>();
-
 }

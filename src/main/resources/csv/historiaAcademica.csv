@@ -1,3 +1,415 @@
-legajo|nombre|mail|insc3| inscAct| aprobUlt| inscTot| aprobTot| restantes|correlativas|Anotadas
-100|pepe|pepe@gmail.com|2|0|1|6|3|5|Si|80005,80000
-101|pepa|pepa@gmail.com|1|2|3|4|5|6|Si|80005,80000
+legajo|nombre|apellido|mail|coeficiente|inscTot|inscAct|insc1C2024|aprob1C2024|insc2C2024|aprob2C2024
+25731082|flavia|saldaña|fff@fff.com|333|0 |-|-|-|-|-
+45072112|Alexis lautaro|Abrahan|alexislautaroabrahan1@gnail.com|21.41|1 |"1041"|"1038,1035"|-|"487,1038"|-
+44170649|Federico Antonio|Acosta|federicoacosta002@gmail.com|89.78|1 |"1046"|"646,1042,1051"|"646,1051,1051,1042,1042"|"1041,1048"|"1041,1041,1048,1048"
+44709009|Matias Ariel|Acosta|aaco.maty@gmail.com|43.30|4 |"1046,1056,646,1305"|"1042,1044,1040,1045"|"1044,1044,1042,1042,1040,1040"|"1043,1033,1038"|"1033,1033,1043,1043"
+40955499|Alejandro adrian|Aguilar|Alejandro_aguilar98@outlook.es|76.16|0 |"90000"|"1044,1047,1040,1045"|"1040,1040,1047,1047,1045,1045"|"90000,1042,1051,1303"|"1051,1051,1042,1042,1303"
+40946592|Roberto Emanuel|Aguirre |emanuelaguirre@yahoo.com|12.12|2 |"90000,1032"|"80000"|-|"80005,80000"|"80000,80005"
+43095296|Tomás Ezequiel |Aguirre |tomi_aguirre01@hotmail.com|32.94|2 |"1043,1036"|"1036"|-|"1041,1037,1038"|"1037"
+44185614|Nicolas Alfredo|Alderete|nicolas.alderete.2002@gmail.com|26.70|2 |"1037,1036"|"1038,752,90028,1039"|"752,752,1039,1039,90028,90028"|"1036,1034"|-
+45297833|JOAQUIN IVAN|ALFARO|ialfarojoaquin@gmail.com|17.90|1 |"1033"|"1035"|-|"1035,1033"|-
+45065440|Amir Leom|Allegue|leonallegue7@gmail.com|14.12|1 |"1032"|"1032,1033"|-|"90000,1032"|-
+41926632|Estefania Belen|Aloe|estefiialoee@gmail.com|18.87|1 |"1032"|"487"|-|"1032"|-
+39715232|Ezequiel Javier|Alonso|ezequiel.javier.alonso@gmail.com|26.35|0 |-|"487,1033"|"1033,487"|"1035,1041"|"1041"
+43596339|Walter Gabriel|Altamirano|altamiranow4@gmail.com|53.85|2 |"1044,1039"|"90028,1037"|"1037,1037,90028,90028"|"1035,1043"|"1035,1035"
+43967766|Renata|Altube|renata.ltube@gmail.com|26.91|2 |"90000,487"|"80000,80005"|"80000,80005"|"1033,1032"|"1033,1032"
+44052334|Gonzalo Sebastian|Alvarez|alvarez.gozalo@outlook.es|20.65|1 |"487"|"80000,80005"|"80000,80005"|"90000,1032"|"1032"
+44698373|Santiago Daniel|Andreoli|santyandreoli16@gmail.com|26.51|2 |"1035,90000"|"80000,80005"|"80000,80005"|"1033,1032"|"1033,1032"
+45300841|Brandon|Arce|brar241203@gmail.com|16.86|2 |"1033,90000"|"80000"|"80000"|"1033,1032"|"1032"
+38303490|Camila|Arciniega Marchini|marchinicamila94@gmail.com|93.49|0 |-|"1045"|-|"1045"|-
+40080153|Natalia Micaela|Arguen|nataliaarguen@gmail.com|27.20|1 |"1035"|-|-|"1035,1039"|"1039"
+38585742|Cristian Nahuel|Arias|cristianariaas@hotmail.com|17.67|1 |"487"|"1033,1032,90000"|"90000,1032"|"487,1033"|-
+38089811|Hernán|Arizaga|hernanpabloarizaga@gmail.com|29.18|2 |"90000,1032"|-|-|"487"|"487"
+36946763|Leonardo Darío |Arjona|arjona.l.dario@gmail.com|32.26|1 |"1034"|"487,90000"|-|"1035,487"|"487"
+42463232|Marcelo Nicolás |Armella |armellamarce@gmail.com|19.40|1 |"1035"|"1036,90000"|-|"1036"|-
+37052506|Cesar Elbio|Arnez Escobar|elbioarnez@gmail.com|20.09|1 |"487"|"80005"|"80005"|"1032,90028"|"1032"
+33170302|Eric Jorge|Arnez Inochea|ericarnez@gmail.com|89.12|0 |-|-|-|"1045"|-
+32382564|Leandro Ignacio |Arroyo|leandroarroyo77@gmail.com|91.12|0 |-|"1045"|-|"1045"|-
+34888536|Ezequiel Eduardo|Astrada|astradaezequiel.tpi@gmail.com|34.95|2 |"1036,90000"|"1035,1036,1033"|-|"1036,1033"|-
+45221067|Matías German|Avalo|avalomatias21@gmail.com|17.99|1 |"487"|"90028"|-|-|-
+36615938|Pablo Damian|Avalos|avalospablod@gmail.com|74.12|0 |"1305"|"1306"|"1306,1306"|"1308,1305"|"1308,1308"
+19009209|Leandro Quimey|Avila Tapia|leandro.avila.tapia@gmail.com|39.58|1 |"1037"|"1036,1033"|-|"1035,1034"|"1035,1034"
+40302955|Gonzalo David|Baez|gonzalodbaez@gmail.com|93.81|0 |-|-|-|-|-
+47114637|Melina Ivana|Barrientos|melinabarrientos0612@gmail.com|13.57|0 |-|"80000,80005"|"80000,80005"|"1032"|-
+46904851|Valeria|Barsotti|barsottivale7@gmail.com|17.08|1 |"1033"|"80005,80000"|"80000,80005"|"1032"|"1032"
+46187280|Cristopher Ian|Bechtholdt|cristopherbechtholdt@gmail.com|48.95|0 |-|"1043,1044"|"1043,1044"|"752,1040,1039"|"1039,1040"
+36154493|Pablo Gaston|Belotto|gastonpablo1991@gmail.com|35.38|1 |"1034"|"1035,1034"|"1035"|"1034,1036"|-
+40141495|Gonzalo|Bender Defago|gonzabender@gmail.com|84.49|1 |"1046"|"1056,646,1043"|"1043,1056,646"|"1042,1041,1045"|"1041,1042"
+34983203|Germán Leonel|Benedetto|germanlbenedetto@gmail.com|15.79|1 |"1032"|"80005,80000"|"80000,80005"|"90000"|-
+45320469|Jimena Jazmín |Berengo|jazminberengo@gmail.com|29.39|1 |"90028"|"487,90000"|"90000"|"487,1033"|"487"
+37367194|Natalia|Berges|natiberges24@gmail.com|26.91|1 |"487"|"80005,80000"|"80000,80005"|"1033,1032"|"1033,1032"
+47020482|Nicolás Emilio|Bermudez |bermudeznicolas503@gmail.com|26.91|2 |"487,90000"|"80000,80005"|"80005,80000"|"1033,1032"|"1032,1033"
+35949747|Pablo Nicolas|Bernasconi|pablonicolas17@gmail.com|80.81|0 |-|"1046,90028"|-|"1046"|"1046"
+44379179|joan paul|berraondo|joanpaulberraondo@yahoo.com.ar|19.49|2 |"487,1032"|"80000,80005"|"80000,80005"|"1032,90000"|"90000"
+45298289|Jeremias Gabriel|Bianqui Kronemberger |jeremiasbianqui@gmail.com|12.46|1 |"1033"|"1033,90000"|-|"1032"|-
+45624177|Priscila Nerea|Billordo|priscilanbillordo@gmail.com|36.09|1 |"1034"|"1032,90000"|"1032,90000"|"487,90028"|"90028,487"
+31963507|Alejandro Ariel |Blanco|sleepyale85@gmail.com|22.32|1 |"487"|"80005,80000"|"80000,80005"|"90000,1032"|"90000,1032"
+36989172|Martin Alejandro|Boidi|boidi.martinalejandro@gmail.com|7.33|0 |-|"1043,1047,1041"|"1041,1043,1047"|"1042,1036"|"1042"
+45573612|Rodrigo Manuel|Bolaños|rodrimanuelbw@gmail.com|74.74|2 |"1042,1041"|"1035,1043,1040"|"1043,1043,1035,1035,1040,1040"|"1044,1045,1039"|"1039,1039,1045,1045,1044,1044"
+44457325|Gonzalo Daniel|Bordon|htitimomonhotmailcom@gmail.com|21.90|2 |"487,90000"|"80005,80000"|"80005,80000"|"1032"|"1032"
+44209211|Maximiliano|Borrajo|maximilianoborrajo0@gmail.com|68.94|1 |"1043"|"1039"|"1039,1039"|"1036,1037,1302"|"1302,1302,1037,1037,1036,1036"
+44710930|Franco|Bottarini|franco.botta7@gmail.com|13.46|1 |"1032"|"80005"|"80005"|"90000,80000"|"80000"
+39095844|Emilse |Bracamonte |bracamonte.emi.a@gmail.com|15.70|1 |"1032"|"80000,80005"|"80000,80005"|"90000"|"90000"
+37660248|Juan Gabriel|Bregonzi |juanbregonzi99@gmail.com|14.70|1 |"1032"|"80005"|"80005,80005"|"90000,80000"|"90000,90000,80000,80000"
+46425745|Agustin|Brizuela|agusbrizu.10@gmail.com|35.72|2 |"1035,1034"|"487,1032"|"1032,1032,487,487"|"90028,1033"|"90028,90028,1033,1033"
+45609670|Micaela Tatiana|Brizuela|micaelabrizuela2016@gmail.com|27.98|3 |"752,1036,1039"|"487,1041"|"1041"|"1038,487"|"1038,487"
+44885935|Ivan Leandro|Budzaj|budzajivan@gmail.com|48.03|2 |"1035,1041"|"1036,1037"|"1037"|"1035,1039"|"1039"
+44655890|Matias Tadeo |Búscaglia |mattadeobb@gmail.com|17.99|1 |"487"|"80000,80005"|"80000"|"90000,80005"|"90000,80005"
+46562921|Eric |Cabral Montenegro |ericmontenegro15657@gmail.com|11.79|1 |"1032"|"80000,80005"|"80000,80005"|"90000"|-
+42544509|Rodrigo Daniel|Caceres Jaramillo|rodicom10@gmail.com|81.50|1 |"1043"|"1056,1042"|"1042,1056"|"1045,90000"|"90000"
+36901897|Braian |Cadillac|braian.cadillac1992@gmail.com|29.39|1 |"1036"|"487,90000"|"487,90000"|"1033"|-
+46623806|Maitena|Campos |maitenacampos903@gmail.com|15.57|2 |"1032,90000"|"90000"|-|"1032"|-
+46625035|Lautaro tomas|Caneda olveira|lautarotomascaneda@gmail.com|26.71|2 |"487,90000"|"80000,80005"|"80000,80005"|"1033,1032"|"1032,1033"
+45503006|Bruno|Capelli|brunocapelli6@gmail.com|16.24|1 |"1032"|"1032,90000"|-|"90000,1033"|-
+29985651|Natalia Susana |Caporale Campaña |nataliacaporalec@gmail.com|60.26|0 |-|"90000"|-|"1047"|-
+39118259|Matias|Cardozo|matiascardozo2795@gmail.com|89.18|1 |"1041"|"1041"|-|"1045"|-
+42723042|Marco Antonio|Cardozo|marcocardozo325@gmail.com|52.57|3 |"90028,1037"|"1035,1036,1039"|"1039,1039,1035,1035"|"1047,1041,1034"|"1047,1047,1034,1034"
+43857008|Lara Noelí |Cardozo |cardozo.laranoeli@gmail.com|65.58|1 |"1045"|"1041,1037,1045"|"1037,1037"|"1043,1041"|"1043,1043"
+42314787|Nicolas|Carmona|nicolascarmona2000@gmail.com|21.90|1 |"1035"|"1033,1032"|"1032"|"487"|-
+42833101|Facundo Lauraro|Carnevale |carnevalefacundo@gmail.com|28.08|1 |"1035"|"1036,1039"|"1039,1036"|"1035"|-
+34683561|Daiana|Casquero|daiecasquero@gmail.com|18.27|2 |"1035"|"90000,80005"|"90000,80005"|"487,1032"|"1032"
+44788527|Agustin Franco|Castillo|frxncoacastillo@gmail.com|13.70|2 |"1033,1032"|"1032,90000"|-|"90000,1035"|"90000"
+42679546|Mateo Ignacio|Castillo |Mateocastillo521@gmail.com|26.31|0 |-|"1033"|"1033"|"487"|-
+45608899|Guadalupe Julieta |Castillo |jgccastillo50@gmail.com|17.57|1 |"487"|"80000,80005"|"80000,80005"|"90000"|-
+46693684|Santiago Javier|Catalogna|catalognasantiago@gmail.com|19.54|2 |"487,1033"|"80000,80005"|"80000,80005"|"90000,1032"|"90000,1032"
+46644961|Melanie Nahiara|Centurión |melanienahiara4@gmail.com|22.92|1 |"1035"|"1032,90000"|"90000"|"1032"|"1032"
+46644962|Lautaro Gabriel |Centurión |lautarogcenturion05@gmail.com|16.90|1 |"1033"|"1032,90000"|-|-|-
+44338815|Axel Yoel|Chaile|exerchaile@gmail.com|21.94|2 |"1041,1032"|"487,90028"|"90028,487"|"1033,1032"|"1033"
+44869636|gaston ivan|chavez|gastonps2160@gmail.com|20.65|1 |"487"|"1032"|"1032"|"1033"|-
+36211804|Esteban Alberto|Cicovich|estebancicovich@gmail.com|84.95|1 |"1304"|"1307,1313"|"1307,1307,1313"|"1316,1309"|"1309,1316,1316"
+44052326|Ignacio|Cirilli|ignaciocirilli@hotmail.com|70.26|1 |"1046"|"1042,1044"|"1042,1044"|"1033,1039"|"1039"
+36762634|Marcelo Rodrigo|Coduto|mcoduto.tpi@gmail.com|24.32|1 |"1032"|"487"|"487"|"1035"|-
+44726675|Lucas|Colman|lucas.colman@outlook.com|22|1 |"487"|"1032,90000"|"90000"|"1032,90028"|"1032"
+42942859|Lucila|Coniglio|lucilavictoria_2000@hotmail.com|32.68|1 |"1036"|"1034"|"1034"|"1037"|"1037"
+36291734|Eric|Contreras|mi1562626720@gmail.com|15.61|0 |-|"1032,90000"|"1032"|"1033,487"|-
+44936710|Ana Lucia |Contreras Sardo |contreraslucy47@gmail.com|14.70|1 |"1033"|"80000,80005"|"80000"|"90000,80005"|"90000,80005"
+43200347|maia tatiana|converti|maiaconverti23@gmail.com| 18.49|2 |"487,1032"|-|-|"487"|-
+43311275|Mayra Nair|Corbalan|leyesmayra06@gmail.com|26.31|1 |"487"|"80005,80000"|"80000,80005"|"1033,1032"|"1033,1032"
+38843221|Lucas Josué|Coronel|lucas._bocajunior@hotmail.com|36.58|3 |"1043,1044,90028"|"1033,1034"|"1034,1033"|"1041,1037,1038"|"1041,1037"
+43095325|Sebastian Emanuel|Correa|sebastiancorreaemanuel@gmail.com|60.72|2 |"1042,1045"|"1036,1033,1039"|"1039,1039,1036,1036,1033,1033"|"1041,1037,1038"|"1038,1038,1037,1037,1041,1041"
+38670110|Ignacio|Correa|Ignaciomanuel07@gmail.com|34.50|1 |"1034"|"487"|"487"|"1033"|"1033"
+40879892|Nicolas|Correa|nicolas.correa97@hotmail.com|37.88|1 |"1034"|"487,90000"|"487"|"1035,1033"|"1033,1035"
+36763955|Margarita|Cortizas|margarita.cortizas@gmail.com|85.77|1 |"1046"|"1056,646,1043"|"1043,1056,646"|"1042,1045,1048"|"1048,1042"
+34021391|Leonardo Adrian|Criado Camilo|leonardoac31@gmail.com|47.62|0 |-|"1045"|"1045,1045"|"1042,1041"|"1041,1041,1042,1042"
+38521125|Martina|Cuadrado|marticuadradolocu@gmail.com|18.07|0 |-|"487"|-|"487,1032"|-
+42833449|Gisela |Cubas|giselacubas2063@gmail.com|13.26|1 |"1032"|"1032"|-|"90000"|-
+39333611|Alan Javier |Cuellar|alan.javier.ajc@gmail.com|16.63|1 |"1033"|"1032"|-|"1032,1033"|-
+39746328|Leandro Agustín|Cuevas|leandroagustin.cuevas@gmail.com|67.36|1 |"1042"|"752,1043,1044,1040"|"752,752,1044,1044,1043,1043,1040,1040"|"1038,1033"|"1038,1038"
+38615422|Matias|Curia|fliacuria10@gmail.com|20.24|1 |"1032"|"80000"|"80000"|"80005,90000"|"90000,80005"
+41165125|Camila|Cutillo Limeres|camisol1998@gmail.com|23.46|1 |"1035"|"487"|"487"|"1032,1034"|"1032,1034"
+43726989|Lourdes Julieta|de la Cerda|fideos.12.11@gmail.com|33.67|1 |"1044"|"1036,1034"|"1034"|"1037,1038"|"1038,1037"
+44823696|Agustín Leonel|De la serna|agusleon03@gmail.com|19.99|1 |"487"|-|-|"80005,90000"|"90000,80005"
+46680139|Agostina Abril|De Yurka|agostinadeyurka@yahoo.com|13.70|0 |-|"80005"|"80005,80005"|"90000"|"90000,90000"
+44958916|Francisco Ignacio|Demartino|frandema19@gmail.com|26.65|2 |"1036,1038"|"487,1032"|"487,487,1032,1032"|"1035,1036"|"1035,1035"
+44784653|Matias Francisco|Deo|matiasfd.deo@gmail.com|65.04|2 |"1044,1040"|"1036,90028,1039"|"1036,1036,90028,90028,1039,1039"|"1041,1037"|"1037,1037,1041,1041"
+44491699|Julian|Derudi|julianderudi9@gmail.com|30.82|2 |"1036,1047"|"1039,1035"|"1039,1035"|"1036,1038"|"1038"
+42778561|Camila|Diaz|camilaadiaz69@gmail.com|23.75|2 |"487,1041"|"1033"|"1033,1033"|"487,1035"|"1035,1035"
+45545389|Ignacio emanuel|Diaz|xxnachoxxt.m@gmail.com|53.38|2 |"1043,1038"|"1036,1033,1037"|"1037"|"1036,90028"|"90028,1036"
+94137667|Ignacio|Diaz|nacho.diiaz324@gmail.com|17.90|1 |"487"|"90000"|-|"487,1033,1032"|-
+42134784|Matias Adrian|Dominguez|dmzmatias32@gmail.com|73.61|2 |"646,1302"|"1043,1044"|"1043,1044"|"1056,1042,1038"|"1056"
+38257590|Maria Rosa|Dominguez|mariadominguez29394@gmail.com|20.74|1 |"1033"|"80000,80005"|"80000,80005"|"90000"|"90000"
+43777585|Juan Cruz|Duran|juan.cruz.duran169@gmail.com|16.24|2 |"1033,90000"|"80000,80005"|"80000,80005"|"1035,1032"|-
+45889945|Alejandro Gabriel|Encina|encinaalegabriel@gmail.com|21.48|1 |-|-|-|-|-
+94544627|Alison Nayeli|Escobar Villarroel|alisonescobar648@gmail.com|22.82|2 |"1033,1038"|"487"|"487,54"|"1032"|"1032"
+44052086|Sabrina|Espinola|espinola2019sabri@gmail.com|15.40|2 |"1033,1032"|"1035,90028"|-|-|-
+46424904|Barbara Agustina|Espinoza|barbiespinoza2017@gmail.com|11.46|1 |"1033"|"80005"|"80005"|-|-
+95009107|Erick Javier|Familia Aquino|familiaaquinoerick@gmail.com|26.31|2 |"487,90000"|"80000,80005"|"80000,80005"|"1033,1032"|"1032"
+46624356|Sabrina Lidia|Farias|sabriifariias28@gmail.com|27.31|2 |"487,90000"|"80000,80005"|"80000,80005"|"1033,1032"|"1033,1032"
+28170571|EZEQUIEL MATIAS|FAUEZ|matiasfauez@hotmail.com|20.65|2 |"90000,1033"|-|-|"80005,80000"|"80005,80005,80000,80000"
+31531038|Emanuel|Feoli|feoliemanuel@gmail.com|20.49|1 |"1032"|"487,90000"|"90000"|"1033"|-
+38424560|Leandro Ariel|Fernandez|leaafernandez1@gmail.com|25.03|0 |-|"1035,487"|"1035"|"90000,487"|-
+44890669|Ramiro Ivan|Fernandez|ramiro.ifernandez15@gmail.com| 29.73|1 |"1036"|"487,90000"|"90000,487"|"1032"|"1032"
+47028764|Verónica Lucia|Fernández Fattori |vero.lucia.fernandez.fattori@gmail.com|20|2 |"487,1038"|"80000,80005"|"80000,80005"|"1033,1032"|"1033,1032"
+44544538|Martin|Fernández Lovotti|martin0022f@gmail.com|50.32|2 |"1047,1037"|"1035,1037"|"1035"|"1036,1039,1038"|"1038,1039"
+44209238|Alexander Victor|Ferragut|alexanderferragut@gmail.com|36.59|1 |"1033"|"1036,1034"|"1034"|"1036,1037"|-
+41924003|Valentin Edgardo|Ferreyra|valentineferreyra@gmail.com|8.61|0 |-|"1051,1039,1058"|"1039,1039,1058,1051,1051"|"1045,1048"|"1048,1048"
+45868035|Damian|Ferreyra|ferreyradamianyo@gmail.com|20.15|1 |-|-|-|-|-
+45812627|Maria Victoria|Ferreyra|ferreyra.mvi@gmail.com|19.07|1 |"1033"|"80000,80005"|"80000,80005"|"90000,1032"|"90000,1032"
+43725881|Leila Beatríz |Ferreyra |ferreyraleila0@gmail.com|36.02|3 |"1035,1037,1032"|"1032,1034"|"1034,1034"|"1032,1036"|"1036,1036"
+44966154|Ignacio|Ferro|nachoferro112233@gmail.com|72.47|3 |"1042,1047,1805"|"1040,1037"|"1037,1037,1040,1040"|"1043,1044"|"1043,1043,1044,1044"
+40096921|Emiliano Martin |Filippelli |emiliano.filippelli@yahoo.com.ar|13.29|0 |-|"80005"|"80005"|"90000,1032"|-
+45580855|Frank Matias|Flores Rea|matyfrank04@gmail.com|33.92|2 |"1035,487"|"1032,90000"|"1032,1032,90000,90000"|"487,1041,1038"|"1041,1041,1038,1038"
+45909090|Sofia Selene |Fogliacco |sofiafogliacco99@gmail.com|16.60|1 |"1035"|"1032,90000"|"90000"|"90028,1032"|"90028,1032"
+39831709|Facundo Thomas|Fonseca|facu9608@hotmail.com|20.15|1 |"487"|-|-|"487"|-
+43081482|Chiara|Forti Dono|chiarafdono@gmail.com|69.99|0 |-|"1038,1039"|"1038,1038,1039,1039"|"1043,90028"|"90028,90028,1043,1043"
+46266429|Roman Eduardo|Francovich|romanedufrancovich@gmail.com|12.97|2 |"90000,1032"|"80000,80005"|"80000,80005"|"1032"|-
+38533749|Fabian|Frangella|fabianfrangella@gmail.com|89.48|1 |"1041"|"1047,1041"|"1047,1047"|"1046"|"1046"
+46187259|Alejo|Fuentes|alejo.fuentess04@gmail.com|27.55|1 |"1036"|"1035,487"|"487,487"|"1034,1036"|-
+46346947|Franco Ezequiel|Fumiere|francofumiere321@gmail.com|43.89|2 |"1037,1038"|"1034,90000"|"1034,90000"|"1035,1036"|"1035,1036"
+45752396|Agustina|Fux|agustinafux485@gmail.com|37.25|2 |"1036,1039"|"1035,487"|"1035,1035"|"487,1033"|"487,487,1033,1033"
+45997241|Dylan|Gallo|Usuario.211202@gmail.com|14.13|1 |"1032"|"752,90000"|"752,90000"|"487,1032"|-
+44454901|Lautaro Ariel |Galvez Monge |lautaroarielgalvezmonge@gmail.com|67.36|2 |"1042,1047"|"1036,1037,90000"|"90000,90000,1036,1036,1037,1037"|"1035,1045,1302"|"1035,1035,1302,1302"
+43389738|Alan Guillermo|Garcia|alanguillermogarcia2001@gmail.com|66.49|2 |"1047,1302"|"1043,1040"|"1043,1043"|"1041,1040"|-
+94643979|Ariana Elena |García Peña |garciaariana523@gmail.com|16.71|1 |"1033"|"90000,80005"|"54,90000,80005"|"487"|"752"
+41894786|Nicolas|Garilli|garillinicolas@hotmail.com|68.20|0 |-|"1036"|-|"1036"|-
+41150928|Giuliano|Gentile|giuliano_gentile24@hotmail.com|18.74|1 |"1035"|"80005"|"80005"|"90000"|"90000"
+42463120|Maximiliano Ezequiel Ulises|Geronimo|gmeugeronimo@gmail.com|17.24|1 |"1032"|"80000,80005"|"80000,80005"|"1033"|-
+44129021|Ian Malcolm|Ghioni|ghioni2002@gmail.com|70.04|1 |"1047"|"1038,1041"|"1038,1038,1041,1041"|"1302"|"1302,1302"
+44300089|Ludmila Antonella|Ghitarroni|a.ghitarroni@gmail.com|16.90|2 |"1032,487"|"80000,80005"|"80000"|-|-
+45496795|Damián Pablo|Giacomazzi|damianpgiacomazzi@hotmail.com|7.80|1 |"1032"|"80000,80005"|"80005,80000"|"1033,90000"|"90000,1033"
+44563936|Nahuel Martin|Giamminelli |nahuelgiamminelli@gmail.com|70.52|1 |"1042"|"1036,1037"|"1036,1036,1037,1037"|"752,1043,1044"|"752,752,1043,1043,1044,1044"
+35943208|Matias|Giardino |giardinomatias029@gmail.com|18.74|1 |"487"|"80000,80005"|"80000,80005"|"1032,90000"|"90000"
+42902697|Alessandro|Giordanella|giordanellalessandro@gmail.com|60.81|0 |-|"1038,1044,1036"|"1044,1044"|"1043,1041,1038"|"1038,1038"
+39114921|Nicolas|Girotti|nicco.girotti@gmail.com|34.74|2 |"1034,1033"|"487"|"487"|"1036"|"1036"
+41080502|Pedro David|Giuglio|pedrogiuglio@hotmail.com|23.12|1 |"487"|"1032"|"1032"|"487,1033"|-
+40858268|Nahuel|Gomez|nahuelggt@gmail.com|91.97|0 |-|"1047,1045"|"1047,1047"|"1045"|-
+44969030|Enzo Adrian|Gomez|enzolucha@gmail.com| 30.48|1 |"1036"|"1035,1034"|"1035"|"1033,1034"|-
+28150516|Walter Gaston|Gomez|walterggomez@gmail.com|70.44|1 |"1302"|"1039,1040"|"1039"|"1044,1047"|"1047,1044"
+45628316|Azul Bianca |Gomez|azulbgomez@gmail.com|34.04|1 |"1035"|"487,1033"|"1033,487"|"1032"|"1032"
+41801705|Julieta Camila|Gomez|j8415020@gmail.com|31.34|1 |"1032"|"487,90000"|"487,90000"|"1036,1034"|-
+45298583|Lihuén|Góngora Di Yorio|lihuengongoradiyorio34@gmail.com|23.18|3 |"1035,1032,90000"|"80005,80000"|"80005,80005,80000,80000"|"1033"|"1033,1033"
+39916477|Juan Ignacio|Gonzalez|jig17@hotmail.com|12.79|1 |"1033"|"1033,90000"|-|"90000,487"|-
+44729054|Manuel Alfredo|Gonzalez|manu.gonzalezalegre@gmail.com|10.86|1 |-|"80005,80000"|"80000,80005"|-|-
+36247217|Nestor Emmanuel|Gonzalez|gonzalez.nestoremmanuel@gmail.com|27.76|2 |"487,90000"|"80005"|"80005"|"1033,1032"|"1033,1032"
+34071818|Juan Fernando|Gonzalez|gonzalezfernando1808@gmail.com|13.46|1 |"1032"|"80005"|"80005"|"90000,80000"|"80000"
+42647264|Santiago Martin|Gonzalez|santigonzalez110500@gmail.com|23.94|1 |"1038"|"90028,487"|"487"|"90028,1033"|"90028"
+45417380|Cristian|Gonzalez|cristiangon0800@gmail.com|16.43|1 |"1033"|"1032,90000"|"90000"|"90028,1032"|"90028,1032"
+44609456|Sebastian Alejo|Gonzalez|sebastianalejogonzalez03@gmail.com|15.61|1 |"1032"|"487"|-|"90000,1032"|"90000"
+39984797|Matias Daniel|Gonzalez Aduco|matias.aduco@gmai.com|89.84|0 |-|"646,1047,1045"|"646,1047,1047"|"54,1302,90028"|"90028,90028"
+33262762|Mariel Mercedes |González Blanco|marugonzalezb@gmail.com|17.57|0 |-|"80005,80000"|"80000,80005"|-|-
+34632688|MARTIN|GONZALEZ BUITRON|martingonzlezbuitron@gmail.com|46.16|1 |"1036"|-|"1039"|"1037"|"1037"
+41855314|Facundo|Gozio|facumil@hotmail.com|28.94|2 |"1036,1038"|"1038,487"|"487"|"1033,1039,90028"|"90028,1033,1039"
+44589345|Juan Francisco |Gramajo |fran.gramajo@yahoo.com|12.46|2 |"1032,90000"|"80000,80005"|"80000,80005"|-|-
+41132213|Aaron Gaston|Gutierrez|aarongastongutierrez@gmail.com|80.97|2 |"1046,1056"|"1043,1044"|"1043,1044"|"1042,1041"|"1041,1042"
+42346302|Eric Alejandro|Gutierrez|eric.alejandrog@hotmail.com|33.03|1 |"1034"|"487"|"487"|"1036,1033"|"1033"
+43311321|Lautaro Nicolas|Guzman|lautaroguzman9@gmail.com|23.72|1 |"487"|"1033"|-|"90028,1033"|"90028,1033"
+44786994|Santiago Gabriel|Hinojosa Aguilar|hinojosa28.3@hotmail.com|12.46|1 |"1032"|-|-|"1032,90000"|-
+45320111|Lautaro Nahuel|Hollmann|lautahollmann@gmail.com|18.76|1 |"487"|"1032"|"1032"|"1038"|"1038"
+45672827|Florencia Rocío |Honeker |florenciahoneker.5@gmail.com|18.26|1 |"1032"|"1033"|-|"752,1033"|"752,1033"
+41164203|Javier|Iapichello|javier.iapichello@gmail.com|25.94|1 |"1038"|"1036"|-|"1038,1039"|-
+43778092|Ezequiel Agustin|Ibarra|ibarra.ezequiel01@gmail.com|63.90|2 |"1043,1038"|"1035,1045,1039"|"1039,1039,1035,1035"|"1041,1040,1037"|"1037,1037,1040,1040"
+44186209|Gustavo Ariel |Ibero |gustavo.ibero@hotmail.com|26.51|1 |"487"|"80005,80000"|"80000,80005"|"1033,1032"|"1033,1032"
+45200229|Melina|Iglesias|melinaiglesias03@gmail.com|55.18|1 |"1039"|"1038,1037"|"1037,1038"|"1043,1036"|"1043"
+45608875|Manuel|Iglesias Merediz |manueliglesiasmerediz@gmail.com|15.11|2 |"1033,1038"|"1032,90000"|"1032"|-|-
+45895455|joaquin|inca|joaquin04.ji@gmail.com|18.49|2 |"487,1032"|"90000"|"90000"|"1033"|-
+40760610|Mauricio Jesús |Infantino|mauricioinfantino1997@gmail.com|28.15|1 |"1035"|"487"|-|"487,1032"|"1032,487"
+38453202|Matias|Inocenti|matiasinocenti@gmail.com|14.28|1 |"1032"|-|-|-|-
+40729945|Cristian Adrian|Irrazabal Romani|c.adrian.irrazabal.r@gmail.com|21.77|1 |"1032"|-|-|"1032"|-
+36291627|Matías|Janikow|matjanikow@gmail.com|84.61|0 |-|-|-|"1038"|-
+43219083|Sofia Agustina|Justiniano|sofia.agustina.justiniano@gmail.com|67.95|2 |"1047,1302"|"1036"|-|"90028,1039"|"1039,1039"
+44170104|Ezequiel|Karottupullolil|ezequielkarottupullolil@gmail.com|32.81|2 |"1047,1041"|"1039,1035,1045"|"1039"|"1033,1038"|"1033,1038"
+28056984|alejandro cesar|kronberger|k11alejandro@gmail.com|65.50|0 |-|"1307"|-|-|-
+45238610|Iara Belén |Lagomarsino |lagomarsinoiara@gmail.com|48.71|2 |"1041,1038"|"487,1033"|"1033,487"|"1034,1036"|"1034,1036"
+47119849|Leandro Julián|Laiso|leandrolaisogp@gmail.com|19.24|3 |"487,1032,1033"|"80005"|"80005"|"80000"|"80000"
+37954121|Ignacio Augusto|Lamandia|ignaciolamandia@gmail.com|75.96|0 |-|-|-|-|-
+46215112|Ulises Alejandro|Larrabe|larrabeulises@gmail.com|28.37|2 |"752,1036"|"1033,1032"|"1033,1032"|"90028,1038"|"90028,1038"
+41855899|Pablo|Lasota|lasotapablo01@gmail.com|35.80|1 |"1036"|"487"|"487"|"1035,1034"|"1035,1034"
+44208218|Ariana Nerea |Ledesma|ledesma.ariana31@gmail.com|23.90|1 |"487"|"1038"|-|"487,1033"|-
+37865536|Fernando Alcides|Lefloth|mellolefloth@gmail.com|43.34|1 |"1036"|"1034"|"1034"|"90028,1037"|"90028,1037"
+41785115|Ivan gabriel andres |Lencina |ivancailencina@gmail.com|16.90|3 |"1033,1032,90000"|-|-|"80005,80000"|"80005,80000"
+43853182|Pablo|Leonczik|pablo.leonczik@gmail.com|22.72|1 |"1035"|"1033"|-|"90028,1033"|"90028"
+38698176|Francisco Damian|LEPRE Figueredo|damfig7@gmail.com|17.54|0 |-|"487"|-|"487"|-
+43859236|Sebastian Agustin|Lezcano|agustin.lezcano@hotmail.com|13.12|0 |-|"80000,80005"|"80000"|"80005,90000"|"80005"
+46302565|Cristian Nahuel|Lezcano|leznahuel02@gmail.com|29.42|1 |"1038"|"1036,1033,90000"|"90000,1033"|"1035,1036"|"1035,1036"
+45466430|Facundo Leonel|Lezcano|facullezcano@gmail.com|27.93|2 |"1033,1039"|"487"|-|"1035,1038,487"|"1038,1035,487"
+40770746|Micaela Agustina|Lois|micaelalois13@gmail.com|29.10|1 |"1035"|"90000,80005"|"90000,80005"|"487,1032"|"1032"
+43042622|Alejo|Lombardo|alejo.lombardo.19@gmail.com|32.43|2 |"1036,90000"|"1033,1032"|"1032,1033"|"1035,1034"|-
+43777486|Mateo|Lonzayes Persles|mlonzayes.ml@gmail.com|13.29|0 |-|"80000,80005"|"80000,80005"|"1033,1032"|-
+44042580|Juan Manuel|Lopetegui|lopeteguijuanma@gmail.com|27.65|2 |"1036,1038"|"1033"|"1033"|"1035,1032"|"1032,1035"
+44052090|Leandro Emmanuel|Lopez|2002leandrolopez@gmail.com|43.44|2 |"90028,1037"|"1035,1034"|"1034,1035"|"1036,1037"|-
+39555085|Sofia|Lopez|sofi.lopez123@outlook.com.ar|17.24|1 |"1032"|-|-|-|-
+35943720|Eva Nadia|Lopez|enadialopez@gmail.com|74.55|0 |-|"90000"|-|"1047,1040"|"1047,1047"
+43673180|Ezequiel Sebastián |López |theangelmode69@gmail.com|31.51|1 |"1032"|"1033,90000"|"1033,90000"|"487"|"487"
+47261446|Nicole Azul|Lopez Botto |nicolelopezbotto@gmail.com|19.27|2 |"487,1038"|"80000,80005"|"80000,80005"|"90000,1032"|"1032,90000"
+40721446|Juan Cruz|López Correa|juancruz.lopezc@gmail.com|22.79|1 |"1038"|"487"|"487"|"1032"|"1032"
+36811836|Mariano Nicolas|López del Castillo|marianolopez.com.26@gmail.com|78.98|0 |-|-|-|"1033,90028"|-
+41970943|Maximiliano|Lovardo Ludwig|maxilovardo@gmail.com|37.50|1 |"1034"|"1036,1034,90000"|"90000"|"1036"|-
+46735631|Tiago|Luca|tiagoluca89@gmail.com|18.74|1 |"1032"|"90000"|-|"1032,90000"|"90000"
+46735632|Tiziano|Luca|tiziluca7@gmail.com|18.99|2 |"487,1032"|"1033,90000"|"90000"|"1033,1032"|-
+47308183|Danilo Bautista |Luca |bautista123luca@gmail.com|22.32|3 |"752,1035,1033"|"80000,80005"|"80000,80000,80005,80005"|"1032,90000"|"90000,90000,1032,1032"
+44962859|Lucas |Lucarni |lucaslucarni@yahoo.com.ar|48.81|2 |"1041,1037"|"1035,1036"|"1035,1036"|"1033,1034"|"1034,1033"
+32557731|Griselda |Maciel|gris.maciel86@gmail.com|22.92|1 |"487"|"1032"|-|"1033,1032"|"1032"
+51700428|Sofia Micaela |Maciel Chamorro|macielmicasofia@gmail.com|20.65|1 |"1035"|"487,1033,90000"|-|"90000,487"|-
+38938375|Marcos Guido|Maldonado|maldonadomarcos31@gmail.com|33.46|1 |"1034"|"1036,1033"|-|"1033,90028"|"1033"
+30248712|Leandro|Malsam|leandro.malsam@gmail.com|92.98|0 |-|-|-|"1046,1048"|"1048,1046"
+44544768|Franco|Mamani|mfranco260500@gmail.com|67.19|1 |"1038"|"1039,1044,1040,1045"|"1044,1044,1039,1039"|"1043,1041,1040,1038"|"1043,1043,1040,1040"
+37066144|Ivana|Marcial|marcial.ivana@gmail.com|16.90|2 |"1033,1032"|"1032,90000"|-|"1033,1032"|-
+43777594|SOL AYLEN|MARGADANT|solaylen2009@gmail.com|18.24|1 |"1033"|"80000,80005"|"80000,80005"|"90000"|"90000"
+38844647|Giuliana|Martilotta|giulianamartilotta@gmail.com|14.45|1 |"1032"|"1033"|-|-|-
+41435734|Eduardo Martin|Martinez|mm7735608@gmail.com| 38.80|2 |"90028,1045"|"752,1045,1039"|"752,1039"|"1045,1302"|"1302"
+40663078|Mario Francisco|Martinez|mariocuenta214@gmail.com|20.18|0 |-|-|-|-|-
+42473354|Gabriel Maximiliano|Martinez|gabi.m@hotmail.com.ar|32.15|2 |"1043,1038"|"1035"|"1035"|"1036"|"1036"
+46282716|Santiago Emiliano |Martinez Cristaldo|santiagomartinezc05@gmail.com|17.67|2 |"487,1033"|"80000,80005"|"80000,80005"|"1032,90000"|"90000,1032"
+45783883|SERGIO|MATTERA|stefanomaximo1962@gmail.com|20.15|1 |"487"|"80005"|"80005"|"90000,1032"|"1032"
+46215239|Diego Nicolás |Mayol|nikmayol@gmail.com|17.24|3 |"1033,1032,90000"|"80005,90000"|"80005"|"1033"|-
+39608313|Florencia Belén |Melgar |florenciamelgar01@gmail.com|13.29|1 |"1032"|"80005"|"80005"|"1033,1032"|-
+43626209|Daniela del Carmen|Mendez|danieladelcarmenmendez@gmail.com|29.81|1 |"1036"|"90000,80005"|"90000,80005"|"487,1032"|"1032,487"
+37551019|Kevin|Mendoza|kevin.mendoza@live.com|21.92|1 |"487"|"1033,1032"|"1032"|"1033,487"|-
+43318320|Ignacio Martin |Mendoza|nachommendoza@hotmail.com|66.35|1 |"1046"|"1039,1036"|"1039"|"1042,1044"|"1042,1044"
+39268312|Rodrigo Nicolas |Meza Sotz|rodri.meza01@gmail.com|17.90|1 |"1033"|"80000,80005"|"80000,80005"|-|-
+45785766|Tomas nahuel|Midea|mideatomas@gmail.com|21.15|1 |"487"|"1033,1032"|"1032"|"487,1033"|-
+37178984|Cristian Gabriel |Mignolo|mignolo93@hotmail.com|19.00|2 |"1033,1032"|"1032"|-|"1032"|-
+44447835|Valentina |Mignone Marco|valenmm63@gmail.com|20.49|2 |"1032,487"|"80005"|"80005"|"90000,80000"|"90000,80000"
+47017226|Bianca nemesis |Miño |minobianca524@gmail.com|13.32|2 |"1032,1033"|"80000,80005"|"80000"|"752,90000,80005"|"752,80005"
+31061119|edgardo daniel|molina|edgardomolina2023@gmail.com|21.65|2 |"90000,1033"|"80000,80005"|"80000,80005"|"1032"|"1032"
+40395465|Matías|Monea|mati.monea@gmail.com|18.63|1 |"1033"|"487,1033"|-|"487,1033"|-
+40947009|Fernando Ariel|Moran|ariel.moran437@gmail.com|24.75|1 |"1038"|"1033"|-|"1038"|-
+46428317|Luca|Moretti|lucamorettiar2005@gmail.com|33.88|1 |"1034"|"487"|"487"|"1033,1032"|"1033,1032"
+46428316|Tiziana Naara|Moretti|tizianamoretti82@gmail.com|21.65|2 |"1033,90000"|"80005"|"80005"|"1033,1032"|"1032"
+46004229|Luciano|Morro|luciano936.2017@gmail.com|23.37|1 |"1035"|"1033,1032"|-|"1033,1032"|"1032"
+43398425|Facundo|Mosquera|facundomosquera@gmail.com|54.77|2 |"1041,1037"|"1038,1045"|"1038,1038"|"1033,1037,1045"|-
+35159589|Fernando|Muñoz|fernandonicolasmunoz@gmail.com|77.50|1 |"1046"|"1033"|-|"1044"|"1044"
+45779089|Sofía Romanella|Natanson|sofiarnatanson@gmail.com|45.46|1 |"1036"|"487,1032"|"1032,487"|"1035,1034"|"1035,1034"
+39275021|Florencia Grisel|Navarro|flornavarro55@gmail.com|23.92|1 |"1033"|"1032,487"|"1032"|"487,1033"|-
+44609229|Tiara Jazmín |Navarro |tiaranavarro0@gmail.com|17.99|1 |"1032"|"90000"|"90000"|"1032"|-
+44851926|Tomás |Neira Guitera |tomasneira181@gmail.com|66.96|0 |-|"1036,1037"|"1037,1037"|"1043,1044,1036"|"1043,1043,1044,1044,1036,1036"
+44502778|Brenda Florencia|Noriega|brendanoriega2002@gmail.com|42.77|2 |"1036,1034"|"1035,487,1041"|"487,487,1041,1041"|"1035,1038,90028"|"90028,90028,1035,1035"
+45609767|Nicolas Ezequiel|Ochoa|ochoanicolas992@gmail.com|24.47|1 |"90000"|"1032,487"|"1032,487"|"1035,1033"|"1033,1035"
+40979030|Johanna Lujan|Ojeda|Johannaojeda15@gmail.com|38.75|2 |"1036,1033"|"487,1032"|"1032,487"|"1035,1034"|"1035,1034"
+40127838|Rodrigo Nahuel|Ojeda|rodrieze2020@icloud.com|37.50|1 |"1035"|"1034,90000"|"1034"|"1036"|-
+42625381|Lucas|Ojeda |lucasojedaf@gmail.com|15.82|2 |"1032,1033"|-|-|-|-
+47261184|Valentina|Oldani|valentinabiancaoldani@gmail.com|18.47|2 |"487,1038"|"80000,80005"|"80000,80005"|"90000,1032"|"90000,1032"
+44186393|Valentina Mailin|Olmedo|valentinaolmedo02@hotmail.com|20.40|1 |"487"|-|-|"1032"|"1032"
+44256749|Franco Juan|Oreskovic|kitofran15@gmail.com|51.31|3 |"1041,1037,1038"|"1036,1032"|"1032,1036"|"1035,90028,1034"|"90028,1035,1034"
+43777496|Franco|Orizonte|francoorizonte@gmail.com|48.52|3 |"54,1042,1044"|"90028,1045"|"90028,90028"|"1037,1045,1302"|"1045,1045,1302,1302,1037,1037"
+41954326|Facundo Agustin|Ortega|facundoortega757@gmail.com|15.48|1 |"1035"|"1032"|"1032"|"1033,1038"|-
+40834310|Lourdes Solange |Ortigoza |lourdesortigoza20@gmail.com|23.88|1 |"1035"|"1033"|"1033"|"487"|"487"
+46936181|Ezequiel Adrian|Ortiz|ezequielortiz0505@gmail.com|22.92|1 |"1033"|"80000,80005"|"80000,80005"|"90000,1032"|"90000"
+46740732|Tiago|Osores|tiagoezequiel.osores@gmail.com|14.52|1 |"1032"|"80000,80005"|"80000,80005"|"90000"|"90000"
+28422184|viviana itati|ovejero|viviana03ovejero@gmail.com|50.86|2 |-|-|-|-|-
+42595064|Alan Nahuel|Pacheco|pachecoalannahuel@gmail.com|84.55|0 |-|"1046,646,1041"|"1046,646"|"1045"|-
+43660662|Tomas Alejandro|Pacio|tomaspacio@hotmail.com|18.60|2 |"487,90000"|"1033,90000"|"1033"|"487"|-
+46104980|Joaquin|Paniagua|cuentajoaquin7695@gmail.com|16.57|2 |"1032,90000"|"80000,80005"|"80000,80005"|"90000,1032"|-
+43898055|Lucas Quimey|Paolo|lucaspaolo002@gmail.com|48.02|2 |"1041,1038"|"1036,1037"|-|"1041,1038,1039"|"1039,1039"
+42417497|Franco Ismael|Paredes|francoismaelparedes@hotmail.com|29.29|0 |-|"1033"|-|"1036,1037"|-
+45608882|Lucas Ignacio|Paruolo|luquipar04@gmail.com|18.10|1 |"1033"|"1032,90028"|"90028"|"487,1032"|"1032"
+46009495|Octavio|Pastorive|nicolas.octavio.pastorive@gmail.com|25.00|2 |"487,1032"|"80005,90000"|"80005,90000"|"1033"|"1033"
+44545162|Agostina nair|Pavon|tynapavon@gmail.com|23.41|2 |"1036,90000"|"1039,1036"|"1039"|"1036,1038"|-
+42346977|Kevin Enzo|Paz|kevinenzopaz@hotmail.com|36.97|1 |"1037"|"1038,1039"|"1039,1039,1038,1038"|"1036,1047,90028"|"1047,1047,90028,90028"
+41259657|Sofía|Paz Kotek|s.pazkotek@gmail.com|17.57|1 |"1032"|"1032"|-|"487,1033"|-
+47158484|Giuliana|Peñalba|giuliana230206@gmail.com|17.07|3 |"1033,1038"|"80005,80000"|"80000,80005"|"90000,1032"|"1032,90000"
+38440514|Leandro|Peppe|leandropeppe@gmail.com|45.48|2 |"1303,1302"|"1041"|-|"1044,1047"|"1047,1044"
+39406312|Matias Mariano|Pereira|matiasmpereira@gmail.com|92.21|0 |-|-|-|"1045"|-
+41080483|Leonardo Maximiliano|Perez|perezleonardom@gmail.com|22.12|1 |"1036"|"1038"|-|"1035,1039"|"1035"
+45608841|Juan Cruz |Perez|juancruzperez2004@hotmail.com|26.33|2 |-|-|-|-|-
+45625143|Nicole|Perez|nicolep3rez28@gmail.com|12.79|1 |"1033"|"80000,80005"|"80005,80000"|"1032,90000"|-
+34490200|Dario Emmanuel|Perez|dario_11d@hotmail.com|23.12|0 |-|"487"|-|-|-
+38842519|Eileen Brenda|Persoglia|epersoglia@gmail.com|18.07|0 |-|"487"|-|"487"|-
+42000743|Leonardo|Pezoa|leonardo@pezoa.com|32.59|1 |"1035"|"1034,90000"|"1034"|"1035,1037"|-
+43036435|Antonella Rocio|Pezzola|antopezzola@gmail.com|71.66|2 |"1047,1302"|"1036"|-|"1042,1041"|"1041,1041,1042,1042"
+45889533|Augusto|Piana|augustopiana3@gmail.com|69.99|1 |"1042"|"1036,1037,90028"|"90028,90028,1036,1036,1037,1037"|"752,1043,1044"|"752,752,1044,1044,1043,1043"
+37982858|Martín|Piñero|martinpiniero@hotmail.com|39.28|1 |"1035"|"1036"|-|"1034"|"1034"
+43777647|tobias|piraino|pirainotobias@gmail.com|14.46|1 |"1032"|"80000,80005"|"80000,80005"|-|-
+40577461|Enzo Nicolás |Ploza|nicolasploza@gmail.com|35.54|3 |"1043,1044,1040"|"1033,1034,90000"|"1034,1034,90000,90000,1033,1033"|"1035,1036,1037"|"1037,1037,1035,1035,1036,1036"
+37148759|Eduardo Ezequiel |Ponce|ezequielponce2012@gmail.com|29.23|1 |"1035"|"1035,487,90000"|"90000,487"|"1036,1034"|-
+46875383|Ramiro Fidel|Porcuna|ramiroporcuna19@gmail.com|14.57|3 |"1032,90000"|"80000,80005"|"80000,80005"|"752,1033"|"752"
+35157861|Mauro Emanuel|Portillo|mauroeportillo@gmail.com|89.18|0 |-|"940,1309"|"1309,940"|"1315"|"1315"
+45320052|LUCIANO|POZZI|pozzilucho@gmail.com|33.31|1 |"1035"|"1035,1032"|"1032"|"487"|"487"
+39429513|Nicolas David|Prato|prato.nicolas5@gmail.com|22.12|0 |-|"1032"|-|"1035,1032"|"1032"
+44046309|Eric Gabriel|Preziosa Galvan|ericpreziosa015@gmail.com|13.46|1 |"1032"|"1032,90000"|-|"487,1033"|-
+95255369|Enmanuel|Prugnoli|enmanuelprugal@gmail.com|12.46|1 |"1032"|"80005"|"80005"|"90000,80000"|"80000"
+45503769|Ian|Quiñónez |iquinones030@gmail.com|17.49|2 |"487,1033"|"1035,90000"|"90000"|"1033,1032"|-
+44964736|Marina Ailen|Quiroga |ailenquiroga039@gmail.com|16.57|2 |"1033,1032"|"1032,90000"|-|"1033"|-
+43518671|Gaston Agustin|Raimondi|gaston14015@gmail.com| 39.28|1 |"1036"|"487"|"487"|"1033,1034"|"1033,1034"
+43000100|Brian|Ramirez|ramirez7358@gmail.com|89.56|1 |"1311"|"646,1306,1305,1051"|"646,1051,1051,1306,1306,1305,1305"|"1047,1041,1048"|"1047,1047,1048,1048"
+44419726|Tomás Agustín|Ramos|tomasagustinramos@gmail.com|31.56|2 |"1034,1039"|"752,487"|"752"|"487"|"487"
+43521390|Ezequiel Nicolas|Ramos|ezequiel.n.ramos@hotmail.com|37.79|2 |"1036,1039"|"1033,1034"|"1033,1033,1034,1034"|"1041,1037"|-
+47261059|Agustin|Retamal|agusretamal2704@gmail.com|28.75|1 |"1033"|"80000,80005"|"80000,80005"|"487,1032"|"1032,487"
+44655783|Kyra|Rey|kyrarey566@gmail.com|24.00|2 |"487,1032"|"80000,80005"|"80000,80005"|"1033"|"1033"
+46961755|Nehuen Elias|Rey|nehuenrey05@gmail.com|24.20|1 |"487"|"80000,80005"|"80000,80005"|"1033"|"1033"
+45064912|Elías|Reynoso|ereynoso2040@gmail.com|43.33|2 |"1037,1038"|"487,1032"|"1032,487"|"1035,1034"|"1035,1034"
+38537089|Daiana Marisol |Ricci |daianaricci@hotmail.com|18.93|1 |"1033"|-|-|"1032,90028"|"90028,1032"
+41760091|Matias Nicolas |Rios|mati_nicolas20@hotmail.com|22.32|1 |"487"|"487,1032"|-|"1032"|"1032"
+47144421|Valentina |Rivarola|valencita55555@gmail.com|16.36|1 |"1033"|"80000,80005"|"80000,80005"|"90000,1032"|"1032"
+38660979|Gaston Adrian|Rivarola|gastonrivarola94@gmail.com|16.11|0 |-|"1035"|-|-|-
+47261611|Jonathan Tomás|Roa|roajonathantomas@gmail.com|15.93|2 |"1033,1032"|"80005,80000"|"80000,80005"|"752,90000"|"752,90000"
+46938282|Maximiliano Ezequiel|Rodriguez|maxi311005@gmail.com|15.61|0 |-|"80000,80005"|"80000,80005"|"1032,90000"|"1032"
+35329598|Natalia Stefania|Rodriguez|nati.stefania@gmail.com|87.12|2 |"604,1313"|"842,1311"|"842,1311,1311"|"1048,1312"|"1048,1048,1312,1312"
+45297855|Matias Ezequiel|Rodriguez|matiherodri@gmail.com|22.12|1 |"1036"|"1033"|"1033"|"487,1032"|"1032,487"
+35942178|Agustin Mauricio|Rodriguez|agustinmauriciorodriguez@gmail.com|20.90|1 |"487"|"80005"|"80005"|"90000,1032"|"1032"
+42902604|Joaquin |Rodriguez |jdr123r@gmail.com|71.83|4 |"1056,1047,646,1805"|"1036,1037"|"1037,1037"|"1043,1044,1036"|"1043,1043,1044,1044,1036,1036"
+47260474|Julieta |Rodríguez |julieta4730@hotmail.com|18.07|3 |"752,487,1033"|"80005,80000"|"80000,80005"|"90000,1032"|"90000,1032"
+39800888|Leonardo Maximiliano|Rodriguez Cisneros|leonardorodriguezcis@gmail.com|89.66|0 |-|"90000"|-|"90000,1051"|"1051,1051,90000,90000"
+42777657|Sabrina Abigail|Rodriguez Fennema|sabrifennema@gmail.com|37.22|1 |"1034"|"1032,90000"|"1032"|"1033,1036"|"1033,1036"
+42225578|Facundo|Rodriguez Ventura|facurv8714@gmail.com|22.12|1 |"1035"|"1033,1032"|"1033,1032"|"487"|"487"
+43582577|Leonardo Agustin|Rojas|rojasleonardo.1422@gmail.com|18.87|1 |"487"|"752,1032"|-|"1032"|"1032"
+43726795|Florencia|Rojas|flopiagus94@gmail.com|16.57|2 |"1032,1033"|"90000"|-|"1033,1032"|-
+42946925|Lucas|Rojo|lucasrojo2000@gmail.com|13.45|0 |-|"1033,1032"|-|"90028"|-
+44185791|Agustina Daniela|Rojo Navarro |agustinarojonavarro@gmail.com|14.79|3 |"1032,90000"|"80005,80000"|"80000,80005"|"1033,1032"|-
+43095368|Marcos Guillermo|Roldan|guillermoroldan0@gmail.com|66.22|1 |"1040"|"1036,1037"|"1037,1037"|"1043,1044,1036"|"1036,1036,1044,1044,1043,1043"
+43594084|Joaquin|Roldan|jroldanarin@gmail.com|73.00|3 |"1046,646"|"1043,1044"|"1043,1043,1044,1044"|"1042,1040"|"1042,1042,1040,1040"
+46502698|Nahuel Nicolas|Romero|nnromerodev@gmail.com|14.07|3 |"752,1032,90000"|"80000,80005"|"80000,80005"|-|-
+42930418|Fernando|Romero|agustinfernando2000@hotmail.com|42.78|0 |-|"1037,1038"|"1037,1038"|"1043,1041"|"1043"
+46645354|Maximo|Rosales|maximorosales.bqm@gmail.com|14.70|1 |"1032"|"90000"|"90000"|-|-
+42435848|Sergio|Rotunno|sergio_rotunno@hotmail.com|15.31|1 |"1032"|"90028,1032"|"90028"|"487"|-
+46635481|Jeremías Nicolás|Ruiz|luizjere8@gmail.com|45.71|2 |"1035,1039"|"1036,1033,90000"|"90000,1033,1036"|"1034"|"1034"
+46936611|Facundo Luca|Russo|facundorusso2109@gmail.com|29.63|3 |"1035,1033,1038,1039"|"90000,80000"|"90000,90000,80000,80000"|"487,1032"|"487,487,1032,1032"
+46282416|Lucas|Saenz|lukiacade05@gmail.com|18.37|2 |"487,1033"|"80000,80005"|"80005,80005,80000,80000"|"752,1032,90000"|"1032,1032,752,752,90000,90000"
+43583552|Martin Oscar|Salazar|martin26smo@gmail.com|30.34|0 |-|"487"|-|"1033,90028"|"90028,1033"
+40621461|Nicolás|Salvanescki|nicolas_salvanescki@hotmail.com|44.03|1 |"1302"|"1038,1039"|"1039,1039,1038,1038"|"1040,1037"|"1037,1037,1040,1040"
+37354615|Guillermo|Salvatore|guillesalvatore@gmail.com|91.50|0 |-|-|-|-|-
+40932269|Iván Joshua|San Martín Farías|ivan.sanmartin98@gmail.com|69.22|0 |-|-|-|"1306,1305"|"1306,1306,1305,1305"
+39096194|Cristian Pablo|Sanabria|crissanabria1995@gmail.com|40.30|1 |"90028"|"1033"|-|"1036,1037"|-
+44129615|Martin Ezequiel|Sanchez|sanchezmartinn2002@gmail.com|41.11|2 |"1036,1034"|"1035,487,1041"|"1041,1041"|"487,1035,1038"|"1035,1035,487,487"
+39959796|Matias Pablo Jesus|Sanchez|sanchezmatias911@yahoo.com|36.93|3 |"1032,1034,90000"|"1035"|-|"90000,1035,1033"|"1033,1035"
+39963238|Ariana Nadina |Sanchez Kiriazis |ankiriazis@live.com|12.79|2 |"90000,1032"|"80000"|"80000"|"80005"|"80005"
+94445230|Raul Enrique|Sanchez Olmedo|raulsanchezolmedo@gmail.com|20.03|2 |"487"|"1032"|"1032"|"1033,1038"|"1033"
+34573048|Elías Daniel|Sandoval|elias_dnl@yahoo.com|52.97|2 |"1043,1041"|"1043,1041"|-|-|-
+46877210|Guadalupe Erica |Sandoval|kimkiwiki@gmail.com|17.24|1 |"1033"|"80000,80005"|"80000,80005"|"90000,487"|-
+46022219|Thomas Alejandro|Sandoval|thomassandovala11@gmail.com|45.42|1 |"1037"|"487,1033"|"1033,487"|"1035,1034,90028"|"90028,1035,1034"
+44545916|Lucas Esteban|Sanguinetti|luquisanguinetti@gmail.com|73.30|2 |"1042,1047"|"752,1037,1045"|"752,752,1037,1037"|"1035,1040,1045,1302"|"1045,1045,1040,1040,1035,1035,1302,1302"
+40770043|Felipe|Sani Figueroa|sffelipe.uni@gmail.com|18.24|1 |"1032"|-|-|"80005"|"80005"
+36396368|Micaela Natalia |Sans|mica.sans@hotmail.com|49.99|1 |"1036"|"1041,1037"|"1041"|"1037"|"1037"
+46421258|Manuel Agustín|Santiago|manusanti1515@gmail.com|15.57|1 |"1033"|-|-|"90000,80005"|"80005"
+42932101|Alan Emanuel |Santillan|alanemanuelsantillan@gmail.com|37.36|2 |"1035,1036"|"1033,1032"|"1032,1032,1033,1033"|"1036,1034,1038"|"1034,1034"
+39866826|Javier Esteban |Saracho Andrade|jesa@outlook.com.ar|16.90|1 |"1033"|"80000,80005"|"80000,80005"|"90000,1032"|-
+46567154|Martín |Sarracini Ontivero |martinsarraciniontivero@gmail.com|29.56|2 |"1032,1033"|"487"|"487"|"1035,1032"|"1035"
+44666507|Santiago|Saucedo|santiagosaucedo55@gmail.com|17.24|3 |-|-|-|-|-
+31575229|German Alfredo|Scheffelaar Klotz|gscheffelaar@gmail.com|29.56|2 |"1035,1033"|"487,1032,90000"|"1032,1032,487,487,90000,90000"|"1036,1038"|-
+45911492|Ian Dario|Schiaffini|raijuusama@gmail.com|19.53|2 |"487"|"1032"|"1032"|"1033"|"1033"
+42138579|Tomas|Sciaini|tsi_001@hotmail.com|22.65|1 |"1032"|"80005"|"80005"|"487"|"487"
+44170094|Malena|Sciutto|male.sciutto02@gmail.com|67.64|0 |-|"1037,1045"|"1037,1037,1045,1045"|"1043,1044"|"1044,1044,1043,1043"
+38838760|Ariel Esteban|Segovia|ariel110595@gmail.com|94.99|1 |"1060"|"1056,1046,1305,90000"|"1046,90000,90000"|"1308,1048,90028"|"1048,1048,1308,1308"
+45910219|Virginia Rocio|Segovia|segovia.virginia.r@gmail.com|19.99|0 |-|-|"90000"|"80005"|"80005"
+43467138|Ian Jael|Sendon|sendonian7@gmail.com|12.46|2 |"1033,1032"|-|-|"90000,487"|-
+41353608|Nicole|Soares|nicolesoares918@gmail.com|36.51|2 |"1041,1037"|"1039,1036"|"1039"|"1047,1033,1034,90028"|"1047,90028,1033,1034"
+45911189|Celeste|Soria|Soriacelestte9@gmail.com| 15.90|2 |"1033,1032"|"80000,80005"|"80000,80005"|"90000"|-
+46565396|Pablo Gabriel|Soria|pablosoria901@gmail.com|14.86|1 |"1033"|"1032"|"1032"|"1035,1038"|-
+46099573|Luciano Emanuel |Sosa|emanuelsosa00@hotmail.com|23.12|1 |"487"|"1032,90000"|"90000"|"1032"|"1032"
+44620501|Nazareno Hernán|Sotelo|nazareno.sotelo19@gmail.com| 26.21|2 |"1036,1038"|"1035,1036"|"1035"|"1041"|-
+45503196|Gonzalo Nicolas|Soto Leon|gonzalosotoleon04@gmail.com|16.86|1 |"1033"|"1032,90000"|"1032"|"487"|-
+35062242|Maximiliano Joaquin|Souto Mendez|max.xies12@gmail.com|41.47|1 |"1033"|"1033"|-|"1036"|-
+32823235|Pablo Luciano|Spizzamiglio|spizzamiglio.pablo@gmail.com|96.61|0 |-|"1041"|"1041"|"90000"|"90000"
+44966385|Santiago|Staffora|s.staffora@gmail.com|43.44|1 |"1035"|"1036,1032"|"1032,1032"|"1041,1034,1038"|"1034,1034,1041,1041"
+43723907|Dalila Lucía |Stafichuk Torres |dalilastafichuk.907@gmail.com|18.57|2 |"487,1032"|"80000"|-|"80000"|"80000"
+37052682|Roberto Ariel |Szeider |szeiderroberto@hotmail.com|2.07|0 |-|"1033,90000"|-|"90000,1032"|-
+45812234|Delfina|Taira|Delfintaira1@gmail.com|13.12|0 |-|"487,1032"|-|"487,1033"|-
+43796044|Thais Nicole|Tanneur |tanneur.thais09@gmail.com|12.79|1 |"1033"|"80000,80005"|"80000,80000,80005,80005"|"1032,90000"|-
+40811889|Ailen Micaela|Tanneur |tanneur.ailen@gmail.com|18.57|1 |"487"|"80000,80005"|"80000,80005"|"90000"|-
+40074499|Leandro Nicolás|Tittarelli |leandrotittarelli@gmail.com|41.43|0 |-|"1047,1041"|-|"1045"|-
+42463488|Oriana |Todini|todini17@gmail.com|27.15|2 |"487,1033"|"1032"|"1032"|"1035,487"|"1035"
+45326296|Coral|Tolazzi|coraltolazzi@gmail.com|30.89|2 |"1035,487"|"90028,1041"|-|-|-
+42232092|Julieta Ailén|Tonini|julieta.a.tonini@gmail.com|31.98|1 |"1033"|"1035,487"|"1035"|"487"|"487"
+39484178|Tobias|Torres|tobias.torres777@gmail.com|92.82|0 |-|"1041"|-|"1045"|-
+42369496|Nicolas|Torres|nicotorz.00@gmail.com|66.16|1 |"1302"|"1036,1037"|"1037,1037"|"1043,1044"|"1044,1044,1043,1043"
+36602874|Tehuel Tupac|Torres Baldi|torresbaldi.tehuel@gmail.com|60.29|0 |-|"752"|-|-|-
+44869026|Tomas Alejandro|Urueña|tomasuruena74@gmail.com|37.93|1 |"1035"|"487,90000"|"487"|"1034"|"1034"
+42198657|Lautaro Zuahir|Valdez Araujo|lautarovaldez1@outlook.com.ar|25.68|1 |"1035"|"1033"|-|"1035,1038"|"1038"
+35630980|Daniel Carlos|Vallejos|dcvallejos@outlook.com|43.35|2 |"1035,1039"|"1033,1034"|"1034,1034"|"1036,1033"|"1033,1033,1036,1036"
+43170072|Camila|Vargas|camivargas432@gmail.com|17.24|1 |"1032"|"80000,80005"|"80000,80005"|"90000"|-
+46272855|Daniel Alejandro|Vargas|vargas2004daniel@gmail.com|14.38|1 |"90000"|"80005"|"80005"|"80000"|"80000"
+47337282|valentin|vazquez|valentinvazquez1105@gmail.com|18.74|1 |"487"|"80000,80005"|"80005,80000"|"90000,1033"|"90000"
+45812742|Alan|Vazquez|vazquezalangabriel@gmail.com|20.80|2 |"1035,1032"|-|-|-|-
+43796042|Mauricio Rafael|Velazquez|mauriciovelazquez211@gmail.com|65.97|0 |-|"1036,1037"|"1037,1037"|"1044,1039,1302"|"1302,1302,1044,1044,1039,1039"
+45297846|Tobias Fabian|Velez|tobia.fajnd09@gmail.com|16.26|3 |"487,1033,1038"|"1035,90028"|"90028"|"487,1032"|"1032"
+40381387|Gian franco|Ventola|gianfranco.ventola@gmail.com|21.61|2 |"1035,90000"|"1033"|-|"1033,1037"|-
+42341174|Yoel Lucas|Ventoso|yoel.ventoso@gmail.com|65.51|2 |"1036,1302"|"1044,1036,1039"|"1044,1044,1039,1039"|"1043,1041"|"1043,1043"
+44361996|Delfina |Ventrice |delfinaventrice@gmail.com|13.38|1 |-|"80000,80005"|-|"80000,80005"|"80000,80005"
+43402185|Gonzalo Agustín |Vera |gonzaaa.rag@gmail.com|14.32|3 |"1033,1032,90000"|"80005"|"80005"|"80000"|"80000"
+43051560|Juan Manuel|Viglianti ibañez|juanviglianti1@gmail.com|30.18|1 |"90028"|"1041"|-|"1039"|"1039"
+45896635|Lautaro|Vildoza|lautarovildoza1@gmail.com|48.30|2 |"1037,1038"|"487,1041,90000"|"1041,1041,90000,90000,487,487"|"752,1036,1034"|"752,752,1036,1036,1034,1034"
+41778181|Franco Javier|Villamayor|francojavier.villamayor@gmail.com|47.95|2 |"1036,1039"|"1038,1035"|"1038,1038,1035,1035"|"90028,1034"|"1034,1034,90028,90028"
+46948760|Cecilia Geraldine|Vinciguerra|ceciv548@gmail.com|16.99|1 |"1032"|"80005,80000"|"80000,80005"|"90000"|"90000"
+42312742|Agustin|Vitagliano|agustin.vitagliano@hotmail.com|13.95|0 |-|"1035,1032"|-|"487,1032"|-
+42359029|Hector Ian|Welschen|ianwelschen.99@gmail.com|16.82|2 |"487,1032"|-|-|"90000"|-
+44609268|Ivan Federico|Zabala Gonzalez|ivanchuzabala@gmail.com|38.91|1 |"1035"|"1034,90000"|"1034,90000"|"1036"|-
+40757763|Lucas Julian|Zalazar Correa|lucasjlcorrea@gmail.com|18.24|1 |"1032"|-|-|-|-
+41786102|Isabel |Zanardi |isah.zanardi@gmail.comi|21.65|1 |"487"|"1032"|"1032"|"1035,487"|-
+44962945|Sergio Ivan|Zapata|serivanzapata@gmail.com|29.76|1 |"1036"|"1039,1036"|"1039"|"1035,1038"|"1038"
+44784732|Julián Matías|Zarco|julianzarco.2003@outlook.com|34.46|3 |"1034,1038"|"487,90000"|"487,487,90000,90000"|"1035,1036"|-
+42198998|Jeremias Alcides|Zarza|jerezarza98@gmail.com|36.67|1 |"1045"|"1039,1036"|"1039,1036"|"1047,1034"|"1034"
+42200909|Erwin|Zieger|e-zieger@hotmail.com|17.82|2 |"1032,487"|"80000,80005"|"80000"|"80005,90000"|"80005"
+46425730|Guadalupe Sol|Zitterkopf|guadalupezitterkopf@gmail.com|48.51|3 |"1035,1040,1039"|"1033,1034"|"1034,1034,1033,1033"|"1036,1037,90000"|"90000,90000,1037,1037,1036,1036"
+41465541|-|Bensal Julian|-|0|0|-|-|-|-|-
+40856864|-|Dobrotinich Manuel Vladimir|-|0|0|-|-|-|-|-
+32864984|ROLDAN|-|77fernandoroldan77@gmail.com| 79.12|0|-|-|-|-|-
