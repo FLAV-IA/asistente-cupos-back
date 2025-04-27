@@ -25,13 +25,14 @@ public interface PeticionInscripcionMapper {
 
   @Mappings({@Mapping(target = "estudiante", expression = "java(mappingService.buscarEstudiantePorDni(csvDto.getDni()))"),
     @Mapping(target = "materia", expression = "java(mappingService.buscarMateriaPorCodigo(csvDto.getCodigoMateria().trim()))"),
-    @Mapping(target = "comisiones", expression = "java(getComisiones(csvDto.getCodigosComisiones().trim(), mappingService))"),
+    @Mapping(target = "comisiones", expression = "java(getComisiones(csvDto.getCodigoMateria(), csvDto.getCodigosComisiones().trim(), mappingService))"),
     @Mapping(target = "cumpleCorrelativa", constant = "false")})
   PeticionInscripcion toPeticionInscripcion(PeticionInscripcionCsvDTO csvDto, @Context PeticionInscripcionMappingService mappingService);
 
-  default List<Comision> getComisiones(String codigosComisiones, PeticionInscripcionMappingService mappingService) {
+  default List<Comision> getComisiones(String codigoMateria, String codigosComisiones, PeticionInscripcionMappingService mappingService) {
+    String materia = codigoMateria.trim();
     return Arrays.stream(codigosComisiones.split(",\\s*"))
-                 .map(codigo -> mappingService.buscarComisionPorCodigo(codigo.trim()))
+                 .map(codigo -> mappingService.buscarComisionPorCodigo(materia.trim() + "-" + codigo.trim()))
                  .collect(Collectors.toList());
   }
 

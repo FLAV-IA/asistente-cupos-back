@@ -37,10 +37,10 @@ class PeticionInscripcionMapperTest {
 
     Estudiante estudiante = Estudiante.builder().dni("22222").nombre("Laura").build();
     Materia materia = Materia.builder().codigo("MAT02").nombre("Fisica").build();
-    Comision comision = Comision.builder().codigo("COM02").materia(materia).build();
+    Comision comision = Comision.builder().codigo("MAT02-COM02").materia(materia).build();
 
     when(mappingService.buscarEstudiantePorDni("22222")).thenReturn(estudiante);
-    when(mappingService.buscarComisionPorCodigo("COM02")).thenReturn(comision);
+    when(mappingService.buscarComisionPorCodigo("MAT02-COM02")).thenReturn(comision);
     when(mappingService.buscarMateriaPorCodigo("MAT02")).thenReturn(materia);
 
 
@@ -50,7 +50,7 @@ class PeticionInscripcionMapperTest {
     assertEquals("22222", peticion.getEstudiante().getDni());
     assertEquals("MAT02", peticion.getMateria().getCodigo());
     assertEquals(1, peticion.getComisiones().size());
-    assertEquals("COM02", peticion.getComisiones().get(0).getCodigo());
+    assertEquals("MAT02-COM02", peticion.getComisiones().get(0).getCodigo());
     assertFalse(peticion.isCumpleCorrelativa());
   }
 
@@ -63,12 +63,12 @@ class PeticionInscripcionMapperTest {
 
     Estudiante estudiante = Estudiante.builder().dni("11111").nombre("Pepe").build();
     Materia materia = Materia.builder().codigo("MAT01").nombre("Matematica").build();
-    Comision comision = Comision.builder().codigo("COM01").materia(materia).build();
-    Comision comision2 = Comision.builder().codigo("COM02").materia(materia).build();
+    Comision comision = Comision.builder().codigo("MAT01-COM01").materia(materia).build();
+    Comision comision2 = Comision.builder().codigo("MAT01-COM02").materia(materia).build();
 
     when(mappingService.buscarEstudiantePorDni("11111")).thenReturn(estudiante);
-    when(mappingService.buscarComisionPorCodigo("COM01")).thenReturn(comision);
-    when(mappingService.buscarComisionPorCodigo("COM02")).thenReturn(comision2);
+    when(mappingService.buscarComisionPorCodigo("MAT01-COM01")).thenReturn(comision);
+    when(mappingService.buscarComisionPorCodigo("MAT01-COM02")).thenReturn(comision2);
     when(mappingService.buscarMateriaPorCodigo("MAT01")).thenReturn(materia);
 
 
@@ -81,8 +81,8 @@ class PeticionInscripcionMapperTest {
     assertEquals("11111", peticion.getEstudiante().getDni());
     assertEquals("MAT01", peticion.getMateria().getCodigo());
     assertEquals(2, peticion.getComisiones().size());
-    assertEquals("COM01", peticion.getComisiones().get(0).getCodigo());
-    assertEquals("COM02", peticion.getComisiones().get(1).getCodigo());
+    assertEquals("MAT01-COM01", peticion.getComisiones().get(0).getCodigo());
+    assertEquals("MAT01-COM02", peticion.getComisiones().get(1).getCodigo());
     assertFalse(peticion.isCumpleCorrelativa());
   }
 

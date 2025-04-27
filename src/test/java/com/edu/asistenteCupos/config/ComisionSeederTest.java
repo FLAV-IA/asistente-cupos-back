@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ComisionSeederTest {
   @Test
-  void cargaComisionesDesdeCSVDeTest() throws Exception {
+  void cargaComisionesDesdeCSV() throws Exception {
     ComisionRepository comisionRepo = new ComisionRepositoryInMemory();
     MateriaRepository materiaRepo = new MateriaRepositoryInMemory();
     ClasspathResourceLoader loader = new ClasspathResourceLoader();
@@ -28,7 +28,7 @@ class ComisionSeederTest {
 
     List<Comision> comisiones = comisionRepo.findAll();
     assertThat(comisiones).hasSize(2);
-    Comision comision = comisionRepo.findById("TEST101COM1").orElseThrow();
+    Comision comision = comisionRepo.findById("TEST101-COM1").orElseThrow();
     assertThat(comision.getHorario()).isEqualTo("Martes 10:00 a 12:00");
     assertThat(comision.getCupo()).isEqualTo(30);
     assertThat(comision.getMateria()).isNotNull();
