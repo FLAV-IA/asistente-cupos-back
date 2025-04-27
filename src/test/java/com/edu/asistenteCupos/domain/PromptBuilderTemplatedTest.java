@@ -66,7 +66,7 @@ public class PromptBuilderTemplatedTest {
     Message userMessage = prompt.getInstructions().get(1);
     String expectedSystemContent = "System prompt content";
     String expectedUserContent = "User prompt content with " + resultado +
-      " with - MAT101 (Matemáticas)\n- FIS201 (Física) and - COM001 (cupo: 1)\n- COM002 (cupo: 3)";
+      " with - MAT101 (Matemáticas)\n- FIS201 (Física) and - COM001 (1)\n- COM002 (3)";
 
     assertEquals(expectedSystemContent, systemMessage.getText());
     String expected = this.normalizarString.apply(expectedUserContent);

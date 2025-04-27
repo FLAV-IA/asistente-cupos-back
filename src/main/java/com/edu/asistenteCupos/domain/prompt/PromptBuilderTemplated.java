@@ -42,7 +42,7 @@ public class PromptBuilderTemplated {
 
   public PromptBuilderTemplated conComisiones(List<Comision> comisiones) {
     this.comisiones = comisiones.stream()
-                                .map(c -> "- " + c.getCodigo() + " (cupo: " + c.getCupo() + ")")
+                                .map(c -> "- " + c.getCodigo() + " (" + c.getCupo() + ")")
                                 .collect(Collectors.joining("\n"));
     return this;
   }
