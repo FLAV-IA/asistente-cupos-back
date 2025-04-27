@@ -4,7 +4,7 @@ import com.edu.asistenteCupos.Utils.JsonConverter;
 import com.edu.asistenteCupos.Utils.PromptTemplateProvider;
 import com.edu.asistenteCupos.domain.Comision;
 import com.edu.asistenteCupos.domain.Materia;
-import com.edu.asistenteCupos.service.factory.PeticionInscripcion4Prompt;
+import com.edu.asistenteCupos.service.factory.dto.PeticionInscripcion4Prompt;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class PromptBuilderTemplated {
   private String materias;
   private String comisiones;
-  private List<PeticionInscripcion4Prompt> peticionesDeInscripcion;
+  private String peticionesDeInscripcion;
   private PromptTemplateProvider promptTemplateProvider;
 
   private PromptBuilderTemplated() {}
@@ -47,7 +47,7 @@ public class PromptBuilderTemplated {
   }
 
   public PromptBuilderTemplated conPeticionesDeInscripcion(List<PeticionInscripcion4Prompt> peticionesDeInscripcion) {
-    this.peticionesDeInscripcion = peticionesDeInscripcion;
+    this.peticionesDeInscripcion = JsonConverter.toJson(peticionesDeInscripcion);
     return this;
   }
 
@@ -59,7 +59,7 @@ public class PromptBuilderTemplated {
     Map<String, Object> variables = new HashMap<>();
     variables.put("materias", materias);
     variables.put("comisiones", comisiones);
-    variables.put("peticiones", JsonConverter.toJson(peticionesDeInscripcion));
+    variables.put("peticiones", peticionesDeInscripcion);
 
     return new Prompt(List.of(systemMessageDesde(variables), userMessageDesde(variables)));
   }

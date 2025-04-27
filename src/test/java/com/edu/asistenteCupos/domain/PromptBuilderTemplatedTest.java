@@ -1,13 +1,12 @@
 package com.edu.asistenteCupos.domain;
 
+import com.edu.asistenteCupos.Utils.JsonConverter;
 import com.edu.asistenteCupos.Utils.PromptTemplateProvider;
 import com.edu.asistenteCupos.domain.prompt.PromptBuilderTemplated;
-import com.edu.asistenteCupos.mapper.PeticionInscripcionMapper;
-import com.edu.asistenteCupos.service.factory.PeticionInscripcion4Prompt;
+import com.edu.asistenteCupos.service.factory.dto.PeticionInscripcion4Prompt;
 import com.edu.asistenteCupos.utils.GeneradorDeDatosDePrueba;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
 import org.mockito.Mockito;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -39,7 +38,7 @@ public class PromptBuilderTemplatedTest {
     Materia fisica = new Materia("Física", "FIS201", List.of());
     materias = Arrays.asList(matematica, fisica);
 
-    comisiones = Arrays.asList(new Comision("COM001","Lunes 10:00", 1, matematica),
+    comisiones = Arrays.asList(new Comision("COM001", "Lunes 10:00", 1, matematica),
       new Comision("COM002", "Martes 14:00", 3, fisica));
 
     peticiones = GeneradorDeDatosDePrueba.peticionInscripcionesDePrueba();
@@ -48,7 +47,6 @@ public class PromptBuilderTemplatedTest {
 
   @Test
   void construirEntregaUnPromptCorrecto() {
-    PeticionInscripcionMapper mapper = Mappers.getMapper(PeticionInscripcionMapper.class);
     String systemPromptContent = "System prompt content";
     String userPromptContent = "User prompt content with {peticiones} with {materias} and {comisiones}";
     Resource userResource = new ByteArrayResource(userPromptContent.getBytes());
@@ -61,7 +59,8 @@ public class PromptBuilderTemplatedTest {
 
 
     String resultado =
-      "[ " + peticiones.stream().map(mapper::toJson).collect(Collectors.joining(", ")) + " ]";
+      "[ " + peticiones.stream().map(JsonConverter::toJson).collect(Collectors.joining(", ")) +
+        " ]";
     assertEquals(2, prompt.getInstructions().size());
     Message systemMessage = prompt.getInstructions().get(0);
     Message userMessage = prompt.getInstructions().get(1);

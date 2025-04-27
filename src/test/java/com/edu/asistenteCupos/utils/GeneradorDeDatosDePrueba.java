@@ -1,21 +1,31 @@
 package com.edu.asistenteCupos.utils;
 
-import com.edu.asistenteCupos.domain.Estudiante;
-import com.edu.asistenteCupos.domain.HistoriaAcademica;
-import com.edu.asistenteCupos.domain.Materia;
-import com.edu.asistenteCupos.domain.PeticionInscripcion;
+import com.edu.asistenteCupos.service.factory.dto.HistoriaAcademica4Prompt;
+import com.edu.asistenteCupos.service.factory.dto.PeticionInscripcion4Prompt;
 
 import java.util.List;
 
 public class GeneradorDeDatosDePrueba {
-  public static List<PeticionInscripcion> peticionInscripcionesDePrueba() {
-    Estudiante ana = Estudiante.builder().dni("1001").nombre("Ana Torres").historiaAcademica(
-      HistoriaAcademica.builder().totalInscripcionesHistoricas(6).build()).build();
+  public static List<PeticionInscripcion4Prompt> peticionInscripcionesDePrueba() {
+    HistoriaAcademica4Prompt historiaAcademica4Prompt = HistoriaAcademica4Prompt.builder()
+                                                                                .totalInscripcionesHistoricas(
+                                                                                  "4")
+                                                                                .totalHistoricasAprobadas(
+                                                                                  "1").build();
+    PeticionInscripcion4Prompt peticionInscripcion4Prompt = PeticionInscripcion4Prompt.builder()
+                                                                                      .dni("1001")
+                                                                                      .codigoMateria(
+                                                                                        "1037")
+                                                                                      .cumpleCorrelativa(
+                                                                                        true)
+                                                                                      .codigosComisiones(
+                                                                                        List.of(
+                                                                                          "1035",
+                                                                                          "1036"))
+                                                                                      .historiaAcademica(
+                                                                                        historiaAcademica4Prompt)
+                                                                                      .build();
 
-    Estudiante carla = Estudiante.builder().dni("1003").nombre("Carla Méndez").historiaAcademica(
-      HistoriaAcademica.builder().totalInscripcionesHistoricas(4).build()).build();
-
-    return List.of(new PeticionInscripcion(ana, new Materia(), List.of(), true),
-      new PeticionInscripcion(carla, new Materia(), List.of(), true));
+    return List.of(peticionInscripcion4Prompt);
   }
 }
