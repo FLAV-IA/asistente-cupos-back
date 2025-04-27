@@ -18,7 +18,7 @@ public class GeneradorDeDatosDePrueba {
                                                                                         "1037")
                                                                                       .cumpleCorrelativa(
                                                                                         true)
-                                                                                      .codigosComisiones(
+                                                                                      .codigosComisionesPosibles(
                                                                                         List.of(
                                                                                           "1035",
                                                                                           "1036"))

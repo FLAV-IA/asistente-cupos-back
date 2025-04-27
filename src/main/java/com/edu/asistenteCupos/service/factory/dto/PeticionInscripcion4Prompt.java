@@ -11,6 +11,6 @@ public class PeticionInscripcion4Prompt {
   private String dni;
   private HistoriaAcademica4Prompt historiaAcademica;
   private String codigoMateria;
-  private List<String> codigosComisiones;
+  private List<String> codigosComisionesPosibles;
   private Boolean cumpleCorrelativa;
 }
