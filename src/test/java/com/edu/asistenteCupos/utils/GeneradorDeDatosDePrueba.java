@@ -14,7 +14,7 @@ public class GeneradorDeDatosDePrueba {
     Estudiante carla = Estudiante.builder().legajo("1003").nombre("Carla Méndez").historiaAcademica(
       HistoriaAcademica.builder().totalInscripcionesHistoricas(4).build()).build();
 
-    return List.of(new PeticionInscripcion(ana, "Matematica", List.of(""), true),
-      new PeticionInscripcion(carla, "Matematica", List.of(""), true));
+    return List.of(new PeticionInscripcion(ana, "Matematica", List.of(), true),
+      new PeticionInscripcion(carla, "Matematica", List.of(), true));
   }
 }
