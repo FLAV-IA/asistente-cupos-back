@@ -24,8 +24,8 @@ public interface PeticionInscripcionMapper {
   }
 
   @Mappings({@Mapping(target = "estudiante", expression = "java(mappingService.buscarEstudiantePorDni(csvDto.getDni()))"),
-    @Mapping(target = "materia", expression = "java(mappingService.buscarMateriaPorCodigo(csvDto.getCodigoMateria()))"),
-    @Mapping(target = "comisiones", expression = "java(getComisiones(csvDto.getCodigosComisiones(), mappingService))"),
+    @Mapping(target = "materia", expression = "java(mappingService.buscarMateriaPorCodigo(csvDto.getCodigoMateria().trim()))"),
+    @Mapping(target = "comisiones", expression = "java(getComisiones(csvDto.getCodigosComisiones().trim(), mappingService))"),
     @Mapping(target = "cumpleCorrelativa", constant = "false")})
   PeticionInscripcion toPeticionInscripcion(PeticionInscripcionCsvDTO csvDto, @Context PeticionInscripcionMappingService mappingService);
 
