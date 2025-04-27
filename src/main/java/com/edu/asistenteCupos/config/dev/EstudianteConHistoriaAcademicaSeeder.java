@@ -85,11 +85,15 @@ public class EstudianteConHistoriaAcademicaSeeder {
   }
 
   private <T extends Collection<Materia>> T parsearMaterias(String materias, Collector<Materia, ?, T> collector) {
-    return (materias.equals("-") ? Stream.<Materia>empty() : Arrays.stream(materias.split(",")).map(
-      codigoMateria -> materiaRepository
-        .findByCodigo(codigoMateria.replace("\"", "").replace(" ", "")).orElseThrow(
+    return (materias.equals("-") ? Stream.<Materia>empty() : Arrays
+      .stream(removerCaracteresEspeciales(materias).split(",")).map(
+        codigoMateria -> materiaRepository.findByCodigo(codigoMateria).orElseThrow(
           () -> new RuntimeException(
             "No se encontró la materia con el código: " + codigoMateria)))).collect(collector);
+  }
+
+  private String removerCaracteresEspeciales(String texto) {
+    return texto.replaceAll("[\"\\s]", "").trim();
   }
 
   @Bean

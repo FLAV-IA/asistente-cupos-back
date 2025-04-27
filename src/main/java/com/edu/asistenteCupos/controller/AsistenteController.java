@@ -25,8 +25,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/asistente")
-@CrossOrigin(origins = "http://localhost:4200")
-
 @RequiredArgsConstructor
 class AsistenteController {
   private final AsistenteDeInscripcion asistenteDeInscripcion;
