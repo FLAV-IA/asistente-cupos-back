@@ -19,7 +19,7 @@ public interface PeticionInscripcionMapper {
 
   List<PeticionInscripcion> toPeticionInscripcionList(List<PeticionInscriptionDTO> peticiones);
 
-  @Mappings({@Mapping(source = "nombre", target = "estudiante.nombre"), @Mapping(source = "legajo", target = "estudiante.legajo"), @Mapping(source = "historiaAcademica", target = "estudiante.historiaAcademica"), @Mapping(source = "correlativa", target = "cumpleCorrelativa")})
+  @Mappings({@Mapping(source = "nombre", target = "estudiante.nombre"), @Mapping(source = "dni", target = "estudiante.dni"), @Mapping(source = "historiaAcademica", target = "estudiante.historiaAcademica"), @Mapping(source = "correlativa", target = "cumpleCorrelativa")})
   PeticionInscripcion toPeticionInscripcion(PeticionInscriptionDTO dto);
 
   default List<PeticionInscripcion> toPeticionInscripcionCsvList(List<PeticionInscripcionCsvDTO> peticiones, @Context PeticionInscripcionMappingService mappingService) {
@@ -27,7 +27,7 @@ public interface PeticionInscripcionMapper {
                      .collect(Collectors.toList());
   }
 
-  @Mappings({@Mapping(target = "estudiante", expression = "java(mappingService.buscarEstudiantePorLegajo(csvDto.getLegajo()))"), @Mapping(target = "materia", expression = "java(mappingService.buscarComisionPorCodigo(csvDto.getCodigoComision()).getMateria().getCodigo())"), @Mapping(target = "comisiones", expression = "java(Collections.singletonList(mappingService.buscarComisionPorCodigo(csvDto.getCodigoComision())))"), @Mapping(target = "cumpleCorrelativa", constant = "false")})
+  @Mappings({@Mapping(target = "estudiante", expression = "java(mappingService.buscarEstudiantePorDni(csvDto.getDni()))"), @Mapping(target = "materia", expression = "java(mappingService.buscarComisionPorCodigo(csvDto.getCodigoComision()).getMateria().getCodigo())"), @Mapping(target = "comisiones", expression = "java(Collections.singletonList(mappingService.buscarComisionPorCodigo(csvDto.getCodigoComision())))"), @Mapping(target = "cumpleCorrelativa", constant = "false")})
   PeticionInscripcion toPeticionInscripcion(PeticionInscripcionCsvDTO csvDto, @Context PeticionInscripcionMappingService mappingService);
 
   @Named("toJson")

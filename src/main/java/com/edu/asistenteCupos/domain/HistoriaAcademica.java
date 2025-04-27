@@ -25,7 +25,7 @@ public class HistoriaAcademica {
   private Double coeficiente;
 
   @OneToOne
-  @JoinColumn(name = "legajo_de_estudiante", referencedColumnName = "legajo", unique = true)
+  @JoinColumn(name = "dni_de_estudiante", referencedColumnName = "dni", unique = true)
   @JsonBackReference
   private Estudiante estudiante;
 

@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/asistente")
@@ -37,7 +36,7 @@ class AsistenteController {
     try {
       List<PeticionInscripcion> peticiones = peticionInscripcionCsvAdapter.convertir(file);
 
-      peticiones.forEach(peticion -> mantenedorAlumno.obtenerAlumno( peticion.getEstudiante().getLegajo()));
+      peticiones.forEach(peticion -> mantenedorAlumno.obtenerAlumno( peticion.getEstudiante().getDni()));
       List<SugerenciaInscripcion> sugerencias = asistenteDeInscripcion.sugerirInscripcion(peticiones);
 
       List<SugerenciaInscripcionDto> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
@@ -70,7 +69,7 @@ class AsistenteController {
 
       peticiones.stream().forEach(peticion ->
       {
-        Optional<Estudiante> estudiante = mantenedorAlumno.obtenerAlumno(peticion.getEstudiante().getLegajo());
+        Optional<Estudiante> estudiante = mantenedorAlumno.obtenerAlumno(peticion.getEstudiante().getDni());
         if(estudiante.isPresent()) {
           peticion.setEstudiante(estudiante.get());                }
       });

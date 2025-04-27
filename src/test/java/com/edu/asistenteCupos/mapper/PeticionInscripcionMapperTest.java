@@ -33,21 +33,21 @@ class PeticionInscripcionMapperTest {
   @Test void convierteUnaPeticionDeInscripcionDTOAUnaPeticionDeInscripcion() {
     PeticionInscriptionDTO peticionDTO = new PeticionInscriptionDTO();
     peticionDTO.setNombre("Ana Garcia");
-    peticionDTO.setLegajo("54321");
+    peticionDTO.setDni("54321");
     peticionDTO.setHistoriaAcademica(new HistoriaAcademicaDTO());
     peticionDTO.setCorrelativa(false);
 
     PeticionInscripcion peticion = mapper.toPeticionInscripcion(peticionDTO);
 
     assertEquals("Ana Garcia", peticion.getEstudiante().getNombre());
-    assertEquals("54321", peticion.getEstudiante().getLegajo());
+    assertEquals("54321", peticion.getEstudiante().getDni());
     assertFalse(peticion.isCumpleCorrelativa());
   }
 
   @Test void convierteUnaListaDePeticionesDeInscriptionDTOAListaDePeticionesDeInscripcion() {
     PeticionInscriptionDTO peticionDTO = new PeticionInscriptionDTO();
     peticionDTO.setNombre("Juan Perez");
-    peticionDTO.setLegajo("12345");
+    peticionDTO.setDni("12345");
     peticionDTO.setHistoriaAcademica(new HistoriaAcademicaDTO());
     peticionDTO.setCorrelativa(true);
     List<PeticionInscriptionDTO> peticionesDTO = List.of(peticionDTO);
@@ -57,27 +57,27 @@ class PeticionInscripcionMapperTest {
     assertThat(peticiones).hasSize(1);
     PeticionInscripcion peticion = peticiones.get(0);
     assertEquals("Juan Perez", peticion.getEstudiante().getNombre());
-    assertEquals("12345", peticion.getEstudiante().getLegajo());
+    assertEquals("12345", peticion.getEstudiante().getDni());
     assertTrue(peticion.isCumpleCorrelativa());
   }
 
   @Test void convierteUnaPeticionInscripcionCsvDTOAUnaPeticionInscripcion() {
     PeticionInscripcionCsvDTO csvDto = new PeticionInscripcionCsvDTO();
-    csvDto.setLegajo("22222");
+    csvDto.setDni("22222");
     csvDto.setCodigoComision("COM02");
 
-    Estudiante estudiante = Estudiante.builder().legajo("22222").nombre("Laura").build();
+    Estudiante estudiante = Estudiante.builder().dni("22222").nombre("Laura").build();
     Materia materia = Materia.builder().codigo("MAT02").nombre("Fisica").build();
     Comision comision = Comision.builder().codigo("COM02").materia(materia).build();
 
-    when(mappingService.buscarEstudiantePorLegajo("22222")).thenReturn(estudiante);
+    when(mappingService.buscarEstudiantePorDni("22222")).thenReturn(estudiante);
     when(mappingService.buscarComisionPorCodigo("COM02")).thenReturn(comision);
 
 
     PeticionInscripcion peticion = mapper.toPeticionInscripcion(csvDto, mappingService);
 
 
-    assertEquals("22222", peticion.getEstudiante().getLegajo());
+    assertEquals("22222", peticion.getEstudiante().getDni());
     assertEquals("MAT02", peticion.getMateria());
     assertEquals(1, peticion.getComisiones().size());
     assertEquals("COM02", peticion.getComisiones().get(0).getCodigo());
@@ -86,14 +86,14 @@ class PeticionInscripcionMapperTest {
 
   @Test void convierteListaDePeticionInscripcionCsvDTOAPeticionesDeInscripcion() {
     PeticionInscripcionCsvDTO csvDTO = new PeticionInscripcionCsvDTO();
-    csvDTO.setLegajo("11111");
+    csvDTO.setDni("11111");
     csvDTO.setCodigoComision("COM01");
 
-    Estudiante estudiante = Estudiante.builder().legajo("11111").nombre("Pepe").build();
+    Estudiante estudiante = Estudiante.builder().dni("11111").nombre("Pepe").build();
     Materia materia = Materia.builder().codigo("MAT01").nombre("Matematica").build();
     Comision comision = Comision.builder().codigo("COM01").materia(materia).build();
 
-    when(mappingService.buscarEstudiantePorLegajo("11111")).thenReturn(estudiante);
+    when(mappingService.buscarEstudiantePorDni("11111")).thenReturn(estudiante);
     when(mappingService.buscarComisionPorCodigo("COM01")).thenReturn(comision);
 
 
@@ -103,7 +103,7 @@ class PeticionInscripcionMapperTest {
 
     assertThat(peticiones).hasSize(1);
     PeticionInscripcion peticion = peticiones.get(0);
-    assertEquals("11111", peticion.getEstudiante().getLegajo());
+    assertEquals("11111", peticion.getEstudiante().getDni());
     assertEquals("MAT01", peticion.getMateria());
     assertEquals(1, peticion.getComisiones().size());
     assertEquals("COM01", peticion.getComisiones().get(0).getCodigo());
@@ -112,7 +112,7 @@ class PeticionInscripcionMapperTest {
 
   @Test void conviertePeticionInscripcionAJson() {
 
-    Estudiante estudiante = Estudiante.builder().nombre("Tomas").legajo("7890").build();
+    Estudiante estudiante = Estudiante.builder().nombre("Tomas").dni("7890").build();
     PeticionInscripcion peticion = PeticionInscripcion.builder().materia("MAT01")
                                                       .cumpleCorrelativa(true)
                                                       .estudiante(estudiante).build();

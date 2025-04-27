@@ -27,13 +27,13 @@ class PeticionInscripcionMappingServiceTest {
       comisionRepository);
   }
 
-  @Test void buscarEstudiantePorLegajoDaAlEstudianteBuscado() {
-    Estudiante estudiante = Estudiante.builder().legajo("12345").nombre("Juan Perez").build();
+  @Test void buscarEstudiantePorDniDaAlEstudianteBuscado() {
+    Estudiante estudiante = Estudiante.builder().dni("12345").nombre("Juan Perez").build();
     when(estudianteRepository.findByCodigo("12345")).thenReturn(Optional.of(estudiante));
 
-    Estudiante resultadoBuscado = mappingService.buscarEstudiantePorLegajo("12345");
+    Estudiante resultadoBuscado = mappingService.buscarEstudiantePorDni("12345");
 
-    assertEquals("12345", resultadoBuscado.getLegajo());
+    assertEquals("12345", resultadoBuscado.getDni());
     assertEquals("Juan Perez", resultadoBuscado.getNombre());
   }
 
@@ -41,8 +41,8 @@ class PeticionInscripcionMappingServiceTest {
     when(estudianteRepository.findByCodigo("99999")).thenReturn(Optional.empty());
 
     IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
-      () -> mappingService.buscarEstudiantePorLegajo("99999"));
-    assertEquals("No se encontró Estudiante con legajo: 99999", ex.getMessage());
+      () -> mappingService.buscarEstudiantePorDni("99999"));
+    assertEquals("No se encontró Estudiante con dni: 99999", ex.getMessage());
   }
 
   @Test void buscarUnaComisionPorCodigoDaLaComisionBuscada() {

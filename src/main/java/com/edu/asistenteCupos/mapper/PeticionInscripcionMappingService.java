@@ -13,9 +13,9 @@ public class PeticionInscripcionMappingService {
   private final EstudianteRepository estudianteRepository;
   private final ComisionRepository comisionRepository;
 
-  public Estudiante buscarEstudiantePorLegajo(String legajo) {
-    return estudianteRepository.findByCodigo(legajo).orElseThrow(
-      () -> new IllegalArgumentException("No se encontró Estudiante con legajo: " + legajo));
+  public Estudiante buscarEstudiantePorDni(String dni) {
+    return estudianteRepository.findByCodigo(dni).orElseThrow(
+      () -> new IllegalArgumentException("No se encontró Estudiante con dni: " + dni));
   }
 
   public Comision buscarComisionPorCodigo(String codigo) {

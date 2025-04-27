@@ -38,16 +38,16 @@ class PeticionInscripcionCsvAdapterTest {
 
   @Test
   void testConvertirArchivoCsvCorrectamente() throws IOException {
-    String csvContent = "legajo,codigoComision\n12345,COM01\n";
+    String csvContent = "dni,codigoComision\n12345,COM01\n";
     MockMultipartFile archivoCsv = new MockMultipartFile("archivo", "peticiones.csv", "text/csv",
       new ByteArrayInputStream(csvContent.getBytes(StandardCharsets.UTF_8)));
 
     PeticionInscripcionCsvDTO dto = new PeticionInscripcionCsvDTO();
-    dto.setLegajo("12345");
+    dto.setDni("12345");
     dto.setCodigoComision("COM01");
 
     PeticionInscripcion peticion = PeticionInscripcion.builder().estudiante(
-                                                        Estudiante.builder().legajo("12345").nombre("Juan Perez").build()).materia("MAT01")
+                                                        Estudiante.builder().dni("12345").nombre("Juan Perez").build()).materia("MAT01")
                                                       .comisiones(Collections.singletonList(
                                                         Comision.builder().codigo("COM01")
                                                                 .horario("Lunes 10hs").materia(
@@ -66,7 +66,7 @@ class PeticionInscripcionCsvAdapterTest {
     assertNotNull(resultados);
     assertEquals(1, resultados.size());
     PeticionInscripcion resultado = resultados.get(0);
-    assertEquals("12345", resultado.getEstudiante().getLegajo());
+    assertEquals("12345", resultado.getEstudiante().getDni());
     assertEquals("MAT01", resultado.getMateria());
     assertEquals(1, resultado.getComisiones().size());
     assertEquals("COM01", resultado.getComisiones().get(0).getCodigo());

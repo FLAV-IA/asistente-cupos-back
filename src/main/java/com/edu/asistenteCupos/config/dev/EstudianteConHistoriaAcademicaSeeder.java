@@ -44,10 +44,10 @@ public class EstudianteConHistoriaAcademicaSeeder {
   }
 
   private Estudiante obtenerEstudiante(String[] row) {
-    String legajo = row[0].trim();
+    String dni = row[0].trim();
     String nombre = row[1].trim() + " " + row[2].trim();
     String mail = row[3].trim();
-    return Estudiante.builder().legajo(legajo).mail(mail).nombre(nombre).build();
+    return Estudiante.builder().dni(dni).mail(mail).nombre(nombre).build();
   }
 
   private HistoriaAcademica obtenerHistoriaAcademica(String[] row) {
