@@ -11,10 +11,7 @@ import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.chat.prompt.SystemPromptTemplate;
-import org.springframework.util.StreamUtils;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +42,7 @@ public class PromptBuilderTemplated {
 
   public PromptBuilderTemplated conComisiones(List<Comision> comisiones) {
     this.comisiones = comisiones.stream()
-                                .map(c -> "- " + c.getHorario() + " (" + c.getCodigo() + ")")
+                                .map(c -> "- " + c.getCodigo() + " (cupo: " + c.getCupo() + ")")
                                 .collect(Collectors.joining("\n"));
     return this;
   }
@@ -73,15 +70,9 @@ public class PromptBuilderTemplated {
     return new UserMessage(userPrompt.create(variables).getContents());
   }
 
-  private Message systemMessageDesde(Map<String, Object> variables)  {
-    String templateString = null;
-    try{
-      templateString = StreamUtils.copyToString(promptTemplateProvider.systemResource().getInputStream(), StandardCharsets.UTF_8
-    );}
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-    SystemPromptTemplate systemPromptTemplate = new SystemPromptTemplate(templateString);// se cambia la forma en la que se crea el template, por incompatibilidad con decodificacion
+  private Message systemMessageDesde(Map<String, Object> variables) {
+    SystemPromptTemplate systemPromptTemplate = new SystemPromptTemplate(
+      promptTemplateProvider.metodoNelson());
     return new SystemMessage(systemPromptTemplate.create(variables).getContents());
   }
 }
