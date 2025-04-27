@@ -3,6 +3,7 @@ package com.edu.asistenteCupos.domain;
 import com.edu.asistenteCupos.Utils.PromptTemplateProvider;
 import com.edu.asistenteCupos.domain.prompt.PromptBuilderTemplated;
 import com.edu.asistenteCupos.mapper.PeticionInscripcionMapper;
+import com.edu.asistenteCupos.service.factory.PeticionInscripcion4Prompt;
 import com.edu.asistenteCupos.utils.GeneradorDeDatosDePrueba;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ public class PromptBuilderTemplatedTest {
   private PromptBuilderTemplated promptBuilder;
   private List<Materia> materias;
   private List<Comision> comisiones;
-  private List<PeticionInscripcion> peticiones;
+  private List<PeticionInscripcion4Prompt> peticiones;
 
   @BeforeEach
   void setUp() {
