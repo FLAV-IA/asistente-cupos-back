@@ -44,10 +44,12 @@ class PeticionInscripcionCsvAdapterTest {
 
     PeticionInscripcionCsvDTO dto = new PeticionInscripcionCsvDTO();
     dto.setDni("12345");
-    dto.setCodigoComision("COM01");
+    dto.setCodigosComisiones("COM01");
 
+    Materia materia = Materia.builder().codigo("MAT01").build();
     PeticionInscripcion peticion = PeticionInscripcion.builder().estudiante(
-                                                        Estudiante.builder().dni("12345").nombre("Juan Perez").build()).materia("MAT01")
+                                                        Estudiante.builder().dni("12345").nombre("Juan Perez").build()).materia(
+                                                        materia)
                                                       .comisiones(Collections.singletonList(
                                                         Comision.builder().codigo("COM01")
                                                                 .horario("Lunes 10hs").materia(
@@ -67,7 +69,7 @@ class PeticionInscripcionCsvAdapterTest {
     assertEquals(1, resultados.size());
     PeticionInscripcion resultado = resultados.get(0);
     assertEquals("12345", resultado.getEstudiante().getDni());
-    assertEquals("MAT01", resultado.getMateria());
+    assertEquals("MAT01", resultado.getMateria().getCodigo());
     assertEquals(1, resultado.getComisiones().size());
     assertEquals("COM01", resultado.getComisiones().get(0).getCodigo());
     assertFalse(resultado.isCumpleCorrelativa());

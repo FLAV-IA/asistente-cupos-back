@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 public class PeticionInscripcion {
   private Estudiante estudiante;
-  private String materia;
+  private Materia materia;
   private List<Comision> comisiones;
   private boolean cumpleCorrelativa;
 }

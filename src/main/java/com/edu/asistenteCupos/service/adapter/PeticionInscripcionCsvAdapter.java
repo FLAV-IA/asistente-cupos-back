@@ -16,6 +16,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class PeticionInscripcionCsvAdapter {
+  public static final char SEPARATOR = '|';
   private final PeticionInscripcionMapper peticionInscripcionMapper;
   private final PeticionInscripcionMappingService mappingService;
 
@@ -23,8 +24,8 @@ public class PeticionInscripcionCsvAdapter {
     try (InputStreamReader reader = new InputStreamReader(archivoCsv.getInputStream(),
       StandardCharsets.UTF_8)) {
       List<PeticionInscripcionCsvDTO> dtos = new CsvToBeanBuilder<PeticionInscripcionCsvDTO>(reader)
-        .withType(PeticionInscripcionCsvDTO.class).withIgnoreLeadingWhiteSpace(true).build()
-        .parse();
+        .withType(PeticionInscripcionCsvDTO.class).withIgnoreLeadingWhiteSpace(true)
+        .withSeparator(SEPARATOR).build().parse();
 
       return peticionInscripcionMapper.toPeticionInscripcionCsvList(dtos, mappingService);
     } catch (Exception e) {
