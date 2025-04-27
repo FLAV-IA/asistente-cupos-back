@@ -2,6 +2,7 @@ package com.edu.asistenteCupos.mapper;
 
 import com.edu.asistenteCupos.controller.dto.PeticionInscripcionCsvDTO;
 import com.edu.asistenteCupos.controller.dto.PeticionInscriptionDTO;
+import com.edu.asistenteCupos.domain.Comision;
 import com.edu.asistenteCupos.domain.PeticionInscripcion;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -11,6 +12,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,8 +23,17 @@ public interface PeticionInscripcionMapper {
                      .collect(Collectors.toList());
   }
 
-  @Mappings({@Mapping(target = "estudiante", expression = "java(mappingService.buscarEstudiantePorDni(csvDto.getDni()))"), @Mapping(target = "materia", expression = "java(mappingService.buscarComisionPorCodigo(csvDto.getCodigoComision()).getMateria().getCodigo())"), @Mapping(target = "comisiones", expression = "java(Collections.singletonList(mappingService.buscarComisionPorCodigo(csvDto.getCodigoComision())))"), @Mapping(target = "cumpleCorrelativa", constant = "false")})
+  @Mappings({@Mapping(target = "estudiante", expression = "java(mappingService.buscarEstudiantePorDni(csvDto.getDni()))"),
+    @Mapping(target = "materia", expression = "java(mappingService.buscarMateriaPorCodigo(csvDto.getCodigoMateria()))"),
+    @Mapping(target = "comisiones", expression = "java(getComisiones(csvDto.getCodigosComisiones(), mappingService))"),
+    @Mapping(target = "cumpleCorrelativa", constant = "false")})
   PeticionInscripcion toPeticionInscripcion(PeticionInscripcionCsvDTO csvDto, @Context PeticionInscripcionMappingService mappingService);
+
+  default List<Comision> getComisiones(String codigosComisiones, PeticionInscripcionMappingService mappingService) {
+    return Arrays.stream(codigosComisiones.split(",\\s*"))
+                 .map(codigo -> mappingService.buscarComisionPorCodigo(codigo.trim()))
+                 .collect(Collectors.toList());
+  }
 
   @Named("toJson")
   default String toJson(PeticionInscripcion peticion) {

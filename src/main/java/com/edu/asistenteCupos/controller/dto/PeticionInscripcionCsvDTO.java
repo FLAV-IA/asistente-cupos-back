@@ -8,6 +8,9 @@ public class PeticionInscripcionCsvDTO {
   @CsvBindByName(column = "dni")
   private String dni;
 
-  @CsvBindByName(column = "codigo_comision")
-  private String codigoComision;
+  @CsvBindByName(column = "codigo_materia")
+  private String codigoMateria;
+
+  @CsvBindByName(column = "codigos_comisiones")
+  private String codigosComisiones;
 }
