@@ -16,12 +16,6 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", uses = PeticionInscripcionMappingService.class, imports = java.util.Collections.class)
 public interface PeticionInscripcionMapper {
-
-  List<PeticionInscripcion> toPeticionInscripcionList(List<PeticionInscriptionDTO> peticiones);
-
-  @Mappings({@Mapping(source = "nombre", target = "estudiante.nombre"), @Mapping(source = "dni", target = "estudiante.dni"), @Mapping(source = "historiaAcademica", target = "estudiante.historiaAcademica"), @Mapping(source = "correlativa", target = "cumpleCorrelativa")})
-  PeticionInscripcion toPeticionInscripcion(PeticionInscriptionDTO dto);
-
   default List<PeticionInscripcion> toPeticionInscripcionCsvList(List<PeticionInscripcionCsvDTO> peticiones, @Context PeticionInscripcionMappingService mappingService) {
     return peticiones.stream().map(dto -> toPeticionInscripcion(dto, mappingService))
                      .collect(Collectors.toList());
