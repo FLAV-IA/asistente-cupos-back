@@ -10,7 +10,7 @@ public class HistoriaAcademicarRepositoryInMemory implements HistoriaAcademicaRe
 
     @Override
     public HistoriaAcademica save(HistoriaAcademica historia) {
-        data.put(historia.getEstudiante().getLegajo(), historia);
+        data.put(historia.getEstudiante().getDni(), historia);
         return historia;
     }
 

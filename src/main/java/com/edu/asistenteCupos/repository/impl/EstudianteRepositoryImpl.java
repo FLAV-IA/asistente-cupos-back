@@ -25,7 +25,7 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
     }
 
     @Override
-    public Optional<Estudiante> findByCodigo(String legajo) {
-        return this.jpaRepository.findById(legajo);
+    public Optional<Estudiante> findByCodigo(String dni) {
+        return this.jpaRepository.findById(dni);
     }
 }

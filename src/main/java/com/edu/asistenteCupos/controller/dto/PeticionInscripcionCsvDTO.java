@@ -5,39 +5,12 @@ import lombok.Data;
 
 @Data
 public class PeticionInscripcionCsvDTO {
-  @CsvBindByName
-  private String nombre;
+  @CsvBindByName(column = "dni")
+  private String dni;
 
-  @CsvBindByName(column = "legajo")
-  private String legajo;
-
-  @CsvBindByName(column = "materia")
-  private String materia;
-
-  @CsvBindByName(column = "comision")
-  private String comisiones;
-
-  @CsvBindByName(column = "codigoMateria")
+  @CsvBindByName(column = "codigo_materia")
   private String codigoMateria;
-  @CsvBindByName
-  private boolean correlativa;
 
-  @CsvBindByName
-  private int insc3;
-
-  @CsvBindByName
-  private int inscAct;
-
-  @CsvBindByName
-  private int aprobUlt;
-
-  @CsvBindByName
-  private int inscTot;
-
-  @CsvBindByName
-  private int aprobTot;
-
-  @CsvBindByName
-  private int restantes;
-
+  @CsvBindByName(column = "codigos_comisiones")
+  private String codigosComisiones;
 }

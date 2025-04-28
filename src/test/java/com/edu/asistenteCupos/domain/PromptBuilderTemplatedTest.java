@@ -28,7 +28,6 @@ public class PromptBuilderTemplatedTest {
   private List<Materia> materias;
   private List<Comision> comisiones;
   private List<PeticionInscripcion> peticiones;
-  private PeticionInscripcionMapper peticionInscripcionMapper;
 
   @BeforeEach
   void setUp() {
@@ -39,8 +38,8 @@ public class PromptBuilderTemplatedTest {
     Materia fisica = new Materia("Física", "FIS201", List.of());
     materias = Arrays.asList(matematica, fisica);
 
-    comisiones = Arrays.asList(new Comision("Lunes 10:00", "COM001", 1, matematica),
-      new Comision("Martes 14:00", "COM002", 3, fisica));
+    comisiones = Arrays.asList(new Comision("COM001","Lunes 10:00", 1, matematica),
+      new Comision("COM002", "Martes 14:00", 3, fisica));
 
     peticiones = GeneradorDeDatosDePrueba.peticionInscripcionesDePrueba();
     normalizarString = s -> s.replace("\r\n", "\n").replaceAll("\\s+$", "").trim();
@@ -51,26 +50,27 @@ public class PromptBuilderTemplatedTest {
     PeticionInscripcionMapper mapper = Mappers.getMapper(PeticionInscripcionMapper.class);
     String systemPromptContent = "System prompt content";
     String userPromptContent = "User prompt content with {peticiones} with {materias} and {comisiones}";
-    Resource systemResource = new ByteArrayResource(systemPromptContent.getBytes());
     Resource userResource = new ByteArrayResource(userPromptContent.getBytes());
-    when(promptTemplateProvider.systemResource()).thenReturn(systemResource);
+    when(promptTemplateProvider.metodoNelson()).thenReturn(systemPromptContent);
     when(promptTemplateProvider.userResource()).thenReturn(userResource);
+
 
     Prompt prompt = promptBuilder.conMaterias(materias).conComisiones(comisiones)
                                  .conPeticionesDeInscripcion(peticiones).construir();
 
+
     String resultado =
       "[ " + peticiones.stream().map(mapper::toJson).collect(Collectors.joining(", ")) + " ]";
-
     assertEquals(2, prompt.getInstructions().size());
     Message systemMessage = prompt.getInstructions().get(0);
     Message userMessage = prompt.getInstructions().get(1);
     String expectedSystemContent = "System prompt content";
     String expectedUserContent = "User prompt content with " + resultado +
-      " with - MAT101 (Matemáticas)\n- FIS201 (Física) and - COM001 (Lunes 10:00)\n- COM002 (Martes 14:00)";
+      " with - MAT101 (Matemáticas)\n- FIS201 (Física) and - COM001 (1)\n- COM002 (3)";
 
     assertEquals(expectedSystemContent, systemMessage.getText());
-    assertEquals(this.normalizarString.apply(expectedUserContent),
-      this.normalizarString.apply(userMessage.getText()));
+    String expected = this.normalizarString.apply(expectedUserContent);
+    String actuakl = this.normalizarString.apply(userMessage.getText());
+    assertEquals(expected, actuakl);
   }
 }

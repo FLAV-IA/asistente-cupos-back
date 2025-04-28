@@ -9,14 +9,12 @@ FORMATO REQUERIDO: Lista JSON por estudiante con materia asignada y comisión su
 ## DATOS DE ENTRADA ##
 
 ### MATERIAS DISPONIBLES: ###
-
-{{materias}}
+#### Nombre de materia (codigo) ####
+{materias}
 
 ### COMISIONES DISPONIBLES: ###
-
-{{comisiones}}
+#### Codigo de comision (cupo) ####
+{comisiones}
 
 ### PETICIONES DE INSCRIPCION: ###
-
 {peticiones}
-

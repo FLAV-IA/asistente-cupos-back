@@ -10,5 +10,5 @@ public interface EstudianteRepository {
 
     List<Estudiante> findAll();
 
-    Optional<Estudiante> findByCodigo(String legajo);
+    Optional<Estudiante> findByCodigo(String dni);
 }

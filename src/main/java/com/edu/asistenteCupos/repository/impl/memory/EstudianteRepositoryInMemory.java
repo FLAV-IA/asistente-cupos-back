@@ -10,7 +10,7 @@ public class EstudianteRepositoryInMemory implements EstudianteRepository {
 
     @Override
     public Estudiante save(Estudiante estudiante) {
-        data.put(estudiante.getLegajo(), estudiante);
+        data.put(estudiante.getDni(), estudiante);
         return estudiante;
     }
 
@@ -20,8 +20,8 @@ public class EstudianteRepositoryInMemory implements EstudianteRepository {
     }
 
     @Override
-    public Optional<Estudiante> findByCodigo(String legajo) {
-        return Optional.ofNullable(data.get(legajo));
+    public Optional<Estudiante> findByCodigo(String dni) {
+        return Optional.ofNullable(data.get(dni));
     }
 }
 

@@ -42,17 +42,18 @@ public class ComisionSeeder {
 
       Optional<Materia> materiaOpt = materiaRepository.findByCodigo(codigoMateria);
 
+      String codigoMateriaComision = codigoMateria + "-" + codigoComision;
       if (materiaOpt.isPresent()) {
         Materia materia = materiaOpt.get();
 
-        Comision comision = Comision.builder().codigo(codigoComision).materia(materia)
+        Comision comision = Comision.builder().codigo(codigoMateriaComision).materia(materia)
                                     .horario(horario).cupo(cupo).build();
 
         comisionRepository.save(comision);
       } else {
         String mensaje = String.format(
           "Materia con código [%s] no encontrada para la comisión [%s - %n]", codigoMateria,
-          codigoComision);
+          codigoMateriaComision);
         log.error(mensaje);
       }
     }

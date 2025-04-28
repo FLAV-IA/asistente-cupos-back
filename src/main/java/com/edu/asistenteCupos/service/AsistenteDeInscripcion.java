@@ -6,7 +6,6 @@ import com.edu.asistenteCupos.domain.SugerenciaInscripcion;
 import com.edu.asistenteCupos.domain.prompt.PromptPrinter;
 import com.edu.asistenteCupos.mapper.SugerenciaInscripcionMapper;
 import com.edu.asistenteCupos.service.factory.PromptFactory;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -22,7 +21,6 @@ import java.util.stream.Collectors;
 public class AsistenteDeInscripcion {
   private final OpenAiChatModel chatModel;
   private final PromptFactory promptFactory;
-  private final ObjectMapper objectMapper = new ObjectMapper();
   private SugerenciaInscripcionMapper mapper;
 
   public List<SugerenciaInscripcion> sugerirInscripcion(List<PeticionInscripcion> peticionesDeInscripcion) {

@@ -17,7 +17,7 @@ public class MantenedorAlumno {
 
 
 
-    public Optional<Estudiante> obtenerAlumno(String legajo) {
-        return estudianteRepository.findByCodigo(legajo);
+    public Optional<Estudiante> obtenerAlumno(String dni) {
+        return estudianteRepository.findByCodigo(dni);
     }
 }

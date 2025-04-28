@@ -1,8 +1,11 @@
 package com.edu.asistenteCupos.Utils;
 
-import lombok.NoArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StreamUtils;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @Component
 public class PromptTemplateProvider {
@@ -20,5 +23,16 @@ public class PromptTemplateProvider {
   public Resource userResource() {
     String userPathName = "prompt/user-template.md";
     return loader.comoRecurso(userPathName);
+  }
+
+  public String metodoNelson() {
+    String templateString;
+    try {
+      templateString = StreamUtils.copyToString(systemResource().getInputStream(),
+        StandardCharsets.UTF_8);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    return templateString;
   }
 }
