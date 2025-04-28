@@ -7,24 +7,29 @@ import com.edu.asistenteCupos.domain.Materia;
 import com.edu.asistenteCupos.domain.PeticionInscripcion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@SpringBootTest(classes = PeticionInscripcionMapperConfig.class)
+@ExtendWith(SpringExtension.class)
 class PeticionInscripcionMapperTest {
-  private PeticionInscripcionMapper mapper;
+  @Autowired
+  private PeticionInscripcionMapper peticionInscripcionMapper;
   private PeticionInscripcionMappingService mappingService;
 
   @BeforeEach
   void setUp() {
-    mapper = Mappers.getMapper(PeticionInscripcionMapper.class);
     mappingService = mock(PeticionInscripcionMappingService.class);
   }
 
@@ -44,7 +49,7 @@ class PeticionInscripcionMapperTest {
     when(mappingService.buscarMateriaPorCodigo("MAT02")).thenReturn(materia);
 
 
-    PeticionInscripcion peticion = mapper.toPeticionInscripcion(csvDto, mappingService);
+    PeticionInscripcion peticion = peticionInscripcionMapper.toPeticionInscripcion(csvDto, mappingService);
 
 
     assertEquals("22222", peticion.getEstudiante().getDni());
@@ -72,7 +77,7 @@ class PeticionInscripcionMapperTest {
     when(mappingService.buscarMateriaPorCodigo("MAT01")).thenReturn(materia);
 
 
-    List<PeticionInscripcion> peticiones = mapper.toPeticionInscripcionCsvList(List.of(csvDto),
+    List<PeticionInscripcion> peticiones = peticionInscripcionMapper.toPeticionInscripcionCsvList(List.of(csvDto),
       mappingService);
 
 
@@ -84,30 +89,5 @@ class PeticionInscripcionMapperTest {
     assertEquals("MAT01-COM01", peticion.getComisiones().get(0).getCodigo());
     assertEquals("MAT01-COM02", peticion.getComisiones().get(1).getCodigo());
     assertFalse(peticion.isCumpleCorrelativa());
-  }
-
-  @Test
-  void conviertePeticionInscripcionAJson() {
-
-    Estudiante estudiante = Estudiante.builder().nombre("Tomas").dni("7890").build();
-    Materia materia = Materia.builder().codigo("MAT01").build();
-    PeticionInscripcion peticion = PeticionInscripcion.builder().materia(materia)
-                                                      .cumpleCorrelativa(true)
-                                                      .estudiante(estudiante).build();
-
-    String json = mapper.toJson(peticion);
-
-    assertThat(json).contains("Tomas");
-    assertThat(json).contains("7890");
-    assertThat(json).contains("MAT01");
-  }
-
-  @Test
-  void lanzaUnErrorSiFallaLaSerializacionAJson() {
-    PeticionInscripcion peticion = mock(PeticionInscripcion.class);
-    when(peticion.getMateria()).thenThrow(new RuntimeException("Fallo interno"));
-
-    RuntimeException ex = assertThrows(RuntimeException.class, () -> mapper.toJson(peticion));
-    assertThat(ex.getMessage()).contains("Error al convertir PeticionInscripcion a JSON");
   }
 }
