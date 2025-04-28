@@ -23,16 +23,16 @@ public class EstudianteSeederTest {
         MateriaRepository materiaRepositoryInMemory = new MateriaRepositoryInMemory();
         EstudianteRepository estudianteRepositoryInMemory = new EstudianteRepositoryInMemory();
         ClasspathResourceLoader loader = new ClasspathResourceLoader();
-        materiaRepositoryInMemory.save(Materia.builder().codigo("80005").nombre("Intro Test").build());
-        materiaRepositoryInMemory.save(Materia.builder().codigo("80000").nombre("Avanzado Test").build());
+        materiaRepositoryInMemory.save(Materia.builder().codigo("1041").nombre("Intro Test").build());
+        materiaRepositoryInMemory.save(Materia.builder().codigo("1046").nombre("Avanzado Test").build());
         Set<Materia> materiasCorrelativas =Set.of(
                 Materia.builder().codigo("80005").build(),
                 Materia.builder().codigo("80000").build()
         );
         HistoriaAcademica historiaAcedemica1 = HistoriaAcademica.builder().insc3(2)
-                .inscAct(0).aprobUlt(1).inscTot(6).aprobTot(3).restantes(5).correlativas("Si").anotadas(materiasCorrelativas).build();
+                .aprobUlt(1).inscTot(6).aprobTot(3).restantes(5).correlativas("Si").anotadas(materiasCorrelativas).build();
         HistoriaAcademica historiaAcedemica2 = HistoriaAcademica.builder().insc3(2)
-                .inscAct(0).aprobUlt(1).inscTot(6).aprobTot(3).restantes(5).correlativas("Si").anotadas(materiasCorrelativas).build();
+                .aprobUlt(1).inscTot(6).aprobTot(3).restantes(5).correlativas("Si").anotadas(materiasCorrelativas).build();
 
         Estudiante estudiante1 = Estudiante.builder().legajo("101").historiaAcademica(historiaAcedemica1).build();
         Estudiante estudiante2 = Estudiante.builder().legajo("100").historiaAcademica(historiaAcedemica2).build();

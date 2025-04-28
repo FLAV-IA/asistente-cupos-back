@@ -18,5 +18,5 @@ FORMATO REQUERIDO: Lista JSON por estudiante con materia asignada y comisión su
 
 ### PETICIONES DE INSCRIPCION: ###
 
-{{peticiones}}
+{peticiones}
 

@@ -17,6 +17,8 @@ import java.util.List;
 public interface PeticionInscripcionMapper {
   List<PeticionInscripcion> toPeticionInscripcionList(List<PeticionInscriptionDTO> peticiones);
 
+  List<PeticionInscripcion> toPeticionInscripcionCsvList(List<PeticionInscripcionCsvDTO> peticiones);
+
   @Mapping(source = "nombre", target = "estudiante.nombre")
   @Mapping(source = "legajo", target = "estudiante.legajo")
   @Mapping(source = "historiaAcademica", target = "estudiante.historiaAcademica")
@@ -35,7 +37,7 @@ public interface PeticionInscripcionMapper {
     }
     HistoriaAcademica historiaAcademica = new HistoriaAcademica();
     historiaAcademica.setInsc3(csvDto.getInsc3());
-    historiaAcademica.setInscAct(csvDto.getInscAct());
+   // historiaAcademica.setInscAct(csvDto.getInscAct());
     historiaAcademica.setAprobUlt(csvDto.getAprobUlt());
     historiaAcademica.setInscTot(csvDto.getInscTot());
     historiaAcademica.setAprobTot(csvDto.getAprobTot());
