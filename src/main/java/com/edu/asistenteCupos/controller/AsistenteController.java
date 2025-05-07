@@ -1,12 +1,13 @@
 package com.edu.asistenteCupos.controller;
 
-import com.edu.asistenteCupos.controller.dto.SugerenciaInscripcionDto;
+import com.edu.asistenteCupos.controller.dto.PeticionInscripcionCsvDTO;
+import com.edu.asistenteCupos.controller.dto.SugerenciaInscripcionDTO;
 import com.edu.asistenteCupos.domain.PeticionInscripcion;
-import com.edu.asistenteCupos.domain.SugerenciaInscripcion;
 import com.edu.asistenteCupos.mapper.SugerenciaInscripcionMapper;
 import com.edu.asistenteCupos.service.AsistenteDeInscripcion;
-import com.edu.asistenteCupos.service.MantenedorAlumno;
+import com.edu.asistenteCupos.assembler.EnsambladorDePeticiones;
 import com.edu.asistenteCupos.service.adapter.PeticionInscripcionCsvAdapter;
+import com.edu.asistenteCupos.domain.sugerencia.SugerenciaInscripcion;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,15 +27,18 @@ class AsistenteController {
   private final AsistenteDeInscripcion asistenteDeInscripcion;
   private final SugerenciaInscripcionMapper sugerenciaInscripcionMapper;
   private final PeticionInscripcionCsvAdapter peticionInscripcionCsvAdapter;
-  private final MantenedorAlumno mantenedorAlumno;
+  private final EnsambladorDePeticiones ensambladorDePeticiones;
 
   @PostMapping("/sugerencia-inscripcion-con-csv")
-  public ResponseEntity<List<SugerenciaInscripcionDto>> sugerirInscripcionConCsv(@RequestParam(required = false) MultipartFile file) {
+  public ResponseEntity<List<SugerenciaInscripcionDTO>> sugerirInscripcionConCsv(
+    @RequestParam(required = false) MultipartFile file) {
     try {
-      List<PeticionInscripcion> peticiones = peticionInscripcionCsvAdapter.convertir(file);
+      List<PeticionInscripcionCsvDTO> peticionesCSV = peticionInscripcionCsvAdapter.adapt(file);
+      List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeCsvDto(
+        peticionesCSV);
       List<SugerenciaInscripcion> sugerencias = asistenteDeInscripcion.sugerirInscripcion(
         peticiones);
-      List<SugerenciaInscripcionDto> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
+      List<SugerenciaInscripcionDTO> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
         sugerencias);
       return ResponseEntity.ok(sugerenciasDTO);
     } catch (Exception e) {
@@ -45,7 +49,9 @@ class AsistenteController {
   @PostMapping("/ver-prompt")
   public ResponseEntity<String> verPrompt(@RequestParam(required = false) MultipartFile file) {
     try {
-      List<PeticionInscripcion> peticiones = peticionInscripcionCsvAdapter.convertir(file);
+      List<PeticionInscripcionCsvDTO> peticionesCSV = peticionInscripcionCsvAdapter.adapt(file);
+      List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeCsvDto(
+        peticionesCSV);
       return ResponseEntity.ok(asistenteDeInscripcion.mostrarPrompt(peticiones));
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
