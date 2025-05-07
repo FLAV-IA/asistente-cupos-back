@@ -22,9 +22,23 @@ public class JsonConverter {
 
   public static List<Map<String, Object>> readValue(String json) {
     try {
-      return mapper.readValue(json, new TypeReference<>() {});
+      var node = mapper.readTree(json);
+
+      if (node.isArray()) {
+        return mapper.readValue(json, new TypeReference<>() {});
+      } else if (node.isObject()) {
+        Map<String, Object> single = mapper.convertValue(node, new TypeReference<>() {});
+        return List.of(single);
+      } else {
+        throw new RuntimeException("El JSON no tiene formato de objeto ni de array.");
+      }
+
     } catch (JsonProcessingException e) {
-      throw new RuntimeException("Error al parsear el JSON: " + e.getMessage());
+      throw new RuntimeException("Error al parsear el JSON: " + e.getMessage(), e);
     }
+  }
+
+  public static <T> T convertMap(Map<String, Object> map, Class<T> clazz) {
+    return mapper.convertValue(map, clazz);
   }
 }
