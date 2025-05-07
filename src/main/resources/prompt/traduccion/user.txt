@@ -1,0 +1,37 @@
+INPUT:
+{peticiones}
+
+Each item is a request in the following format:
+
+```json
+[
+  {
+    "peticion": {
+      "estudiante": { "nombre": "Juan" },
+      "comision": { "codigo": "MAT1-01-c3", "materia": { "nombre": "Matemática I" } },
+      "prioridad": 90,
+      "motivo": "AVZ, COR, CF"
+    },
+    "cupoAsignado": true
+  },
+  ...
+]
+
+Expected output:
+
+[
+  {
+    "a": "12312334",
+    "c": "MAT1-01-c3",
+    "p": 90,
+    "m": "Está por terminar la carrera, cumple correlativas y tiene un buen promedio.",
+    "x": true
+  },
+  ...
+]
+
+GUIDELINES:
+- Replace priority tags (e.g., AVZ, COR) with short explanations.
+- Avoid repeating identical explanations.
+- Use Spanish only.
+- Keep it concise but human-readable.
