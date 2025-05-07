@@ -11,14 +11,13 @@ import java.util.stream.Collectors;
 
 @Component
 public class SugerenciaInscripcionMapper {
-
   public SugerenciaInscripcionDTO toDto(SugerenciaInscripcion sugerencia) {
     if (sugerencia instanceof SugerenciaAsignada asignada) {
       return SugerenciaInscripcionDTO.builder()
                                      .nombreEstudiante(asignada.estudiante().getNombre())
                                      .dniEstudiante(asignada.estudiante().getDni())
                                      .nombreMateria(asignada.materia().getNombre())
-                                     .codigoComision(asignada.getComision().getCodigo())
+                                     .codigoComision(asignada.comision().getCodigo())
                                      .motivo(asignada.motivo())
                                      .prioridad(asignada.prioridad()).cupoAsignado(true).build();
     } else if (sugerencia instanceof SugerenciaRechazada rechazada) {
