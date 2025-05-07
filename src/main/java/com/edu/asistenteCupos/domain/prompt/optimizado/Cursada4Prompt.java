@@ -1,4 +1,4 @@
-package com.edu.asistenteCupos.domain.prompt;
+package com.edu.asistenteCupos.domain.prompt.optimizado;
 
 import lombok.Data;
 
