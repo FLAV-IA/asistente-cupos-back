@@ -9,6 +9,7 @@ import com.edu.asistenteCupos.assembler.EnsambladorDePeticiones;
 import com.edu.asistenteCupos.service.adapter.PeticionInscripcionCsvAdapter;
 import com.edu.asistenteCupos.domain.sugerencia.SugerenciaInscripcion;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/asistente")
 @RequiredArgsConstructor
+@Slf4j
 class AsistenteController {
   private final AsistenteDeInscripcion asistenteDeInscripcion;
   private final SugerenciaInscripcionMapper sugerenciaInscripcionMapper;
@@ -42,6 +44,7 @@ class AsistenteController {
         sugerencias);
       return ResponseEntity.ok(sugerenciasDTO);
     } catch (Exception e) {
+      log.error(e.getMessage(), e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ArrayList<>());
     }
   }

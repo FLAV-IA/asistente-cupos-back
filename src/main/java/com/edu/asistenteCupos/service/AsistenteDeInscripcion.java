@@ -30,7 +30,7 @@ import java.util.function.ToIntFunction;
 @RequiredArgsConstructor
 @Slf4j
 public class AsistenteDeInscripcion {
-  private static final int MAX_TOKENS_BATCH = 3000;
+  private static final int MAX_TOKENS_BATCH = 6000;
 
   private final FiltroDePeticionInscripcion cadenaDeFiltros;
   private final PriorizadorDePeticiones priorizadorDePeticiones;
@@ -46,21 +46,23 @@ public class AsistenteDeInscripcion {
     List<PeticionInscripcion> filtradas = cadenaDeFiltros.filtrar(peticionesDeInscripcion);
 
     var batchesEtapa1 = BatcherPorTokens.dividir(filtradas, MAX_TOKENS_BATCH, estimadorPeticion);
-    log.info("Etapa 1 - Total de batches: {}", batchesEtapa1.size());
+    log.info("Etapa priorización - Total de batches: {}", batchesEtapa1.size());
 
     List<ResultadoPriorizacionLLM> resultadosTotales = batchesEtapa1.stream().peek(
-                                                                      batch -> log.info("Etapa 1 - Batch con {} peticiones (tokens estimados: {})", batch.size(),
-                                                                        batch.stream().mapToInt(estimadorPeticion).sum())).map(priorizadorDePeticiones::priorizar)
-                                                                    .flatMap(List::stream).toList();
+      batch -> log.info("Etapa priorización - Batch con {} peticiones (tokens estimados: {})",
+        batch.size(), batch.stream().mapToInt(estimadorPeticion).sum())).map(
+      priorizadorDePeticiones::priorizar).flatMap(List::stream).toList();
 
     List<PeticionPriorizada> priorizadas = conversorResultadoLLM.desdeResultadosLLM(
       resultadosTotales, filtradas);
 
+    log.info("Etapa asignación - Total de peticiones: {}", priorizadas.size());
     List<SugerenciaInscripcion> sugerenciasAsignadas = asignadorDeCuposManual.asignar(priorizadas);
 
     var batchesEtapa4 = BatcherPorTokens.dividir(sugerenciasAsignadas, MAX_TOKENS_BATCH,
       estimadorPriorizada);
 
+    log.info("Etapa traducción - Total de batches: {}", batchesEtapa4.size());
     List<SugerenciaInscripcionLLM> sugerenciasLLM = batchesEtapa4.stream().map(traductor::traducir)
                                                                  .flatMap(List::stream).toList();
 

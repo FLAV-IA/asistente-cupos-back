@@ -2,31 +2,7 @@ REQUESTS:
 {peticiones}
 
 Each item has the following format:
-
-```json
-[
-  {
-    "a": "12345678",
-    "h": {
-      "i": 22,
-      "ap": 20,
-      "cf": 8.3,
-      "ca": ["MAT1", "ALG1"],
-      "ac": ["PROG2"]
-    },
-    "p": [
-      {
-        "m": ["MAT1-01", "MAT1-02"],
-        "c": true
-      },
-      {
-        "m": ["ALG1-01"],
-        "c": false
-      }
-    ]
-  },
-  ...
-]
+{ejemploJson}
 
 For each student in the list, return a JSON object with the following fields:
 - "a": student ID
@@ -34,22 +10,9 @@ For each student in the list, return a JSON object with the following fields:
 - "p": priority (0 to 100)
 - "e": justification tags
 
-EXPECTED OUTPUT
-
-[
-  {
-    "a": "12345678",
-    "m": "MAT1",
-    "p": 86,
-    "e": ["COR", "REC", "CF"]
-  },
-  {
-    "a": "12345678",
-    "m": "ALG1",
-    "p": 55,
-    "e": ["SIN", "REZ"]
-  }
-]
+EXPECTED OUTPUT:
+{ejemploOutput}
 
 - Make sure the array is sorted by p descending.
-- Do not add any explanations outside the JSON.
+- Do not use markdown (like ```json). Return only the raw JSON array.
+- Do not add any explanations or comments.

@@ -3,11 +3,13 @@ package com.edu.asistenteCupos.service.llm;
 import com.edu.asistenteCupos.Utils.JsonConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -29,11 +31,18 @@ public class RespuestaLLMParser {
   }
 
   private String extraerJson(ChatResponse response) {
-    String content = response.getResult().getOutput().toString().trim();
+    AssistantMessage assistantMessage = response.getResult().getOutput();
+    String content = Objects.requireNonNull(assistantMessage.getText()).trim();
+    log.info("Respuesta del modelo: {}", content);
 
     if (content.isBlank()) {
       log.warn("Respuesta del LLM vacía.");
       throw new RuntimeException("La respuesta del LLM está vacía.");
+    }
+
+    if (content.startsWith("```json") || content.startsWith("```")) {
+      content = content.replaceAll("(?s)^```json\\s*", "").replaceAll("(?s)^```\\s*", "")
+                       .replaceAll("(?s)```$", "").trim();
     }
 
     if (content.startsWith("[")) {

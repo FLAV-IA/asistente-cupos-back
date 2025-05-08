@@ -14,6 +14,10 @@ public class ResultadoPriorizacionLLM {
    */
   private String a;
   /**
+   * materia
+   */
+  private String m;
+  /**
    * Prioridad
    */
   private int p;
