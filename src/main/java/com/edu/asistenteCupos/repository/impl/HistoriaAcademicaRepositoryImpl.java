@@ -7,25 +7,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
 public class HistoriaAcademicaRepositoryImpl implements HistoriaAcademicaRepository {
-    private final HistoriaAcademicaJpaRepository jpaRepository;
+  private final HistoriaAcademicaJpaRepository jpaRepository;
 
-    @Override
-    public HistoriaAcademica save(HistoriaAcademica historia) {
-        return jpaRepository.save(historia);
-    }
+  @Override
+  public HistoriaAcademica save(HistoriaAcademica historia) {
+    return jpaRepository.save(historia);
+  }
 
-    @Override
-    public List<HistoriaAcademica> findAll() {
-        return jpaRepository.findAll();
-    }
-
-    @Override
-    public Optional<HistoriaAcademica> findByIdHistoriaAcademica(Long idHistoriaAcademica) {
-        return jpaRepository.findByIdHistoriaAcademica(idHistoriaAcademica);  }
-
+  @Override
+  public List<HistoriaAcademica> findAll() {
+    return jpaRepository.findAll();
+  }
 }

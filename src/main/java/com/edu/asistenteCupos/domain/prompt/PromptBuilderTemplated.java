@@ -1,77 +1,65 @@
 package com.edu.asistenteCupos.domain.prompt;
 
-import com.edu.asistenteCupos.Utils.JsonConverter;
-import com.edu.asistenteCupos.Utils.PromptTemplateProvider;
-import com.edu.asistenteCupos.domain.Comision;
-import com.edu.asistenteCupos.domain.Materia;
-import com.edu.asistenteCupos.service.factory.dto.PeticionInscripcion4Prompt;
+import com.edu.asistenteCupos.Utils.prompt.PromptTemplateProvider;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.ai.chat.prompt.SystemPromptTemplate;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class PromptBuilderTemplated {
-  private String materias;
-  private String comisiones;
-  private String peticionesDeInscripcion;
-  private PromptTemplateProvider promptTemplateProvider;
+  private final PromptTemplateProvider promptTemplateProvider;
+  private final Map<String, Object> variables = new HashMap<>();
+  private String systemTemplatePath;
+  private String userTemplatePath;
 
-  private PromptBuilderTemplated() {}
+  private PromptBuilderTemplated(PromptTemplateProvider promptTemplateProvider) {
+    this.promptTemplateProvider = promptTemplateProvider;
+  }
 
-  public static PromptBuilderTemplated nuevo(PromptTemplateProvider promptTemplateProvider) {
-    if (promptTemplateProvider == null) {
+  public static PromptBuilderTemplated nuevo(PromptTemplateProvider provider) {
+    if (provider == null)
       throw new IllegalArgumentException("PromptTemplateProvider no puede ser nulo.");
-    }
-    PromptBuilderTemplated builder = new PromptBuilderTemplated();
-    builder.promptTemplateProvider = promptTemplateProvider;
-    return builder;
+    return new PromptBuilderTemplated(provider);
   }
 
-  public PromptBuilderTemplated conMaterias(List<Materia> materias) {
-    this.materias = materias.stream().map(m -> "- " + m.getNombre() + " (" + m.getCodigo() + ")")
-                            .collect(Collectors.joining("\n"));
-    return this;
-  }
-
-  public PromptBuilderTemplated conComisiones(List<Comision> comisiones) {
-    this.comisiones = comisiones.stream().map(c -> "- " + c.getCodigo() + " (" + c.getCupo() + ")")
-                                .collect(Collectors.joining("\n"));
-    return this;
-  }
-
-  public PromptBuilderTemplated conPeticionesDeInscripcion(List<PeticionInscripcion4Prompt> peticionesDeInscripcion) {
-    this.peticionesDeInscripcion = JsonConverter.toJson(peticionesDeInscripcion);
+  public PromptBuilderTemplated conVariable(String clave, Object valor) {
+    variables.put(clave, valor);
     return this;
   }
 
   public Prompt construir() {
-    if (materias == null && comisiones == null && peticionesDeInscripcion == null) {
-      throw new IllegalArgumentException("Pone al menos uno, master.");
+    if (variables.isEmpty()) {
+      throw new IllegalArgumentException("Tenés que pasar al menos una variable.");
     }
-
-    Map<String, Object> variables = new HashMap<>();
-    variables.put("materias", materias);
-    variables.put("comisiones", comisiones);
-    variables.put("peticiones", peticionesDeInscripcion);
-
-    return new Prompt(List.of(systemMessageDesde(variables), userMessageDesde(variables)));
+    return new Prompt(List.of(systemMessageDesde(), userMessageDesde()));
   }
 
-  private Message userMessageDesde(Map<String, Object> variables) {
-    PromptTemplate userPrompt = new PromptTemplate(promptTemplateProvider.userResource());
+  private Message userMessageDesde() {
+    if (userTemplatePath == null)
+      throw new IllegalStateException("Falta el path del template user");
+    PromptTemplate userPrompt = new PromptTemplate(
+      promptTemplateProvider.getTemplate(userTemplatePath));
     return new UserMessage(userPrompt.create(variables).getContents());
   }
 
-  private Message systemMessageDesde(Map<String, Object> variables) {
-    SystemPromptTemplate systemPromptTemplate = new SystemPromptTemplate(
-      promptTemplateProvider.metodoNelson());
-    return new SystemMessage(systemPromptTemplate.create(variables).getContents());
+  private Message systemMessageDesde() {
+    if (userTemplatePath == null)
+      throw new IllegalStateException("Falta el path del template system");
+    return new SystemMessage(promptTemplateProvider.leerTemplateComoString(systemTemplatePath));
+  }
+
+  public PromptBuilderTemplated conSystemTemplate(String path) {
+    this.systemTemplatePath = path;
+    return this;
+  }
+
+  public PromptBuilderTemplated conUserTemplate(String path) {
+    this.userTemplatePath = path;
+    return this;
   }
 }

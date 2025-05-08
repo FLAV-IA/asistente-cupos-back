@@ -1,0 +1,63 @@
+OBJ: Assign students to courses and sections while respecting capacity limits and applying prioritization criteria. Evaluate all requests jointly. Use abbreviated JSON format.
+
+- The output must be a single JSON containing all processed assignments.
+- Decisions must be global: compare all student requests collectively.
+- Do not process individually. Consider cross-impact on available seats.
+- Extract the course code by taking characters before the first hyphen in the section code.
+
+PRIORITIZATION CRITERIA:
+1. [AVZ] Few courses left to graduate (when "h.i - h.ap" ∈ {1,2})
+2. [COR] Meets prerequisites ("c": true)
+3. [SIN] No current course enrollments ("h.ac" is empty)
+4. [EXC] Allowed to bypass prerequisites due to graduation proximity
+5. [REC] Repeating the course, previously attempted but not passed ("h.ca" contains the course)
+6. [REZ] Few recent approvals ("h.ap" is low)
+7. [CF] High academic performance ("h.cf" is high), used for tie-breaking
+
+PRIO:
+- The "p" field must be a number between 0 and 100, calculated based on the above criteria.
+- Greater weight must be given to [AVZ], [COR], and [SIN].
+
+EXPLANATION:
+- The "e" field must contain only labels from the list above, separated by comma and space.
+- Do not include any additional text or narrative.
+- Labels must reflect the criteria applied in the assignment.
+
+OUT FORMAT:
+A JSON array sorted in descending order by priority. Each object must follow this structure:
+
+{
+  "a": "student ID",
+  "m": "course code",
+  "p": 0-100,
+  "c": true | false,
+  "e": "[AVZ], [SIN], [COR]"
+}
+
+Example:
+
+{
+  "a": "36946763",
+  "m": "1035",
+  "p": 65,
+  "c": true,
+  "e": "[COR], [CF]"
+}
+
+- Do not include narrative explanations.
+- Do not alter the structure or output format.
+- Do not omit the "e" field, even when the request is denied.
+
+FORMAT RULES:
+- List must be sorted by descending "p" value.
+- Seats must be assigned in order of priority until capacity is exhausted.
+- Field "p" should be a score between 0 and 100, weighted by criteria (1, 2, and 3 are most important).
+- Field "e" must contain applied criteria labels only (no natural language).
+
+RULES:
+- Evaluate all requests together.
+- A student may only be assigned one section per course.
+- If a course in the student's history has no available section, skip it.
+- Do not repeat decisions.
+- Justify all assignments or rejections using only compact labels.
+- Course code must be inferred from section code (everything before the first hyphen).

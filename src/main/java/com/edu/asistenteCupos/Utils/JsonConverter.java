@@ -24,7 +24,17 @@ public class JsonConverter {
     try {
       return mapper.readValue(json, new TypeReference<>() {});
     } catch (JsonProcessingException e) {
-      throw new RuntimeException("Error al parsear el JSON: " + e.getMessage());
+      try {
+        Map<String, Object> single = mapper.readValue(json, new TypeReference<>() {});
+        return List.of(single);
+      } catch (JsonProcessingException ex) {
+        throw new RuntimeException(
+          "Error al parsear el JSON como array u objeto. Contenido:\n" + json, ex);
+      }
     }
+  }
+
+  public static <T> T convertMap(Map<String, Object> map, Class<T> clazz) {
+    return mapper.convertValue(map, clazz);
   }
 }

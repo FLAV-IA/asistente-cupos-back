@@ -1,0 +1,22 @@
+## EXAMPLE OF EXPECTED FORMAT ##
+
+Each item is a request in the following format:
+{ejemploInput}
+
+Expected output:
+{ejemploOutput}
+
+---
+
+## ACTUAL INPUT TO PROCESS ##
+
+INPUT:
+{peticiones}
+
+GUIDELINES:
+- Replace priority tags (e.g., AVZ, COR) with short explanations.
+- Avoid repeating identical explanations.
+- Use Spanish only.
+- Keep it concise but human-readable.
+- Do NOT include or repeat the example above.
+- Only generate the output corresponding to the input provided in {peticiones}.

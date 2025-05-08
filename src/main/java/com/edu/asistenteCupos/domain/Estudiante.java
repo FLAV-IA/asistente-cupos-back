@@ -29,4 +29,8 @@ public class Estudiante {
     this.historiaAcademica = historia;
     historia.setEstudiante(this);
   }
+
+  public boolean puedeInscribirse(Materia materia) {
+    return true;
+  }
 }
