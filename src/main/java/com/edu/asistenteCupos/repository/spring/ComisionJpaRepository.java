@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ComisionJpaRepository extends JpaRepository<Comision, String> {
   List<Comision> findByCodigoIn(Collection<String> codigos);
+
+    int findCupoByCodigo(String codigo);
 }
