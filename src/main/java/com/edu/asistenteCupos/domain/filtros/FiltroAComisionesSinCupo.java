@@ -1,13 +1,10 @@
 package com.edu.asistenteCupos.domain.filtros;
 
-import com.edu.asistenteCupos.domain.Comision;
 import com.edu.asistenteCupos.domain.PeticionInscripcion;
-import com.edu.asistenteCupos.domain.PeticionPorMateria;
 import com.edu.asistenteCupos.repository.ComisionRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Filtra las peticiones a comisiones sin cupo
@@ -26,27 +23,8 @@ public class FiltroAComisionesSinCupo implements FiltroDePeticionInscripcion {
 
   @Override
   public List<PeticionInscripcion> filtrar(List<PeticionInscripcion> peticiones) {
-    List<PeticionInscripcion> filtradas = new ArrayList<>();
-
-    for (PeticionInscripcion peticion : peticiones) {
-      List<PeticionPorMateria> materiasConCupo = new ArrayList<>();
-
-      for (PeticionPorMateria ppm : peticion.getPeticionPorMaterias()) {
-        List<Comision> comisionesConCupo = ppm.getComisiones().stream()
-                .filter(c -> comisionRepository.findCupoByCodigo(c.getCodigo()) > 0)
-                .collect(Collectors.toList());
-
-        if (!comisionesConCupo.isEmpty()) {
-          ppm.setComisiones(comisionesConCupo);
-          materiasConCupo.add(ppm);
-        }
-      }
-
-      if (!materiasConCupo.isEmpty()) {
-        peticion.setPeticionPorMaterias(materiasConCupo);
-        filtradas.add(peticion);
-      }
-    }
+    // chequear si solamente se debe reemplazar por  comisionAEvaluar.getCupo() > 0
+    List<PeticionInscripcion> filtradas =filtrarPeticionesSegunPredicado(peticiones, (comisionAEvaluar,peticionInscripcionAEvaluar) -> comisionRepository.findCupoByCodigo(comisionAEvaluar.getCodigo()) > 0);
 
     if (siguiente != null) {
       return siguiente.filtrar(filtradas);
@@ -54,4 +32,6 @@ public class FiltroAComisionesSinCupo implements FiltroDePeticionInscripcion {
 
     return filtradas;
   }
+
+
 }

@@ -26,7 +26,7 @@ codigo_materia | codigo_comision | horario | cupo
 487|5-G14|Lunes 12:00 a 14:59,Jueves 12:00 a 14:59,Sabado 09:00 a 10:59|1
 487|6-G14|Lunes 16:00 a 18:59,Jueves 16:00 a 18:59,Sabado 09:00 a 10:59|2
 487|7-G14|Lunes 16:00 a 18:59,Jueves 16:00 a 18:59,Sabado 09:00 a 10:59|3
-487|8-G14|Lunes 19:00 a 21:59,Jueves 19:00 a 21:59,Sabado 09:00 a 10:59|4
+487|8-G14|Lunes 19:00 a 21:59,Jueves 19:00 a 21:59,Sabado 09:00 a 10:59|5
 487|9-G14|Lunes 19:00 a 21:59,Jueves 19:00 a 21:59,Sabado 09:00 a 10:59|2
 487|10-G14|Lunes  19:00 a 21:59,Jueves 19:00 a 21:59,Sabado 09:00 a 10:59|3
 1056|1-G14|Viernes 18:00 a 21:59|1
@@ -48,7 +48,7 @@ codigo_materia | codigo_comision | horario | cupo
 1032|1-G14|Martes 09:00 a 11:59,Viernes  09:00 a 11:59|4
 1032|2-G14|Martes 09:00 a 11:59,Viernes  09:00 a 11:59|1
 1032|3-G14|Martes 15:00 a 17:59,Viernes  15:00 a 17:59|5
-1032|4-G14|Martes 18:00 a 19:59,Viernes  18:00 a 21:59|2
+1032|4-G14|Martes 18:00 a 19:59,Viernes  18:00 a 21:59|0
 1032|5-G14|Martes 09:00 a 11:59,Viernes  13:00 a 15:59|1
 1032|6-G14|Martes 09:00 a 11:59,Viernes  09:00 a 11:59|4
 1032|8-G14|Martes 09:00 a 11:59,Viernes  09:00 a 11:59|3

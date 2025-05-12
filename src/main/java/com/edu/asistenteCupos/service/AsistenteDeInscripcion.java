@@ -6,6 +6,7 @@ import com.edu.asistenteCupos.domain.PeticionPriorizada;
 import com.edu.asistenteCupos.domain.filtros.FiltroDePeticionInscripcion;
 import com.edu.asistenteCupos.domain.prompt.PromptPrinter;
 import com.edu.asistenteCupos.domain.sugerencia.SugerenciaInscripcion;
+import com.edu.asistenteCupos.mapper.SugerenciaInscripcionMapper;
 import com.edu.asistenteCupos.service.asignacion.AsignadorDeCupos;
 import com.edu.asistenteCupos.service.priorizacion.ConversorResultadoLLM;
 import com.edu.asistenteCupos.service.priorizacion.PriorizadorDePeticiones;
@@ -15,20 +16,23 @@ import com.edu.asistenteCupos.service.prompt.PromptTokenizerEstimator;
 import com.edu.asistenteCupos.service.traduccion.ConversorSugerenciasLLM;
 import com.edu.asistenteCupos.service.traduccion.TraductorDeSugerencias;
 import com.edu.asistenteCupos.service.traduccion.dto.SugerenciaInscripcionLLM;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.function.ToIntFunction;
 
 /**
- * Orquesta todo lo relativo a la inscripción. A.K.A flavia
+ * Orquesta todo lo relativo a la inscripcion. A.K.A flavia
  */
 @Component
 @RequiredArgsConstructor
 @Slf4j
+
 public class AsistenteDeInscripcion {
   private static final int MAX_TOKENS_BATCH = 6000;
 
@@ -46,23 +50,23 @@ public class AsistenteDeInscripcion {
     List<PeticionInscripcion> filtradas = cadenaDeFiltros.filtrar(peticionesDeInscripcion);
 
     var batchesEtapa1 = BatcherPorTokens.dividir(filtradas, MAX_TOKENS_BATCH, estimadorPeticion);
-    log.info("Etapa priorización - Total de batches: {}", batchesEtapa1.size());
+    log.info("Etapa priorizaci�n - Total de batches: {}", batchesEtapa1.size());
 
     List<ResultadoPriorizacionLLM> resultadosTotales = batchesEtapa1.stream().peek(
-      batch -> log.info("Etapa priorización - Batch con {} peticiones (tokens estimados: {})",
+      batch -> log.info("Etapa priorizaci�n - Batch con {} peticiones (tokens estimados: {})",
         batch.size(), batch.stream().mapToInt(estimadorPeticion).sum())).map(
       priorizadorDePeticiones::priorizar).flatMap(List::stream).toList();
 
     List<PeticionPriorizada> priorizadas = conversorResultadoLLM.desdeResultadosLLM(
       resultadosTotales, filtradas);
 
-    log.info("Etapa asignación - Total de peticiones: {}", priorizadas.size());
+    log.info("Etapa asignaci�n - Total de peticiones: {}", priorizadas.size());
     List<SugerenciaInscripcion> sugerenciasAsignadas = asignadorDeCuposManual.asignar(priorizadas);
 
     var batchesEtapa4 = BatcherPorTokens.dividir(sugerenciasAsignadas, MAX_TOKENS_BATCH,
       estimadorPriorizada);
 
-    log.info("Etapa traducción - Total de batches: {}", batchesEtapa4.size());
+    log.info("Etapa traducci�n - Total de batches: {}", batchesEtapa4.size());
     List<SugerenciaInscripcionLLM> sugerenciasLLM = batchesEtapa4.stream().map(traductor::traducir)
                                                                  .flatMap(List::stream).toList();
 

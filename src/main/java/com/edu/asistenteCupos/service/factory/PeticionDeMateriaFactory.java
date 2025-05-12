@@ -14,18 +14,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.stream.Collectors.toList;
+
 @Component
 public class PeticionDeMateriaFactory {
   public PeticionPorMateria crearPeticionDeMateria(PeticionInscripcionCsvDTO dto, Map<String, Comision> comisionesPorCodigo, Estudiante estudiante) {
     List<String> codigoComisiones = Arrays.stream(dto.getCodigosComisiones().split(","))
                                           .map(String::trim).toList();
+    List<Comision> comisiones = codigoComisiones.stream().map(c->{
+                                                                Comision comision = comisionesPorCodigo.get(c);
+                                                                if (comision == null)
+                                                                     throw new ComisionNoEncontradaException("No se encontró la comisión con el código: " + c);
+                                                                return comision;}).toList()  ;
 
-    List<Comision> comisiones = codigoComisiones.stream().map(comisionesPorCodigo::get).toList();
 
-    if (comisiones.contains(null)) {
-      throw new ComisionNoEncontradaException(
-        "No se encontraron todas las comisiones especificadas.");
-    }
 
     if (comisiones.isEmpty()) {
       throw new NoSeEspecificaronComisionesException(

@@ -31,7 +31,7 @@ class FiltroAComisionesSinCupoTest {
     }
 
     @Test
-    void testFiltrarVariasPeticionesAlgunasConCupo() {
+    void filtrarVariasPeticionesAlgunasConCupo() {
         // Estudiante 1
         Estudiante estudiante1 = Estudiante.builder().dni("45072112").nombre("Juan").build();
         PeticionInscripcion peticion1 = PeticionInscripcion.builder()
@@ -54,9 +54,9 @@ class FiltroAComisionesSinCupoTest {
         peticion2.setPeticionPorMaterias(List.of(ppm2));
 
         // Comisiones con y sin cupo
-        when(comisionRepository.findCupoByCodigo("90028-C-1-G14")).thenReturn(10); // con cupo
-        when(comisionRepository.findCupoByCodigo("90028-C-2-G14")).thenReturn(0);  // sin cupo
-        when(comisionRepository.findCupoByCodigo("1060-1-CP")).thenReturn(0);      // sin cupo
+        when(comisionRepository.findCupoByCodigo( "90028-C-1-G14")).thenReturn(10); // con cupo
+        when(comisionRepository.findCupoByCodigo( "90028-C-2-G14")).thenReturn(0);  // sin cupo
+        when(comisionRepository.findCupoByCodigo( "1060-1-CP")).thenReturn(0);      // sin cupo
 
         List<PeticionInscripcion> resultado = filtro.filtrar(List.of(peticion1, peticion2));
 
@@ -70,7 +70,7 @@ class FiltroAComisionesSinCupoTest {
     }
 
     @Test
-    void testFiltrarTodosSinCupo() {
+    void filtrarTodosSinCupo() {
         Estudiante estudiante1 = Estudiante.builder().dni("40955499").nombre("Lucas").build();
         PeticionInscripcion pet1 = PeticionInscripcion.builder()
                 .estudiante(estudiante1)
@@ -87,7 +87,7 @@ class FiltroAComisionesSinCupoTest {
         ppm2.setComisiones(List.of(Comision.builder().codigo("1032-4-G14").build()));
         pet2.setPeticionPorMaterias(List.of(ppm2));
 
-        when(comisionRepository.findCupoByCodigo(anyString())).thenReturn(0);
+        when(comisionRepository.findCupoByCodigo( anyString())).thenReturn(0);
 
         List<PeticionInscripcion> resultado = filtro.filtrar(List.of(pet1, pet2));
 
@@ -95,7 +95,7 @@ class FiltroAComisionesSinCupoTest {
     }
 
     @Test
-    void testFiltrarConCupoYFiltroSiguiente() {
+    void filtrarConCupoYFiltroSiguiente() {
         Estudiante estudiante = Estudiante.builder().dni("45297833").nombre("Carla").build();
         PeticionInscripcion peticion = PeticionInscripcion.builder()
                 .estudiante(estudiante)
@@ -105,7 +105,7 @@ class FiltroAComisionesSinCupoTest {
         ppm.setComisiones(List.of(comision));
         peticion.setPeticionPorMaterias(List.of(ppm));
 
-        when(comisionRepository.findCupoByCodigo("1032-8-G14")).thenReturn(5);
+        when(comisionRepository.findCupoByCodigo( "1032-8-G14")).thenReturn(5);
 
         // siguiente filtro mockeado
         FiltroDePeticionInscripcion siguiente = mock(FiltroDePeticionInscripcion.class);
@@ -119,7 +119,7 @@ class FiltroAComisionesSinCupoTest {
         assertEquals("45297833", resultado.get(0).getEstudiante().getDni());
     }
     @Test
-    void testOmitirPeticionInscripcionSiNingunaComisionTieneCupo() {
+    void omitirPeticionInscripcionSiNingunaComisionTieneCupo() {
         Estudiante estudiante = Estudiante.builder().dni("40000000").nombre("Pedro").build();
         PeticionPorMateria ppm1 = PeticionPorMateria.builder().build();
         ppm1.setComisiones(List.of(
@@ -132,15 +132,15 @@ class FiltroAComisionesSinCupoTest {
                 .peticionPorMaterias(List.of(ppm1))
                 .build();
 
-        when(comisionRepository.findCupoByCodigo("A")).thenReturn(0);
-        when(comisionRepository.findCupoByCodigo("B")).thenReturn(0);
+        when(comisionRepository.findCupoByCodigo( "A")).thenReturn(0);
+        when(comisionRepository.findCupoByCodigo( "B")).thenReturn(0);
 
         List<PeticionInscripcion> resultado = filtro.filtrar(List.of(peticion));
 
         assertTrue(resultado.isEmpty(), "La peticion debe ser omitida si todas sus comisiones estan sin cupo");
     }
     @Test
-    void testOmitirPeticionPorMateriaSiTodasSusComisionesEstanSinCupo() {
+    void omitirPeticionPorMateriaSiTodasSusComisionesEstanSinCupo() {
         Estudiante estudiante = Estudiante.builder().dni("40000001").nombre("Maria").build();
 
         PeticionPorMateria sinCupo = PeticionPorMateria.builder().build();
@@ -154,8 +154,8 @@ class FiltroAComisionesSinCupoTest {
                 .peticionPorMaterias(List.of(sinCupo, conCupo))
                 .build();
 
-        when(comisionRepository.findCupoByCodigo("C1")).thenReturn(0);  // sin cupo
-        when(comisionRepository.findCupoByCodigo("C2")).thenReturn(5);  // con cupo
+        when(comisionRepository.findCupoByCodigo( "C1")).thenReturn(0);  // sin cupo
+        when(comisionRepository.findCupoByCodigo( "C2")).thenReturn(5);  // con cupo
 
         List<PeticionInscripcion> resultado = filtro.filtrar(List.of(peticion));
 
@@ -166,7 +166,7 @@ class FiltroAComisionesSinCupoTest {
     }
 
     @Test
-    void testOmitirSoloComisionesSinCupoDeUnaPeticionPorMateria() {
+    void omitirSoloComisionesSinCupoDeUnaPeticionPorMateria() {
         Estudiante estudiante = Estudiante.builder().dni("40000002").nombre("Julian").build();
 
         Comision sinCupo = Comision.builder().codigo("D1").build();
@@ -180,8 +180,8 @@ class FiltroAComisionesSinCupoTest {
                 .peticionPorMaterias(List.of(ppm))
                 .build();
 
-        when(comisionRepository.findCupoByCodigo("D1")).thenReturn(0);   // sin cupo
-        when(comisionRepository.findCupoByCodigo("D2")).thenReturn(7);   // con cupo
+        when(comisionRepository.findCupoByCodigo( "D1")).thenReturn(0);   // sin cupo
+        when(comisionRepository.findCupoByCodigo( "D2")).thenReturn(7);   // con cupo
 
         List<PeticionInscripcion> resultado = filtro.filtrar(List.of(peticion));
 
@@ -193,7 +193,7 @@ class FiltroAComisionesSinCupoTest {
     }
 
     @Test
-    void testPeticionPorMateriaConTodasComisionesSinCupoEsEliminada() {
+    void peticionPorMateriaConTodasComisionesSinCupoEsEliminada() {
         Estudiante estudiante = Estudiante.builder().dni("40000003").nombre("Sofia").build();
 
         PeticionPorMateria ppm1 = PeticionPorMateria.builder().build();
@@ -204,8 +204,8 @@ class FiltroAComisionesSinCupoTest {
                 .peticionPorMaterias(List.of(ppm1))
                 .build();
 
-        when(comisionRepository.findCupoByCodigo("E1")).thenReturn(0);
-        when(comisionRepository.findCupoByCodigo("E2")).thenReturn(0);
+        when(comisionRepository.findCupoByCodigo( "E1")).thenReturn(0);
+        when(comisionRepository.findCupoByCodigo( "E2")).thenReturn(0);
 
         List<PeticionInscripcion> resultado = filtro.filtrar(List.of(peticion));
 

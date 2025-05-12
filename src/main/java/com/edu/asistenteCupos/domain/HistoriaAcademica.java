@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 @Data
 @AllArgsConstructor
@@ -40,4 +41,13 @@ public class HistoriaAcademica {
       columnNames = {"id_historia_academica", "codigo_de_materia"}))
   @Builder.Default
   private Set<Materia> inscripcionesActuales = new HashSet<>();
+
+  public Boolean cumpleCorrelativas(Materia materia) {
+    List<Materia> correlativasNecesarias = materia.getCorrelativas();
+    return correlativasNecesarias.stream().allMatch(correlativa ->
+            this.cursadasAnteriores.stream()
+                    .filter(Cursada::getFueAprobada)
+                    .anyMatch(cursada -> cursada.getMateria().getCodigo().equals(correlativa.getCodigo()))
+    );
+  }
 }
