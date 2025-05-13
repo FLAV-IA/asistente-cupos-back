@@ -27,7 +27,7 @@ class FiltroAComisionesSinCupoTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        filtro = new FiltroAComisionesSinCupo(comisionRepository);
+        filtro = new FiltroAComisionesSinCupo();
     }
 
     @Test

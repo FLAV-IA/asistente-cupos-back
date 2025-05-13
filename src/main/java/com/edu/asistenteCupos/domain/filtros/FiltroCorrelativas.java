@@ -15,12 +15,9 @@ import java.util.function.BiPredicate;
  */
 public class FiltroCorrelativas implements FiltroDePeticionInscripcion {
   private FiltroDePeticionInscripcion siguiente;
-  private final ComisionRepository comisionRepository;
 
 
-  public FiltroCorrelativas(ComisionRepository comisionRepository) {
-    this.comisionRepository = comisionRepository;
-  }
+
   @Override
   public void setFiltroSiguiente(FiltroDePeticionInscripcion siguiente) {
     this.siguiente = siguiente;
@@ -29,10 +26,8 @@ public class FiltroCorrelativas implements FiltroDePeticionInscripcion {
   @Override
   public List<PeticionInscripcion> filtrar(List<PeticionInscripcion> peticiones) {
 
-    BiPredicate<Comision, PeticionInscripcion> comisionPredicate = (c, p) -> {
-      Comision comision = comisionRepository.findById(c.getCodigo()).orElseThrow(() -> new RuntimeException("No se encontró la comisión")); //Es necesario buscar la comision en base de datos ?
-      return p.getEstudiante().puedeInscribirse(comision.getMateria());
-    };
+    BiPredicate<Comision, PeticionInscripcion> comisionPredicate = (c, p) ->  p.getEstudiante().puedeInscribirse(c.getMateria());
+
     List<PeticionInscripcion> filtradas =filtrarPeticionesSegunPredicado(peticiones, comisionPredicate);
 
     if (siguiente != null) {

@@ -10,11 +10,8 @@ import java.util.List;
  * Filtra las peticiones a comisiones sin cupo
  */
 public class FiltroAComisionesSinCupo implements FiltroDePeticionInscripcion {
-  private final ComisionRepository comisionRepository;
   private FiltroDePeticionInscripcion siguiente;
-  public FiltroAComisionesSinCupo(ComisionRepository comisionRepository) {
-    this.comisionRepository = comisionRepository;
-  }
+
 
   @Override
   public void setFiltroSiguiente(FiltroDePeticionInscripcion siguiente) {
@@ -24,7 +21,7 @@ public class FiltroAComisionesSinCupo implements FiltroDePeticionInscripcion {
   @Override
   public List<PeticionInscripcion> filtrar(List<PeticionInscripcion> peticiones) {
     // chequear si solamente se debe reemplazar por  comisionAEvaluar.getCupo() > 0
-    List<PeticionInscripcion> filtradas =filtrarPeticionesSegunPredicado(peticiones, (comisionAEvaluar,peticionInscripcionAEvaluar) -> comisionRepository.findCupoByCodigo(comisionAEvaluar.getCodigo()) > 0);
+    List<PeticionInscripcion> filtradas =filtrarPeticionesSegunPredicado(peticiones, (comisionAEvaluar,peticionInscripcionAEvaluar) -> comisionAEvaluar.getCupo() > 0);
 
     if (siguiente != null) {
       return siguiente.filtrar(filtradas);

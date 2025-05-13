@@ -6,6 +6,7 @@ import com.edu.asistenteCupos.domain.Estudiante;
 import com.edu.asistenteCupos.domain.Materia;
 import com.edu.asistenteCupos.repository.EstudianteRepository;
 import com.edu.asistenteCupos.repository.MateriaRepository;
+import com.edu.asistenteCupos.repository.impl.memory.ComisionRepositoryInMemory;
 import com.edu.asistenteCupos.repository.impl.memory.EstudianteRepositoryInMemory;
 import com.edu.asistenteCupos.repository.impl.memory.MateriaRepositoryInMemory;
 import org.junit.jupiter.api.Test;
@@ -28,8 +29,9 @@ public class EstudianteSeederTest {
     materiaRepositoryInMemory.save(
       Materia.builder().codigo("1046").nombre("Avanzado Test").build());
     EstudianteRepository estudianteRepositoryInMemory = new EstudianteRepositoryInMemory();
+    ComisionRepositoryInMemory comisionRepositoryInMemory = new ComisionRepositoryInMemory();
     EstudianteConHistoriaAcademicaSeeder estudianteConHistoriaAcademicaSeeder = new EstudianteConHistoriaAcademicaSeeder(
-      estudianteRepositoryInMemory, materiaRepositoryInMemory, new ClasspathResourceLoader());
+      estudianteRepositoryInMemory, materiaRepositoryInMemory,comisionRepositoryInMemory, new ClasspathResourceLoader());
 
 
     estudianteConHistoriaAcademicaSeeder.cargarEstudiante("historiaAcademica_test.csv");

@@ -34,7 +34,7 @@ class FiltroCorrelativasTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        filtroCorrelativas = new FiltroCorrelativas(comisionRepository);
+        filtroCorrelativas = new FiltroCorrelativas();
     }
 
     @Test

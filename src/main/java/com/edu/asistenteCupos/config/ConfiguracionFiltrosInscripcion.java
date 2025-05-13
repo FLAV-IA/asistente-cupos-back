@@ -16,22 +16,18 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class ConfiguracionFiltrosInscripcion {
-  private final ComisionRepository repositoryComisiones;
 
   /**
    * @return un filtro de petición de inscripción inicial que conoce su cadena de filtros.
    *
    */
 
-  @Autowired
-  public ConfiguracionFiltrosInscripcion(ComisionRepository repositoryComisiones) {
-    this.repositoryComisiones = repositoryComisiones;
-  }
+
   @Bean
   public FiltroDePeticionInscripcion cadenaDeFiltros() {
-    FiltroDePeticionInscripcion filtro1 = new FiltroCorrelativas(repositoryComisiones);//se comenta porque si no, nadie se inscribe xD
+    FiltroDePeticionInscripcion filtro1 = new FiltroCorrelativas();//se comenta porque si no, nadie se inscribe xD
     FiltroDePeticionInscripcion filtro2 = new FiltrarAnotadosAVariasMaterias();
-    FiltroDePeticionInscripcion filtro3 = new FiltroAComisionesSinCupo(repositoryComisiones);
+    FiltroDePeticionInscripcion filtro3 = new FiltroAComisionesSinCupo();
     FiltroDePeticionInscripcion filtro4 = new FiltroSuperposicionHoraria();
     filtro3.setFiltroSiguiente(filtro4);
     filtro2.setFiltroSiguiente(filtro3);

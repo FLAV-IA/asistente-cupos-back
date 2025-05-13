@@ -40,7 +40,7 @@ public class HistoriaAcademica {
     uniqueConstraints = @UniqueConstraint(
       columnNames = {"id_historia_academica", "codigo_de_materia"}))
   @Builder.Default
-  private Set<Materia> inscripcionesActuales = new HashSet<>();
+  private Set<Comision> inscripcionesActuales = new HashSet<Comision>();
 
   public Boolean cumpleCorrelativas(Materia materia) {
     List<Materia> correlativasNecesarias = materia.getCorrelativas();
@@ -49,5 +49,14 @@ public class HistoriaAcademica {
                     .filter(Cursada::getFueAprobada)
                     .anyMatch(cursada -> cursada.getMateria().getCodigo().equals(correlativa.getCodigo()))
     );
+  }
+
+  public boolean haySuperposicionHoraria(Comision nuevaComision) {
+      for (Comision comisionYaInscripta : getInscripcionesActuales()) {
+        if (ValidadorHorario.haySuperposicion(comisionYaInscripta.getHorario(), nuevaComision.getHorario())) {
+          return true;
+        }
+      }
+    return false;
   }
 }
