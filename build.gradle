@@ -69,6 +69,7 @@ dependencies {
     implementation 'org.springframework.ai:spring-ai-openai'
     implementation 'mysql:mysql-connector-java:8.0.33'
     implementation 'com.zaxxer:HikariCP'
+    implementation 'org.choco-solver:choco-solver:4.10.14'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'
