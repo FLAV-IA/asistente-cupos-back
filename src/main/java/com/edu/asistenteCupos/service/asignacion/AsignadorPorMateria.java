@@ -3,7 +3,7 @@ package com.edu.asistenteCupos.service.asignacion;
 import com.edu.asistenteCupos.domain.asignacion.AsignacionExitosa;
 import com.edu.asistenteCupos.domain.asignacion.AsignacionFallida;
 import com.edu.asistenteCupos.domain.Comision;
-import com.edu.asistenteCupos.domain.PeticionPorMateria;
+import com.edu.asistenteCupos.domain.peticion.PeticionPorMateria;
 import com.edu.asistenteCupos.domain.asignacion.ResultadoAsignacion;
 
 import java.util.Map;

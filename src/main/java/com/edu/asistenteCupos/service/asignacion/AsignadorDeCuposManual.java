@@ -1,7 +1,7 @@
 package com.edu.asistenteCupos.service.asignacion;
 
 import com.edu.asistenteCupos.domain.Comision;
-import com.edu.asistenteCupos.domain.PeticionPriorizada;
+import com.edu.asistenteCupos.domain.peticion.PeticionPriorizada;
 import com.edu.asistenteCupos.repository.ComisionRepository;
 import com.edu.asistenteCupos.domain.sugerencia.SugerenciaInscripcion;
 import lombok.RequiredArgsConstructor;

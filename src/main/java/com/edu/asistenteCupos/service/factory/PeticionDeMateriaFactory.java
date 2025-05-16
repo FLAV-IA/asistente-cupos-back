@@ -4,7 +4,7 @@ import com.edu.asistenteCupos.controller.dto.PeticionInscripcionCsvDTO;
 import com.edu.asistenteCupos.domain.Comision;
 import com.edu.asistenteCupos.domain.Estudiante;
 import com.edu.asistenteCupos.domain.Materia;
-import com.edu.asistenteCupos.domain.PeticionPorMateria;
+import com.edu.asistenteCupos.domain.peticion.PeticionPorMateria;
 import com.edu.asistenteCupos.excepcion.ComisionNoEncontradaException;
 import com.edu.asistenteCupos.excepcion.ComisionesDeDistintaMateriaException;
 import com.edu.asistenteCupos.excepcion.NoSeEspecificaronComisionesException;

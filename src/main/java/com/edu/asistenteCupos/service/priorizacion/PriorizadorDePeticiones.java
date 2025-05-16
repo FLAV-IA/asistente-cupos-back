@@ -1,6 +1,6 @@
 package com.edu.asistenteCupos.service.priorizacion;
 
-import com.edu.asistenteCupos.domain.PeticionInscripcion;
+import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistenteCupos.service.llm.LlmClient;
 import com.edu.asistenteCupos.service.llm.RespuestaLLMParser;
 import com.edu.asistenteCupos.service.priorizacion.dto.ResultadoPriorizacionLLM;

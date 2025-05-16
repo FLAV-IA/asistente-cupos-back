@@ -2,7 +2,7 @@ package com.edu.asistenteCupos.service.prompt;
 
 import com.edu.asistenteCupos.Utils.JsonConverter;
 import com.edu.asistenteCupos.Utils.prompt.PromptTemplateProvider;
-import com.edu.asistenteCupos.domain.PeticionInscripcion;
+import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistenteCupos.domain.prompt.PromptBuilderTemplated;
 import com.edu.asistenteCupos.domain.prompt.optimizado.PeticionInscripcion4Prompt;
 import com.edu.asistenteCupos.mapper.PeticionInscripcionMapper;

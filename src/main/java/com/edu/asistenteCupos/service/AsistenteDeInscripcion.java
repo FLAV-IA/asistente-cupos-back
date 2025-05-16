@@ -1,8 +1,8 @@
 package com.edu.asistenteCupos.service;
 
 import com.edu.asistenteCupos.Utils.llm.BatcherPorTokens;
-import com.edu.asistenteCupos.domain.PeticionInscripcion;
-import com.edu.asistenteCupos.domain.PeticionPriorizada;
+import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
+import com.edu.asistenteCupos.domain.peticion.PeticionPriorizada;
 import com.edu.asistenteCupos.domain.filtros.FiltroDePeticionInscripcion;
 import com.edu.asistenteCupos.domain.prompt.PromptPrinter;
 import com.edu.asistenteCupos.domain.sugerencia.SugerenciaInscripcion;

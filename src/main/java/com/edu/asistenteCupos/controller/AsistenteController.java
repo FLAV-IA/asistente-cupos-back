@@ -2,7 +2,7 @@ package com.edu.asistenteCupos.controller;
 
 import com.edu.asistenteCupos.controller.dto.PeticionInscripcionCsvDTO;
 import com.edu.asistenteCupos.controller.dto.SugerenciaInscripcionDTO;
-import com.edu.asistenteCupos.domain.PeticionInscripcion;
+import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistenteCupos.mapper.SugerenciaInscripcionMapper;
 import com.edu.asistenteCupos.service.AsistenteDeInscripcion;
 import com.edu.asistenteCupos.assembler.EnsambladorDePeticiones;

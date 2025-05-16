@@ -1,4 +1,4 @@
-package com.edu.asistenteCupos.domain;
+package com.edu.asistenteCupos.domain.peticion;
 
 import com.edu.asistenteCupos.domain.asignacion.ResultadoAsignacion;
 import com.edu.asistenteCupos.domain.sugerencia.SugerenciaInscripcion;

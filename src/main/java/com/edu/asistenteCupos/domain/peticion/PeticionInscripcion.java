@@ -1,4 +1,4 @@
-package com.edu.asistenteCupos.domain;
+package com.edu.asistenteCupos.domain.peticion;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
