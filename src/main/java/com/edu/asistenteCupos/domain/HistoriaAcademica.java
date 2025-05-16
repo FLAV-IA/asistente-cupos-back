@@ -36,7 +36,8 @@ public class HistoriaAcademica {
   @JoinTable(name = "inscripciones_actuales",
     joinColumns = @JoinColumn(name = "id_historia_academica"),
     inverseJoinColumns = @JoinColumn(name = "codigo_de_materia"),
-    uniqueConstraints = @UniqueConstraint(columnNames = {"id_historia_academica", "codigo_de_materia"}))
+    uniqueConstraints = @UniqueConstraint(
+      columnNames = {"id_historia_academica", "codigo_de_materia"}))
   @Builder.Default
   private Set<Materia> inscripcionesActuales = new HashSet<>();
 }

@@ -37,7 +37,7 @@ public class EstudianteSeederTest {
 
     List<Estudiante> all = estudianteRepositoryInMemory.findAll();
     assertThat(all).hasSize(2);
-    Estudiante estudianteBuscado = estudianteRepositoryInMemory.findByCodigo("100").orElseThrow();
+    Estudiante estudianteBuscado = estudianteRepositoryInMemory.findByDni("100").orElseThrow();
     assertThat(estudianteBuscado.getHistoriaAcademica().getCoeficiente()).isEqualTo(89.78);
   }
 }

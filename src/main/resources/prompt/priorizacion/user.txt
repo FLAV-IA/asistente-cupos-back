@@ -1,0 +1,18 @@
+REQUESTS:
+{peticiones}
+
+Each item has the following format:
+{ejemploJson}
+
+For each student in the list, return a JSON object with the following fields:
+- "a": student ID
+- "m": course code (extracted from the first part of commission code, before the dash)
+- "p": priority (0 to 100)
+- "e": justification tags
+
+EXPECTED OUTPUT:
+{ejemploOutput}
+
+- Make sure the array is sorted by p descending.
+- Do not use markdown (like ```json). Return only the raw JSON array.
+- Do not add any explanations or comments.
