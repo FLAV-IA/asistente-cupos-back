@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", uses = {HistoriaAcademicaMapper.class})
 public interface PeticionInscripcionMapper {
-
   @Mappings({@Mapping(target = "a", source = "estudiante.dni"), @Mapping(target = "h",
     source = "estudiante.historiaAcademica"), @Mapping(target = "p",
     expression = "java(mapPeticiones(peticionInscripcion))")})
@@ -26,7 +25,7 @@ public interface PeticionInscripcionMapper {
       return List.of();
 
     return peticionInscripcion.getPeticionPorMaterias().stream().map(
-                                p -> PeticionDeMateria4Prompt.builder().m(
+                                p -> PeticionDeMateria4Prompt.builder().n(p.getCddigoMateria()).m(
                                                                p.getComisiones().stream().map(Comision::getCodigo).collect(Collectors.toList()))
                                                              .c(p.isCumpleCorrelativa()).build())
                               .collect(Collectors.toList());

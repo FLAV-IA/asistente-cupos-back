@@ -1,18 +1,30 @@
 REQUESTS:
 {peticiones}
 
+Each item includes:
+- "a": student ID (DNI)
+- "h": academic history of the student
+- "p": list of course requests
+
+Each course request ("p") includes:
+- "n": course code
+- "m": list of requested commission codes
+- "c": whether the student meets the prerequisites for that course
+
 Each item has the following format:
 {ejemploJson}
 
-For each student in the list, return a JSON object with the following fields:
+For each student, return an object with:
 - "a": student ID
-- "m": course code (extracted from the first part of commission code, before the dash)
-- "p": priority (0 to 100)
-- "e": justification tags
+- "ep": a list of prioritizations for each course request, each with:
+  - "n": course code
+  - "p": priority score (0 to 100)
+  - "e": list of tags explaining the score
 
 EXPECTED OUTPUT:
 {ejemploOutput}
 
-- Make sure the array is sorted by p descending.
-- Do not use markdown (like ```json). Return only the raw JSON array.
+- Sort the list inside "ep" from highest to lowest priority ("p").
+- Do not use markdown (like ```json).
 - Do not add any explanations or comments.
+- Output only the raw JSON array.

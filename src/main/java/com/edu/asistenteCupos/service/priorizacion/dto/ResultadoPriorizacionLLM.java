@@ -14,15 +14,25 @@ public class ResultadoPriorizacionLLM {
    */
   private String a;
   /**
-   * materia
+   * Lista de priorizaciones por materia solicitada
    */
-  private String m;
-  /**
-   * Prioridad
-   */
-  private int p;
-  /**
-   * La lista de etiquetas que explican la prioridad asignada
-   */
-  private List<String> e;
+  private List<EvaluacionPrioridad> ep;
+
+  @Data
+  public static class EvaluacionPrioridad {
+    /**
+     * Código de la materia
+     */
+    private String n;
+
+    /**
+     * Prioridad asignada
+     */
+    private int p;
+
+    /**
+     * Lista de etiquetas que justifican la prioridad
+     */
+    private List<String> e;
+  }
 }

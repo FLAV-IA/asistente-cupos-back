@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class PromptPrioridadGenerator implements PromptGenerator<List<PeticionInscripcion>> {
-  public static final String EJEMPLO_JSON = """
+  private static final String EJEMPLO_JSON = """
     [
       {
         "a": "12345678",
@@ -28,10 +28,12 @@ public class PromptPrioridadGenerator implements PromptGenerator<List<PeticionIn
         },
         "p": [
           {
+            "n": 1036,
             "m": ["MAT1-01", "MAT1-02"],
             "c": true
           },
           {
+            "n": 1035,
             "m": ["ALG1-01"],
             "c": false
           }
@@ -39,21 +41,25 @@ public class PromptPrioridadGenerator implements PromptGenerator<List<PeticionIn
       }
     ]
     """;
-  public static final String EJEMPLO_OUTPUT = """
+  private static final String EJEMPLO_OUTPUT = """
     [
       {
-        "a": "12345678",
-        "m": "MAT1",
-        "p": 86,
-        "e": ["COR", "REC", "CF"]
-      },
-      {
-        "a": "12345678",
-        "m": "ALG1",
-        "p": 55,
-        "e": ["SIN", "REZ"]
-      }
+          "a": "12345678",
+          "ep": [
+            {
+              "n": "1035",
+              "p": 91,
+              "e": ["COR", "AVZ"]
+            },
+            {
+              "n": "1036",
+              "p": 78,
+              "e": ["REZ", "REC"]
+            }
+          ]
+        },
     ]
+    
     """;
   private final PromptTemplateProvider templateProvider;
   private final PeticionInscripcionMapper peticionMapper;

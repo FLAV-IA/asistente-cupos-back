@@ -20,6 +20,10 @@ public class PeticionPorMateria {
     return comisiones.get(0).getMateria();
   }
 
+  public String getCddigoMateria() {
+    return getMateria().getCodigo();
+  }
+
   public Set<String> codigosDeComisiones() {
     return comisiones.stream().map(Comision::getCodigo).collect(Collectors.toSet());
   }

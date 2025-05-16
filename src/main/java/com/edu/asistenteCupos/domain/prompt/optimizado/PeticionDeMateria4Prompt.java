@@ -12,6 +12,10 @@ import java.util.List;
 @Builder
 public class PeticionDeMateria4Prompt {
   /**
+   * código de materia
+   */
+  private String n;
+  /**
    * lista de codigosDeComisiones
    */
   private List<String> m;
