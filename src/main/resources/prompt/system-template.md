@@ -13,7 +13,7 @@ OBJETIVO: Sugerir inscripciones a materias y asignar cupos de comisiones de form
 ## FORMATO REQUERIDO ##
 Responde únicamente con un JSON que contenga una lista de objetos ordenada por prioridad con los siguientes campos:
 [
-  {
+  
     "alumno": "Nombre completo del estudiante",
     "materia": "Nombre de la materia",
     "prioridad": 0-100,
@@ -21,7 +21,7 @@ Responde únicamente con un JSON que contenga una lista de objetos ordenada por 
     "explicacion": "Motivo resumido de la asignación o rechazo",
     "cumpleCorrelativas": true | false,
     "modoCursada": "Regular" | "Libre"
-  }
+  
 ]
 
 ## CONTEXTO ##

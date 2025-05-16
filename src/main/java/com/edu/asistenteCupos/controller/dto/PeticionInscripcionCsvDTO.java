@@ -8,15 +8,17 @@ public class PeticionInscripcionCsvDTO {
   @CsvBindByName
   private String nombre;
 
-  @CsvBindByName
+  @CsvBindByName(column = "legajo")
   private String legajo;
 
-  @CsvBindByName
+  @CsvBindByName(column = "materia")
   private String materia;
 
-  @CsvBindByName
+  @CsvBindByName(column = "comision")
   private String comisiones;
 
+  @CsvBindByName(column = "codigoMateria")
+  private String codigoMateria;
   @CsvBindByName
   private boolean correlativa;
 
@@ -37,4 +39,5 @@ public class PeticionInscripcionCsvDTO {
 
   @CsvBindByName
   private int restantes;
+
 }

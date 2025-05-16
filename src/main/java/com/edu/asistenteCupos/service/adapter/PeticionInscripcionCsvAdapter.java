@@ -1,6 +1,6 @@
 package com.edu.asistenteCupos.service.adapter;
 
-import com.edu.asistenteCupos.controller.dto.PeticionInscriptionDTO;
+import com.edu.asistenteCupos.controller.dto.PeticionInscripcionCsvDTO;
 import com.edu.asistenteCupos.domain.PeticionInscripcion;
 import com.edu.asistenteCupos.mapper.PeticionInscripcionMapper;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -20,10 +20,13 @@ public class PeticionInscripcionCsvAdapter {
   public List<PeticionInscripcion> convertir(MultipartFile archivoCsv) {
     try (InputStreamReader reader = new InputStreamReader(archivoCsv.getInputStream(),
       StandardCharsets.UTF_8)) {
-      List<PeticionInscriptionDTO> dtos = new CsvToBeanBuilder<PeticionInscriptionDTO>(reader)
-        .withType(PeticionInscriptionDTO.class).withIgnoreLeadingWhiteSpace(true).build().parse();
+      List<PeticionInscripcionCsvDTO> dtos = new CsvToBeanBuilder<PeticionInscripcionCsvDTO>(reader)
+              .withType(PeticionInscripcionCsvDTO.class)
+              .withIgnoreLeadingWhiteSpace(true)
+              .build()
+              .parse();
 
-      return peticionInscripcionMapper.toPeticionInscripcionList(dtos);
+      return peticionInscripcionMapper.toPeticionInscripcionCsvList(dtos);
     } catch (Exception e) {
       throw new RuntimeException("Error al procesar el archivo CSV: " + e.getMessage(), e);
     }
