@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -17,36 +17,24 @@ import java.util.Set;
 @Builder
 public class HistoriaAcademica {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY) 
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long idHistoriaAcademica;
-
-  @OneToOne
-  @JoinColumn(name = "legajo_estudiante", referencedColumnName = "legajo", unique = true)
-  @JsonBackReference
-
-  private Estudiante estudiante;
-
-  private int insc3;
-  private String inscAct;
-  private int aprobUlt;
-  private int inscTot;
-  private int aprobTot;
-  private int restantes;
-  private String correlativas;
-  private String curso1c;
-  private String aprob1c;
-  private String curso2c;
-  private String aprob2c;
+  private int totalInscripcionesHistoricas;
+  private int totalHistoricasAprobadas;
   private Double coeficiente;
 
+  @OneToOne
+  @JoinColumn(name = "dni_de_estudiante", referencedColumnName = "dni", unique = true)
+  @JsonBackReference
+  private Estudiante estudiante;
+
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Cursada> cursadasAnteriores;
 
   @ManyToMany(fetch = FetchType.EAGER)
-  @JoinTable(
-          name = "historia_academica_anotadas",
-          joinColumns = @JoinColumn(name = "historia_academica_id_historia_academica"),
-          inverseJoinColumns = @JoinColumn(name = "anotadas_codigo"),
-          uniqueConstraints = @UniqueConstraint(columnNames = {"historia_academica_id_historia_academica", "anotadas_codigo"})
-  )
-  private Set<Materia> anotadas = new HashSet<>();
-
+  @JoinTable(name = "inscripciones_actuales",
+    joinColumns = @JoinColumn(name = "id_historia_academica"),
+    inverseJoinColumns = @JoinColumn(name = "codigo_de_materia"),
+    uniqueConstraints = @UniqueConstraint(columnNames = {"id_historia_academica", "codigo_de_materia"}))
+  private Set<Materia> inscripcionesActuales;
 }

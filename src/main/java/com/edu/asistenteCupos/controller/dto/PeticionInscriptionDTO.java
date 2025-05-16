@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class PeticionInscriptionDTO {
   String nombre;
-  String legajo;
+  String dni;
   String materia;
   List<String> comisiones;
   HistoriaAcademicaDTO historiaAcademica;
