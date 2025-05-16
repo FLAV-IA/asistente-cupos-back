@@ -1,6 +1,7 @@
 package com.edu.asistenteCupos.service.llm;
 
 import com.edu.asistenteCupos.Utils.JsonConverter;
+import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.messages.AssistantMessage;
@@ -8,21 +9,17 @@ import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class RespuestaLLMParser {
-  public <T> List<T> parsear(ChatResponse response, Function<Map<String, Object>, T> transformador) {
+  public <T> List<T> parsear(ChatResponse response, TypeReference<List<T>> typeRef) {
     String json = extraerJson(response);
 
     try {
-      List<Map<String, Object>> lista = JsonConverter.readValue(json);
-      return lista.stream().map(transformador).collect(Collectors.toList());
+      return JsonConverter.readList(json, typeRef);
     } catch (Exception e) {
       log.error("Error al parsear el JSON generado por el LLM. Contenido:\n{}", json);
       throw new RuntimeException(

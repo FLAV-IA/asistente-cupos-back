@@ -1,11 +1,11 @@
 package com.edu.asistenteCupos.service.priorizacion;
 
-import com.edu.asistenteCupos.Utils.JsonConverter;
 import com.edu.asistenteCupos.domain.PeticionInscripcion;
 import com.edu.asistenteCupos.service.llm.LlmClient;
 import com.edu.asistenteCupos.service.llm.RespuestaLLMParser;
 import com.edu.asistenteCupos.service.priorizacion.dto.ResultadoPriorizacionLLM;
 import com.edu.asistenteCupos.service.prompt.PromptGenerator;
+import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -24,6 +24,6 @@ public class PriorizadorDePeticiones {
     Prompt prompt = promptGenerator.crearPrompt(peticiones);
     ChatResponse respuesta = llmClient.call(prompt);
     return respuestaLLMParser.parsear(respuesta,
-      x -> JsonConverter.convertMap(x, ResultadoPriorizacionLLM.class));
+      new TypeReference<List<ResultadoPriorizacionLLM>>() {});
   }
 }
