@@ -97,3 +97,31 @@ tasks.named('idea') {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
+
+    classDirectories.setFrom(
+            files(classDirectories.files.collect {
+                fileTree(dir: it, exclude: [
+                        '**/config/**',
+                        '**/dto/**',
+                        '**/mapper/**',
+                        '**/repository/**',
+                        '**/prompt/optimizado/**',
+                        '**/JsonConverter.class',
+                        '**/PeticionInscripcion.class',
+                        '**/PeticionPorMateriaPriorizada.class',
+                        '**/domain/comision.class',
+                        '**/domain/Mteria.class',
+                        '**/domain/cursada.class',
+                        '**/domain/asignacion/**',
+                        '**/domain/sugerencia/**'
+                ])
+            })
+    )
+}

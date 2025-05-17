@@ -1,7 +1,6 @@
-package com.edu.asistenteCupos.config;
+package com.edu.asistenteCupos.seeder;
 
 import com.edu.asistenteCupos.Utils.ClasspathResourceLoader;
-import com.edu.asistenteCupos.config.dev.MateriasSeeder;
 import com.edu.asistenteCupos.domain.Materia;
 import com.edu.asistenteCupos.repository.MateriaRepository;
 import com.edu.asistenteCupos.repository.impl.memory.MateriaRepositoryInMemory;

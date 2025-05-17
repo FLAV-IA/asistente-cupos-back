@@ -1,7 +1,6 @@
-package com.edu.asistenteCupos.config;
+package com.edu.asistenteCupos.seeder;
 
 import com.edu.asistenteCupos.Utils.ClasspathResourceLoader;
-import com.edu.asistenteCupos.config.dev.EstudianteConHistoriaAcademicaSeeder;
 import com.edu.asistenteCupos.domain.Estudiante;
 import com.edu.asistenteCupos.domain.Materia;
 import com.edu.asistenteCupos.repository.EstudianteRepository;
