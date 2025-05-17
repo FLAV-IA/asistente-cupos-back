@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class PromptTraduccionGenerator implements PromptGenerator<List<SugerenciaInscripcion>> {
-  private static final String EJEMPLO_INPUT = """
+  protected static final String EJEMPLO_INPUT = """
     [
       {
         "peticion": {
@@ -28,7 +28,7 @@ public class PromptTraduccionGenerator implements PromptGenerator<List<Sugerenci
       }
     ]
     """;
-  private static final String EJEMPLO_OUTPUT = """
+  protected static final String EJEMPLO_OUTPUT = """
     [
       {
         "a": "12312334",

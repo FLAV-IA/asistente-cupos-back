@@ -21,16 +21,28 @@ public class TestDataFactory {
   }
 
   public static Estudiante crearEstudianteDummy() {
-    return Estudiante.builder().dni("12345678").legajo("LEG001").nombre("Juan Pérez")
-                     .mail("juan@test.com").build();
+    return crearEstudianteDummy("12345678");
+  }
+
+  public static Estudiante crearEstudianteDummy(String dni) {
+    return Estudiante.builder().dni(dni).legajo("LEG" + dni).nombre("Estudiante " + dni)
+                     .mail(dni + "@test.com").build();
   }
 
   public static Materia crearMateriaDummy() {
-    return Materia.builder().codigo("MAT1").nombre("Matemática I").build();
+    return crearMateriaDummy("MAT1", "Matemática I");
+  }
+
+  public static Materia crearMateriaDummy(String codigo, String nombre) {
+    return Materia.builder().codigo(codigo).nombre(nombre).build();
   }
 
   public static Comision crearComisionDummy() {
-    return new Comision("C1", "Lunes 10-12", 30, crearMateriaDummy());
+    return crearComisionDummy("C1", 30, crearMateriaDummy());
+  }
+
+  public static Comision crearComisionDummy(String codigo, int cupo, Materia materia) {
+    return new Comision(codigo, "Lunes 10-12", cupo, materia);
   }
 
   public static PeticionPorMateria crearPeticionPorMateriaDummy() {
@@ -39,7 +51,8 @@ public class TestDataFactory {
   }
 
   public static PeticionPorMateriaPriorizada crearPeticionPriorizadaDummy() {
-    return PeticionPorMateriaPriorizada.builder()
+    return PeticionPorMateriaPriorizada.builder().estudiante(crearEstudianteDummy())
+                                       .materia(crearMateriaDummy())
                                        .comisionesSolicitadas(List.of(crearComisionDummy()))
                                        .cumpleCorrelativa(true).prioridad(1).motivo("COR").build();
   }
@@ -47,7 +60,7 @@ public class TestDataFactory {
   public static ResultadoPriorizacionLLM crearResultadoPriorizacionLLMDummy() {
     ResultadoPriorizacionLLM.EvaluacionPrioridad evaluacion = new ResultadoPriorizacionLLM.EvaluacionPrioridad();
     evaluacion.setN("MAT1");
-    evaluacion.setP(1);
+    evaluacion.setP(91);
     evaluacion.setE(List.of("COR", "AVZ"));
 
     return new ResultadoPriorizacionLLM("12345678", List.of(evaluacion));

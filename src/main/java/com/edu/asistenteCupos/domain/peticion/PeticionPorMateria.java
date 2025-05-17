@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -24,13 +22,5 @@ public class PeticionPorMateria {
 
   public String getCodigoMateria() {
     return getMateria().getCodigo();
-  }
-
-  public Set<String> codigosDeComisiones() {
-    return comisiones.stream().map(Comision::getCodigo).collect(Collectors.toSet());
-  }
-
-  public boolean perteneceAMateria(String codigoMateria) {
-    return getCodigoMateria().equals(codigoMateria);
   }
 }

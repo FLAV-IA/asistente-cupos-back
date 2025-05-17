@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class PromptPrioridadGenerator implements PromptGenerator<List<PeticionInscripcion>> {
-  private static final String EJEMPLO_JSON = """
+  protected static final String EJEMPLO_JSON = """
     [
       {
         "a": "12345678",
@@ -41,7 +41,7 @@ public class PromptPrioridadGenerator implements PromptGenerator<List<PeticionIn
       }
     ]
     """;
-  private static final String EJEMPLO_OUTPUT = """
+  protected static final String EJEMPLO_OUTPUT = """
     [
       {
           "a": "12345678",

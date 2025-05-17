@@ -18,14 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/asistente")
 @RequiredArgsConstructor
 @Slf4j
-class AsistenteController {
+public class AsistenteController {
   private final AsistenteDeInscripcion2 asistenteDeInscripcion;
   private final SugerenciaInscripcionMapper sugerenciaInscripcionMapper;
   private final PeticionInscripcionCsvAdapter peticionInscripcionCsvAdapter;
@@ -33,8 +32,12 @@ class AsistenteController {
 
   @PostMapping("/sugerencia-inscripcion-con-csv")
   public ResponseEntity<List<SugerenciaInscripcionDTO>> sugerirInscripcionConCsv(
-    @RequestParam(required = false) MultipartFile file) {
+    @RequestParam(value = "file", required = false) MultipartFile file) {
     try {
+      if (file == null || file.isEmpty()) {
+        return ResponseEntity.badRequest().body(List.of());
+      }
+
       List<PeticionInscripcionCsvDTO> peticionesCSV = peticionInscripcionCsvAdapter.adapt(file);
       List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeCsvDto(
         peticionesCSV);
@@ -43,9 +46,10 @@ class AsistenteController {
       List<SugerenciaInscripcionDTO> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
         sugerencias);
       return ResponseEntity.ok(sugerenciasDTO);
+
     } catch (Exception e) {
-      log.error(e.getMessage(), e);
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ArrayList<>());
+      log.error("Error procesando CSV", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(List.of());
     }
   }
 }
