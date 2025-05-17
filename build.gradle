@@ -40,6 +40,7 @@ sonar {
         property "sonar.projectName", "FLAV-IA"
         property "sonar.sourceEncoding", "UTF-8"
         property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+        property "sonar.gradle.skipCompile", "true"
     }
 }
 
@@ -47,15 +48,7 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-tasks.named('jacocoTestReport') {
-    dependsOn test
-    reports {
-        xml.required.set(true)
-        html.required.set(true)
-    }
-}
-
-tasks.named('sonarqube') {
+tasks.named('sonar') {
     dependsOn tasks.named('jacocoTestReport')
 }
 
@@ -117,7 +110,7 @@ jacocoTestReport {
                         '**/PeticionInscripcion.class',
                         '**/PeticionPorMateriaPriorizada.class',
                         '**/domain/comision.class',
-                        '**/domain/Mteria.class',
+                        '**/domain/Materia.class',
                         '**/domain/cursada.class',
                         '**/domain/asignacion/**',
                         '**/domain/sugerencia/**'
