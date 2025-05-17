@@ -21,6 +21,7 @@ public class Estudiante {
   private String legajo;
   private String nombre;
   private String mail;
+
   @OneToOne(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
   @JsonManagedReference
   private HistoriaAcademica historiaAcademica;
@@ -31,6 +32,6 @@ public class Estudiante {
   }
 
   public boolean puedeInscribirse(Materia materia) {
-    return true;
+    return historiaAcademica.cumpleCorrelativa(materia);
   }
 }

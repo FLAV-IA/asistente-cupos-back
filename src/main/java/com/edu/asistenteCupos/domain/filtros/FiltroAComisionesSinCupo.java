@@ -1,6 +1,6 @@
 package com.edu.asistenteCupos.domain.filtros;
 
-import com.edu.asistenteCupos.domain.PeticionInscripcion;
+import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
 
 import java.util.List;
 

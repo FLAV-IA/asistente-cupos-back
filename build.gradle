@@ -40,6 +40,7 @@ sonar {
         property "sonar.projectName", "FLAV-IA"
         property "sonar.sourceEncoding", "UTF-8"
         property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+        property "sonar.gradle.skipCompile", "true"
     }
 }
 
@@ -47,15 +48,7 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-tasks.named('jacocoTestReport') {
-    dependsOn test
-    reports {
-        xml.required.set(true)
-        html.required.set(true)
-    }
-}
-
-tasks.named('sonarqube') {
+tasks.named('sonar') {
     dependsOn tasks.named('jacocoTestReport')
 }
 
@@ -64,9 +57,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.opencsv:opencsv:5.8'
-    implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-SNAPSHOT")
-    implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter:1.0.0-M6'
-    implementation 'org.springframework.ai:spring-ai-openai'
+    implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-M6")
+    implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
     implementation 'mysql:mysql-connector-java:8.0.33'
     implementation 'com.zaxxer:HikariCP'
     compileOnly 'org.projectlombok:lombok'
@@ -97,4 +89,32 @@ tasks.named('idea') {
 }
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
+
+    classDirectories.setFrom(
+            files(classDirectories.files.collect {
+                fileTree(dir: it, exclude: [
+                        '**/config/**',
+                        '**/dto/**',
+                        '**/mapper/**',
+                        '**/repository/**',
+                        '**/prompt/optimizado/**',
+                        '**/JsonConverter.class',
+                        '**/PeticionInscripcion.class',
+                        '**/PeticionPorMateriaPriorizada.class',
+                        '**/domain/comision.class',
+                        '**/domain/Materia.class',
+                        '**/domain/cursada.class',
+                        '**/domain/asignacion/**',
+                        '**/domain/sugerencia/**'
+                ])
+            })
+    )
 }

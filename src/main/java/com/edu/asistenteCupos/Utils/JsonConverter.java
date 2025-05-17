@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.util.List;
-import java.util.Map;
 
 public class JsonConverter {
   private static final ObjectMapper mapper = new ObjectMapper().enable(
@@ -20,21 +19,11 @@ public class JsonConverter {
     }
   }
 
-  public static List<Map<String, Object>> readValue(String json) {
+  public static <T> List<T> readList(String json, TypeReference<List<T>> typeRef) {
     try {
-      return mapper.readValue(json, new TypeReference<>() {});
+      return mapper.readValue(json, typeRef);
     } catch (JsonProcessingException e) {
-      try {
-        Map<String, Object> single = mapper.readValue(json, new TypeReference<>() {});
-        return List.of(single);
-      } catch (JsonProcessingException ex) {
-        throw new RuntimeException(
-          "Error al parsear el JSON como array u objeto. Contenido:\n" + json, ex);
-      }
+      throw new RuntimeException("Error al convertir JSON a lista de objetos", e);
     }
-  }
-
-  public static <T> T convertMap(Map<String, Object> map, Class<T> clazz) {
-    return mapper.convertValue(map, clazz);
   }
 }

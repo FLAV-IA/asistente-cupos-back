@@ -40,4 +40,8 @@ public class HistoriaAcademica {
       columnNames = {"id_historia_academica", "codigo_de_materia"}))
   @Builder.Default
   private Set<Materia> inscripcionesActuales = new HashSet<>();
+
+  public boolean cumpleCorrelativa(Materia materia) {
+    return true;
+  }
 }

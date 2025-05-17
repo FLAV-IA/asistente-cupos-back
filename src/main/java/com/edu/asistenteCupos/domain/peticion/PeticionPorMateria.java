@@ -1,11 +1,11 @@
-package com.edu.asistenteCupos.domain;
+package com.edu.asistenteCupos.domain.peticion;
 
+import com.edu.asistenteCupos.domain.Comision;
+import com.edu.asistenteCupos.domain.Materia;
 import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -20,7 +20,7 @@ public class PeticionPorMateria {
     return comisiones.get(0).getMateria();
   }
 
-  public Set<String> codigosDeComisiones() {
-    return comisiones.stream().map(Comision::getCodigo).collect(Collectors.toSet());
+  public String getCodigoMateria() {
+    return getMateria().getCodigo();
   }
 }

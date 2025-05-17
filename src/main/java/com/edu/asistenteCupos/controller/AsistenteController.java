@@ -1,13 +1,13 @@
 package com.edu.asistenteCupos.controller;
 
+import com.edu.asistenteCupos.assembler.EnsambladorDePeticiones;
 import com.edu.asistenteCupos.controller.dto.PeticionInscripcionCsvDTO;
 import com.edu.asistenteCupos.controller.dto.SugerenciaInscripcionDTO;
-import com.edu.asistenteCupos.domain.PeticionInscripcion;
-import com.edu.asistenteCupos.mapper.SugerenciaInscripcionMapper;
-import com.edu.asistenteCupos.service.AsistenteDeInscripcion;
-import com.edu.asistenteCupos.assembler.EnsambladorDePeticiones;
-import com.edu.asistenteCupos.service.adapter.PeticionInscripcionCsvAdapter;
+import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistenteCupos.domain.sugerencia.SugerenciaInscripcion;
+import com.edu.asistenteCupos.mapper.SugerenciaInscripcionMapper;
+import com.edu.asistenteCupos.service.AsistenteDeInscripcion2;
+import com.edu.asistenteCupos.service.adapter.PeticionInscripcionCsvAdapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,23 +18,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/asistente")
 @RequiredArgsConstructor
 @Slf4j
-class AsistenteController {
-  private final AsistenteDeInscripcion asistenteDeInscripcion;
+public class AsistenteController {
+  private final AsistenteDeInscripcion2 asistenteDeInscripcion;
   private final SugerenciaInscripcionMapper sugerenciaInscripcionMapper;
   private final PeticionInscripcionCsvAdapter peticionInscripcionCsvAdapter;
   private final EnsambladorDePeticiones ensambladorDePeticiones;
 
   @PostMapping("/sugerencia-inscripcion-con-csv")
   public ResponseEntity<List<SugerenciaInscripcionDTO>> sugerirInscripcionConCsv(
-    @RequestParam(required = false) MultipartFile file) {
+    @RequestParam(value = "file", required = false) MultipartFile file) {
     try {
+      if (file == null || file.isEmpty()) {
+        return ResponseEntity.badRequest().body(List.of());
+      }
+
       List<PeticionInscripcionCsvDTO> peticionesCSV = peticionInscripcionCsvAdapter.adapt(file);
       List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeCsvDto(
         peticionesCSV);
@@ -43,22 +46,10 @@ class AsistenteController {
       List<SugerenciaInscripcionDTO> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
         sugerencias);
       return ResponseEntity.ok(sugerenciasDTO);
-    } catch (Exception e) {
-      log.error(e.getMessage(), e);
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ArrayList<>());
-    }
-  }
 
-  @PostMapping("/ver-prompt")
-  public ResponseEntity<String> verPrompt(@RequestParam(required = false) MultipartFile file) {
-    try {
-      List<PeticionInscripcionCsvDTO> peticionesCSV = peticionInscripcionCsvAdapter.adapt(file);
-      List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeCsvDto(
-        peticionesCSV);
-      return ResponseEntity.ok(asistenteDeInscripcion.mostrarPrompt(peticiones));
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                           .body("Error en la consulta: " + e.getMessage());
+      log.error("Error procesando CSV", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(List.of());
     }
   }
 }

@@ -1,4 +1,4 @@
-package com.edu.asistenteCupos.config.dev;
+package com.edu.asistenteCupos.seeder;
 
 import com.edu.asistenteCupos.Utils.ClasspathResourceLoader;
 import com.edu.asistenteCupos.domain.Materia;

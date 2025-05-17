@@ -1,9 +1,9 @@
 package com.edu.asistenteCupos.service;
 
 import com.edu.asistenteCupos.Utils.llm.BatcherPorTokens;
-import com.edu.asistenteCupos.domain.PeticionInscripcion;
-import com.edu.asistenteCupos.domain.PeticionPriorizada;
 import com.edu.asistenteCupos.domain.filtros.FiltroDePeticionInscripcion;
+import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
+import com.edu.asistenteCupos.domain.priorizacion.PeticionPorMateriaPriorizada;
 import com.edu.asistenteCupos.domain.prompt.PromptPrinter;
 import com.edu.asistenteCupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistenteCupos.service.asignacion.AsignadorDeCupos;
@@ -39,21 +39,22 @@ public class AsistenteDeInscripcion {
   private final ConversorResultadoLLM conversorResultadoLLM;
   private final ConversorSugerenciasLLM conversorSugerenciasLLM;
   private final AsignadorDeCupos asignadorDeCuposManual;
-  private final ToIntFunction<PeticionInscripcion> estimadorPeticion = PromptTokenizerEstimator.estimadorDeObjeto();
+  private final ToIntFunction<PeticionInscripcion> estimadorTokensDePeticion = PromptTokenizerEstimator.estimadorDeObjeto();
   private final ToIntFunction<SugerenciaInscripcion> estimadorPriorizada = PromptTokenizerEstimator.estimadorDeObjeto();
 
   public List<SugerenciaInscripcion> sugerirInscripcion(List<PeticionInscripcion> peticionesDeInscripcion) {
     List<PeticionInscripcion> filtradas = cadenaDeFiltros.filtrar(peticionesDeInscripcion);
 
-    var batchesEtapa1 = BatcherPorTokens.dividir(filtradas, MAX_TOKENS_BATCH, estimadorPeticion);
+    var batchesEtapa1 = BatcherPorTokens.dividir(filtradas, MAX_TOKENS_BATCH,
+      estimadorTokensDePeticion);
     log.info("Etapa priorización - Total de batches: {}", batchesEtapa1.size());
 
     List<ResultadoPriorizacionLLM> resultadosTotales = batchesEtapa1.stream().peek(
       batch -> log.info("Etapa priorización - Batch con {} peticiones (tokens estimados: {})",
-        batch.size(), batch.stream().mapToInt(estimadorPeticion).sum())).map(
+        batch.size(), batch.stream().mapToInt(estimadorTokensDePeticion).sum())).map(
       priorizadorDePeticiones::priorizar).flatMap(List::stream).toList();
 
-    List<PeticionPriorizada> priorizadas = conversorResultadoLLM.desdeResultadosLLM(
+    List<PeticionPorMateriaPriorizada> priorizadas = conversorResultadoLLM.desdeResultadosLLM(
       resultadosTotales, filtradas);
 
     log.info("Etapa asignación - Total de peticiones: {}", priorizadas.size());
@@ -67,7 +68,6 @@ public class AsistenteDeInscripcion {
                                                                  .flatMap(List::stream).toList();
 
     return conversorSugerenciasLLM.desdeLLM(sugerenciasLLM);
-
   }
 
   public String mostrarPrompt(List<PeticionInscripcion> peticionesDeInscripcion) {
