@@ -1,9 +1,9 @@
 package com.edu.asistenteCupos.service;
 
 import com.edu.asistenteCupos.Utils.llm.BatcherPorTokens;
-import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
-import com.edu.asistenteCupos.domain.peticion.PeticionPriorizada;
 import com.edu.asistenteCupos.domain.filtros.FiltroDePeticionInscripcion;
+import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
+import com.edu.asistenteCupos.domain.priorizacion.PeticionPorMateriaPriorizada;
 import com.edu.asistenteCupos.domain.prompt.PromptPrinter;
 import com.edu.asistenteCupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistenteCupos.service.asignacion.AsignadorDeCupos;
@@ -54,7 +54,7 @@ public class AsistenteDeInscripcion {
         batch.size(), batch.stream().mapToInt(estimadorTokensDePeticion).sum())).map(
       priorizadorDePeticiones::priorizar).flatMap(List::stream).toList();
 
-    List<PeticionPriorizada> priorizadas = conversorResultadoLLM.desdeResultadosLLM(
+    List<PeticionPorMateriaPriorizada> priorizadas = conversorResultadoLLM.desdeResultadosLLM(
       resultadosTotales, filtradas);
 
     log.info("Etapa asignación - Total de peticiones: {}", priorizadas.size());
@@ -68,7 +68,6 @@ public class AsistenteDeInscripcion {
                                                                  .flatMap(List::stream).toList();
 
     return conversorSugerenciasLLM.desdeLLM(sugerenciasLLM);
-
   }
 
   public String mostrarPrompt(List<PeticionInscripcion> peticionesDeInscripcion) {

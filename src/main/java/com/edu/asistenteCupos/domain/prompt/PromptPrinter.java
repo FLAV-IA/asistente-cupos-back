@@ -4,7 +4,7 @@ import org.springframework.ai.chat.messages.MessageType;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.DefaultChatOptions;
 import org.springframework.ai.chat.prompt.Prompt;
-import org.springframework.ai.content.Content;
+import org.springframework.ai.model.Content;
 
 import java.util.List;
 import java.util.Map;
