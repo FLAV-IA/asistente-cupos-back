@@ -1,5 +1,6 @@
 package com.edu.asistenteCupos.service.priorizacion.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
  * Representación de la priorización hecha por el LLM para el estudiante
  */
 @Data
+@AllArgsConstructor
 public class ResultadoPriorizacionLLM {
   /**
    * Dni del estudiante

@@ -4,12 +4,14 @@ import com.edu.asistenteCupos.domain.Comision;
 import com.edu.asistenteCupos.domain.Estudiante;
 import com.edu.asistenteCupos.domain.Materia;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class PeticionPorMateriaPriorizada {
   private Estudiante estudiante;
   private Materia materia;
