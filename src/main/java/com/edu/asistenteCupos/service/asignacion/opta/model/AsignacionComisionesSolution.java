@@ -3,7 +3,9 @@ package com.edu.asistenteCupos.service.asignacion.opta.model;
 import com.edu.asistenteCupos.service.asignacion.opta.reglas.ConfiguracionDeRestricciones;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.optaplanner.core.api.domain.constraintweight.ConstraintConfigurationProvider;
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningScore;
@@ -19,6 +21,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
+@Setter
 public class AsignacionComisionesSolution {
 
   // 🔹 Las comisiones disponibles (hechos del problema)

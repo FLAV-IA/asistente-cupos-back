@@ -8,14 +8,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.optaplanner.core.api.domain.lookup.PlanningId;
 
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "codigo")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ComisionDTO {
+  @PlanningId
   private String codigo;
   private String materiaCodigo;
   private String horario;

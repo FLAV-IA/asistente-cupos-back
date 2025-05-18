@@ -34,7 +34,7 @@ class AsignadorDeCuposOptaPlannerEmpateTest {
                                                                   .comisionesSolicitadas(
                                                                     List.of(comision))
                                                                   .cumpleCorrelativa(true)
-                                                                  .prioridad(70).motivo("[COR]")
+                                                                  .prioridad(80).motivo("[COR]")
                                                                   .build();
 
     PeticionPorMateriaPriorizada p2 = PeticionPorMateriaPriorizada.builder().estudiante(e2)
@@ -62,4 +62,52 @@ class AsignadorDeCuposOptaPlannerEmpateTest {
 
     assertThat(rechazadas).hasSize(1);
   }
-}
+
+    @Test
+    void soloSeAsignaHastaElCupoDeLaComision() {
+      Materia materia = Materia.builder().codigo("MAT2").nombre("Física").build();
+      Comision comision = new Comision("MAT2-A", "martes 10-12", 3, materia);
+
+      Estudiante e1 = Estudiante.builder().dni("300").nombre("Juan").build();
+      Estudiante e2 = Estudiante.builder().dni("400").nombre("Sofi").build();
+
+      PeticionPorMateriaPriorizada p1 = PeticionPorMateriaPriorizada.builder()
+              .estudiante(e1)
+              .materia(materia)
+              .comisionesSolicitadas(List.of(comision))
+              .cumpleCorrelativa(true)
+              .prioridad(70).motivo("[COR]")
+              .build();
+
+      PeticionPorMateriaPriorizada p2 = PeticionPorMateriaPriorizada.builder()
+              .estudiante(e2)
+              .materia(materia)
+              .comisionesSolicitadas(List.of(comision))
+              .cumpleCorrelativa(true)
+              .prioridad(70).motivo("[COR]")
+              .build();
+
+      List<SugerenciaInscripcion> resultado = asignador.asignar(List.of(p1, p2));
+
+      // Verificamos que el resultado contenga las 2 sugerencias
+      assertThat(resultado).hasSize(2);
+
+      // Solo uno debe estar asignado, por el cupo 1
+      List<SugerenciaInscripcion> asignadas = resultado.stream()
+              .filter(SugerenciaInscripcion::fueAsignada)
+              .toList();
+      assertThat(asignadas).hasSize(2);
+
+      // La comisión asignada debe ser la correcta
+      SugerenciaAsignada aceptada = (SugerenciaAsignada) asignadas.get(0);
+      assertThat(aceptada.comision().getCodigo()).isEqualTo("MAT2-A");
+
+      // La otra sugerencia debe estar rechazada
+      List<SugerenciaInscripcion> rechazadas = resultado.stream()
+              .filter(s -> !s.fueAsignada())
+              .toList();
+      assertThat(rechazadas).hasSize(0);
+    }
+  }
+
+

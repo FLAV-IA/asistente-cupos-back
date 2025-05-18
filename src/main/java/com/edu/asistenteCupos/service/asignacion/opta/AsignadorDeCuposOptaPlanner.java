@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 @Component
@@ -59,7 +60,8 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
 
 
   private PeticionAsignableDTO convertirAPeticionAsignable(PeticionPorMateriaPriorizada peticion) {
-    return PeticionAsignableDTO.builder().estudianteId(peticion.getEstudiante().getDni())
+    return PeticionAsignableDTO.builder().id(UUID.randomUUID().toString()).
+            estudianteId(peticion.getEstudiante().getDni())
                                .materiaCodigo(peticion.getMateria().getCodigo())
                                .codigosDeComisionPreferidas(peticion.codigosDeComisiones())
                                .cumpleCorrelativa(peticion.getCumpleCorrelativa())
@@ -71,7 +73,6 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
                                .estudiante(peticion.getEstudiante()).materia(peticion.getMateria())
                                .build();
   }
-
   private SugerenciaInscripcion reconstruirSugerencia(PeticionAsignableDTO dto) {
     if (dto.getComisionAsignada() == null) {
       return new AsignacionFallida().crearSugerencia(dto.getEstudiante(), dto.getMateria(),
