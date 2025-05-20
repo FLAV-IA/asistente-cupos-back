@@ -35,4 +35,13 @@ public class ComisionRepositoryInMemory implements ComisionRepository {
   public List<Comision> findByCodigoIn(Set<String> codigos) {
     return codigos.stream().map(data::get).filter(Objects::nonNull).collect(Collectors.toList());
   }
+
+  @Override
+  public int findCupoByCodigo(String codigo) {
+    Comision comision = data.get(codigo);
+    if (comision != null) {
+      return comision.getCupo();
+    }
+    return 0;
+  }
 }

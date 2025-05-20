@@ -3,7 +3,19 @@ package com.edu.asistenteCupos.service;
 import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistenteCupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistenteCupos.pipeline.Paso;
+import com.edu.asistenteCupos.mapper.SugerenciaInscripcionMapper;
+import com.edu.asistenteCupos.service.asignacion.AsignadorDeCupos;
+import com.edu.asistenteCupos.service.priorizacion.ConversorResultadoLLM;
+import com.edu.asistenteCupos.service.priorizacion.PriorizadorDePeticiones;
+import com.edu.asistenteCupos.service.priorizacion.dto.ResultadoPriorizacionLLM;
+import com.edu.asistenteCupos.service.prompt.PromptGenerator;
+import com.edu.asistenteCupos.service.prompt.PromptTokenizerEstimator;
+import com.edu.asistenteCupos.service.traduccion.ConversorSugerenciasLLM;
+import com.edu.asistenteCupos.service.traduccion.TraductorDeSugerencias;
+import com.edu.asistenteCupos.service.traduccion.dto.SugerenciaInscripcionLLM;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,6 +25,7 @@ import java.util.List;
  */
 @Component
 @RequiredArgsConstructor
+
 public class AsistenteDeInscripcion {
   private final Paso<List<PeticionInscripcion>, List<PeticionInscripcion>> filtroPaso;
   private final Paso<List<PeticionInscripcion>, List<com.edu.asistenteCupos.domain.priorizacion.PeticionPorMateriaPriorizada>> priorizacionPaso;

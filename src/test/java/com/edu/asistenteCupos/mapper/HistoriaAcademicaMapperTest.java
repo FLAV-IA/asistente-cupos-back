@@ -1,5 +1,6 @@
 package com.edu.asistenteCupos.mapper;
 
+import com.edu.asistenteCupos.domain.Comision;
 import com.edu.asistenteCupos.domain.Cursada;
 import com.edu.asistenteCupos.domain.HistoriaAcademica;
 import com.edu.asistenteCupos.domain.Materia;
@@ -13,7 +14,8 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class HistoriaAcademicaMapperTest {
   private HistoriaAcademicaMapper mapper;
@@ -30,6 +32,7 @@ class HistoriaAcademicaMapperTest {
   void convierteHistoriaAcademicaCorrectamente() {
     Materia mat1 = Materia.builder().codigo("MAT1").nombre("Algoritmos").build();
     Materia mat2 = Materia.builder().codigo("MAT2").nombre("Matemática").build();
+    Comision comision = Comision.builder().codigo("COM1").build();
 
     Cursada c1 = Cursada.builder().id(1L).materia(mat1).fueAprobada(false).build();
     Cursada c2 = Cursada.builder().id(2L).materia(mat2).fueAprobada(true).build();
@@ -42,7 +45,7 @@ class HistoriaAcademicaMapperTest {
                                                   .totalHistoricasAprobadas(7)
                                                   .coeficiente(8.3)
                                                   .cursadasAnteriores(List.of(c1, c2))
-                                                  .inscripcionesActuales(Set.of(mat2))
+                                                  .inscripcionesActuales(Set.of(comision))
                                                   .build();
 
     HistoriaAcademica4Prompt dto = mapper.toHistoriaAcademica4Prompt(historia);
@@ -51,6 +54,6 @@ class HistoriaAcademicaMapperTest {
     assertThat(dto.getAp()).isEqualTo("7");
     assertThat(dto.getCf()).isEqualTo("8.3");
     assertThat(dto.getCa()).containsExactly("MAT1");
-    assertThat(dto.getAc()).containsExactly("MAT2");
+    assertThat(dto.getAc()).containsExactly("COM1");
   }
 }

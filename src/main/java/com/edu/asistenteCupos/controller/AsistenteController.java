@@ -5,6 +5,7 @@ import com.edu.asistenteCupos.controller.dto.PeticionInscripcionCsvDTO;
 import com.edu.asistenteCupos.controller.dto.SugerenciaInscripcionDTO;
 import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistenteCupos.domain.sugerencia.SugerenciaInscripcion;
+import com.edu.asistenteCupos.domain.filtros.FiltroDePeticionInscripcion;
 import com.edu.asistenteCupos.mapper.SugerenciaInscripcionMapper;
 import com.edu.asistenteCupos.service.AsistenteDeInscripcion;
 import com.edu.asistenteCupos.service.adapter.PeticionInscripcionCsvAdapter;
@@ -29,6 +30,7 @@ public class AsistenteController {
   private final SugerenciaInscripcionMapper sugerenciaInscripcionMapper;
   private final PeticionInscripcionCsvAdapter peticionInscripcionCsvAdapter;
   private final EnsambladorDePeticiones ensambladorDePeticiones;
+  private final FiltroDePeticionInscripcion filtroDePeticionInscripcion;
 
   @PostMapping("/sugerencia-inscripcion-con-csv")
   public ResponseEntity<List<SugerenciaInscripcionDTO>> sugerirInscripcionConCsv(
@@ -41,8 +43,9 @@ public class AsistenteController {
       List<PeticionInscripcionCsvDTO> peticionesCSV = peticionInscripcionCsvAdapter.adapt(file);
       List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeCsvDto(
         peticionesCSV);
+        List<PeticionInscripcion> peticionesFiltradas = filtroDePeticionInscripcion.filtrar(peticiones);
       List<SugerenciaInscripcion> sugerencias = asistenteDeInscripcion.sugerirInscripcion(
-        peticiones);
+              peticionesFiltradas);
       List<SugerenciaInscripcionDTO> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
         sugerencias);
       return ResponseEntity.ok(sugerenciasDTO);
