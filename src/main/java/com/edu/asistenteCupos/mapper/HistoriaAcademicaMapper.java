@@ -1,5 +1,6 @@
 package com.edu.asistenteCupos.mapper;
 
+import com.edu.asistenteCupos.domain.Comision;
 import com.edu.asistenteCupos.domain.Cursada;
 import com.edu.asistenteCupos.domain.HistoriaAcademica;
 import com.edu.asistenteCupos.domain.Materia;
@@ -29,10 +30,10 @@ public abstract class HistoriaAcademicaMapper {
   public abstract HistoriaAcademica4Prompt toHistoriaAcademica4Prompt(HistoriaAcademica historia);
 
   @Named("mapInscripcionesActuales")
-  public List<String> mapInscripcionesActuales(Set<Materia> materias) {
-    if (materias == null)
+  public List<String> mapInscripcionesActuales(Set<Comision> Comisiones) {
+    if (Comisiones == null)
       return List.of();
-    return materias.stream().map(Materia::getCodigo).collect(Collectors.toList());
+    return Comisiones.stream().map(Comision::getCodigo).collect(Collectors.toList());
   }
 
   @Named("mapCursadasNoAprobadas")

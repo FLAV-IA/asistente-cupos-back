@@ -10,6 +10,7 @@ import java.util.List;
 public class FiltroAComisionesSinCupo implements FiltroDePeticionInscripcion {
   private FiltroDePeticionInscripcion siguiente;
 
+
   @Override
   public void setFiltroSiguiente(FiltroDePeticionInscripcion siguiente) {
     this.siguiente = siguiente;
@@ -17,12 +18,14 @@ public class FiltroAComisionesSinCupo implements FiltroDePeticionInscripcion {
 
   @Override
   public List<PeticionInscripcion> filtrar(List<PeticionInscripcion> peticiones) {
+    List<PeticionInscripcion> filtradas =filtrarPeticionesSegunPredicado(peticiones, (comisionAEvaluar,peticionInscripcionAEvaluar) -> comisionAEvaluar.getCupo() > 0);
+
     if (siguiente != null) {
-      return siguiente.filtrar(peticiones);
+      return siguiente.filtrar(filtradas);
     }
-    return peticiones;
+
+    return filtradas;
   }
+
+
 }
-
-
-
