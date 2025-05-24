@@ -1,5 +1,6 @@
 package com.edu.asistenteCupos.mapper;
 
+import com.edu.asistenteCupos.domain.Comision;
 import com.edu.asistenteCupos.domain.Cursada;
 import com.edu.asistenteCupos.domain.HistoriaAcademica;
 import com.edu.asistenteCupos.domain.Materia;
@@ -13,7 +14,8 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class HistoriaAcademicaMapperTest {
   private HistoriaAcademicaMapper mapper;
@@ -30,6 +32,7 @@ class HistoriaAcademicaMapperTest {
   void convierteHistoriaAcademicaCorrectamente() {
     Materia mat1 = Materia.builder().codigo("MAT1").nombre("Algoritmos").build();
     Materia mat2 = Materia.builder().codigo("MAT2").nombre("Matemática").build();
+    Comision comision = Comision.builder().codigo("COM1").build();
 
     Cursada c1 = Cursada.builder().id(1L).materia(mat1).fueAprobada(false).build();
     Cursada c2 = Cursada.builder().id(2L).materia(mat2).fueAprobada(true).build();

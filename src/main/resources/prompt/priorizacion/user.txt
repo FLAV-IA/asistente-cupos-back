@@ -28,3 +28,5 @@ EXPECTED OUTPUT:
 - Do not use markdown (like ```json).
 - Do not add any explanations or comments.
 - Output only the raw JSON array.
+
+- no incluyas el procesamiento de los ejemplos mencionados en  EXPECTED OUTPUT ni en Each item has the following format solo tenelos en cuenta para el formato de salida

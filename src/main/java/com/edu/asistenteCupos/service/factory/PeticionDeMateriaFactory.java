@@ -5,7 +5,6 @@ import com.edu.asistenteCupos.domain.Comision;
 import com.edu.asistenteCupos.domain.Estudiante;
 import com.edu.asistenteCupos.domain.Materia;
 import com.edu.asistenteCupos.domain.peticion.PeticionPorMateria;
-import com.edu.asistenteCupos.excepcion.ComisionNoEncontradaException;
 import com.edu.asistenteCupos.excepcion.ComisionesDeDistintaMateriaException;
 import com.edu.asistenteCupos.excepcion.NoSeEspecificaronComisionesException;
 import org.springframework.stereotype.Component;
@@ -33,14 +32,10 @@ public class PeticionDeMateriaFactory {
 
     List<Comision> comisiones = codigoComisiones.stream().map(comisionesPorCodigo::get).toList();
 
-    if (comisiones.contains(null)) {
-      throw new ComisionNoEncontradaException(
-        "No se encontraron todas las comisiones especificadas.");
-    }
 
     Materia materiaReferencia = comisiones.get(0).getMateria();
     boolean todasMismaMateria = comisiones.stream()
-                                          .allMatch(c -> c.getMateria().equals(materiaReferencia));
+                                          .allMatch(c ->c!=null && c.getMateria().equals(materiaReferencia));
     if (!todasMismaMateria) {
       throw new ComisionesDeDistintaMateriaException(
         "Las comisiones especificadas deben pertenecer a la misma materia: " +

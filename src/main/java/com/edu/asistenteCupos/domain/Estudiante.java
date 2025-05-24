@@ -32,6 +32,6 @@ public class Estudiante {
   }
 
   public boolean puedeInscribirse(Materia materia) {
-    return historiaAcademica.cumpleCorrelativa(materia);
+    return this.historiaAcademica.cumpleCorrelativas(materia);
   }
 }

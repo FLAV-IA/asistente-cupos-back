@@ -26,7 +26,7 @@ class AsistenteDeInscripcionTest {
       Paso.class);
     Paso<List<SugerenciaInscripcion>, List<SugerenciaInscripcion>> traductor = mock(Paso.class);
 
-    AsistenteDeInscripcion2 asistente = new AsistenteDeInscripcion2(filtro, priorizador, asignador,
+    AsistenteDeInscripcion asistente = new AsistenteDeInscripcion(filtro, priorizador, asignador,
       traductor);
 
     List<PeticionInscripcion> peticiones = List.of(crearPeticionInscripcionDummy());

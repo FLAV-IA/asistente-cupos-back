@@ -2,6 +2,7 @@ package com.edu.asistenteCupos.service.priorizacion.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ResultadoPriorizacionLLM {
   /**
    * Dni del estudiante
@@ -21,6 +23,8 @@ public class ResultadoPriorizacionLLM {
   private List<EvaluacionPrioridad> ep;
 
   @Data
+  @AllArgsConstructor
+  @NoArgsConstructor
   public static class EvaluacionPrioridad {
     /**
      * Código de la materia

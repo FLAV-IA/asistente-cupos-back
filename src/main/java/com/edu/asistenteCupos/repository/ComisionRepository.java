@@ -14,5 +14,7 @@ public interface ComisionRepository {
   Optional<Comision> findById(String id);
 
   List<Comision> findByCodigoIn(Set<String> id);
+
+  int findCupoByCodigo(String codigo);
 }
 

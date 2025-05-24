@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Data
@@ -39,7 +40,25 @@ public class HistoriaAcademica {
     uniqueConstraints = @UniqueConstraint(
       columnNames = {"id_historia_academica", "codigo_de_materia"}))
   @Builder.Default
-  private Set<Materia> inscripcionesActuales = new HashSet<>();
+  private Set<Materia> inscripcionesActuales = new HashSet<Materia>();
+
+  public Boolean cumpleCorrelativas(Materia materia) {
+    List<Materia> correlativasNecesarias = materia.getCorrelativas();
+    return correlativasNecesarias.stream().allMatch(correlativa ->
+            this.cursadasAnteriores.stream()
+                    .filter(Cursada::getFueAprobada)
+                    .anyMatch(cursada -> cursada.getMateria().getCodigo().equals(correlativa.getCodigo()))
+    );
+  }
+
+  public boolean haySuperposicionHoraria(Comision nuevaComision) {
+      for (Materia comisionYaInscripta : getInscripcionesActuales()) {
+        //if (ValidadorHorario.haySuperposicion(comisionYaInscripta.getHorario(), nuevaComision.getHorario())) {
+          return true;
+        //}
+      }
+    return false;
+  }
 
   public boolean cumpleCorrelativa(Materia materia) {
     return true;

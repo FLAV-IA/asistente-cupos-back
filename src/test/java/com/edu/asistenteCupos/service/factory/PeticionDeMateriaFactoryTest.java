@@ -5,7 +5,6 @@ import com.edu.asistenteCupos.domain.Comision;
 import com.edu.asistenteCupos.domain.Estudiante;
 import com.edu.asistenteCupos.domain.Materia;
 import com.edu.asistenteCupos.domain.peticion.PeticionPorMateria;
-import com.edu.asistenteCupos.excepcion.ComisionNoEncontradaException;
 import com.edu.asistenteCupos.excepcion.ComisionesDeDistintaMateriaException;
 import com.edu.asistenteCupos.excepcion.NoSeEspecificaronComisionesException;
 import org.junit.jupiter.api.Test;
@@ -52,7 +51,7 @@ class PeticionDeMateriaFactoryTest {
     Map<String, Comision> mapa = Map.of("COM1", c1);
     Estudiante estudiante = mock(Estudiante.class);
 
-    assertThrows(ComisionNoEncontradaException.class,
+    assertThrows(ComisionesDeDistintaMateriaException.class,
       () -> factory.crearPeticionDeMateria(dto, mapa, estudiante));
   }
 

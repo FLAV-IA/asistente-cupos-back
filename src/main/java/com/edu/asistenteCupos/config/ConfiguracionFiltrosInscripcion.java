@@ -1,10 +1,6 @@
 package com.edu.asistenteCupos.config;
 
-import com.edu.asistenteCupos.domain.filtros.FiltrarAnotadosAVariasMaterias;
-import com.edu.asistenteCupos.domain.filtros.FiltroAComisionesSinCupo;
-import com.edu.asistenteCupos.domain.filtros.FiltroCorrelativas;
-import com.edu.asistenteCupos.domain.filtros.FiltroDePeticionInscripcion;
-import com.edu.asistenteCupos.domain.filtros.FiltroSuperposicionHoraria;
+import com.edu.asistenteCupos.domain.filtros.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,19 +9,23 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class ConfiguracionFiltrosInscripcion {
+
   /**
    * @return un filtro de petición de inscripción inicial que conoce su cadena de filtros.
+   *
    */
+
+
   @Bean
   public FiltroDePeticionInscripcion cadenaDeFiltros() {
-    FiltroDePeticionInscripcion filtro1 = new FiltroCorrelativas();
+    FiltroDePeticionInscripcion filtro1 = new FiltroCorrelativas();//se comenta porque si no, nadie se inscribe xD
     FiltroDePeticionInscripcion filtro2 = new FiltrarAnotadosAVariasMaterias();
     FiltroDePeticionInscripcion filtro3 = new FiltroAComisionesSinCupo();
     FiltroDePeticionInscripcion filtro4 = new FiltroSuperposicionHoraria();
     filtro3.setFiltroSiguiente(filtro4);
     filtro2.setFiltroSiguiente(filtro3);
-    filtro1.setFiltroSiguiente(filtro2);
+   // filtro1.setFiltroSiguiente(filtro2);
 
-    return filtro1;
+    return filtro2;
   }
 }

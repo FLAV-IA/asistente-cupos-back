@@ -25,7 +25,7 @@ public class SugerenciaInscripcionMapper {
                                      .nombreEstudiante(rechazada.estudiante().getNombre())
                                      .dniEstudiante(rechazada.estudiante().getDni())
                                      .nombreMateria(rechazada.materia().getNombre())
-                                     .codigoComision("NO ASIGNADA").motivo(rechazada.motivo())
+                                     .codigoComision(rechazada.comision().getCodigo()).motivo(rechazada.motivo())
                                      .prioridad(rechazada.prioridad()).cupoAsignado(false)
                                      .build();
     } else {

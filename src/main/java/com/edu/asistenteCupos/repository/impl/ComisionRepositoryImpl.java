@@ -34,4 +34,9 @@ public class ComisionRepositoryImpl implements ComisionRepository {
   public List<Comision> findByCodigoIn(Set<String> codigos) {
     return jpaRepository.findByCodigoIn(codigos);
   }
+
+  @Override
+  public int findCupoByCodigo(String codigo) {
+    return jpaRepository.findCupoByCodigo(codigo);
+  }
 }

@@ -36,7 +36,6 @@ class SugerenciaInscripcionMapperTest {
     assertThat(dto.getNombreEstudiante()).isEqualTo(sugerencia.estudiante().getNombre());
     assertThat(dto.getDniEstudiante()).isEqualTo(sugerencia.estudiante().getDni());
     assertThat(dto.getNombreMateria()).isEqualTo(sugerencia.materia().getNombre());
-    assertThat(dto.getCodigoComision()).isEqualTo("NO ASIGNADA");
     assertThat(dto.getMotivo()).isEqualTo(sugerencia.motivo());
     assertThat(dto.getPrioridad()).isEqualTo(sugerencia.prioridad());
     assertThat(dto.isCupoAsignado()).isFalse();

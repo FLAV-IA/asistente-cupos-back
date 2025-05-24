@@ -28,7 +28,7 @@ public class ConversorSugerenciasLLM {
       return new SugerenciaAsignada(estudiante, comision.getMateria(), comision,
         sugerenciaInscripcionLLM.getM(), sugerenciaInscripcionLLM.getP());
     } else {
-      return new SugerenciaRechazada(estudiante, comision.getMateria(),
+      return new SugerenciaRechazada(estudiante, comision.getMateria(),comision,
         sugerenciaInscripcionLLM.getM(), sugerenciaInscripcionLLM.getP());
     }
   }
