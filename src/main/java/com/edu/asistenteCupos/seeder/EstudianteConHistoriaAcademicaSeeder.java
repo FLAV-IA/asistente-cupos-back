@@ -59,7 +59,7 @@ public class EstudianteConHistoriaAcademicaSeeder {
     String inscripcionesActuales = row[6].trim();
     int totalHistoricasAprobadas = 0;
 
-    Set<Comision> comisionesAnotadas = parsearComisiones(inscripcionesActuales,Collectors.toSet());
+    Set<Materia> comisionesAnotadas = parsearMaterias(inscripcionesActuales,Collectors.toSet());
 
     List<Cursada> cursadasAnterioresC12024 = construirCursadas(row[7].trim(), row[8].trim());
     List<Cursada> cursadasAnterioresC22024 = construirCursadas(row[9].trim(), row[10].trim());

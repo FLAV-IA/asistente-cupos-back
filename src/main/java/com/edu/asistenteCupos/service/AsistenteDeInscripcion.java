@@ -34,7 +34,7 @@ public class AsistenteDeInscripcion {
 
   public List<SugerenciaInscripcion> sugerirInscripcion(List<PeticionInscripcion> peticiones) {
     var filtradas = filtroPaso.ejecutar(peticiones);
-    var priorizadas = priorizacionPaso.ejecutar(filtradas);
+    var priorizadas = priorizacionPaso.ejecutar(peticiones);
     var sugerencias = asignacionPaso.ejecutar(priorizadas);
     return traduccionYConversorPaso.ejecutar(sugerencias);
   }

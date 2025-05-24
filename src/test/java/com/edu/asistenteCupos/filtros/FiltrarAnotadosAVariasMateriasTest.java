@@ -3,6 +3,7 @@ package com.edu.asistenteCupos.filtros;
 import com.edu.asistenteCupos.domain.Comision;
 import com.edu.asistenteCupos.domain.Estudiante;
 import com.edu.asistenteCupos.domain.HistoriaAcademica;
+import com.edu.asistenteCupos.domain.Materia;
 import com.edu.asistenteCupos.domain.filtros.FiltrarAnotadosAVariasMaterias;
 import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistenteCupos.domain.peticion.PeticionPorMateria;
@@ -36,10 +37,10 @@ class FiltrarAnotadosAVariasMateriasTest {
         HistoriaAcademica historia = mock(HistoriaAcademica.class);
 
         // Construimos un Set de comisiones mocks segun la cantidad
-        Set<Comision> inscripcionesActuales = new HashSet<>();
+        Set<Materia> inscripcionesActuales = new HashSet<>();
         for (int i = 0; i < cantidadInscripcionesActuales; i++) {
-            Comision comisionMock = mock(Comision.class);
-            inscripcionesActuales.add(comisionMock);
+            Materia materiaMock = mock(Materia.class);
+            inscripcionesActuales.add(materiaMock);
         }
 
         when(estudiante.getHistoriaAcademica()).thenReturn(historia);
