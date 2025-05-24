@@ -17,4 +17,5 @@ public class SugerenciaInscripcionDTO {
   private String motivo;
   private int prioridad;
   private boolean cupoAsignado;
+  private HistoriaAcademicaDTO historiaAcademica;
 }

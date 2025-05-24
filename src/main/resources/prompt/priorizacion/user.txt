@@ -1,4 +1,4 @@
-REQUESTS:
+SOLICITUDES:
 {peticiones}
 
 Each item includes:

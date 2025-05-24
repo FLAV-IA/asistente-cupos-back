@@ -17,8 +17,7 @@ public class AsignacionConstraintProvider implements ConstraintProvider {
                 cupoExcedidoPorComision(factory),       // ❗ Regla hard
                 peticionNoAsignada(factory),            // ⚠️ Soft para permitir inviabilidad controlada
                 prioridadAltaFavorecida(factory),       // ⭐ Elegí al que mejor prioridad tiene
-                favorecerAVZ_COR_SIN(factory),          // ⭐ favorecer etiquetas
-                desempatarPorCF(factory),             // ⭐ mejorcoeficiente
+            //    desempatarPorCF(factory),             // ⭐ mejorcoeficiente
 
         };
     }
@@ -37,9 +36,10 @@ public class AsignacionConstraintProvider implements ConstraintProvider {
     private Constraint prioridadAltaFavorecida(ConstraintFactory factory) {
         return factory.from(PeticionAsignableDTO.class)
                 .filter(p -> p.getComisionAsignada() != null)
-                .reward("Prioridad alta favorecida", HardSoftScore.ofSoft(10),
-                        p -> 100 - p.getPrioridad());
+                .reward("Prioridad alta favorecida", HardSoftScore.ONE_SOFT,
+                        p -> p.getPrioridad() * p.getPrioridad());
     }
+
 
 
       @SuppressWarnings("deprecation")
@@ -49,10 +49,14 @@ public class AsignacionConstraintProvider implements ConstraintProvider {
                     int score = 0;
                     if (p.getEtiquetas().contains("[AVZ]"))
                       score += 10;
-                    if (p.getEtiquetas().contains("[COR]"))
-                      score += 8;
                     if (p.getEtiquetas().contains("[SIN]"))
-                      score += 6;
+                      score += 8;
+                    if (p.getEtiquetas().contains("[REC]"))
+                      score += 8;
+                    if (p.getEtiquetas().contains("[REZ]"))
+                      score += 4;
+                    if (p.getEtiquetas().contains("[CF]"))
+                      score += 4;
                     return score;
                   });
   }
