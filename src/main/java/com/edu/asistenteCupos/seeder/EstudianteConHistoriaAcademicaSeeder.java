@@ -57,7 +57,7 @@ public class EstudianteConHistoriaAcademicaSeeder {
     Double coeficiente = Double.parseDouble(row[4].trim().equals("-") ? "0" : row[4].trim());
     int totalInscripcionesHistoricas = Integer.parseInt(row[5].trim());
     String inscripcionesActuales = row[6].trim();
-    int totalHistoricasAprobadas = 0;
+    int totalHistoricasAprobadas = Integer.parseInt((row.length==11|| row[11].trim().equals("-") ) ? "0" : row[11].trim());
 
     Set<Materia> comisionesAnotadas = parsearMaterias(inscripcionesActuales,Collectors.toSet());
 

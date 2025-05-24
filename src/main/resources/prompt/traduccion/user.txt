@@ -15,6 +15,14 @@ INPUT:
 
 GUIDELINES:
 - Replace priority tags (e.g., AVZ, COR) with short explanations.
+using
+    CRITERIA & TAGS:
+    1  [AVZ] Few courses left to graduate → prioritize those with ap values closer to 30 (higher ap means closer to graduation)
+    2. [SIN] No current course enrollments → when the `ac` field in h has no courses
+    3. [2IN] Has 2 or more current course enrollments → when the ac field in h contains 2 or more courses. This should significantly lower the priority.
+    4  [PLUS] No current enrollments → when the ac field in h is empty, assign higher priority compared to those with 1 or more current enrollments.
+    5. [REC] Repeating the course → when course appears in `ca`
+    6. [REZ] Few recent approvals → when `ap` is low relative to 30
 - Avoid repeating identical explanations.
 - Use Spanish only.
 - Keep it concise but human-readable.
