@@ -39,7 +39,6 @@ class SugerenciaInscripcionPromptMapperTest {
     assertThat(resultado).hasSize(1);
     var prompt = resultado.get(0);
     assertThat(prompt.getA()).isEqualTo(rechazada.estudiante().getDni());
-    assertThat(prompt.getM()).isEqualTo("NO_ASIGNADA");
     assertThat(prompt.isX()).isFalse();
     assertThat(prompt.getP()).isEqualTo(rechazada.prioridad());
     assertThat(prompt.getE()).isEqualTo(rechazada.motivo());

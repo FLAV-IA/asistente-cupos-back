@@ -45,7 +45,7 @@ class HistoriaAcademicaMapperTest {
                                                   .totalHistoricasAprobadas(7)
                                                   .coeficiente(8.3)
                                                   .cursadasAnteriores(List.of(c1, c2))
-                                                  .inscripcionesActuales(Set.of(comision))
+                                                  .inscripcionesActuales(Set.of(mat2))
                                                   .build();
 
     HistoriaAcademica4Prompt dto = mapper.toHistoriaAcademica4Prompt(historia);
@@ -54,6 +54,6 @@ class HistoriaAcademicaMapperTest {
     assertThat(dto.getAp()).isEqualTo("7");
     assertThat(dto.getCf()).isEqualTo("8.3");
     assertThat(dto.getCa()).containsExactly("MAT1");
-    assertThat(dto.getAc()).containsExactly("COM1");
+    assertThat(dto.getAc()).containsExactly("MAT2");
   }
 }

@@ -120,7 +120,7 @@ class AsignadorDeCuposOptaPlannerEmpateTest {
   void logueaEscenarioYResultadoDeAsignacion() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Matemática").build();
 
-    List<Comision> comisiones = IntStream.range(0, 5)
+    List<Comision> comisiones = IntStream.range(0, 700)
             .mapToObj(i -> new Comision("MAT1-" + (char) ('A' + i), "lunes " + (8 + i) + "-10", i + 1, materia))
             .collect(Collectors.toList());
 

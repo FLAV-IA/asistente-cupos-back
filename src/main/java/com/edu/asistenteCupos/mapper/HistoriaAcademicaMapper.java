@@ -30,10 +30,10 @@ public abstract class HistoriaAcademicaMapper {
   public abstract HistoriaAcademica4Prompt toHistoriaAcademica4Prompt(HistoriaAcademica historia);
 
   @Named("mapInscripcionesActuales")
-  public List<String> mapInscripcionesActuales(Set<Comision> Comisiones) {
+  public List<String> mapInscripcionesActuales(Set<Materia> Comisiones) {
     if (Comisiones == null)
       return List.of();
-    return Comisiones.stream().map(Comision::getCodigo).collect(Collectors.toList());
+    return Comisiones.stream().map(Materia::getCodigo).collect(Collectors.toList());
   }
 
   @Named("mapCursadasNoAprobadas")

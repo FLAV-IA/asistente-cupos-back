@@ -2,10 +2,10 @@ codigo_materia | codigo_comision | horario | cupo
 1307|1-CW|Martes 18:30 a 21:29,Jueves 18:30 a 21:29|4
 1314|1-CW|Viernes 18:00 a 21:59|5
 1316|1-CW|Viernes 18:00 a 21:59|2
-1035|1-G14|Martes 09:00 a 11:59,Miercoles 15:00 a 17:59|3
+1035|1-G14|Martes 09:00 a 11:59,Miercoles 15:00 a 17:59|1
 1035|2-G14|Martes 09:00 a 11:59,Miercoles 15:00 a 17:59|1
-1035|3-G14|Martes 18:00 a 20:59,Sabado 10:00 a 12:59|4
-1035|4-G14|Martes 18:00 a 20:59,Sabado 10:00 a 12:59|2
+1035|3-G14|Martes 18:00 a 20:59,Sabado 10:00 a 12:59|1
+1035|4-G14|Martes 18:00 a 20:59,Sabado 10:00 a 12:59|1
 1043|1-G14|Miercoles  18:30 a 20:59,Jueves 18:30 a 21:59|5
 1046|1-CP|Martes 19:00 a 21:59,Miercoles18:00 a 20:59|3
 1042|1-G14|Lunes 18:00 a 21:59,Miercoles 18:00 a 19:59|1
@@ -18,17 +18,17 @@ codigo_materia | codigo_comision | horario | cupo
 90028|C-2-G14|Miercoles  10:00 a 12:59|3
 90028|C-1-G14|Lunes 09:00 a 11:59|2
 1052|1-G14|Miercoles 18:00 a 21:59|4
-487|1-G14|Lunes 09:00 a 11:59,Jueves 09:00 a 11:59,Sabado 09:00 a 10:59|1
-487|2-G14|Lunes 09:00 a 11:59,Jueves 09:00 a 11:59,Sabado 09:00 a 10:59|5
-487|3-CX|Lunes 09:00 a 11:59,Jueves 09:00 a 11:59,Sabado 09:00 a 10:59|3
-487|3-G14|Lunes 09:00 a 11:59,Jueves 09:00 a 11:59,Sabado 09:00 a 10:59|2
-487|4-G14|Lunes 12:00 a 14:59,Jueves 12:00 a 14:59,Sabado 09:00 a 10:59|5
-487|5-G14|Lunes 12:00 a 14:59,Jueves 12:00 a 14:59,Sabado 09:00 a 10:59|1
-487|6-G14|Lunes 16:00 a 18:59,Jueves 16:00 a 18:59,Sabado 09:00 a 10:59|2
-487|7-G14|Lunes 16:00 a 18:59,Jueves 16:00 a 18:59,Sabado 09:00 a 10:59|3
-487|8-G14|Lunes 19:00 a 21:59,Jueves 19:00 a 21:59,Sabado 09:00 a 10:59|5
-487|9-G14|Lunes 19:00 a 21:59,Jueves 19:00 a 21:59,Sabado 09:00 a 10:59|2
-487|10-G14|Lunes  19:00 a 21:59,Jueves 19:00 a 21:59,Sabado 09:00 a 10:59|3
+487|1-G14|Lunes 09:00 a 11:59,Jueves 09:00 a 11:59,Sabado 09:00 a 10:59|0
+487|2-G14|Lunes 09:00 a 11:59,Jueves 09:00 a 11:59,Sabado 09:00 a 10:59|0
+487|3-CX|Lunes 09:00 a 11:59,Jueves 09:00 a 11:59,Sabado 09:00 a 10:59|0
+487|3-G14|Lunes 09:00 a 11:59,Jueves 09:00 a 11:59,Sabado 09:00 a 10:59|0
+487|4-G14|Lunes 12:00 a 14:59,Jueves 12:00 a 14:59,Sabado 09:00 a 10:59|0
+487|5-G14|Lunes 12:00 a 14:59,Jueves 12:00 a 14:59,Sabado 09:00 a 10:59|0
+487|6-G14|Lunes 16:00 a 18:59,Jueves 16:00 a 18:59,Sabado 09:00 a 10:59|0
+487|7-G14|Lunes 16:00 a 18:59,Jueves 16:00 a 18:59,Sabado 09:00 a 10:59|0
+487|8-G14|Lunes 19:00 a 21:59,Jueves 19:00 a 21:59,Sabado 09:00 a 10:59|0
+487|9-G14|Lunes 19:00 a 21:59,Jueves 19:00 a 21:59,Sabado 09:00 a 10:59|0
+487|10-G14|Lunes  19:00 a 21:59,Jueves 19:00 a 21:59,Sabado 09:00 a 10:59|1
 1056|1-G14|Viernes 18:00 a 21:59|1
 1047|1-G14|Jueves 18:00 a 21:59|4
 1306|1-G14|Lunes  19:00 a 20:59,Miercoles18:30 a 20:29|2
@@ -45,14 +45,14 @@ codigo_materia | codigo_comision | horario | cupo
 1033|10-G14|Martes  13:00 a 16:59,Jueves 13:00 a 16:59|1
 1041|1-G14|Martes  16:00 a 17:59,Viernes 16:00 a 17:59|3
 1041|2-G14|Martes  18:00 a 19:59,Viernes 18:00 a 19:59|2
-1032|1-G14|Martes 09:00 a 11:59,Viernes  09:00 a 11:59|4
+1032|1-G14|Martes 09:00 a 11:59,Viernes  09:00 a 11:59|1
 1032|2-G14|Martes 09:00 a 11:59,Viernes  09:00 a 11:59|1
-1032|3-G14|Martes 15:00 a 17:59,Viernes  15:00 a 17:59|5
+1032|3-G14|Martes 15:00 a 17:59,Viernes  15:00 a 17:59|1
 1032|4-G14|Martes 18:00 a 19:59,Viernes  18:00 a 21:59|0
 1032|5-G14|Martes 09:00 a 11:59,Viernes  13:00 a 15:59|1
-1032|6-G14|Martes 09:00 a 11:59,Viernes  09:00 a 11:59|4
-1032|8-G14|Martes 09:00 a 11:59,Viernes  09:00 a 11:59|3
-1032|7-G14|Martes 18:00 a 19:59,Viernes  18:00 a 21:59|2
+1032|6-G14|Martes 09:00 a 11:59,Viernes  09:00 a 11:59|1
+1032|8-G14|Martes 09:00 a 11:59,Viernes  09:00 a 11:59|1
+1032|7-G14|Martes 18:00 a 19:59,Viernes  18:00 a 21:59|1
 1032|10-G14|Lunes 13:00 a 16:59,Miercoles13:00 a 14:59|1
 1032|11-G14|Martes  13:00 a 16:59,Viernes  13:00 a 14:59|4
 1305|1-CW|Martes 08:00 a 11:59,Jueves 18:00 a 21:59|1
@@ -72,4 +72,4 @@ codigo_materia | codigo_comision | horario | cupo
 1311|1-G14|Miercoles  18:00 a 21:59|3
 1039|1-G14|Lunes 19:00 a 21:59,Miercoles 19:00 a 21:59|2
 1039|2-G14|Lunes 19:00 a 21:59,Miercoles 19:00 a 21:59|4
-1060|1-CP| Sabado 8:00 a 11:59|1
+1060|1-CP| Sabado 8:00 a 11:59|0

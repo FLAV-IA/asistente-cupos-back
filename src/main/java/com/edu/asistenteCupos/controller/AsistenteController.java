@@ -43,9 +43,8 @@ public class AsistenteController {
       List<PeticionInscripcionCsvDTO> peticionesCSV = peticionInscripcionCsvAdapter.adapt(file);
       List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeCsvDto(
         peticionesCSV);
-        List<PeticionInscripcion> peticionesFiltradas = filtroDePeticionInscripcion.filtrar(peticiones);
       List<SugerenciaInscripcion> sugerencias = asistenteDeInscripcion.sugerirInscripcion(
-              peticionesFiltradas);
+              peticiones);
       List<SugerenciaInscripcionDTO> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
         sugerencias);
       return ResponseEntity.ok(sugerenciasDTO);

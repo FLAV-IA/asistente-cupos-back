@@ -11,19 +11,24 @@ import com.edu.asistenteCupos.service.asignacion.opta.model.PeticionAsignableDTO
 import com.edu.asistenteCupos.service.asignacion.opta.reglas.ConfiguracionDeRestricciones;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.optaplanner.core.api.solver.SolverJob;
 import org.optaplanner.core.api.solver.SolverManager;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 @Component
 @Primary
 @RequiredArgsConstructor
+@Slf4j
 public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
   private final SolverManager<AsignacionComisionesSolution, Long> solverManager;
   @PostConstruct
@@ -51,7 +56,10 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
       SolverJob<AsignacionComisionesSolution, Long> job = solverManager.solve(1L, problema);
       AsignacionComisionesSolution solucion = job.getFinalBestSolution();
 
-      return solucion.getPeticiones().stream().map(this::reconstruirSugerencia).toList();
+      return solucion.getPeticiones().stream().flatMap(p -> {
+        List<SugerenciaInscripcion> sugerencias = reconstruirSugerencia(p);
+        return sugerencias.stream();
+      }).toList();
 
     } catch (InterruptedException | ExecutionException e) {
       throw new RuntimeException("Error al resolver el problema de asignación", e);
@@ -73,14 +81,40 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
                                .estudiante(peticion.getEstudiante()).materia(peticion.getMateria())
                                .build();
   }
-  private SugerenciaInscripcion reconstruirSugerencia(PeticionAsignableDTO dto) {
-    if (dto.getComisionAsignada() == null) {
-      return new AsignacionFallida().crearSugerencia(dto.getEstudiante(), dto.getMateria(),
-        String.join(",", dto.getEtiquetas()), dto.getPrioridad());
+  private List<SugerenciaInscripcion> reconstruirSugerencia(PeticionAsignableDTO dto) {
+    ComisionDTO comisionAsignada = dto.getComisionAsignada();
+
+    // Generar sugerencias fallidas (todas las comisiones posibles menos la asignada)
+    List<SugerenciaInscripcion> sugerenciasFallidas = dto.getComisionesPosibles().stream()
+            .filter(c -> !Objects.equals(c, comisionAsignada))
+            .map(c -> new AsignacionFallida(c.toDomain(dto.getMateria()))
+                    .crearSugerencia(
+                            dto.getEstudiante(),
+                            dto.getMateria(),
+                            String.join(",", dto.getEtiquetas()),
+                            dto.getPrioridad()
+                    ))
+            .collect(Collectors.toList());
+
+    // Lista final a devolver
+    List<SugerenciaInscripcion> sugerenciasProcesadas = new ArrayList<>();
+
+    // Si hay una comisión asignada, agregarla como sugerencia exitosa
+    if (comisionAsignada != null) {
+      SugerenciaInscripcion sugerenciaExitosa = new AsignacionExitosa(
+              comisionAsignada.toDomain(dto.getMateria()))
+              .crearSugerencia(
+                      dto.getEstudiante(),
+                      dto.getMateria(),
+                      String.join(",", dto.getEtiquetas()),
+                      dto.getPrioridad()
+              );
+      sugerenciasProcesadas.add(sugerenciaExitosa);
     }
 
-    return new AsignacionExitosa(
-      dto.getComisionAsignada().toDomain(dto.getMateria())).crearSugerencia(dto.getEstudiante(),
-      dto.getMateria(), String.join(",", dto.getEtiquetas()), dto.getPrioridad());
+    // Agregar las fallidas al final
+    sugerenciasProcesadas.addAll(sugerenciasFallidas);
+    return sugerenciasProcesadas;
   }
+
 }
