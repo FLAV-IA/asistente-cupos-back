@@ -11,6 +11,7 @@ import com.edu.asistenteCupos.service.asignacion.opta.model.PeticionAsignableDTO
 import com.edu.asistenteCupos.service.asignacion.opta.reglas.ConfiguracionDeRestricciones;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.optaplanner.core.api.solver.SolverJob;
 import org.optaplanner.core.api.solver.SolverManager;
 import org.springframework.context.annotation.Primary;
@@ -24,12 +25,15 @@ import java.util.concurrent.ExecutionException;
 @Component
 @Primary
 @RequiredArgsConstructor
+@Slf4j
 public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
   private final SolverManager<AsignacionComisionesSolution, Long> solverManager;
+
   @PostConstruct
   public void checkSolver() {
-    System.out.println("OptaPlanner configurado correctamente");
+    log.info("OptaPlanner configurado correctamente");
   }
+
   @Override
   public List<SugerenciaInscripcion> asignar(List<PeticionPorMateriaPriorizada> peticiones) {
     List<PeticionAsignableDTO> asignables = peticiones.stream()
@@ -42,7 +46,9 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
 
     AsignacionComisionesSolution problema = AsignacionComisionesSolution.builder()
                                                                         .comisiones(comisiones)
-                                                                        .peticiones(asignables).configuracion(new ConfiguracionDeRestricciones())
+                                                                        .peticiones(asignables)
+                                                                        .configuracion(
+                                                                          new ConfiguracionDeRestricciones())
                                                                         .build();
     if (problema.getConfiguracion() == null) {
       throw new IllegalStateException("No se configuró el ConstraintConfigurationProvider");
@@ -60,8 +66,8 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
 
 
   private PeticionAsignableDTO convertirAPeticionAsignable(PeticionPorMateriaPriorizada peticion) {
-    return PeticionAsignableDTO.builder().id(UUID.randomUUID().toString()).
-            estudianteId(peticion.getEstudiante().getDni())
+    return PeticionAsignableDTO.builder().id(UUID.randomUUID().toString())
+                               .estudianteId(peticion.getEstudiante().getDni())
                                .materiaCodigo(peticion.getMateria().getCodigo())
                                .codigosDeComisionPreferidas(peticion.codigosDeComisiones())
                                .cumpleCorrelativa(peticion.getCumpleCorrelativa())
@@ -73,6 +79,7 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
                                .estudiante(peticion.getEstudiante()).materia(peticion.getMateria())
                                .build();
   }
+
   private SugerenciaInscripcion reconstruirSugerencia(PeticionAsignableDTO dto) {
     if (dto.getComisionAsignada() == null) {
       return new AsignacionFallida().crearSugerencia(dto.getEstudiante(), dto.getMateria(),
