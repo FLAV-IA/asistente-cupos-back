@@ -4,6 +4,10 @@ import com.edu.asistenteCupos.domain.asignacion.AsignacionExitosa;
 import com.edu.asistenteCupos.domain.asignacion.AsignacionFallida;
 import com.edu.asistenteCupos.domain.priorizacion.PeticionPorMateriaPriorizada;
 import com.edu.asistenteCupos.domain.sugerencia.SugerenciaInscripcion;
+import com.edu.asistenteCupos.excepcion.opta.AsignacionRuntimeException;
+import com.edu.asistenteCupos.excepcion.opta.ConfiguracionDeAsignacionInvalidaException;
+import com.edu.asistenteCupos.excepcion.opta.ErrorDeEjecucionDeAsignacionException;
+import com.edu.asistenteCupos.excepcion.opta.InterrupcionDuranteAsignacionException;
 import com.edu.asistenteCupos.service.asignacion.AsignadorDeCupos;
 import com.edu.asistenteCupos.service.asignacion.opta.model.AsignacionComisionesSolution;
 import com.edu.asistenteCupos.service.asignacion.opta.model.ComisionDTO;
@@ -51,19 +55,22 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
                                                                           new ConfiguracionDeRestricciones())
                                                                         .build();
     if (problema.getConfiguracion() == null) {
-      throw new IllegalStateException("No se configuró el ConstraintConfigurationProvider");
+      throw new ConfiguracionDeAsignacionInvalidaException(
+        "Falta la configuración de restricciones");
     }
     try {
       SolverJob<AsignacionComisionesSolution, Long> job = solverManager.solve(1L, problema);
-      AsignacionComisionesSolution solucion = job.getFinalBestSolution();
-
+      var solucion = job.getFinalBestSolution();
       return solucion.getPeticiones().stream().map(this::reconstruirSugerencia).toList();
 
-    } catch (InterruptedException | ExecutionException e) {
-      throw new RuntimeException("Error al resolver el problema de asignación", e);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      throw new AsignacionRuntimeException(new InterrupcionDuranteAsignacionException(e));
+
+    } catch (ExecutionException e) {
+      throw new AsignacionRuntimeException(new ErrorDeEjecucionDeAsignacionException(e));
     }
   }
-
 
   private PeticionAsignableDTO convertirAPeticionAsignable(PeticionPorMateriaPriorizada peticion) {
     return PeticionAsignableDTO.builder().id(UUID.randomUUID().toString())
