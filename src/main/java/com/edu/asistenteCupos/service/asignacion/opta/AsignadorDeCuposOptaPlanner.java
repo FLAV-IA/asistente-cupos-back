@@ -21,10 +21,13 @@ import org.optaplanner.core.api.solver.SolverManager;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 @Component
 @Primary
@@ -60,8 +63,12 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
     }
     try {
       SolverJob<AsignacionComisionesSolution, Long> job = solverManager.solve(1L, problema);
-      var solucion = job.getFinalBestSolution();
-      return solucion.getPeticiones().stream().map(this::reconstruirSugerencia).toList();
+      AsignacionComisionesSolution solucion = job.getFinalBestSolution();
+
+      return solucion.getPeticiones().stream().flatMap(p -> {
+        List<SugerenciaInscripcion> sugerencias = reconstruirSugerencia(p);
+        return sugerencias.stream();
+      }).toList();
 
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();
@@ -86,15 +93,40 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
                                .estudiante(peticion.getEstudiante()).materia(peticion.getMateria())
                                .build();
   }
+  private List<SugerenciaInscripcion> reconstruirSugerencia(PeticionAsignableDTO dto) {
+    ComisionDTO comisionAsignada = dto.getComisionAsignada();
 
-  private SugerenciaInscripcion reconstruirSugerencia(PeticionAsignableDTO dto) {
-    if (dto.getComisionAsignada() == null) {
-      return new AsignacionFallida().crearSugerencia(dto.getEstudiante(), dto.getMateria(),
-        String.join(",", dto.getEtiquetas()), dto.getPrioridad());
+    // Generar sugerencias fallidas (todas las comisiones posibles menos la asignada)
+    List<SugerenciaInscripcion> sugerenciasFallidas = dto.getComisionesPosibles().stream()
+            .filter(c -> !Objects.equals(c, comisionAsignada))
+            .map(c -> new AsignacionFallida(c.toDomain(dto.getMateria()))
+                    .crearSugerencia(
+                            dto.getEstudiante(),
+                            dto.getMateria(),
+                            String.join(",", dto.getEtiquetas()),
+                            dto.getPrioridad()
+                    ))
+            .toList();
+
+    // Lista final a devolver
+    List<SugerenciaInscripcion> sugerenciasProcesadas = new ArrayList<>();
+
+    // Si hay una comisión asignada, agregarla como sugerencia exitosa
+    if (comisionAsignada != null) {
+      SugerenciaInscripcion sugerenciaExitosa = new AsignacionExitosa(
+              comisionAsignada.toDomain(dto.getMateria()))
+              .crearSugerencia(
+                      dto.getEstudiante(),
+                      dto.getMateria(),
+                      String.join(",", dto.getEtiquetas()),
+                      dto.getPrioridad()
+              );
+      sugerenciasProcesadas.add(sugerenciaExitosa);
     }
 
-    return new AsignacionExitosa(
-      dto.getComisionAsignada().toDomain(dto.getMateria())).crearSugerencia(dto.getEstudiante(),
-      dto.getMateria(), String.join(",", dto.getEtiquetas()), dto.getPrioridad());
+    // Agregar las fallidas al final
+    sugerenciasProcesadas.addAll(sugerenciasFallidas);
+    return sugerenciasProcesadas;
   }
+
 }

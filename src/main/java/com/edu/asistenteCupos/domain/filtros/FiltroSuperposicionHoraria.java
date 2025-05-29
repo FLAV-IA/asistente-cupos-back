@@ -1,8 +1,10 @@
 package com.edu.asistenteCupos.domain.filtros;
 
+import com.edu.asistenteCupos.domain.Comision;
 import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
 
 import java.util.List;
+import java.util.function.BiPredicate;
 
 /**
  * Filtra las peticiones a comisiones que se superpongan en el horario con las inscripciones actuales
@@ -17,10 +19,15 @@ public class FiltroSuperposicionHoraria implements FiltroDePeticionInscripcion {
 
   @Override
   public List<PeticionInscripcion> filtrar(List<PeticionInscripcion> peticiones) {
+    BiPredicate<Comision, PeticionInscripcion> comisionPredicate = (c, p) ->  p.getEstudiante().getHistoriaAcademica().haySuperposicionHoraria(c);
+
+    List<PeticionInscripcion> filtradas =filtrarPeticionesSegunPredicado(peticiones, comisionPredicate);
+
+
     if (siguiente != null) {
-      return siguiente.filtrar(peticiones);
+      return siguiente.filtrar(filtradas);
     }
-    return peticiones;
+    return filtradas;
   }
 }
 

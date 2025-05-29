@@ -118,5 +118,3 @@ class AsignadorDeCuposOptaPlannerEmpateTest {
     assertThat(rechazadas).hasSize(sugerencias.size() - asignadas.size());
   }
 }
-
-

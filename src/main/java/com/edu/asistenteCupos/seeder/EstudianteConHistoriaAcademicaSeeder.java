@@ -1,10 +1,12 @@
 package com.edu.asistenteCupos.seeder;
 
 import com.edu.asistenteCupos.Utils.ClasspathResourceLoader;
+import com.edu.asistenteCupos.domain.Comision;
 import com.edu.asistenteCupos.domain.Cursada;
 import com.edu.asistenteCupos.domain.Estudiante;
 import com.edu.asistenteCupos.domain.HistoriaAcademica;
 import com.edu.asistenteCupos.domain.Materia;
+import com.edu.asistenteCupos.repository.ComisionRepository;
 import com.edu.asistenteCupos.repository.EstudianteRepository;
 import com.edu.asistenteCupos.repository.MateriaRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,7 @@ import java.util.stream.Stream;
 public class EstudianteConHistoriaAcademicaSeeder {
   private final EstudianteRepository estudianteRepository;
   private final MateriaRepository materiaRepository;
+  private final ComisionRepository comisionRepository;
   private final ClasspathResourceLoader resourceLoader;
   String nombreCsv = "csv/historiaAcademica.csv";
 
@@ -56,7 +59,7 @@ public class EstudianteConHistoriaAcademicaSeeder {
     String inscripcionesActuales = row[6].trim();
     int totalHistoricasAprobadas = 0;
 
-    Set<Materia> materiasAnotadas = parsearMaterias(inscripcionesActuales, Collectors.toSet());
+    Set<Materia> comisionesAnotadas = parsearMaterias(inscripcionesActuales,Collectors.toSet());
 
     List<Cursada> cursadasAnterioresC12024 = construirCursadas(row[7].trim(), row[8].trim());
     List<Cursada> cursadasAnterioresC22024 = construirCursadas(row[9].trim(), row[10].trim());
@@ -66,7 +69,7 @@ public class EstudianteConHistoriaAcademicaSeeder {
     return HistoriaAcademica.builder().totalInscripcionesHistoricas(totalInscripcionesHistoricas)
                             .totalHistoricasAprobadas(totalHistoricasAprobadas)
                             .cursadasAnteriores(cursadasAnteriores).coeficiente(coeficiente)
-                            .inscripcionesActuales(materiasAnotadas).build();
+                            .inscripcionesActuales(comisionesAnotadas).build();
   }
 
   /**

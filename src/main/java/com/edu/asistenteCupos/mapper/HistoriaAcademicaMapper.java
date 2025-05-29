@@ -1,5 +1,6 @@
 package com.edu.asistenteCupos.mapper;
 
+import com.edu.asistenteCupos.domain.Comision;
 import com.edu.asistenteCupos.domain.Cursada;
 import com.edu.asistenteCupos.domain.HistoriaAcademica;
 import com.edu.asistenteCupos.domain.Materia;
@@ -15,6 +16,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 @Mapper(componentModel = "spring", uses = {CursadaMapper.class})
 public abstract class HistoriaAcademicaMapper {
   @Autowired
@@ -29,10 +32,10 @@ public abstract class HistoriaAcademicaMapper {
   public abstract HistoriaAcademica4Prompt toHistoriaAcademica4Prompt(HistoriaAcademica historia);
 
   @Named("mapInscripcionesActuales")
-  public List<String> mapInscripcionesActuales(Set<Materia> materias) {
-    if (materias == null)
+  public List<String> mapInscripcionesActuales(Set<Materia> Comisiones) {
+    if (Comisiones == null)
       return List.of();
-    return materias.stream().map(Materia::getCodigo).collect(Collectors.toList());
+    return Comisiones.stream().map(Materia::getCodigo).collect(toList());
   }
 
   @Named("mapCursadasNoAprobadas")
@@ -40,7 +43,7 @@ public abstract class HistoriaAcademicaMapper {
     if (cursadas == null)
       return List.of();
     return cursadas.stream().filter(c -> !c.getFueAprobada()).map(cursadaMapper::toCursada4Prompt)
-                   .map(Cursada4Prompt::getCm).collect(Collectors.toList());
+                   .map(Cursada4Prompt::getCm).collect(toList());
   }
 
   @Named("toString")

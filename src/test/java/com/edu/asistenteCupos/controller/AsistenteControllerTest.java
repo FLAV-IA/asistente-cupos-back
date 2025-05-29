@@ -3,6 +3,7 @@ package com.edu.asistenteCupos.controller;
 import com.edu.asistenteCupos.assembler.EnsambladorDePeticiones;
 import com.edu.asistenteCupos.controller.dto.PeticionInscripcionCsvDTO;
 import com.edu.asistenteCupos.controller.dto.SugerenciaInscripcionDTO;
+import com.edu.asistenteCupos.domain.filtros.FiltroDePeticionInscripcion;
 import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistenteCupos.mapper.SugerenciaInscripcionMapper;
 import com.edu.asistenteCupos.service.AsistenteDeInscripcion;
@@ -28,16 +29,18 @@ public class AsistenteControllerTest {
   private SugerenciaInscripcionMapper sugerenciaInscripcionMapper;
   private PeticionInscripcionCsvAdapter peticionInscripcionCsvAdapter;
   private EnsambladorDePeticiones ensambladorDePeticiones;
-
+  private FiltroDePeticionInscripcion filtroDePeticionInscripcion;
   @BeforeEach
   void setUp() {
     asistenteDeInscripcion = mock(AsistenteDeInscripcion.class);
     sugerenciaInscripcionMapper = mock(SugerenciaInscripcionMapper.class);
     peticionInscripcionCsvAdapter = mock(PeticionInscripcionCsvAdapter.class);
     ensambladorDePeticiones = mock(EnsambladorDePeticiones.class);
+    filtroDePeticionInscripcion = mock(FiltroDePeticionInscripcion.class);
+
 
     AsistenteController controller = new AsistenteController(asistenteDeInscripcion,
-      sugerenciaInscripcionMapper, peticionInscripcionCsvAdapter, ensambladorDePeticiones);
+      sugerenciaInscripcionMapper, peticionInscripcionCsvAdapter, ensambladorDePeticiones,filtroDePeticionInscripcion);
 
     mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
   }

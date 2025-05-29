@@ -23,7 +23,7 @@ public class SugerenciaInscripcionPromptMapper {
 
     if (sugerencia instanceof SugerenciaRechazada rechazada) {
       return SugerenciaParaTraducir4Prompt.builder().a(rechazada.estudiante().getDni())
-                                          .m("NO_ASIGNADA").x(false).p(rechazada.prioridad())
+                                          .m(rechazada.comision().getCodigo()).x(false).p(rechazada.prioridad())
                                           .e(rechazada.motivo()).build();
     }
 
