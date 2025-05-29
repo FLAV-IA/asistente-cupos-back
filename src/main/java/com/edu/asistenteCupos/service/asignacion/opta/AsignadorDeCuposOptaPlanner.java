@@ -106,7 +106,7 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
                             String.join(",", dto.getEtiquetas()),
                             dto.getPrioridad()
                     ))
-            .collect(Collectors.toList());
+            .toList();
 
     // Lista final a devolver
     List<SugerenciaInscripcion> sugerenciasProcesadas = new ArrayList<>();

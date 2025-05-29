@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @Data
@@ -44,23 +43,12 @@ public class HistoriaAcademica {
 
   public Boolean cumpleCorrelativas(Materia materia) {
     List<Materia> correlativasNecesarias = materia.getCorrelativas();
-    return correlativasNecesarias.stream().allMatch(correlativa ->
-            this.cursadasAnteriores.stream()
-                    .filter(Cursada::getFueAprobada)
-                    .anyMatch(cursada -> cursada.getMateria().getCodigo().equals(correlativa.getCodigo()))
-    );
+    return correlativasNecesarias.stream().allMatch(
+      correlativa -> this.cursadasAnteriores.stream().filter(Cursada::getFueAprobada).anyMatch(
+        cursada -> cursada.getMateria().getCodigo().equals(correlativa.getCodigo())));
   }
 
   public boolean haySuperposicionHoraria(Comision nuevaComision) {
-      for (Materia comisionYaInscripta : getInscripcionesActuales()) {
-        //if (ValidadorHorario.haySuperposicion(comisionYaInscripta.getHorario(), nuevaComision.getHorario())) {
-          return true;
-        //}
-      }
-    return false;
-  }
-
-  public boolean cumpleCorrelativa(Materia materia) {
-    return true;
+    return !getInscripcionesActuales().isEmpty();
   }
 }

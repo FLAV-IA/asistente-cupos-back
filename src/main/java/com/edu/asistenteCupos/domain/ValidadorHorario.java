@@ -3,43 +3,39 @@ package com.edu.asistenteCupos.domain;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ValidadorHorario {
-
+    private ValidadorHorario() {}
     public static boolean haySuperposicion(String horario1, String horario2) {
-        List<RangoHorario> lista1 = parsearHorarios(horario1);
-        List<RangoHorario> lista2 = parsearHorarios(horario2);
+        List<RangoHorario> rangos1 = parsearHorarios(horario1);
+        List<RangoHorario> rangos2 = parsearHorarios(horario2);
 
-        for (RangoHorario r1 : lista1) {
-            for (RangoHorario r2 : lista2) {
-                if (r1.seSuperpone(r2)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return rangos1.stream()
+                      .anyMatch(r1 -> rangos2.stream().anyMatch(r1::seSuperponeCon));
     }
 
     private static List<RangoHorario> parsearHorarios(String horarioStr) {
-        List<RangoHorario> resultado = new ArrayList<>();
-        String[] bloques = horarioStr.split(",");
+        if (horarioStr == null || horarioStr.isBlank()) return List.of();
 
-        for (String bloque : bloques) {
-            String[] partes = bloque.trim().split(" ");
-            String dia = partes[0];
-            LocalTime desde = LocalTime.parse(partes[1]);
-            LocalTime hasta = LocalTime.parse(partes[3]);
-            resultado.add(new RangoHorario(dia, desde, hasta));
-        }
+        return List.of(horarioStr.split(",")).stream()
+                   .map(String::trim)
+                   .map(ValidadorHorario::parsearBloque)
+                   .collect(Collectors.toList());
+    }
 
-        return resultado;
+    private static RangoHorario parsearBloque(String bloque) {
+        String[] partes = bloque.trim().split(" ");
+        String dia = partes[0];
+        LocalTime inicio = LocalTime.parse(partes[1]);
+        LocalTime fin = LocalTime.parse(partes[3]);
+        return new RangoHorario(dia, inicio, fin);
     }
 
     static class RangoHorario {
-        String dia;
-        LocalTime inicio;
-        LocalTime fin;
+        final String dia;
+        final LocalTime inicio;
+        final LocalTime fin;
 
         RangoHorario(String dia, LocalTime inicio, LocalTime fin) {
             this.dia = dia;
@@ -47,9 +43,10 @@ public class ValidadorHorario {
             this.fin = fin;
         }
 
-        boolean seSuperpone(RangoHorario otro) {
+        boolean seSuperponeCon(RangoHorario otro) {
             return this.dia.equalsIgnoreCase(otro.dia) &&
-                    !(this.fin.isBefore(otro.inicio) || this.inicio.isAfter(otro.fin));
+              !inicio.isAfter(otro.fin) &&
+              !fin.isBefore(otro.inicio);
         }
     }
 }

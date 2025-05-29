@@ -18,14 +18,12 @@ public class ConfiguracionFiltrosInscripcion {
 
   @Bean
   public FiltroDePeticionInscripcion cadenaDeFiltros() {
-    FiltroDePeticionInscripcion filtro1 = new FiltroCorrelativas();//se comenta porque si no, nadie se inscribe xD
-    FiltroDePeticionInscripcion filtro2 = new FiltrarAnotadosAVariasMaterias();
-    FiltroDePeticionInscripcion filtro3 = new FiltroAComisionesSinCupo();
-    FiltroDePeticionInscripcion filtro4 = new FiltroSuperposicionHoraria();
-    filtro3.setFiltroSiguiente(filtro4);
+    FiltroDePeticionInscripcion filtro1 = new FiltrarAnotadosAVariasMaterias();
+    FiltroDePeticionInscripcion filtro2 = new FiltroAComisionesSinCupo();
+    FiltroDePeticionInscripcion filtro3 = new FiltroSuperposicionHoraria();
     filtro2.setFiltroSiguiente(filtro3);
-   // filtro1.setFiltroSiguiente(filtro2);
+    filtro1.setFiltroSiguiente(filtro2);
 
-    return filtro2;
+    return filtro1;
   }
 }

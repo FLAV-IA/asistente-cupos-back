@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 @Mapper(componentModel = "spring", uses = {CursadaMapper.class})
 public abstract class HistoriaAcademicaMapper {
   @Autowired
@@ -33,7 +35,7 @@ public abstract class HistoriaAcademicaMapper {
   public List<String> mapInscripcionesActuales(Set<Materia> Comisiones) {
     if (Comisiones == null)
       return List.of();
-    return Comisiones.stream().map(Materia::getCodigo).collect(Collectors.toList());
+    return Comisiones.stream().map(Materia::getCodigo).collect(toList());
   }
 
   @Named("mapCursadasNoAprobadas")
@@ -41,7 +43,7 @@ public abstract class HistoriaAcademicaMapper {
     if (cursadas == null)
       return List.of();
     return cursadas.stream().filter(c -> !c.getFueAprobada()).map(cursadaMapper::toCursada4Prompt)
-                   .map(Cursada4Prompt::getCm).collect(Collectors.toList());
+                   .map(Cursada4Prompt::getCm).collect(toList());
   }
 
   @Named("toString")

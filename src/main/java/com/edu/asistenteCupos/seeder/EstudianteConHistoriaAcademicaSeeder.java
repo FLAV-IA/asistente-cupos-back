@@ -94,14 +94,6 @@ public class EstudianteConHistoriaAcademicaSeeder {
           () -> new RuntimeException(
             "No se encontró la materia con el código: " + codigoMateria)))).collect(collector);
   }
-  private <T extends Collection<Comision>> T parsearComisiones(String comisiones, Collector<Comision, ?, T> collector) {
-    return (comisiones.equals("-") ? Stream.<Comision>empty() : Arrays
-            .stream(removerCaracteresEspeciales(comisiones).split(",")).map(
-                    codigoComision -> comisionRepository.findById(codigoComision).orElseThrow(
-                            () -> new RuntimeException(
-                                    "No se encontró la comision con el código: " + codigoComision)))).collect(collector);
-  }
-
 
   private String removerCaracteresEspeciales(String texto) {
     return texto.replaceAll("[\"\\s]", "").trim();
