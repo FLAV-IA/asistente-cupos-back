@@ -8,9 +8,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.edu.asistente_cupos.testutils.TestDataFactory.*;
+import static com.edu.asistente_cupos.testutils.TestDataFactory.crearSugerenciaAsignadaDummy;
+import static com.edu.asistente_cupos.testutils.TestDataFactory.crearSugerenciaLLMDummy;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class PasoTraduccionTest {
   @Test

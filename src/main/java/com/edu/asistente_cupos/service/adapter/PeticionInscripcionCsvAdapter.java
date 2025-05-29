@@ -21,11 +21,8 @@ public class PeticionInscripcionCsvAdapter {
       StandardCharsets.UTF_8)) {
 
       return new CsvToBeanBuilder<PeticionInscripcionCsvDTO>(reader)
-        .withType(PeticionInscripcionCsvDTO.class)
-        .withIgnoreLeadingWhiteSpace(true)
-        .withSeparator(SEPARATOR)
-        .build()
-        .parse();
+        .withType(PeticionInscripcionCsvDTO.class).withIgnoreLeadingWhiteSpace(true)
+        .withSeparator(SEPARATOR).build().parse();
     } catch (Exception e) {
       throw new ArchivoCsvInvalidoException("El archivo CSV no tiene el formato esperado", e);
     }

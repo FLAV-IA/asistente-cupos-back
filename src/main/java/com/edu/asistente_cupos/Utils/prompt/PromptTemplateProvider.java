@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 @Component
 public class PromptTemplateProvider {
-  private ClasspathResourceLoader loader;
+  private final ClasspathResourceLoader loader;
 
   public PromptTemplateProvider(ClasspathResourceLoader loader) {
     this.loader = loader;

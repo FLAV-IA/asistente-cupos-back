@@ -3,9 +3,9 @@ package com.edu.asistente_cupos.controller;
 import com.edu.asistente_cupos.assembler.EnsambladorDePeticiones;
 import com.edu.asistente_cupos.controller.dto.PeticionInscripcionCsvDTO;
 import com.edu.asistente_cupos.controller.dto.SugerenciaInscripcionDTO;
+import com.edu.asistente_cupos.domain.filtros.FiltroDePeticionInscripcion;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
-import com.edu.asistente_cupos.domain.filtros.FiltroDePeticionInscripcion;
 import com.edu.asistente_cupos.mapper.SugerenciaInscripcionMapper;
 import com.edu.asistente_cupos.service.AsistenteDeInscripcion;
 import com.edu.asistente_cupos.service.adapter.PeticionInscripcionCsvAdapter;
@@ -44,7 +44,7 @@ public class AsistenteController {
       List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeCsvDto(
         peticionesCSV);
       List<SugerenciaInscripcion> sugerencias = asistenteDeInscripcion.sugerirInscripcion(
-              peticiones);
+        peticiones);
       List<SugerenciaInscripcionDTO> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
         sugerencias);
       return ResponseEntity.ok(sugerenciasDTO);

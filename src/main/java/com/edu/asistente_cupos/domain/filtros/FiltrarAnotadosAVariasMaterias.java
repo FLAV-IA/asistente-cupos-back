@@ -19,9 +19,11 @@ public class FiltrarAnotadosAVariasMaterias implements FiltroDePeticionInscripci
 
   @Override
   public List<PeticionInscripcion> filtrar(List<PeticionInscripcion> peticiones) {
-    BiPredicate<Comision, PeticionInscripcion> comisionPredicate = (c, p) ->  p.getEstudiante().getHistoriaAcademica().getInscripcionesActuales().size()<3;
+    BiPredicate<Comision, PeticionInscripcion> comisionPredicate = (c, p) ->
+      p.getEstudiante().getHistoriaAcademica().getInscripcionesActuales().size() < 3;
 
-    List<PeticionInscripcion> filtradas =filtrarPeticionesSegunPredicado(peticiones, comisionPredicate);
+    List<PeticionInscripcion> filtradas = filtrarPeticionesSegunPredicado(peticiones,
+      comisionPredicate);
     if (siguiente != null) {
       return siguiente.filtrar(filtradas);
     }

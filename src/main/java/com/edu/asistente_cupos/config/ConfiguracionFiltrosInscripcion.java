@@ -1,6 +1,9 @@
 package com.edu.asistente_cupos.config;
 
-import com.edu.asistente_cupos.domain.filtros.*;
+import com.edu.asistente_cupos.domain.filtros.FiltrarAnotadosAVariasMaterias;
+import com.edu.asistente_cupos.domain.filtros.FiltroAComisionesSinCupo;
+import com.edu.asistente_cupos.domain.filtros.FiltroDePeticionInscripcion;
+import com.edu.asistente_cupos.domain.filtros.FiltroSuperposicionHoraria;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,7 +15,6 @@ public class ConfiguracionFiltrosInscripcion {
 
   /**
    * @return un filtro de petición de inscripción inicial que conoce su cadena de filtros.
-   *
    */
 
 

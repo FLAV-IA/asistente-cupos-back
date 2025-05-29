@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ConversorResultadoLLMTest {
   private final ConversorResultadoLLM conversor = new ConversorResultadoLLM();
+
   @Test
   void convierteResultadosLlmEnPeticionesPriorizadas() {
     PeticionInscripcion inscripcion = crearPeticionInscripcionDummy();

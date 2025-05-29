@@ -39,7 +39,7 @@ public class HistoriaAcademica {
     uniqueConstraints = @UniqueConstraint(
       columnNames = {"id_historia_academica", "codigo_de_materia"}))
   @Builder.Default
-  private Set<Materia> inscripcionesActuales = new HashSet<Materia>();
+  private Set<Materia> inscripcionesActuales = new HashSet<>();
 
   public Boolean cumpleCorrelativas(Materia materia) {
     List<Materia> correlativasNecesarias = materia.getCorrelativas();

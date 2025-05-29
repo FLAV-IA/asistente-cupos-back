@@ -19,9 +19,13 @@ public class FiltroSuperposicionHoraria implements FiltroDePeticionInscripcion {
 
   @Override
   public List<PeticionInscripcion> filtrar(List<PeticionInscripcion> peticiones) {
-    BiPredicate<Comision, PeticionInscripcion> comisionPredicate = (c, p) ->  p.getEstudiante().getHistoriaAcademica().haySuperposicionHoraria(c);
+    BiPredicate<Comision, PeticionInscripcion> comisionPredicate = (c, p) -> p.getEstudiante()
+                                                                              .getHistoriaAcademica()
+                                                                              .haySuperposicionHoraria(
+                                                                                c);
 
-    List<PeticionInscripcion> filtradas =filtrarPeticionesSegunPredicado(peticiones, comisionPredicate);
+    List<PeticionInscripcion> filtradas = filtrarPeticionesSegunPredicado(peticiones,
+      comisionPredicate);
 
 
     if (siguiente != null) {

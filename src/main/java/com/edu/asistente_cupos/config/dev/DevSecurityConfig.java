@@ -14,7 +14,7 @@ public class DevSecurityConfig {
   @Bean
   public SecurityFilterChain devSecurityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
-        .csrf(AbstractHttpConfigurer::disable)
+        .csrf(AbstractHttpConfigurer::disable) // NOSONAR Deshabilitar CSRF sólo para los perfiles dev/test
         .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
 
     return http.build();

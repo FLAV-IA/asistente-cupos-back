@@ -16,7 +16,7 @@ public class HistoriaAcademica4Prompt {
    */
   private String i;
   /**
-   totalHistoricasAprobadas
+   * totalHistoricasAprobadas
    */
   private String ap;
   /**

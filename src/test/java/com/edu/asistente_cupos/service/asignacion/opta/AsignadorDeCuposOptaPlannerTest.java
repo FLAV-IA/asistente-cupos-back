@@ -67,6 +67,7 @@ class AsignadorDeCuposOptaPlannerTest {
     assertThat(aceptada.comision().getCodigo()).isEqualTo("MAT1-A");
     assertThat(aceptada.motivo()).contains("[COR]");
   }
+
   @Test
   void asignaCupoAlEstudianteConEtiquetasMasValoradas() {
     // Materia compartida
@@ -82,21 +83,23 @@ class AsignadorDeCuposOptaPlannerTest {
     // Peticiones:
     // Ana tiene etiquetas AVZ y COR (valen más)
     PeticionPorMateriaPriorizada p1 = PeticionPorMateriaPriorizada.builder().estudiante(e1)
-            .materia(materia)
-            .comisionesSolicitadas(List.of(comision))
-            .cumpleCorrelativa(true)
-            .prioridad(50) // prioridad base que puede ser menor que la otra
-            .motivo("[AVZ], [COR]")
-            .build();
+                                                                  .materia(materia)
+                                                                  .comisionesSolicitadas(
+                                                                    List.of(comision))
+                                                                  .cumpleCorrelativa(true)
+                                                                  .prioridad(
+                                                                    50) // prioridad base que puede ser menor que la otra
+                                                                  .motivo("[AVZ], [COR]").build();
 
     // Leo tiene solo etiqueta COR (menos peso que AVZ + COR)
     PeticionPorMateriaPriorizada p2 = PeticionPorMateriaPriorizada.builder().estudiante(e2)
-            .materia(materia)
-            .comisionesSolicitadas(List.of(comision))
-            .cumpleCorrelativa(true)
-            .prioridad(70) // mayor prioridad base pero menos etiquetas
-            .motivo("[COR]")
-            .build();
+                                                                  .materia(materia)
+                                                                  .comisionesSolicitadas(
+                                                                    List.of(comision))
+                                                                  .cumpleCorrelativa(true)
+                                                                  .prioridad(
+                                                                    70) // mayor prioridad base pero menos etiquetas
+                                                                  .motivo("[COR]").build();
 
     List<SugerenciaInscripcion> resultado = asignador.asignar(List.of(p1, p2));
 
@@ -108,16 +111,15 @@ class AsignadorDeCuposOptaPlannerTest {
     assertThat(aceptadas).isEqualTo(1);
     assertThat(rechazadas).isEqualTo(1);
 
-    SugerenciaAsignada aceptada = (SugerenciaAsignada) resultado.stream()
-            .filter(s -> s instanceof SugerenciaAsignada)
-            .findFirst()
-            .orElseThrow();
+    SugerenciaAsignada aceptada = (SugerenciaAsignada) resultado.stream().filter(
+      s -> s instanceof SugerenciaAsignada).findFirst().orElseThrow();
 
     // Verificamos que se asignó a Ana, que tiene más etiquetas valoradas
     assertThat(aceptada.comision().getCodigo()).isEqualTo("MAT1-A");
     assertThat(aceptada.motivo()).contains("[AVZ]");
     assertThat(aceptada.motivo()).contains("[COR]");
   }
+
   @Test
   void noAsignaNadieCuandoNoHayCupo() {
     // Materia compartida
@@ -131,23 +133,21 @@ class AsignadorDeCuposOptaPlannerTest {
     Estudiante e2 = Estudiante.builder().dni("200").nombre("Leo").build();
 
     // Peticiones
-    PeticionPorMateriaPriorizada p1 = PeticionPorMateriaPriorizada.builder()
-            .estudiante(e1)
-            .materia(materia)
-            .comisionesSolicitadas(List.of(comision))
-            .cumpleCorrelativa(true)
-            .prioridad(80)
-            .motivo("[AVZ], [COR]")
-            .build();
+    PeticionPorMateriaPriorizada p1 = PeticionPorMateriaPriorizada.builder().estudiante(e1)
+                                                                  .materia(materia)
+                                                                  .comisionesSolicitadas(
+                                                                    List.of(comision))
+                                                                  .cumpleCorrelativa(true)
+                                                                  .prioridad(80)
+                                                                  .motivo("[AVZ], [COR]").build();
 
-    PeticionPorMateriaPriorizada p2 = PeticionPorMateriaPriorizada.builder()
-            .estudiante(e2)
-            .materia(materia)
-            .comisionesSolicitadas(List.of(comision))
-            .cumpleCorrelativa(true)
-            .prioridad(40)
-            .motivo("[COR]")
-            .build();
+    PeticionPorMateriaPriorizada p2 = PeticionPorMateriaPriorizada.builder().estudiante(e2)
+                                                                  .materia(materia)
+                                                                  .comisionesSolicitadas(
+                                                                    List.of(comision))
+                                                                  .cumpleCorrelativa(true)
+                                                                  .prioridad(40).motivo("[COR]")
+                                                                  .build();
 
     List<SugerenciaInscripcion> resultado = asignador.asignar(List.of(p1, p2));
 

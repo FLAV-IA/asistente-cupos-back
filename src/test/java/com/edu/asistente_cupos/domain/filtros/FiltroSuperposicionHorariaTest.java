@@ -1,4 +1,3 @@
-
 package com.edu.asistente_cupos.domain.filtros;
 
 import com.edu.asistente_cupos.domain.Estudiante;
@@ -9,7 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class FiltroSuperposicionHorariaTest {
   @Test

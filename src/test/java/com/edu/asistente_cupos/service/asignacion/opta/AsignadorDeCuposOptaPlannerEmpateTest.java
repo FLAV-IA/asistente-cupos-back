@@ -65,10 +65,7 @@ class AsignadorDeCuposOptaPlannerEmpateTest {
 
   @Test
   void noSeSuperaElCupoDisponibleDeUnaComision() {
-    Materia fisica = Materia.builder()
-                            .codigo("MAT2")
-                            .nombre("Física")
-                            .build();
+    Materia fisica = Materia.builder().codigo("MAT2").nombre("Física").build();
 
     Comision unicaComision = new Comision("MAT2-A", "martes 10-12", 3, fisica);
 
@@ -78,7 +75,9 @@ class AsignadorDeCuposOptaPlannerEmpateTest {
     PeticionPorMateriaPriorizada peticionJuan = PeticionPorMateriaPriorizada.builder()
                                                                             .estudiante(juan)
                                                                             .materia(fisica)
-                                                                            .comisionesSolicitadas(List.of(unicaComision))
+                                                                            .comisionesSolicitadas(
+                                                                              List.of(
+                                                                                unicaComision))
                                                                             .cumpleCorrelativa(true)
                                                                             .prioridad(70)
                                                                             .motivo("[COR]")
@@ -87,22 +86,24 @@ class AsignadorDeCuposOptaPlannerEmpateTest {
     PeticionPorMateriaPriorizada peticionSofi = PeticionPorMateriaPriorizada.builder()
                                                                             .estudiante(sofi)
                                                                             .materia(fisica)
-                                                                            .comisionesSolicitadas(List.of(unicaComision))
+                                                                            .comisionesSolicitadas(
+                                                                              List.of(
+                                                                                unicaComision))
                                                                             .cumpleCorrelativa(true)
                                                                             .prioridad(70)
                                                                             .motivo("[COR]")
                                                                             .build();
 
 
-    List<SugerenciaInscripcion> sugerencias = asignador.asignar(List.of(peticionJuan, peticionSofi));
+    List<SugerenciaInscripcion> sugerencias = asignador.asignar(
+      List.of(peticionJuan, peticionSofi));
 
 
     List<SugerenciaInscripcion> asignadas = sugerencias.stream()
                                                        .filter(SugerenciaInscripcion::fueAsignada)
                                                        .toList();
 
-    List<SugerenciaInscripcion> rechazadas = sugerencias.stream()
-                                                        .filter(s -> !s.fueAsignada())
+    List<SugerenciaInscripcion> rechazadas = sugerencias.stream().filter(s -> !s.fueAsignada())
                                                         .toList();
 
     assertThat(sugerencias).hasSize(2);

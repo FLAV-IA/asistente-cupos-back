@@ -2,14 +2,16 @@
 <solver>
     <solutionClass>com.edu.asistente_cupos.service.asignacion.opta.model.AsignacionComisionesSolution</solutionClass>
     <entityClass>com.edu.asistente_cupos.service.asignacion.opta.model.PeticionAsignableDTO</entityClass>
-    <constraintProviderClass>com.edu.asistente_cupos.service.asignacion.opta.reglas.AsignacionConstraintProvider</constraintProviderClass>
+    <constraintProviderClass>com.edu.asistente_cupos.service.asignacion.opta.reglas.AsignacionConstraintProvider
+    </constraintProviderClass>
 
     <termination>
         <secondsSpentLimit>10</secondsSpentLimit> <!--tiempo en la que tardara en resolver el problema-->
     </termination>
 
     <scoreDirectorFactory>
-        <constraintProviderClass>com.edu.asistente_cupos.service.asignacion.opta.reglas.AsignacionConstraintProvider</constraintProviderClass>
+        <constraintProviderClass>com.edu.asistente_cupos.service.asignacion.opta.reglas.AsignacionConstraintProvider
+        </constraintProviderClass>
     </scoreDirectorFactory>
 
     <constraintMatchEnabled>true</constraintMatchEnabled>

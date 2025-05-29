@@ -15,22 +15,22 @@ public class ConfiguracionDeRestricciones {
   public static final String COEFICIENTE_ACADEMICO = "Coeficiente académico alto favorecido";
 
   @ConstraintWeight(CUPO_EXCEDIDO)
-  private HardSoftScore pesoCupoExcedido = HardSoftScore.ofHard(1000);
+  private final HardSoftScore pesoCupoExcedido = HardSoftScore.ofHard(1000);
 
   @ConstraintWeight(ASIGNACION_NO_SOLICITADA)
-  private HardSoftScore pesoAsignacionNoSolicitada = HardSoftScore.ofHard(100);
+  private final HardSoftScore pesoAsignacionNoSolicitada = HardSoftScore.ofHard(100);
 
   @ConstraintWeight(MAS_DE_UNA_COMISION_POR_MATERIA)
-  private HardSoftScore pesoMasDeUnaComisionPorMateria = HardSoftScore.ofHard(100);
+  private final HardSoftScore pesoMasDeUnaComisionPorMateria = HardSoftScore.ofHard(100);
 
   @ConstraintWeight(PRIORIDAD_ALTA)
-  private HardSoftScore pesoPrioridadAlta = HardSoftScore.ofSoft(10);
+  private final HardSoftScore pesoPrioridadAlta = HardSoftScore.ofSoft(10);
 
   @ConstraintWeight(ETIQUETAS_AVZ_COR_SIN)
-  private HardSoftScore pesoEtiquetas = HardSoftScore.ofSoft(5);
+  private final HardSoftScore pesoEtiquetas = HardSoftScore.ofSoft(5);
 
   @ConstraintWeight(COEFICIENTE_ACADEMICO)
-  private HardSoftScore pesoCoeficienteAcademico = HardSoftScore.ofSoft(2);
+  private final HardSoftScore pesoCoeficienteAcademico = HardSoftScore.ofSoft(2);
 
 
 }

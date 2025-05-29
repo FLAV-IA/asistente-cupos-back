@@ -37,16 +37,13 @@ class HistoriaAcademicaMapperTest {
     Cursada c1 = Cursada.builder().id(1L).materia(mat1).fueAprobada(false).build();
     Cursada c2 = Cursada.builder().id(2L).materia(mat2).fueAprobada(true).build();
 
-    when(cursadaMapperMock.toCursada4Prompt(c1))
-      .thenReturn(Cursada4Prompt.builder().cm("MAT1").build());
+    when(cursadaMapperMock.toCursada4Prompt(c1)).thenReturn(
+      Cursada4Prompt.builder().cm("MAT1").build());
 
-    HistoriaAcademica historia = HistoriaAcademica.builder()
-                                                  .totalInscripcionesHistoricas(10)
-                                                  .totalHistoricasAprobadas(7)
-                                                  .coeficiente(8.3)
+    HistoriaAcademica historia = HistoriaAcademica.builder().totalInscripcionesHistoricas(10)
+                                                  .totalHistoricasAprobadas(7).coeficiente(8.3)
                                                   .cursadasAnteriores(List.of(c1, c2))
-                                                  .inscripcionesActuales(Set.of(mat2))
-                                                  .build();
+                                                  .inscripcionesActuales(Set.of(mat2)).build();
 
     HistoriaAcademica4Prompt dto = mapper.toHistoriaAcademica4Prompt(historia);
 

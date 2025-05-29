@@ -23,8 +23,8 @@ public class SugerenciaInscripcionPromptMapper {
 
     if (sugerencia instanceof SugerenciaRechazada rechazada) {
       return SugerenciaParaTraducir4Prompt.builder().a(rechazada.estudiante().getDni())
-                                          .m(rechazada.comision().getCodigo()).x(false).p(rechazada.prioridad())
-                                          .e(rechazada.motivo()).build();
+                                          .m(rechazada.comision().getCodigo()).x(false)
+                                          .p(rechazada.prioridad()).e(rechazada.motivo()).build();
     }
 
     throw new IllegalArgumentException("Tipo de sugerencia no soportado: " + sugerencia.getClass());

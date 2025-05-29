@@ -23,9 +23,7 @@ public class PeticionPorMateriaPriorizada {
   private String motivo;
 
   public List<String> codigosDeComisiones() {
-    return comisionesSolicitadas.stream()
-                                .map(Comision::getCodigo)
-                                .toList();
+    return comisionesSolicitadas.stream().map(Comision::getCodigo).toList();
   }
 
   public boolean getCumpleCorrelativa() {

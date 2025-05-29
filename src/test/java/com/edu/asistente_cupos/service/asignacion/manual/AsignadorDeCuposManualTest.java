@@ -14,7 +14,8 @@ import java.util.Set;
 
 import static com.edu.asistente_cupos.testutils.TestDataFactory.crearEstudianteDummy;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class AsignadorDeCuposManualTest {
   @Test
@@ -22,8 +23,8 @@ class AsignadorDeCuposManualTest {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Mat").build();
     Comision comision = new Comision("COM1", "lunes", 1, materia);
 
-    PeticionPorMateriaPriorizada peticion = new PeticionPorMateriaPriorizada(
-        crearEstudianteDummy(), materia, List.of(comision), true, 99, "AVZ");
+    PeticionPorMateriaPriorizada peticion = new PeticionPorMateriaPriorizada(crearEstudianteDummy(),
+      materia, List.of(comision), true, 99, "AVZ");
 
     ComisionRepository mockRepo = mock(ComisionRepository.class);
     when(mockRepo.findByCodigoIn(Set.of("COM1"))).thenReturn(List.of(comision));
@@ -44,8 +45,8 @@ class AsignadorDeCuposManualTest {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Mat").build();
     Comision comision = new Comision("COM1", "lunes", 0, materia);
 
-    PeticionPorMateriaPriorizada peticion = new PeticionPorMateriaPriorizada(
-        crearEstudianteDummy(), materia, List.of(comision), true, 99, "COR");
+    PeticionPorMateriaPriorizada peticion = new PeticionPorMateriaPriorizada(crearEstudianteDummy(),
+      materia, List.of(comision), true, 99, "COR");
 
     ComisionRepository mockRepo = mock(ComisionRepository.class);
     when(mockRepo.findByCodigoIn(Set.of("COM1"))).thenReturn(List.of(comision));
@@ -66,9 +67,9 @@ class AsignadorDeCuposManualTest {
     Comision comision = new Comision("COM1", "lunes", 1, materia);
 
     PeticionPorMateriaPriorizada alta = new PeticionPorMateriaPriorizada(
-        crearEstudianteDummy("111"), materia, List.of(comision), true, 100, "AVZ");
+      crearEstudianteDummy("111"), materia, List.of(comision), true, 100, "AVZ");
     PeticionPorMateriaPriorizada baja = new PeticionPorMateriaPriorizada(
-        crearEstudianteDummy("222"), materia, List.of(comision), true, 10, "REC");
+      crearEstudianteDummy("222"), materia, List.of(comision), true, 10, "REC");
 
     ComisionRepository mockRepo = mock(ComisionRepository.class);
     when(mockRepo.findByCodigoIn(Set.of("COM1"))).thenReturn(List.of(comision));

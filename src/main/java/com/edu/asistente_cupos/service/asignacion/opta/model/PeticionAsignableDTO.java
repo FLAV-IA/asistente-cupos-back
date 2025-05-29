@@ -34,7 +34,7 @@ public class PeticionAsignableDTO {
 
   @ValueRangeProvider(id = "comisionesPosibles")
   private List<ComisionDTO> comisionesPosibles;
-  @PlanningVariable(valueRangeProviderRefs = "comisionesPosibles",nullable = true)
+  @PlanningVariable(valueRangeProviderRefs = "comisionesPosibles", nullable = true)
   private ComisionDTO comisionAsignada;
 
   // NUEVOS CAMPOS para reconstruir dominio

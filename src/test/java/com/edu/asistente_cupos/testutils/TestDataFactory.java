@@ -72,8 +72,8 @@ public class TestDataFactory {
   }
 
   public static SugerenciaInscripcion crearSugerenciaRechazadaDummy() {
-    return new SugerenciaRechazada(crearEstudianteDummy(), crearMateriaDummy(),crearComisionDummy(),
-      "Rechazada por falta de cupo", 2);
+    return new SugerenciaRechazada(crearEstudianteDummy(), crearMateriaDummy(),
+      crearComisionDummy(), "Rechazada por falta de cupo", 2);
   }
 
   public static SugerenciaInscripcionLLM crearSugerenciaLLMDummy() {

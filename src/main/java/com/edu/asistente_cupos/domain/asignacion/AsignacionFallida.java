@@ -16,6 +16,6 @@ public class AsignacionFallida implements ResultadoAsignacion {
 
   @Override
   public SugerenciaInscripcion crearSugerencia(Estudiante estudiante, Materia materia, String motivo, int prioridad) {
-    return new SugerenciaRechazada(estudiante, materia,comision, motivo, prioridad);
+    return new SugerenciaRechazada(estudiante, materia, comision, motivo, prioridad);
   }
 }

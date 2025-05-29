@@ -34,8 +34,8 @@ public class PeticionDeMateriaFactory {
 
 
     Materia materiaReferencia = comisiones.get(0).getMateria();
-    boolean todasMismaMateria = comisiones.stream()
-                                          .allMatch(c ->c!=null && c.getMateria().equals(materiaReferencia));
+    boolean todasMismaMateria = comisiones.stream().allMatch(
+      c -> c != null && c.getMateria().equals(materiaReferencia));
     if (!todasMismaMateria) {
       throw new ComisionesDeDistintaMateriaException(
         "Las comisiones especificadas deben pertenecer a la misma materia: " +

@@ -31,8 +31,12 @@ public class EstudianteSeederTest {
 
     EstudianteRepository estudianteRepo = new EstudianteRepositoryInMemory();
     ComisionRepositoryInMemory comisionRepo = new ComisionRepositoryInMemory();
-    comisionRepo.save(Comision.builder().codigo("1046").materia(materiaRepo.findByCodigo("1046").orElseThrow()).build());
-    comisionRepo.save(Comision.builder().codigo("1041").materia(materiaRepo.findByCodigo("1041").orElseThrow()).build());
+    comisionRepo.save(
+      Comision.builder().codigo("1046").materia(materiaRepo.findByCodigo("1046").orElseThrow())
+              .build());
+    comisionRepo.save(
+      Comision.builder().codigo("1041").materia(materiaRepo.findByCodigo("1041").orElseThrow())
+              .build());
 
     EstudianteConHistoriaAcademicaSeeder seeder = new EstudianteConHistoriaAcademicaSeeder(
       estudianteRepo, materiaRepo, comisionRepo, new ClasspathResourceLoader());
@@ -67,8 +71,12 @@ public class EstudianteSeederTest {
     materiaRepo.save(Materia.builder().codigo("1046").nombre("Test").build());
 
     ComisionRepositoryInMemory comisionRepo = new ComisionRepositoryInMemory();
-    comisionRepo.save(Comision.builder().codigo("1041").materia(materiaRepo.findByCodigo("1041").orElseThrow()).build());
-    comisionRepo.save(Comision.builder().codigo("1046").materia(materiaRepo.findByCodigo("1046").orElseThrow()).build());
+    comisionRepo.save(
+      Comision.builder().codigo("1041").materia(materiaRepo.findByCodigo("1041").orElseThrow())
+              .build());
+    comisionRepo.save(
+      Comision.builder().codigo("1046").materia(materiaRepo.findByCodigo("1046").orElseThrow())
+              .build());
 
     EstudianteRepository estudianteRepo = new EstudianteRepositoryInMemory();
     EstudianteConHistoriaAcademicaSeeder seeder = new EstudianteConHistoriaAcademicaSeeder(

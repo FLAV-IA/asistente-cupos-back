@@ -45,7 +45,7 @@ public class AsignadorDeCuposManual implements AsignadorDeCupos {
       }
     }
 
-    return new AsignacionFallida(null).crearSugerencia(peticion.getEstudiante(), peticion.getMateria(),
-      peticion.getMotivo(), peticion.getPrioridad());
+    return new AsignacionFallida(null).crearSugerencia(peticion.getEstudiante(),
+      peticion.getMateria(), peticion.getMotivo(), peticion.getPrioridad());
   }
 }

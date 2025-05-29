@@ -21,9 +21,8 @@ public interface FiltroDePeticionInscripcion {
       List<PeticionPorMateria> peticionPorMateriasFiltradas = new ArrayList<>();
 
       for (PeticionPorMateria ppm : peticion.getPeticionPorMaterias()) {
-        List<Comision> comisionesFiltradas = ppm.getComisiones().stream()
-                .filter(comision -> comisionPredicate.test(comision, peticion))
-                .collect(Collectors.toList());
+        List<Comision> comisionesFiltradas = ppm.getComisiones().stream().filter(
+          comision -> comisionPredicate.test(comision, peticion)).collect(Collectors.toList());
 
         if (!comisionesFiltradas.isEmpty()) {
           ppm.setComisiones(comisionesFiltradas);

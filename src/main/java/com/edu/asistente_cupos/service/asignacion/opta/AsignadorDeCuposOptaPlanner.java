@@ -92,40 +92,25 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
                                .estudiante(peticion.getEstudiante()).materia(peticion.getMateria())
                                .build();
   }
+
   private List<SugerenciaInscripcion> reconstruirSugerencia(PeticionAsignableDTO dto) {
     ComisionDTO comisionAsignada = dto.getComisionAsignada();
 
-    // Generar sugerencias fallidas (todas las comisiones posibles menos la asignada)
-    List<SugerenciaInscripcion> sugerenciasFallidas = dto.getComisionesPosibles().stream()
-            .filter(c -> !Objects.equals(c, comisionAsignada))
-            .map(c -> new AsignacionFallida(c.toDomain(dto.getMateria()))
-                    .crearSugerencia(
-                            dto.getEstudiante(),
-                            dto.getMateria(),
-                            String.join(",", dto.getEtiquetas()),
-                            dto.getPrioridad()
-                    ))
-            .toList();
+    List<SugerenciaInscripcion> sugerenciasFallidas = dto.getComisionesPosibles().stream().filter(
+      c -> !Objects.equals(c, comisionAsignada)).map(
+      c -> new AsignacionFallida(c.toDomain(dto.getMateria())).crearSugerencia(dto.getEstudiante(),
+        dto.getMateria(), String.join(",", dto.getEtiquetas()), dto.getPrioridad())).toList();
 
-    // Lista final a devolver
     List<SugerenciaInscripcion> sugerenciasProcesadas = new ArrayList<>();
 
-    // Si hay una comisión asignada, agregarla como sugerencia exitosa
     if (comisionAsignada != null) {
       SugerenciaInscripcion sugerenciaExitosa = new AsignacionExitosa(
-              comisionAsignada.toDomain(dto.getMateria()))
-              .crearSugerencia(
-                      dto.getEstudiante(),
-                      dto.getMateria(),
-                      String.join(",", dto.getEtiquetas()),
-                      dto.getPrioridad()
-              );
+        comisionAsignada.toDomain(dto.getMateria())).crearSugerencia(dto.getEstudiante(),
+        dto.getMateria(), String.join(",", dto.getEtiquetas()), dto.getPrioridad());
       sugerenciasProcesadas.add(sugerenciaExitosa);
     }
 
-    // Agregar las fallidas al final
     sugerenciasProcesadas.addAll(sugerenciasFallidas);
     return sugerenciasProcesadas;
   }
-
 }

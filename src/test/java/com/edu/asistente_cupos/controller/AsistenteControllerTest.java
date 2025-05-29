@@ -30,6 +30,7 @@ public class AsistenteControllerTest {
   private PeticionInscripcionCsvAdapter peticionInscripcionCsvAdapter;
   private EnsambladorDePeticiones ensambladorDePeticiones;
   private FiltroDePeticionInscripcion filtroDePeticionInscripcion;
+
   @BeforeEach
   void setUp() {
     asistenteDeInscripcion = mock(AsistenteDeInscripcion.class);
@@ -40,7 +41,8 @@ public class AsistenteControllerTest {
 
 
     AsistenteController controller = new AsistenteController(asistenteDeInscripcion,
-      sugerenciaInscripcionMapper, peticionInscripcionCsvAdapter, ensambladorDePeticiones,filtroDePeticionInscripcion);
+      sugerenciaInscripcionMapper, peticionInscripcionCsvAdapter, ensambladorDePeticiones,
+      filtroDePeticionInscripcion);
 
     mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
   }

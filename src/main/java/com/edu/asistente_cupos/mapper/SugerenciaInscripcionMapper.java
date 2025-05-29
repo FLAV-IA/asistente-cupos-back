@@ -13,21 +13,19 @@ import java.util.stream.Collectors;
 public class SugerenciaInscripcionMapper {
   public SugerenciaInscripcionDTO toDto(SugerenciaInscripcion sugerencia) {
     if (sugerencia instanceof SugerenciaAsignada asignada) {
-      return SugerenciaInscripcionDTO.builder()
-                                     .nombreEstudiante(asignada.estudiante().getNombre())
+      return SugerenciaInscripcionDTO.builder().nombreEstudiante(asignada.estudiante().getNombre())
                                      .dniEstudiante(asignada.estudiante().getDni())
                                      .nombreMateria(asignada.materia().getNombre())
                                      .codigoComision(asignada.comision().getCodigo())
-                                     .motivo(asignada.motivo())
-                                     .prioridad(asignada.prioridad()).cupoAsignado(true).build();
+                                     .motivo(asignada.motivo()).prioridad(asignada.prioridad())
+                                     .cupoAsignado(true).build();
     } else if (sugerencia instanceof SugerenciaRechazada rechazada) {
-      return SugerenciaInscripcionDTO.builder()
-                                     .nombreEstudiante(rechazada.estudiante().getNombre())
+      return SugerenciaInscripcionDTO.builder().nombreEstudiante(rechazada.estudiante().getNombre())
                                      .dniEstudiante(rechazada.estudiante().getDni())
                                      .nombreMateria(rechazada.materia().getNombre())
-                                     .codigoComision(rechazada.comision().getCodigo()).motivo(rechazada.motivo())
-                                     .prioridad(rechazada.prioridad()).cupoAsignado(false)
-                                     .build();
+                                     .codigoComision(rechazada.comision().getCodigo())
+                                     .motivo(rechazada.motivo()).prioridad(rechazada.prioridad())
+                                     .cupoAsignado(false).build();
     } else {
       throw new IllegalArgumentException(
         "Tipo de sugerencia no soportado: " + sugerencia.getClass().getSimpleName());

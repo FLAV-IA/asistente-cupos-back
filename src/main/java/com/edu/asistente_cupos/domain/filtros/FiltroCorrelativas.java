@@ -13,7 +13,6 @@ public class FiltroCorrelativas implements FiltroDePeticionInscripcion {
   private FiltroDePeticionInscripcion siguiente;
 
 
-
   @Override
   public void setFiltroSiguiente(FiltroDePeticionInscripcion siguiente) {
     this.siguiente = siguiente;
@@ -22,9 +21,12 @@ public class FiltroCorrelativas implements FiltroDePeticionInscripcion {
   @Override
   public List<PeticionInscripcion> filtrar(List<PeticionInscripcion> peticiones) {
 
-    BiPredicate<Comision, PeticionInscripcion> comisionPredicate = (c, p) ->  p.getEstudiante().puedeInscribirse(c.getMateria());
+    BiPredicate<Comision, PeticionInscripcion> comisionPredicate = (c, p) -> p.getEstudiante()
+                                                                              .puedeInscribirse(
+                                                                                c.getMateria());
 
-    List<PeticionInscripcion> filtradas =filtrarPeticionesSegunPredicado(peticiones, comisionPredicate);
+    List<PeticionInscripcion> filtradas = filtrarPeticionesSegunPredicado(peticiones,
+      comisionPredicate);
 
     if (siguiente != null) {
       return siguiente.filtrar(filtradas);

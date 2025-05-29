@@ -8,38 +8,37 @@ import org.optaplanner.core.api.score.stream.ConstraintFactory;
 import org.optaplanner.core.api.score.stream.ConstraintProvider;
 
 public class AsignacionConstraintProvider implements ConstraintProvider {
-    @Override
-    public Constraint[] defineConstraints(ConstraintFactory factory) {
-        return new Constraint[] {
-                cupoExcedidoPorComision(factory),       // Regla hard
-                peticionNoAsignada(factory),            //️ Soft para permitir inviabilidad controlada
-                prioridadAltaFavorecida(factory),       // Elegí al que mejor prioridad tiene
-                favorecerAVZ_COR_SIN(factory),          // favorecer etiquetas
-                desempatarPorCF(factory),             // mejorcoeficiente
+  @Override
+  public Constraint[] defineConstraints(ConstraintFactory factory) {
+    return new Constraint[]{cupoExcedidoPorComision(factory),       // Regla hard
+      peticionNoAsignada(factory),            //️ Soft para permitir inviabilidad controlada
+      prioridadAltaFavorecida(factory),       // Elegí al que mejor prioridad tiene
+      favorecerAVZ_COR_SIN(factory),          // favorecer etiquetas
+      desempatarPorCF(factory),             // mejorcoeficiente
 
-        };
-    }
-    private Constraint cupoExcedidoPorComision(ConstraintFactory factory) {
-        return factory.from(PeticionAsignableDTO.class)
-                .filter(p -> p.getComisionAsignada() != null)
-                .groupBy(PeticionAsignableDTO::getComisionAsignada, ConstraintCollectors.count())
-                .filter((comision, count) -> count > comision.getCupo())
-                .penalize("Cupo excedido", HardSoftScore.ofHard(1000));
-    }
-    private Constraint peticionNoAsignada(ConstraintFactory factory) {
-        return factory.from(PeticionAsignableDTO.class)
-                .filter(p -> p.getComisionAsignada() == null)
-                .penalize("Petición no asignada", HardSoftScore.ofSoft(1000));
-    }
-    private Constraint prioridadAltaFavorecida(ConstraintFactory factory) {
-        return factory.from(PeticionAsignableDTO.class)
-                .filter(p -> p.getComisionAsignada() != null)
-                .reward("Prioridad alta favorecida", HardSoftScore.ofSoft(10),
-                        p -> 100 - p.getPrioridad());
-    }
+    };
+  }
+
+  private Constraint cupoExcedidoPorComision(ConstraintFactory factory) {
+    return factory.from(PeticionAsignableDTO.class).filter(p -> p.getComisionAsignada() != null)
+                  .groupBy(PeticionAsignableDTO::getComisionAsignada, ConstraintCollectors.count())
+                  .filter((comision, count) -> count > comision.getCupo())
+                  .penalize("Cupo excedido", HardSoftScore.ofHard(1000));
+  }
+
+  private Constraint peticionNoAsignada(ConstraintFactory factory) {
+    return factory.from(PeticionAsignableDTO.class).filter(p -> p.getComisionAsignada() == null)
+                  .penalize("Petición no asignada", HardSoftScore.ofSoft(1000));
+  }
+
+  private Constraint prioridadAltaFavorecida(ConstraintFactory factory) {
+    return factory.from(PeticionAsignableDTO.class).filter(p -> p.getComisionAsignada() != null)
+                  .reward("Prioridad alta favorecida", HardSoftScore.ofSoft(10),
+                    p -> 100 - p.getPrioridad());
+  }
 
 
-      @SuppressWarnings("deprecation")
+  @SuppressWarnings("deprecation")
   private Constraint favorecerAVZ_COR_SIN(ConstraintFactory factory) {
     return factory.forEach(PeticionAsignableDTO.class).filter(p -> p.getComisionAsignada() != null)
                   .rewardConfigurable("Etiquetas AVZ, COR, SIN favorecidas", p -> {
@@ -54,9 +53,9 @@ public class AsignacionConstraintProvider implements ConstraintProvider {
                   });
   }
 
-    /**
-     * SOFT: Premia coeficientes académicos altos.
-     */
+  /**
+   * SOFT: Premia coeficientes académicos altos.
+   */
   @SuppressWarnings("deprecation")
   private Constraint desempatarPorCF(ConstraintFactory factory) {
     return factory.forEach(PeticionAsignableDTO.class).filter(p -> p.getComisionAsignada() != null)
