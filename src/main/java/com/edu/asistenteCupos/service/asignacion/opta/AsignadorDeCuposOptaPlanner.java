@@ -4,6 +4,10 @@ import com.edu.asistenteCupos.domain.asignacion.AsignacionExitosa;
 import com.edu.asistenteCupos.domain.asignacion.AsignacionFallida;
 import com.edu.asistenteCupos.domain.priorizacion.PeticionPorMateriaPriorizada;
 import com.edu.asistenteCupos.domain.sugerencia.SugerenciaInscripcion;
+import com.edu.asistenteCupos.excepcion.opta.AsignacionRuntimeException;
+import com.edu.asistenteCupos.excepcion.opta.ConfiguracionDeAsignacionInvalidaException;
+import com.edu.asistenteCupos.excepcion.opta.ErrorDeEjecucionDeAsignacionException;
+import com.edu.asistenteCupos.excepcion.opta.InterrupcionDuranteAsignacionException;
 import com.edu.asistenteCupos.service.asignacion.AsignadorDeCupos;
 import com.edu.asistenteCupos.service.asignacion.opta.model.AsignacionComisionesSolution;
 import com.edu.asistenteCupos.service.asignacion.opta.model.ComisionDTO;
@@ -31,10 +35,12 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
   private final SolverManager<AsignacionComisionesSolution, Long> solverManager;
+
   @PostConstruct
   public void checkSolver() {
-    System.out.println("OptaPlanner configurado correctamente");
+    log.info("OptaPlanner configurado correctamente");
   }
+
   @Override
   public List<SugerenciaInscripcion> asignar(List<PeticionPorMateriaPriorizada> peticiones) {
     List<PeticionAsignableDTO> asignables = peticiones.stream()
@@ -47,10 +53,13 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
 
     AsignacionComisionesSolution problema = AsignacionComisionesSolution.builder()
                                                                         .comisiones(comisiones)
-                                                                        .peticiones(asignables).configuracion(new ConfiguracionDeRestricciones())
+                                                                        .peticiones(asignables)
+                                                                        .configuracion(
+                                                                          new ConfiguracionDeRestricciones())
                                                                         .build();
     if (problema.getConfiguracion() == null) {
-      throw new IllegalStateException("No se configuró el ConstraintConfigurationProvider");
+      throw new ConfiguracionDeAsignacionInvalidaException(
+        "Falta la configuración de restricciones");
     }
     try {
       SolverJob<AsignacionComisionesSolution, Long> job = solverManager.solve(1L, problema);
@@ -61,15 +70,18 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
         return sugerencias.stream();
       }).toList();
 
-    } catch (InterruptedException | ExecutionException e) {
-      throw new RuntimeException("Error al resolver el problema de asignación", e);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      throw new AsignacionRuntimeException(new InterrupcionDuranteAsignacionException(e));
+
+    } catch (ExecutionException e) {
+      throw new AsignacionRuntimeException(new ErrorDeEjecucionDeAsignacionException(e));
     }
   }
 
-
   private PeticionAsignableDTO convertirAPeticionAsignable(PeticionPorMateriaPriorizada peticion) {
-    return PeticionAsignableDTO.builder().id(UUID.randomUUID().toString()).
-            estudianteId(peticion.getEstudiante().getDni())
+    return PeticionAsignableDTO.builder().id(UUID.randomUUID().toString())
+                               .estudianteId(peticion.getEstudiante().getDni())
                                .materiaCodigo(peticion.getMateria().getCodigo())
                                .codigosDeComisionPreferidas(peticion.codigosDeComisiones())
                                .cumpleCorrelativa(peticion.getCumpleCorrelativa())

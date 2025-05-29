@@ -27,17 +27,17 @@ public class Comision {
   private Materia materia;
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Comision that = (Comision) o;
-    return Objects.equals(codigo, that.codigo);
-  }
-
-  @Override
   public int hashCode() {
     return Objects.hash(codigo);
   }
 
-
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    Comision that = (Comision) o;
+    return Objects.equals(codigo, that.codigo);
+  }
 }

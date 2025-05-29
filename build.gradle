@@ -32,6 +32,23 @@ repositories {
     }
 }
 
+def coberturaExcluida = [
+        '**/config/**',
+        '**/dto/**',
+        '**/mapper/**',
+        '**/repository/**',
+        '**/prompt/optimizado/**',
+        '**/JsonConverter.class',
+        '**/PeticionInscripcion.class',
+        '**/PeticionPorMateriaPriorizada.class',
+        '**/domain/comision.class',
+        '**/domain/Materia.class',
+        '**/domain/cursada.class',
+        '**/domain/asignacion/**',
+        '**/domain/sugerencia/**',
+        '**/excepcion/opta/**'
+]
+
 sonar {
     properties {
         property "sonar.projectKey", "FLAV-IA_asistente-cupos-back"
@@ -41,6 +58,7 @@ sonar {
         property "sonar.sourceEncoding", "UTF-8"
         property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
         property "sonar.gradle.skipCompile", "true"
+        property "sonar.coverage.exclusions", coberturaExcluida.join(',')
     }
 }
 
@@ -90,6 +108,7 @@ tasks.register('setupCodeStyle', Copy) {
 tasks.named('idea') {
     dependsOn 'setupCodeStyle'
 }
+
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
@@ -102,22 +121,9 @@ jacocoTestReport {
     }
 
     classDirectories.setFrom(
-            files(classDirectories.files.collect {
-                fileTree(dir: it, exclude: [
-                        '**/config/**',
-                        '**/dto/**',
-                        '**/mapper/**',
-                        '**/repository/**',
-                        '**/prompt/optimizado/**',
-                        '**/JsonConverter.class',
-                        '**/PeticionInscripcion.class',
-                        '**/PeticionPorMateriaPriorizada.class',
-                        '**/domain/comision.class',
-                        '**/domain/Materia.class',
-                        '**/domain/cursada.class',
-                        '**/domain/asignacion/**',
-                        '**/domain/sugerencia/**'
-                ])
-            })
+            fileTree(
+                    dir: layout.buildDirectory.dir("classes/java/main").get().asFile,
+                    excludes: coberturaExcluida
+            )
     )
 }

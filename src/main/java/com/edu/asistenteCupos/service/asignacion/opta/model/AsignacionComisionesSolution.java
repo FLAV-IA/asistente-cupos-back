@@ -14,7 +14,6 @@ import org.optaplanner.core.api.domain.solution.ProblemFactCollectionProperty;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 
-import java.util.Arrays;
 import java.util.List;
 
 @PlanningSolution
@@ -24,7 +23,7 @@ import java.util.List;
 @Getter
 @Setter
 public class AsignacionComisionesSolution {
-
+  @ValueRangeProvider(id = "comisionesDisponibles")
   @ProblemFactCollectionProperty
   private List<ComisionDTO> comisiones;
 
@@ -32,37 +31,8 @@ public class AsignacionComisionesSolution {
   private List<PeticionAsignableDTO> peticiones;
 
   @PlanningScore
-  public HardSoftScore getScore() {
-    return score;
-  }
-
   private HardSoftScore score;
-  private ConfiguracionDeRestricciones configuracion;
-
-  public AsignacionComisionesSolution(List<PeticionAsignableDTO> planningPeticiones, List<ComisionDTO> comisiones, ConfiguracionDeRestricciones configuracion) {
-    this.peticiones = planningPeticiones;
-    this.comisiones = comisiones;
-    this.configuracion = configuracion;
-  }
 
   @ConstraintConfigurationProvider
-  public ConfiguracionDeRestricciones getConfiguracion() {
-    return configuracion;
-  }
-  public void setScore(HardSoftScore score) {
-    this.score = score;
-  }
-
-  public void setConfiguracion(ConfiguracionDeRestricciones configuracion) {
-    this.configuracion = configuracion;
-  }
-
-  @ValueRangeProvider(id = "comisionesDisponibles")
-  public List<ComisionDTO> getComisionesDisponibles() {
-    return comisiones;
-  }
-
-  public List<PeticionAsignableDTO>  getPeticiones() {
-    return peticiones;
-  }
+  private ConfiguracionDeRestricciones configuracion;
 }
