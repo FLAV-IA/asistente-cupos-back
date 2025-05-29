@@ -4,4 +4,9 @@ import com.edu.asistenteCupos.domain.Estudiante;
 import com.edu.asistenteCupos.domain.Materia;
 
 public record SugerenciaRechazada(Estudiante estudiante, Materia materia, String motivo,
-                                  int prioridad) implements SugerenciaInscripcion {}
+                                  int prioridad) implements SugerenciaInscripcion {
+  @Override
+  public boolean fueAsignada() {
+    return false;
+  }
+}

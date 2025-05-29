@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+    <solutionClass>com.edu.asistenteCupos.service.asignacion.opta.model.AsignacionComisionesSolution</solutionClass>
+    <entityClass>com.edu.asistenteCupos.service.asignacion.opta.model.PeticionAsignableDTO</entityClass>
+    <constraintProviderClass>com.edu.asistenteCupos.service.asignacion.opta.reglas.AsignacionConstraintProvider</constraintProviderClass>
+
+    <termination>
+        <secondsSpentLimit>10</secondsSpentLimit> <!--tiempo en la que tardara en resolver el problema-->
+    </termination>
+
+    <scoreDirectorFactory>
+        <constraintProviderClass>com.edu.asistenteCupos.service.asignacion.opta.reglas.AsignacionConstraintProvider</constraintProviderClass>
+    </scoreDirectorFactory>
+
+    <constraintMatchEnabled>true</constraintMatchEnabled>
+    <environmentMode>FAST_ASSERT</environmentMode>
+</solver>

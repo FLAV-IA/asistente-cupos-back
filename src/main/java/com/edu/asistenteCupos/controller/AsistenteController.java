@@ -6,7 +6,7 @@ import com.edu.asistenteCupos.controller.dto.SugerenciaInscripcionDTO;
 import com.edu.asistenteCupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistenteCupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistenteCupos.mapper.SugerenciaInscripcionMapper;
-import com.edu.asistenteCupos.service.AsistenteDeInscripcion2;
+import com.edu.asistenteCupos.service.AsistenteDeInscripcion;
 import com.edu.asistenteCupos.service.adapter.PeticionInscripcionCsvAdapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class AsistenteController {
-  private final AsistenteDeInscripcion2 asistenteDeInscripcion;
+  private final AsistenteDeInscripcion asistenteDeInscripcion;
   private final SugerenciaInscripcionMapper sugerenciaInscripcionMapper;
   private final PeticionInscripcionCsvAdapter peticionInscripcionCsvAdapter;
   private final EnsambladorDePeticiones ensambladorDePeticiones;
