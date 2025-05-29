@@ -116,7 +116,8 @@ jacocoTestReport {
                         '**/domain/Materia.class',
                         '**/domain/cursada.class',
                         '**/domain/asignacion/**',
-                        '**/domain/sugerencia/**'
+                        '**/domain/sugerencia/**',
+                        '**/service/asignacion/opta/config**'
                 ])
             })
     )
