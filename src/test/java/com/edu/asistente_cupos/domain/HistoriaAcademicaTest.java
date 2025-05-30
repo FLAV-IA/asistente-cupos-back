@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class HistoriaAcademicaTest {
-
   @Test
   void retornaFalseSiNoTieneCursadasEnCurso() {
     Comision nuevaComision = Comision.builder().horario("Lunes 10:00 a 12:00").build();
@@ -100,7 +99,8 @@ class HistoriaAcademicaTest {
     HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(List.of(enCurso, aprobada))
                                                   .build();
 
-    List<Materia> actuales = historia.inscripcionesActuales();
+    List<Materia> actuales = historia.inscripcionesActuales().stream().map(Cursada::getMateria)
+                                     .toList();
     assertEquals(1, actuales.size());
     assertTrue(actuales.contains(matA));
   }
@@ -130,5 +130,48 @@ class HistoriaAcademicaTest {
     assertEquals(10, historia.getTotalHistoricasAprobadas());
     assertEquals(12, historia.getTotalInscripcionesHistoricas());
     assertEquals(estudiante, historia.getEstudiante());
+  }
+
+  @Test
+  void retornaFalseSiSoloUnaDeLasCorrelativasEstaAprobada() {
+    Materia cor1 = Materia.builder().codigo("MAT12").build();
+    Materia cor2 = Materia.builder().codigo("MAT13").build();
+    Materia destino = Materia.builder().codigo("MAT14").correlativas(List.of(cor1, cor2)).build();
+
+    Cursada aprobadaCor1 = CursadaFactory.aprobada(cor1, 8);
+    Cursada noAprobadaCor2 = CursadaFactory.desaprobada(cor2, 3);
+
+    HistoriaAcademica historia = HistoriaAcademica.builder()
+                                                  .cursadas(List.of(aprobadaCor1, noAprobadaCor2))
+                                                  .build();
+
+    assertFalse(historia.cumpleCorrelativas(destino));
+  }
+
+  @Test
+  void cumpleCorrelativasRetornaFalseSiCursadasEsNull() {
+    Materia correlativa = Materia.builder().codigo("MAT-X").build();
+    Materia destino = Materia.builder().codigo("MAT-Y").correlativas(List.of(correlativa)).build();
+
+    HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(null).build();
+
+    assertFalse(historia.cumpleCorrelativas(destino));
+  }
+
+  @Test
+  void materiasEnCursoRetornaSoloMateriasConEstadoEnCurso() {
+    Materia matEnCurso = Materia.builder().codigo("MAT-A").build();
+    Materia matAprobada = Materia.builder().codigo("MAT-B").build();
+
+    Cursada cursadaEnCurso = CursadaFactory.enCurso(matEnCurso);
+    Cursada cursadaAprobada = CursadaFactory.aprobada(matAprobada, 9);
+
+    HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(
+      List.of(cursadaEnCurso, cursadaAprobada)).build();
+
+    List<Materia> materias = historia.materiasEnCurso();
+
+    assertEquals(1, materias.size());
+    assertTrue(materias.contains(matEnCurso));
   }
 }
