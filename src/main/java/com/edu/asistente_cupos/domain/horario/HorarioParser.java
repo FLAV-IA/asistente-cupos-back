@@ -21,7 +21,7 @@ public class HorarioParser {
   }
 
   private static RangoHorario parsearBloque(String bloqueHorario) {
-    String[] partes = bloqueHorario.trim().split(" ");
+    String[] partes = bloqueHorario.trim().replaceAll("\\s+", " ").split(" ");
     if (partes.length < 4) {
       throw new HorarioParseException(
         "Formato inválido: se esperaban al menos 4 partes en '" + bloqueHorario + "'");
@@ -37,4 +37,5 @@ public class HorarioParser {
         e);
     }
   }
+
 }
