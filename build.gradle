@@ -98,6 +98,8 @@ dependencies {
             because 'Fixes CVE-2024-26308 y CVE-2024-25710 en testcontainers'
         }
     }
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.micrometer:micrometer-core'
 }
 
 tasks.register('setupCodeStyle', Copy) {
