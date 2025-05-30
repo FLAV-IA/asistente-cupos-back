@@ -29,7 +29,7 @@ public class Cursada {
   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional = false)
   private EstadoCursada estado;
 
-  public boolean getFueAprobada() {
+  public boolean fueAprobada() {
     return estado.fueAprobada();
   }
 }

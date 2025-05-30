@@ -3,7 +3,9 @@ package com.edu.asistente_cupos.domain;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ComisionTest {
   @Test
@@ -43,5 +45,31 @@ class ComisionTest {
 
     assertNotEquals(null, c1);
     assertNotEquals("otro tipo", c1);
+  }
+
+  @Test
+  void tieneCupoDevuelveTrueSiCupoMayorACero() {
+    Comision c = Comision.builder().codigo("C1").cupo(10).build();
+    assertTrue(c.tieneCupo());
+  }
+
+  @Test
+  void tieneCupoDevuelveFalseSiCupoEsCero() {
+    Comision c = Comision.builder().codigo("C1").cupo(0).build();
+    assertFalse(c.tieneCupo());
+  }
+
+  @Test
+  void tieneCupoDevuelveFalseSiCupoEsNegativo() {
+    Comision c = Comision.builder().codigo("C1").cupo(-5).build();
+    assertFalse(c.tieneCupo());
+  }
+
+  @Test
+  void materiaPuedeSerAsignadaYRecuperada() {
+    Materia m = Materia.builder().codigo("MAT202").nombre("Álgebra").build();
+    Comision c = Comision.builder().codigo("C1").materia(m).build();
+    assertEquals("MAT202", c.getMateria().getCodigo());
+    assertEquals("Álgebra", c.getMateria().getNombre());
   }
 }

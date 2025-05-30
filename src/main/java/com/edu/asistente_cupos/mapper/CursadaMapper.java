@@ -7,7 +7,6 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface CursadaMapper {
-
   @Mapping(source = "materia.codigo", target = "cm")
   @Mapping(target = "fpm", expression = "java(cursada.getEstado().fueAprobada())")
   Cursada4Prompt toCursada4Prompt(Cursada cursada);

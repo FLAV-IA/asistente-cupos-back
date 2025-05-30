@@ -12,7 +12,6 @@ import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
 
@@ -31,16 +30,14 @@ public abstract class HistoriaAcademicaMapper {
 
   @Named("mapMateriasEnCurso")
   public List<String> mapMateriasEnCurso(HistoriaAcademica historia) {
-    return historia.inscripcionesActuales().stream()
-                   .map(Materia::getCodigo)
-                   .collect(toList());
+    return historia.inscripcionesActuales().stream().map(Materia::getCodigo).collect(toList());
   }
 
   @Named("mapCursadasNoAprobadas")
   public List<String> mapCursadasNoAprobadas(List<Cursada> cursadas) {
     if (cursadas == null)
       return List.of();
-    return cursadas.stream().filter(c -> !c.getFueAprobada()).map(cursadaMapper::toCursada4Prompt)
+    return cursadas.stream().filter(c -> !c.fueAprobada()).map(cursadaMapper::toCursada4Prompt)
                    .map(Cursada4Prompt::getCm).collect(toList());
   }
 

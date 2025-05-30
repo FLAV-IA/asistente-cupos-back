@@ -17,7 +17,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -55,41 +57,38 @@ public class EstudianteConHistoriaAcademicaSeeder {
     int totalInscripcionesHistoricas = Integer.parseInt(row[5].trim());
     int totalHistoricasAprobadas = 0;
 
-    List<Cursada> cursadasActuales = parsearMaterias(row[6].trim(), Collectors.toList())
-      .stream().map(CursadaFactory::enCurso).toList();
+    List<Cursada> cursadasActuales = parsearMaterias(row[6].trim(), Collectors.toList()).stream()
+                                                                                        .map(
+                                                                                          CursadaFactory::enCurso)
+                                                                                        .toList();
 
     List<Cursada> cursadasAnterioresC12024 = construirCursadas(row[7].trim(), row[8].trim());
     List<Cursada> cursadasAnterioresC22024 = construirCursadas(row[9].trim(), row[10].trim());
 
-    List<Cursada> cursadasAnteriores = Stream.of(cursadasAnterioresC12024, cursadasAnterioresC22024, cursadasActuales)
-                                             .flatMap(Collection::stream)
-                                             .toList();
+    List<Cursada> cursadasAnteriores = Stream
+      .of(cursadasAnterioresC12024, cursadasAnterioresC22024, cursadasActuales)
+      .flatMap(Collection::stream).toList();
 
-    return HistoriaAcademica.builder()
-                            .totalInscripcionesHistoricas(totalInscripcionesHistoricas)
+    return HistoriaAcademica.builder().totalInscripcionesHistoricas(totalInscripcionesHistoricas)
                             .totalHistoricasAprobadas(totalHistoricasAprobadas)
-                            .coeficiente(coeficiente)
-                            .cursadas(cursadasAnteriores)
-                            .build();
+                            .coeficiente(coeficiente).cursadas(cursadasAnteriores).build();
   }
 
   private List<Cursada> construirCursadas(String inscriptas, String aprobadas) {
     List<Materia> materiasCursadas = parsearMaterias(inscriptas, Collectors.toList());
     List<Materia> materiasAprobadas = parsearMaterias(aprobadas, Collectors.toList());
 
-    return materiasCursadas.stream()
-                           .map(materia -> materiasAprobadas.contains(materia)
-                             ? CursadaFactory.aprobada(materia, 10)
-                             : CursadaFactory.desaprobada(materia, 2))
-                           .toList();
+    return materiasCursadas.stream().map(
+      materia -> materiasAprobadas.contains(materia) ? CursadaFactory.aprobada(materia,
+        10) : CursadaFactory.desaprobada(materia, 2)).toList();
   }
 
   private <T extends Collection<Materia>> T parsearMaterias(String materias, Collector<Materia, ?, T> collector) {
     return (materias.equals("-") ? Stream.<Materia>empty() : Arrays
       .stream(removerCaracteresEspeciales(materias).split(",")).map(
         codigoMateria -> materiaRepository.findByCodigo(codigoMateria).orElseThrow(
-          () -> new RuntimeException("No se encontró la materia con el código: " + codigoMateria))
-      )).collect(collector);
+          () -> new RuntimeException(
+            "No se encontró la materia con el código: " + codigoMateria)))).collect(collector);
   }
 
   private String removerCaracteresEspeciales(String texto) {

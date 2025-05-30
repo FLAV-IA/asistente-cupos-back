@@ -13,7 +13,8 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class HistoriaAcademicaMapperTest {
   private HistoriaAcademicaMapper mapper;
@@ -35,18 +36,13 @@ class HistoriaAcademicaMapperTest {
     Cursada c2 = CursadaFactory.enCurso(mat2);
 
     when(cursadaMapperMock.toCursada4Prompt(c1)).thenReturn(
-      Cursada4Prompt.builder().cm("MAT1").fpm(false).build()
-    );
+      Cursada4Prompt.builder().cm("MAT1").fpm(false).build());
     when(cursadaMapperMock.toCursada4Prompt(c2)).thenReturn(
-      Cursada4Prompt.builder().cm("MAT2").fpm(false).build()
-    );
+      Cursada4Prompt.builder().cm("MAT2").fpm(false).build());
 
-    HistoriaAcademica historia = HistoriaAcademica.builder()
-                                                  .totalInscripcionesHistoricas(10)
-                                                  .totalHistoricasAprobadas(7)
-                                                  .coeficiente(8.3)
-                                                  .cursadas(List.of(c1, c2))
-                                                  .build();
+    HistoriaAcademica historia = HistoriaAcademica.builder().totalInscripcionesHistoricas(10)
+                                                  .totalHistoricasAprobadas(7).coeficiente(8.3)
+                                                  .cursadas(List.of(c1, c2)).build();
 
 
     HistoriaAcademica4Prompt dto = mapper.toHistoriaAcademica4Prompt(historia);
