@@ -1,15 +1,21 @@
 package com.edu.asistente_cupos.domain;
 
+import com.edu.asistente_cupos.domain.cursada.Cursada;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -30,25 +36,21 @@ public class HistoriaAcademica {
   private Estudiante estudiante;
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Cursada> cursadasAnteriores;
+  private List<Cursada> cursadas;
 
-  @ManyToMany(fetch = FetchType.EAGER)
-  @JoinTable(name = "inscripciones_actuales",
-    joinColumns = @JoinColumn(name = "id_historia_academica"),
-    inverseJoinColumns = @JoinColumn(name = "codigo_de_materia"),
-    uniqueConstraints = @UniqueConstraint(
-      columnNames = {"id_historia_academica", "codigo_de_materia"}))
-  @Builder.Default
-  private Set<Materia> inscripcionesActuales = new HashSet<>();
+  public List<Materia> inscripcionesActuales() {
+    return cursadas == null ? List.of() : cursadas.stream().filter(c -> c.getEstado().estaEnCurso())
+                                                  .map(Cursada::getMateria).toList();
+  }
 
   public Boolean cumpleCorrelativas(Materia materia) {
     List<Materia> correlativasNecesarias = materia.getCorrelativas();
     return correlativasNecesarias.stream().allMatch(
-      correlativa -> this.cursadasAnteriores.stream().filter(Cursada::getFueAprobada).anyMatch(
+      correlativa -> this.cursadas.stream().filter(Cursada::getFueAprobada).anyMatch(
         cursada -> cursada.getMateria().getCodigo().equals(correlativa.getCodigo())));
   }
 
   public boolean haySuperposicionHoraria(Comision nuevaComision) {
-    return !getInscripcionesActuales().isEmpty();
+    return !inscripcionesActuales().isEmpty();
   }
 }

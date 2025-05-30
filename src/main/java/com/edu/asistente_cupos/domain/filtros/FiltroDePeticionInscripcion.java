@@ -7,6 +7,7 @@ import com.edu.asistente_cupos.domain.peticion.PeticionPorMateria;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public interface FiltroDePeticionInscripcion {
@@ -38,4 +39,12 @@ public interface FiltroDePeticionInscripcion {
     return filtradas;
   }
 
+  default List<PeticionInscripcion> filtrarPeticiones(
+    List<PeticionInscripcion> peticiones,
+    Predicate<PeticionInscripcion> predicate
+  ) {
+    return peticiones.stream()
+                     .filter(predicate)
+                     .toList();
+  }
 }

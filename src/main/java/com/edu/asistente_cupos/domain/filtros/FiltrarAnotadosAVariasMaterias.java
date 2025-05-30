@@ -1,15 +1,15 @@
 package com.edu.asistente_cupos.domain.filtros;
 
-import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
 
 import java.util.List;
-import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 /**
- * Filtra las peticiones a quienes están anotados a más de dos(configurable) materias.
+ * Filtra las peticiones a quienes están anotados a más de dos (configurable) materias.
  */
 public class FiltrarAnotadosAVariasMaterias implements FiltroDePeticionInscripcion {
+  private static final int MAX_MATERIAS = 2;
   private FiltroDePeticionInscripcion siguiente;
 
   @Override
@@ -19,17 +19,14 @@ public class FiltrarAnotadosAVariasMaterias implements FiltroDePeticionInscripci
 
   @Override
   public List<PeticionInscripcion> filtrar(List<PeticionInscripcion> peticiones) {
-    BiPredicate<Comision, PeticionInscripcion> comisionPredicate = (c, p) ->
-      p.getEstudiante().getHistoriaAcademica().getInscripcionesActuales().size() < 3;
+    Predicate<PeticionInscripcion> predicate = p -> !p.getEstudiante()
+                                                     .estaInscriptoEnMasDe(MAX_MATERIAS);
 
-    List<PeticionInscripcion> filtradas = filtrarPeticionesSegunPredicado(peticiones,
-      comisionPredicate);
+    List<PeticionInscripcion> filtradas = filtrarPeticiones(peticiones, predicate);
+
     if (siguiente != null) {
       return siguiente.filtrar(filtradas);
     }
     return filtradas;
   }
 }
-
-
-

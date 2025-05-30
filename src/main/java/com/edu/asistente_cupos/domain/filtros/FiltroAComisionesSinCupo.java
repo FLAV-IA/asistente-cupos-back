@@ -27,6 +27,4 @@ public class FiltroAComisionesSinCupo implements FiltroDePeticionInscripcion {
 
     return filtradas;
   }
-
-
 }
