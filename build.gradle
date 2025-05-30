@@ -77,7 +77,6 @@ dependencies {
     implementation 'com.opencsv:opencsv:5.8'
     implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-M6")
     implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
-    implementation 'mysql:mysql-connector-java:8.0.33'
     implementation 'com.zaxxer:HikariCP'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
@@ -90,9 +89,9 @@ dependencies {
     implementation 'org.optaplanner:optaplanner-core:9.44.0.Final'
     implementation 'org.optaplanner:optaplanner-spring-boot-starter:9.44.0.Final'
     testImplementation 'org.optaplanner:optaplanner-test:9.44.0.Final'
-    testImplementation 'org.testcontainers:mysql:1.19.3'
+    testImplementation('org.testcontainers:postgresql:1.20.6')
     testImplementation 'org.testcontainers:junit-jupiter:1.19.3'
-    implementation 'com.mysql:mysql-connector-j:8.3.0'
+    runtimeOnly 'org.postgresql:postgresql'
     constraints {
         implementation('org.apache.commons:commons-compress:1.27.1') {
             because 'Fixes CVE-2024-26308 y CVE-2024-25710 en testcontainers'
