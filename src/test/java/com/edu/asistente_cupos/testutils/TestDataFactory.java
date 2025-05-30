@@ -2,6 +2,7 @@ package com.edu.asistente_cupos.testutils;
 
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Estudiante;
+import com.edu.asistente_cupos.domain.HistoriaAcademica;
 import com.edu.asistente_cupos.domain.Materia;
 import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
@@ -12,22 +13,15 @@ import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaRechazada;
 import com.edu.asistente_cupos.service.priorizacion.dto.ResultadoPriorizacionLLM;
 import com.edu.asistente_cupos.service.traduccion.dto.SugerenciaInscripcionLLM;
+import org.springframework.ai.chat.messages.AssistantMessage;
+import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.chat.model.Generation;
 
 import java.util.List;
 
 public class TestDataFactory {
-  public static PeticionInscripcion crearPeticionInscripcionDummy() {
-    return PeticionInscripcion.builder().estudiante(crearEstudianteDummy())
-                              .peticionPorMaterias(List.of(crearPeticionPorMateriaDummy())).build();
-  }
-
   public static Estudiante crearEstudianteDummy() {
     return crearEstudianteDummy("12345678");
-  }
-
-  public static Estudiante crearEstudianteDummy(String dni) {
-    return Estudiante.builder().dni(dni).legajo("LEG" + dni).nombre("Estudiante " + dni)
-                     .mail(dni + "@test.com").build();
   }
 
   public static Materia crearMateriaDummy() {
@@ -46,11 +40,6 @@ public class TestDataFactory {
     return new Comision(codigo, HorarioParser.parse("LUNES 09:00 a 10:00"), cupo, materia);
   }
 
-  public static PeticionPorMateria crearPeticionPorMateriaDummy() {
-    return PeticionPorMateria.builder().comisiones(List.of(crearComisionDummy()))
-                             .cumpleCorrelativa(true).build();
-  }
-
   public static PeticionPorMateriaPriorizada crearPeticionPriorizadaDummy() {
     return PeticionPorMateriaPriorizada.builder().estudiante(crearEstudianteDummy())
                                        .materia(crearMateriaDummy())
@@ -60,7 +49,7 @@ public class TestDataFactory {
 
   public static ResultadoPriorizacionLLM crearResultadoPriorizacionLLMDummy() {
     ResultadoPriorizacionLLM.EvaluacionPrioridad evaluacion = new ResultadoPriorizacionLLM.EvaluacionPrioridad();
-    evaluacion.setN("MAT1");
+    evaluacion.setN("MAT101");
     evaluacion.setP(91);
     evaluacion.setE(List.of("COR", "AVZ"));
 
@@ -85,5 +74,76 @@ public class TestDataFactory {
     sugerencia.setM("Asignada [COR]");
     sugerencia.setX(true);
     return sugerencia;
+  }
+
+  public static Estudiante crearEstudianteDummy(String dni) {
+    Estudiante estudiante = Estudiante.builder().dni(dni).legajo("LEG" + dni).nombre("Juan")
+                                      .mail(dni + "@test.com").build();
+
+    HistoriaAcademica historia = HistoriaAcademica.builder().estudiante(estudiante)
+                                                  .totalInscripcionesHistoricas(1)
+                                                  .totalHistoricasAprobadas(1).coeficiente(8.0)
+                                                  .cursadas(List.of()) // vacías por ahora
+                                                  .build();
+
+    estudiante.setHistoriaAcademica(historia);
+    return estudiante;
+  }
+
+  public static PeticionInscripcion crearPeticionInscripcionDummy() {
+    Estudiante estudiante = crearEstudianteDummy("12345678");
+
+    Materia materia = Materia.builder().codigo("MAT101").nombre("Matemática I").build();
+
+    Comision comision = Comision.builder().codigo("MAT1-01-c3").materia(materia)
+                                .horario(HorarioParser.parse("Martes 10:00 a 12:00")).cupo(30)
+                                .build();
+
+    PeticionPorMateria peticionPorMateria = PeticionPorMateria.builder()
+                                                              .comisiones(List.of(comision))
+                                                              .build();
+
+    return PeticionInscripcion.builder().estudiante(estudiante)
+                              .peticionPorMaterias(List.of(peticionPorMateria)).build();
+  }
+
+
+  public static ChatResponse respuestaChatResponsePriorizacion() {
+    String json = """
+        [
+          {
+            "a": "12345678",
+            "ep": [
+              { "n": "1035", "p": 91, "e": ["COR", "AVZ"] },
+              { "n": "1036", "p": 78, "e": ["REZ", "REC"] }
+            ]
+          }
+        ]
+      """;
+    return new ChatResponse(List.of(new Generation(new AssistantMessage(json))));
+  }
+
+  public static ChatResponse respuestaChatResponseTraduccion() {
+    String json = """
+        [
+          {
+            "peticion": {
+              "estudiante": { "nombre": "Juan" },
+              "comision": {
+                "codigo": "MAT1-01-c3",
+                "materia": { "nombre": "Matemática I" }
+              },
+              "prioridad": 90,
+              "motivo": "AVZ, COR, CF"
+            },
+            "cupoAsignado": true
+          }
+        ]
+      """;
+    return new ChatResponse(List.of(new Generation(new AssistantMessage(json))));
+  }
+
+  public static ChatResponse respuestaChatResponseDummy() {
+    return respuestaChatResponsePriorizacion();
   }
 }
