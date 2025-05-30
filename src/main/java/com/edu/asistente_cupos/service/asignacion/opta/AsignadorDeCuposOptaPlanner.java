@@ -4,18 +4,19 @@ import com.edu.asistente_cupos.domain.asignacion.AsignacionExitosa;
 import com.edu.asistente_cupos.domain.asignacion.AsignacionFallida;
 import com.edu.asistente_cupos.domain.priorizacion.PeticionPorMateriaPriorizada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
-import com.edu.asistente_cupos.excepcion.opta.AsignacionRuntimeException;
 import com.edu.asistente_cupos.excepcion.opta.ConfiguracionDeAsignacionInvalidaException;
-import com.edu.asistente_cupos.excepcion.opta.ErrorDeEjecucionDeAsignacionException;
-import com.edu.asistente_cupos.excepcion.opta.InterrupcionDuranteAsignacionException;
+import com.edu.asistente_cupos.observacion.NombresMetricas;
+import com.edu.asistente_cupos.observacion.TimeTracker;
 import com.edu.asistente_cupos.service.asignacion.AsignadorDeCupos;
 import com.edu.asistente_cupos.service.asignacion.opta.model.AsignacionComisionesSolution;
 import com.edu.asistente_cupos.service.asignacion.opta.model.ComisionDTO;
 import com.edu.asistente_cupos.service.asignacion.opta.model.PeticionAsignableDTO;
 import com.edu.asistente_cupos.service.asignacion.opta.reglas.ConfiguracionDeRestricciones;
+import io.micrometer.core.instrument.MeterRegistry;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import org.optaplanner.core.api.solver.SolverJob;
 import org.optaplanner.core.api.solver.SolverManager;
 import org.springframework.context.annotation.Primary;
@@ -26,7 +27,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 @Component
 @Primary
@@ -34,6 +34,8 @@ import java.util.concurrent.ExecutionException;
 @Slf4j
 public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
   private final SolverManager<AsignacionComisionesSolution, Long> solverManager;
+  private final TimeTracker timeTracker;
+  private final MeterRegistry meterRegistry;
 
   @PostConstruct
   public void checkSolver() {
@@ -56,26 +58,31 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
                                                                         .configuracion(
                                                                           new ConfiguracionDeRestricciones())
                                                                         .build();
+
     if (problema.getConfiguracion() == null) {
       throw new ConfiguracionDeAsignacionInvalidaException(
         "Falta la configuración de restricciones");
     }
-    try {
+
+    AsignacionComisionesSolution solucion = timeTracker.track(NombresMetricas.OPTA_SOLUCION, () -> {
       SolverJob<AsignacionComisionesSolution, Long> job = solverManager.solve(1L, problema);
-      AsignacionComisionesSolution solucion = job.getFinalBestSolution();
+      return job.getFinalBestSolution();
+    });
 
-      return solucion.getPeticiones().stream().flatMap(p -> {
-        List<SugerenciaInscripcion> sugerencias = reconstruirSugerencia(p);
-        return sugerencias.stream();
-      }).toList();
+    HardSoftScore score = solucion.getScore();
+    log.info("Score final: {}", score);
 
-    } catch (InterruptedException e) {
-      Thread.currentThread().interrupt();
-      throw new AsignacionRuntimeException(new InterrupcionDuranteAsignacionException(e));
+    meterRegistry.gauge(NombresMetricas.OPTA_SCORE_HARD, score.hardScore());
+    meterRegistry.gauge(NombresMetricas.OPTA_SCORE_SOFT, score.softScore());
 
-    } catch (ExecutionException e) {
-      throw new AsignacionRuntimeException(new ErrorDeEjecucionDeAsignacionException(e));
-    }
+    long asignadas = solucion.getPeticiones().stream().filter(p -> p.getComisionAsignada() != null)
+                             .count();
+
+    meterRegistry.gauge(NombresMetricas.OPTA_PETICIONES_ASIGNADAS, asignadas);
+
+    return solucion.getPeticiones().stream().flatMap(p -> reconstruirSugerencia(p).stream())
+                   .toList();
+
   }
 
   private PeticionAsignableDTO convertirAPeticionAsignable(PeticionPorMateriaPriorizada peticion) {
