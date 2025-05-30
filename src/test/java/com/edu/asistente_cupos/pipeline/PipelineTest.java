@@ -45,7 +45,7 @@ class PipelineTest {
 
   @Test
   void ejecutaTodoElPipelineConBeansRealesYMockDeLlm() {
-    var peticiones = List.of(TestDataFactory.crearPeticionInscripcionDummy());
+    var peticiones = List.of(TestDataFactory.crearPeticionInscripcionParaPipeline());
     var resultado = asistente.sugerirInscripcion(peticiones);
     assertThat(resultado).isNotEmpty();
   }

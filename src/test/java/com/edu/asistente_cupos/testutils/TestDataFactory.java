@@ -90,6 +90,23 @@ public class TestDataFactory {
     return estudiante;
   }
 
+  public static PeticionInscripcion crearPeticionInscripcionParaPipeline() {
+    Estudiante estudiante = crearEstudianteDummy("45072112");
+
+    Materia materia = Materia.builder().codigo("1041").nombre("Matemática II").build();
+
+    Comision comision = Comision.builder().codigo("1041-1-G14").materia(materia)
+                                .horario(HorarioParser.parse("Jueves 10:00 a 12:00")).cupo(2)
+                                .build();
+
+    PeticionPorMateria peticionPorMateria = PeticionPorMateria.builder()
+                                                              .comisiones(List.of(comision))
+                                                              .build();
+
+    return PeticionInscripcion.builder().estudiante(estudiante)
+                              .peticionPorMaterias(List.of(peticionPorMateria)).build();
+  }
+
   public static PeticionInscripcion crearPeticionInscripcionDummy() {
     Estudiante estudiante = crearEstudianteDummy("12345678");
 
@@ -112,10 +129,9 @@ public class TestDataFactory {
     String json = """
         [
           {
-            "a": "12345678",
+            "a": "45072112",
             "ep": [
-              { "n": "1035", "p": 91, "e": ["COR", "AVZ"] },
-              { "n": "1036", "p": 78, "e": ["REZ", "REC"] }
+              { "n": "1041", "p": 91, "e": ["COR", "AVZ"] }
             ]
           }
         ]
@@ -125,20 +141,15 @@ public class TestDataFactory {
 
   public static ChatResponse respuestaChatResponseTraduccion() {
     String json = """
-        [
-          {
-            "peticion": {
-              "estudiante": { "nombre": "Juan" },
-              "comision": {
-                "codigo": "MAT1-01-c3",
-                "materia": { "nombre": "Matemática I" }
-              },
-              "prioridad": 90,
-              "motivo": "AVZ, COR, CF"
-            },
-            "cupoAsignado": true
-          }
-        ]
+      [
+        {
+          "a": "45072112",
+          "c": "1041-1-G14",
+          "p": 90,
+          "m": "Está por terminar la carrera, cumple correlativas y tiene un buen promedio.",
+          "x": true
+        }
+      ]
       """;
     return new ChatResponse(List.of(new Generation(new AssistantMessage(json))));
   }
