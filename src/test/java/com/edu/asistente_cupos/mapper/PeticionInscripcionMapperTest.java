@@ -3,6 +3,7 @@ package com.edu.asistente_cupos.mapper;
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.HistoriaAcademica;
 import com.edu.asistente_cupos.domain.Materia;
+import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistente_cupos.domain.peticion.PeticionPorMateria;
 import com.edu.asistente_cupos.domain.prompt.optimizado.PeticionDeMateria4Prompt;
@@ -29,7 +30,7 @@ class PeticionInscripcionMapperTest {
   @Test
   void conviertePeticionInscripcionCorrectamente() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Algoritmos").build();
-    Comision comision = new Comision("C1", "Lunes 10-12", 10, materia);
+    Comision comision = new Comision("C1", HorarioParser.parse("LUNES 10:00 a 12:00"), 10, materia);
 
     PeticionPorMateria peticionMateria = PeticionPorMateria.builder().comisiones(List.of(comision))
                                                            .cumpleCorrelativa(true).build();

@@ -3,6 +3,7 @@ package com.edu.asistente_cupos.service.asignacion.opta;
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Estudiante;
 import com.edu.asistente_cupos.domain.Materia;
+import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import com.edu.asistente_cupos.domain.priorizacion.PeticionPorMateriaPriorizada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAsignada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
@@ -28,7 +29,8 @@ class AsignadorDeCuposOptaPlannerTest {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Matemática").build();
 
     // Comisión con solo 1 cupo
-    Comision comision = new Comision("MAT1-A", "lunes 10-12", 1, materia);
+    Comision comision = new Comision("MAT1-A", HorarioParser.parse("LUNES 10:00 a 12:00"), 1,
+      materia);
 
     // Estudiantes
     Estudiante e1 = Estudiante.builder().dni("100").nombre("Ana").build();
@@ -70,13 +72,10 @@ class AsignadorDeCuposOptaPlannerTest {
 
   @Test
   void asignaCupoAlEstudianteConEtiquetasMasValoradas() {
-    // Materia compartida
     Materia materia = Materia.builder().codigo("MAT1").nombre("Matemática").build();
 
-    // Comisión con solo 1 cupo
-    Comision comision = new Comision("MAT1-A", "lunes 10-12", 1, materia);
+    Comision comision = new Comision("MAT1-A", HorarioParser.parse("LUNES 10:00 a 12:00"), 1, materia);
 
-    // Estudiantes
     Estudiante e1 = Estudiante.builder().dni("100").nombre("Ana").build();
     Estudiante e2 = Estudiante.builder().dni("200").nombre("Leo").build();
 
@@ -126,7 +125,7 @@ class AsignadorDeCuposOptaPlannerTest {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Matemática").build();
 
     // Comisión sin cupo disponible
-    Comision comision = new Comision("MAT1-A", "lunes 10-12", 0, materia);
+    Comision comision = new Comision("MAT1-A", HorarioParser.parse("LUNES 10:00 a 12:00"), 0, materia);
 
     // Estudiantes
     Estudiante e1 = Estudiante.builder().dni("100").nombre("Ana").build();

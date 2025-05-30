@@ -30,7 +30,7 @@ public abstract class HistoriaAcademicaMapper {
 
   @Named("mapMateriasEnCurso")
   public List<String> mapMateriasEnCurso(HistoriaAcademica historia) {
-    return historia.inscripcionesActuales().stream().map(Materia::getCodigo).collect(toList());
+    return historia.materiasEnCurso().stream().map(Materia::getCodigo).toList();
   }
 
   @Named("mapCursadasNoAprobadas")

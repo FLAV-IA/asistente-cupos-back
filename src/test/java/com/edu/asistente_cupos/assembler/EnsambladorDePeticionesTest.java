@@ -3,6 +3,7 @@ package com.edu.asistente_cupos.assembler;
 import com.edu.asistente_cupos.controller.dto.PeticionInscripcionCsvDTO;
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Estudiante;
+import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistente_cupos.domain.peticion.PeticionPorMateria;
 import com.edu.asistente_cupos.excepcion.EstudianteNoEncontradoException;
@@ -48,8 +49,8 @@ class EnsambladorDePeticionesTest {
     dto.setCodigosComisiones("COM1,COM2");
 
     Estudiante estudiante = Estudiante.builder().dni("123").nombre("Juan").build();
-    Comision com1 = new Comision("COM1", "lunes", 30, null);
-    Comision com2 = new Comision("COM2", "martes", 30, null);
+    Comision com1 = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 30, null);
+    Comision com2 = new Comision("COM2", HorarioParser.parse("MARTES 09:00 a 10:00"), 30, null);
 
     PeticionPorMateria peticion = PeticionPorMateria.builder().comisiones(List.of(com1, com2))
                                                     .build();

@@ -1,5 +1,6 @@
 package com.edu.asistente_cupos.domain;
 
+import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,11 +13,11 @@ class ComisionTest {
   void creaComisionConBuilder() {
     Materia materia = Materia.builder().codigo("MAT101").nombre("Matemática I").build();
 
-    Comision comision = Comision.builder().codigo("C1").horario("Lunes 10-12").cupo(30)
+    Comision comision = Comision.builder().codigo("C1").horario(HorarioParser.parse("LUNES 10:30 a 12:30")).cupo(30)
                                 .materia(materia).build();
 
     assertEquals("C1", comision.getCodigo());
-    assertEquals("Lunes 10-12", comision.getHorario());
+    assertEquals("LUNES 10:30 a 12:30", comision.getHorario().toString());
     assertEquals(30, comision.getCupo());
     assertEquals(materia, comision.getMateria());
   }

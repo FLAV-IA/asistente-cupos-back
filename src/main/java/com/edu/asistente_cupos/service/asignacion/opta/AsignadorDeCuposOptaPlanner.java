@@ -88,7 +88,7 @@ public class AsignadorDeCuposOptaPlanner implements AsignadorDeCupos {
                                .etiquetas(Arrays.asList(peticion.getMotivo().split(",")))
                                .comisionesPosibles(peticion.getComisionesSolicitadas().stream().map(
                                  c -> new ComisionDTO(c.getCodigo(), c.getMateria().getCodigo(),
-                                   c.getHorario(), c.getCupo())).toList())
+                                   c.getHorario().toString(), c.getCupo())).toList())
                                .estudiante(peticion.getEstudiante()).materia(peticion.getMateria())
                                .build();
   }

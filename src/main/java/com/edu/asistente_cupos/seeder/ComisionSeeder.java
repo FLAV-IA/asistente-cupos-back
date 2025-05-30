@@ -3,6 +3,8 @@ package com.edu.asistente_cupos.seeder;
 import com.edu.asistente_cupos.Utils.ClasspathResourceLoader;
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Materia;
+import com.edu.asistente_cupos.domain.horario.Horario;
+import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import com.edu.asistente_cupos.repository.ComisionRepository;
 import com.edu.asistente_cupos.repository.MateriaRepository;
 import jakarta.transaction.Transactional;
@@ -37,7 +39,7 @@ public class ComisionSeeder {
     for (String[] row : rows) {
       String codigoMateria = row[0];
       String codigoComision = row[1];
-      String horario = row[2];
+      String descripcionHorario = row[2];
       int cupo = Integer.parseInt(row[3]);
 
       Optional<Materia> materiaOpt = materiaRepository.findByCodigo(codigoMateria);
@@ -45,6 +47,7 @@ public class ComisionSeeder {
       String codigoMateriaComision = codigoMateria + "-" + codigoComision;
       if (materiaOpt.isPresent()) {
         Materia materia = materiaOpt.get();
+        Horario horario = HorarioParser.parse(descripcionHorario);
 
         Comision comision = Comision.builder().codigo(codigoMateriaComision).materia(materia)
                                     .horario(horario).cupo(cupo).build();

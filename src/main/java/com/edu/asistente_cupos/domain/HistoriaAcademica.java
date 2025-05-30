@@ -38,19 +38,31 @@ public class HistoriaAcademica {
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Cursada> cursadas;
 
-  public List<Materia> inscripcionesActuales() {
+  public List<Cursada> inscripcionesActuales() {
     return cursadas == null ? List.of() : cursadas.stream().filter(c -> c.getEstado().estaEnCurso())
-                                                  .map(Cursada::getMateria).toList();
+                                                  .toList();
   }
 
   public Boolean cumpleCorrelativas(Materia materia) {
+    if (cursadas == null)
+      return false;
+
     List<Materia> correlativasNecesarias = materia.getCorrelativas();
+    if (correlativasNecesarias == null || correlativasNecesarias.isEmpty()) {
+      return true;
+    }
+
     return correlativasNecesarias.stream().allMatch(
-      correlativa -> this.cursadas.stream().filter(Cursada::fueAprobada).anyMatch(
+      correlativa -> cursadas.stream().filter(Cursada::fueAprobada).anyMatch(
         cursada -> cursada.getMateria().getCodigo().equals(correlativa.getCodigo())));
   }
 
   public boolean haySuperposicionHoraria(Comision nuevaComision) {
-    return !inscripcionesActuales().isEmpty();
+    return !materiasEnCurso().isEmpty();
+  }
+
+  public List<Materia> materiasEnCurso() {
+    return cursadas == null ? List.of() : cursadas.stream().filter(c -> c.getEstado().estaEnCurso())
+                                                  .map(Cursada::getMateria).toList();
   }
 }
