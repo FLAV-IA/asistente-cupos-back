@@ -1,0 +1,669 @@
+{
+  "id": null,
+  "uid": "asistente-cupos-extendido",
+  "title": "Asistente de Cupos - Métricas Extendidas",
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Priorización - Batch",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "llm_priorizacion_batch",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Priorización - Batch - sum",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "llm_priorizacion_batch_sum",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Priorización - Batch - max",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "llm_priorizacion_batch_max",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 16,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Priorización - Batch - count",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "llm_priorizacion_batch_count",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 24,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Priorización - Total",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_priorizacion_total",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Priorización - Total - sum",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_priorizacion_total_sum",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 12,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Priorización - Total - max",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_priorizacion_total_max",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 12,
+        "y": 16,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Priorización - Total - count",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_priorizacion_total_count",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 12,
+        "y": 24,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Paso Asignación - Total",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_asignacion_total",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 24,
+        "y": 0,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Paso Asignación - Total - sum",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_asignacion_total_sum",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 24,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Paso Asignación - Total - max",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_asignacion_total_max",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 24,
+        "y": 16,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Paso Asignación - Total - count",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_asignacion_total_count",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 24,
+        "y": 24,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "OptaPlanner - Peticiones Asignadas",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "optaplanner_peticiones_asignadas",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 36,
+        "y": 0,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "OptaPlanner - Score Hard",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "optaplanner_score_hard",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 36,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "OptaPlanner - Score Soft",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "optaplanner_score_soft",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 36,
+        "y": 16,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "OptaPlanner - Solve Duration",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "optaplanner_solve",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 36,
+        "y": 24,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "OptaPlanner - Solve Duration - sum",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "optaplanner_solve_sum",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 36,
+        "y": 32,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "OptaPlanner - Solve Duration - max",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "optaplanner_solve_max",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 36,
+        "y": 40,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "OptaPlanner - Solve Duration - count",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "optaplanner_solve_count",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 36,
+        "y": 48,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Traducción - Batch",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "llm_traduccion_batch",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 48,
+        "y": 0,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Traducción - Batch - sum",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "llm_traduccion_batch_sum",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 48,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Traducción - Batch - max",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "llm_traduccion_batch_max",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 48,
+        "y": 16,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Traducción - Batch - count",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "llm_traduccion_batch_count",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 48,
+        "y": 24,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Traducción - Total",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_traduccion_total",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 60,
+        "y": 0,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Traducción - Total - sum",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_traduccion_total_sum",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 60,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Traducción - Total - max",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_traduccion_total_max",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 60,
+        "y": 16,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Traducción - Total - count",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_traduccion_total_count",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 60,
+        "y": 24,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Sugerencia - Total",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_sugerencia_total",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 72,
+        "y": 0,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Sugerencia - Total - sum",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_sugerencia_total_sum",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 72,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Sugerencia - Total - max",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_sugerencia_total_max",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 72,
+        "y": 16,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Sugerencia - Total - count",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "pipeline_sugerencia_total_count",
+          "refId": "A",
+          "instant": false
+        }
+      ],
+      "gridPos": {
+        "x": 72,
+        "y": 24,
+        "w": 12,
+        "h": 8
+      }
+    }
+  ],
+  "templating": {
+    "list": []
+  },
+  "annotations": {
+    "list": []
+  },
+  "overwrite": true
+}
