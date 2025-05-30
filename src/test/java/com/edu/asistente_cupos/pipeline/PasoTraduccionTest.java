@@ -1,40 +1,52 @@
 package com.edu.asistente_cupos.pipeline;
 
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
+import com.edu.asistente_cupos.observacion.ParalelizadorConMetrica;
+import com.edu.asistente_cupos.observacion.TimeTracker;
 import com.edu.asistente_cupos.service.traduccion.ConversorSugerenciasLLM;
 import com.edu.asistente_cupos.service.traduccion.TraductorDeSugerencias;
 import com.edu.asistente_cupos.service.traduccion.dto.SugerenciaInscripcionLLM;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import static com.edu.asistente_cupos.testutils.TestDataFactory.crearSugerenciaAsignadaDummy;
 import static com.edu.asistente_cupos.testutils.TestDataFactory.crearSugerenciaLLMDummy;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class PasoTraduccionTest {
   @Test
-  void alEjecutarLaTraduccionDeLasSugerenciasRetornaLasSugerenciasTraducidasCorrectamente() {
+  void alEjecutarLaTraduccionDeLasSugerenciasRetornaLasSugerenciasTraducidasCorrectamente() throws Exception {
     TraductorDeSugerencias traductor = mock(TraductorDeSugerencias.class);
     ConversorSugerenciasLLM conversor = mock(ConversorSugerenciasLLM.class);
-    PasoTraduccion paso = new PasoTraduccion(traductor, conversor);
+    TimeTracker tracker = mock(TimeTracker.class);
+    ParalelizadorConMetrica paralelizador = mock(ParalelizadorConMetrica.class);
 
-    List<SugerenciaInscripcion> sugerencias = List.of(crearSugerenciaAsignadaDummy());
-    List<SugerenciaInscripcionLLM> sugerenciasLLM = List.of(crearSugerenciaLLMDummy());
-    List<SugerenciaInscripcion> resultadoFinal = List.of(crearSugerenciaAsignadaDummy());
+    PasoTraduccion paso = new PasoTraduccion(traductor, conversor, tracker, paralelizador);
 
-    when(traductor.traducir(sugerencias)).thenReturn(sugerenciasLLM);
-    when(conversor.desdeLLM(sugerenciasLLM)).thenReturn(resultadoFinal);
+    List<SugerenciaInscripcion> input = List.of(crearSugerenciaAsignadaDummy());
+    List<List<SugerenciaInscripcion>> batches = List.of(input);
+    List<SugerenciaInscripcionLLM> traducidas = List.of(crearSugerenciaLLMDummy());
+    List<SugerenciaInscripcion> resultadoEsperado = List.of(crearSugerenciaAsignadaDummy());
+
+    when(paralelizador.procesar(anyString(), eq(batches), any())).thenReturn(List.of(traducidas));
+
+    when(conversor.desdeLLM(traducidas)).thenReturn(resultadoEsperado);
+
+    when(tracker.track(anyString(), any(Callable.class))).thenAnswer(invocation -> {
+      Callable<?> callable = invocation.getArgument(1);
+      return callable.call();
+    });
 
 
-    var resultado = paso.ejecutar(sugerencias);
+    List<SugerenciaInscripcion> resultado = paso.ejecutar(input);
 
-
-    assertThat(resultado).isEqualTo(resultadoFinal);
-    verify(traductor).traducir(sugerencias);
-    verify(conversor).desdeLLM(sugerenciasLLM);
+    
+    assertThat(resultado).isEqualTo(resultadoEsperado);
+    verify(paralelizador).procesar(anyString(), eq(batches), any());
+    verify(conversor).desdeLLM(traducidas);
+    verify(tracker).track(eq("pipeline.traduccion.total"), any());
   }
 }
