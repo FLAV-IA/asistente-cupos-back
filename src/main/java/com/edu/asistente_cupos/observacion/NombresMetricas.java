@@ -10,4 +10,5 @@ public class NombresMetricas {
   public static final String OPTA_SOLUCION = "optaplanner.solve";
   public static final String TRADUCCION_TOTAL = "pipeline.traduccion.total";
   public static final String TRADUCCION_BATCH = "llm.traduccion.batch";
+  public static final String ASISTENTE_SUGERENCIA_TOTAL = "pipeline.sugerencia.total";
 }

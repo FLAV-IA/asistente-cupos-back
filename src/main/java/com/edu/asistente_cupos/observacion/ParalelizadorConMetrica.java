@@ -5,7 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Function;
 
 @Component
@@ -16,10 +18,17 @@ public class ParalelizadorConMetrica {
 
   public <T, R> List<R> procesar(String nombreMetrica, List<T> inputs, Function<T, R> funcion) {
     List<CompletableFuture<R>> tareas = inputs.stream()
-      .map(input -> CompletableFuture.supplyAsync(() ->
-        meterRegistry.timer(nombreMetrica).record(() -> funcion.apply(input)), executor))
-      .toList();
+                                              .map(input -> CompletableFuture.supplyAsync(() -> {
+                                                try {
+                                                  return meterRegistry.timer(nombreMetrica)
+                                                                      .recordCallable(
+                                                                        () -> funcion.apply(input));
+                                                } catch (Exception e) {
+                                                  throw new RuntimeException(e);
+                                                }
+                                              }, executor)).toList();
 
     return tareas.stream().map(CompletableFuture::join).toList();
   }
 }
+

@@ -43,7 +43,7 @@ class PasoTraduccionTest {
 
     List<SugerenciaInscripcion> resultado = paso.ejecutar(input);
 
-    
+
     assertThat(resultado).isEqualTo(resultadoEsperado);
     verify(paralelizador).procesar(anyString(), eq(batches), any());
     verify(conversor).desdeLLM(traducidas);
