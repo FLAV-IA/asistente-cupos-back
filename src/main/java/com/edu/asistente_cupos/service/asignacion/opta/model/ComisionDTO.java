@@ -2,6 +2,7 @@ package com.edu.asistente_cupos.service.asignacion.opta.model;
 
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Materia;
+import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -24,6 +25,6 @@ public class ComisionDTO {
   private int cupo;
 
   public Comision toDomain(Materia materia) {
-    return new Comision(this.codigo, this.horario, this.cupo, materia);
+    return new Comision(this.codigo, HorarioParser.parse(this.horario), this.cupo, materia);
   }
 }

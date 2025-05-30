@@ -2,6 +2,7 @@ package com.edu.asistente_cupos.service.asignacion.manual;
 
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Materia;
+import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -55,6 +56,6 @@ class GestorDeCuposTest {
 
   private Comision crearComision(String codigo, int cupo) {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Ejemplo").build();
-    return new Comision(codigo, "lunes", cupo, materia);
+    return new Comision(codigo, HorarioParser.parse("LUNES 09:00 a 10:00"), cupo, materia);
   }
 }

@@ -3,6 +3,7 @@ package com.edu.asistente_cupos.service.asignacion.opta;
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Estudiante;
 import com.edu.asistente_cupos.domain.Materia;
+import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import com.edu.asistente_cupos.domain.priorizacion.PeticionPorMateriaPriorizada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAsignada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
@@ -24,7 +25,7 @@ class AsignadorDeCuposOptaPlannerEmpateTest {
   @Test
   void enEmpateDePrioridadSoloUnoEsAsignado() {
     Materia materia = Materia.builder().codigo("MAT2").nombre("Física").build();
-    Comision comision = new Comision("MAT2-A", "martes 10-12", 1, materia);
+    Comision comision = new Comision("MAT2-A", HorarioParser.parse("MARTES 10:00 a 12:00"), 1, materia);
 
     Estudiante e1 = Estudiante.builder().dni("300").nombre("Juan").build();
     Estudiante e2 = Estudiante.builder().dni("400").nombre("Sofi").build();
@@ -67,7 +68,7 @@ class AsignadorDeCuposOptaPlannerEmpateTest {
   void noSeSuperaElCupoDisponibleDeUnaComision() {
     Materia fisica = Materia.builder().codigo("MAT2").nombre("Física").build();
 
-    Comision unicaComision = new Comision("MAT2-A", "martes 10-12", 3, fisica);
+    Comision unicaComision = new Comision("MAT2-A", HorarioParser.parse("LUNES 10:00 a 12:00"), 3, fisica);
 
     Estudiante juan = Estudiante.builder().dni("300").nombre("Juan").build();
     Estudiante sofi = Estudiante.builder().dni("400").nombre("Sofi").build();

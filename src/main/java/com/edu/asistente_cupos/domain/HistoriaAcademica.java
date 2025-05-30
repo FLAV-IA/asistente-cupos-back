@@ -46,7 +46,12 @@ public class HistoriaAcademica {
   public Boolean cumpleCorrelativas(Materia materia) {
     if (cursadas == null)
       return false;
+
     List<Materia> correlativasNecesarias = materia.getCorrelativas();
+    if (correlativasNecesarias == null || correlativasNecesarias.isEmpty()) {
+      return true;
+    }
+
     return correlativasNecesarias.stream().allMatch(
       correlativa -> cursadas.stream().filter(Cursada::fueAprobada).anyMatch(
         cursada -> cursada.getMateria().getCodigo().equals(correlativa.getCodigo())));

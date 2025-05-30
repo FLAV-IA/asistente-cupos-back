@@ -28,7 +28,7 @@ class ComisionSeederTest {
     List<Comision> comisiones = comisionRepo.findAll();
     assertThat(comisiones).hasSize(2);
     Comision comision = comisionRepo.findById("TEST101-COM1").orElseThrow();
-    assertThat(comision.getHorario()).isEqualTo("Martes 10:00 a 12:00");
+    assertThat(comision.getHorario().toString()).isEqualTo("MARTES 10:00 a 12:00");
     assertThat(comision.getCupo()).isEqualTo(30);
     assertThat(comision.getMateria()).isNotNull();
     assertThat(comision.getMateria().getCodigo()).isEqualTo("TEST101");

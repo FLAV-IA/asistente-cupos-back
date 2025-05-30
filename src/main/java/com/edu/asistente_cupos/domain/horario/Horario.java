@@ -3,9 +3,7 @@ package com.edu.asistente_cupos.domain.horario;
 import java.util.List;
 import java.util.Objects;
 
-public class Horario {
-  private final List<RangoHorario> bloques;
-
+public record Horario(List<RangoHorario> bloques) {
   public Horario(List<RangoHorario> bloques) {
     this.bloques = List.copyOf(bloques);
   }
@@ -16,15 +14,6 @@ public class Horario {
 
   public boolean estaVacio() {
     return bloques.isEmpty();
-  }
-
-  public List<RangoHorario> getBloques() {
-    return bloques;
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(bloques);
   }
 
   @Override

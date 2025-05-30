@@ -2,6 +2,7 @@ package com.edu.asistente_cupos.service.asignacion.manual;
 
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Materia;
+import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import com.edu.asistente_cupos.domain.priorizacion.PeticionPorMateriaPriorizada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAsignada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
@@ -21,7 +22,7 @@ class AsignadorDeCuposManualTest {
   @Test
   void asignaCupoSiHayDisponibilidad() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Mat").build();
-    Comision comision = new Comision("COM1", "lunes", 1, materia);
+    Comision comision = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 1, materia);
 
     PeticionPorMateriaPriorizada peticion = new PeticionPorMateriaPriorizada(crearEstudianteDummy(),
       materia, List.of(comision), true, 99, "AVZ");
@@ -43,7 +44,7 @@ class AsignadorDeCuposManualTest {
   @Test
   void rechazaPeticionSiNoHayCupos() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Mat").build();
-    Comision comision = new Comision("COM1", "lunes", 0, materia);
+    Comision comision = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 0, materia);
 
     PeticionPorMateriaPriorizada peticion = new PeticionPorMateriaPriorizada(crearEstudianteDummy(),
       materia, List.of(comision), true, 99, "COR");
@@ -64,7 +65,7 @@ class AsignadorDeCuposManualTest {
   @Test
   void soloAsignaCupoAQuienTieneMayorPrioridad() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Mat").build();
-    Comision comision = new Comision("COM1", "lunes", 1, materia);
+    Comision comision = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 1, materia);
 
     PeticionPorMateriaPriorizada alta = new PeticionPorMateriaPriorizada(
       crearEstudianteDummy("111"), materia, List.of(comision), true, 100, "AVZ");

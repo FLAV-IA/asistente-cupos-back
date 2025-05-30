@@ -3,6 +3,7 @@ package com.edu.asistente_cupos.testutils;
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Estudiante;
 import com.edu.asistente_cupos.domain.Materia;
+import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistente_cupos.domain.peticion.PeticionPorMateria;
 import com.edu.asistente_cupos.domain.priorizacion.PeticionPorMateriaPriorizada;
@@ -42,7 +43,7 @@ public class TestDataFactory {
   }
 
   public static Comision crearComisionDummy(String codigo, int cupo, Materia materia) {
-    return new Comision(codigo, "Lunes 10-12", cupo, materia);
+    return new Comision(codigo, HorarioParser.parse("LUNES 09:00 a 10:00"), cupo, materia);
   }
 
   public static PeticionPorMateria crearPeticionPorMateriaDummy() {

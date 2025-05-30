@@ -1,5 +1,8 @@
 package com.edu.asistente_cupos.domain;
 
+import com.edu.asistente_cupos.domain.horario.Horario;
+import com.edu.asistente_cupos.mapper.HorarioConverter;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -19,7 +22,10 @@ import java.util.Objects;
 public class Comision {
   @Id
   private String codigo;
-  private String horario;
+
+  @Convert(converter = HorarioConverter.class)
+  private Horario horario;
+
   private int cupo;
 
   @ManyToOne

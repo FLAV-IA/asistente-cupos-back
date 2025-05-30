@@ -15,7 +15,7 @@ class HorarioParserTest {
   void parseaUnSoloBloqueCorrectamente() {
     Horario horario = HorarioParser.parse("LUNES 09:00 a 10:00");
 
-    List<RangoHorario> bloques = horario.getBloques();
+    List<RangoHorario> bloques = horario.bloques();
     assertEquals(1, bloques.size());
 
     RangoHorario bloque = bloques.get(0);
@@ -28,10 +28,10 @@ class HorarioParserTest {
   void parseaMultiplesBloquesSeparadosPorComa() {
     Horario horario = HorarioParser.parse("LUNES 09:00 a 10:00, MARTES 10:00 a 11:00");
 
-    assertEquals(2, horario.getBloques().size());
+    assertEquals(2, horario.bloques().size());
 
-    assertEquals(DiaSemana.LUNES, horario.getBloques().get(0).dia());
-    assertEquals(DiaSemana.MARTES, horario.getBloques().get(1).dia());
+    assertEquals(DiaSemana.LUNES, horario.bloques().get(0).dia());
+    assertEquals(DiaSemana.MARTES, horario.bloques().get(1).dia());
   }
 
   @Test

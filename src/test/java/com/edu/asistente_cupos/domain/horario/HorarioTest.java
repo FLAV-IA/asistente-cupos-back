@@ -19,14 +19,14 @@ class HorarioTest {
   void horarioVacio_noTieneBloques() {
     Horario horario = new Horario(List.of());
     assertTrue(horario.estaVacio());
-    assertEquals(0, horario.getBloques().size());
+    assertEquals(0, horario.bloques().size());
   }
 
   @Test
   void horarioNoVacio_tieneBloques() {
     Horario horario = new Horario(List.of(bloque(DiaSemana.LUNES, "08:00", "09:00")));
     assertFalse(horario.estaVacio());
-    assertEquals(1, horario.getBloques().size());
+    assertEquals(1, horario.bloques().size());
   }
 
   @Test

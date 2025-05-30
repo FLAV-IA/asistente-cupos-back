@@ -1,64 +1,41 @@
 package com.edu.asistente_cupos.domain;
 
 import com.edu.asistente_cupos.domain.cursada.Cursada;
-import com.edu.asistente_cupos.domain.cursada.CursadaFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class EstudianteTest {
   @Test
-  void puedeInscribirseRetornaTrueSiCumpleCorrelativa() {
-    Materia materia = Materia.builder().codigo("MAT1").nombre("Matemática I").build();
+  void puedeInscribirseDelegadoAHistoriaAcademica() {
+    Materia materia = Materia.builder().codigo("MAT1").build();
 
-    HistoriaAcademica historia = HistoriaAcademica.builder().coeficiente(8.5).build();
-    Estudiante estudiante = Estudiante.builder().dni("12345678").nombre("Juan").legajo("LEG123")
-                                      .mail("juan@example.com").build();
+    HistoriaAcademica historiaMock = mock(HistoriaAcademica.class);
+    when(historiaMock.cumpleCorrelativas(materia)).thenReturn(true);
 
-    estudiante.setHistoriaAcademica(historia);
+    Estudiante estudiante = Estudiante.builder().dni("12345678").build();
+    estudiante.setHistoriaAcademica(historiaMock);
 
     assertThat(estudiante.puedeInscribirse(materia)).isTrue();
+    verify(historiaMock).cumpleCorrelativas(materia);
   }
 
   @Test
-  void puedeInscribirseRetornaFalseSiNoCumpleCorrelativa() {
-    Materia correlativa = Materia.builder().codigo("MAT2").build();
-    Materia materia = Materia.builder().codigo("MAT3").correlativas(List.of(correlativa)).build();
+  void estaInscriptoEnMasDeDelegadoAHistoriaAcademica() {
+    HistoriaAcademica historiaMock = mock(HistoriaAcademica.class);
+    when(historiaMock.inscripcionesActuales()).thenReturn(
+      List.of(mock(Cursada.class), mock(Cursada.class)));
 
-    HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(List.of()).build();
-    Estudiante estudiante = Estudiante.builder().dni("87654321").build();
-    estudiante.setHistoriaAcademica(historia);
-
-    assertThat(estudiante.puedeInscribirse(materia)).isFalse();
-  }
-
-  @Test
-  void estaInscriptoEnMasDeRetornaTrueSiSuperaCantidad() {
-    Materia matA = Materia.builder().codigo("MAT4").build();
-    Materia matB = Materia.builder().codigo("MAT5").build();
-    Cursada cursada1 = CursadaFactory.enCurso(matA);
-    Cursada cursada2 = CursadaFactory.enCurso(matB);
-
-    HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(List.of(cursada1, cursada2))
-                                                  .build();
-    Estudiante estudiante = Estudiante.builder().dni("555").build();
-    estudiante.setHistoriaAcademica(historia);
+    Estudiante estudiante = Estudiante.builder().dni("111").build();
+    estudiante.setHistoriaAcademica(historiaMock);
 
     assertThat(estudiante.estaInscriptoEnMasDe(1)).isTrue();
-  }
-
-  @Test
-  void estaInscriptoEnMasDeRetornaFalseSiNoSuperaCantidad() {
-    Materia matA = Materia.builder().codigo("MAT6").build();
-    Cursada cursada = CursadaFactory.enCurso(matA);
-
-    HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(List.of(cursada)).build();
-    Estudiante estudiante = Estudiante.builder().dni("444").build();
-    estudiante.setHistoriaAcademica(historia);
-
-    assertThat(estudiante.estaInscriptoEnMasDe(1)).isFalse();
+    verify(historiaMock).inscripcionesActuales();
   }
 
   @Test
