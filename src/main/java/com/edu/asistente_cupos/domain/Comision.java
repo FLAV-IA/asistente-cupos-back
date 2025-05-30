@@ -40,4 +40,8 @@ public class Comision {
     Comision that = (Comision) o;
     return Objects.equals(codigo, that.codigo);
   }
+
+  public boolean tieneCupo(){
+    return this.cupo > 0;
+  }
 }

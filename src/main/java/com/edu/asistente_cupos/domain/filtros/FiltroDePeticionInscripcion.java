@@ -4,47 +4,54 @@ import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistente_cupos.domain.peticion.PeticionPorMateria;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiPredicate;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
-public interface FiltroDePeticionInscripcion {
-  void setFiltroSiguiente(FiltroDePeticionInscripcion siguiente);
+public abstract class FiltroDePeticionInscripcion {
+  @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+  private Optional<FiltroDePeticionInscripcion> siguiente = Optional.empty();
 
-  List<PeticionInscripcion> filtrar(List<PeticionInscripcion> peticiones);
-
-  default List<PeticionInscripcion> filtrarPeticionesSegunPredicado(List<PeticionInscripcion> peticiones, BiPredicate<Comision, PeticionInscripcion> comisionPredicate) {
-    List<PeticionInscripcion> filtradas = new ArrayList<>();
-
-    for (PeticionInscripcion peticion : peticiones) {
-      List<PeticionPorMateria> peticionPorMateriasFiltradas = new ArrayList<>();
-
-      for (PeticionPorMateria ppm : peticion.getPeticionPorMaterias()) {
-        List<Comision> comisionesFiltradas = ppm.getComisiones().stream().filter(
-          comision -> comisionPredicate.test(comision, peticion)).collect(Collectors.toList());
-
-        if (!comisionesFiltradas.isEmpty()) {
-          ppm.setComisiones(comisionesFiltradas);
-          peticionPorMateriasFiltradas.add(ppm);
-        }
-      }
-
-      if (!peticionPorMateriasFiltradas.isEmpty()) {
-        peticion.setPeticionPorMaterias(peticionPorMateriasFiltradas);
-        filtradas.add(peticion);
-      }
-    }
-    return filtradas;
+  public void setFiltroSiguiente(FiltroDePeticionInscripcion siguiente) {
+    this.siguiente = Optional.ofNullable(siguiente);
   }
 
-  default List<PeticionInscripcion> filtrarPeticiones(
-    List<PeticionInscripcion> peticiones,
-    Predicate<PeticionInscripcion> predicate
-  ) {
-    return peticiones.stream()
-                     .filter(predicate)
-                     .toList();
+  public List<PeticionInscripcion> filtrar(List<PeticionInscripcion> peticiones) {
+    List<PeticionInscripcion> filtradas = aplicarFiltro(peticiones);
+    return siguiente.map(f -> f.filtrar(filtradas)).orElse(filtradas);
+  }
+
+  protected abstract List<PeticionInscripcion> aplicarFiltro(List<PeticionInscripcion> peticiones);
+
+  protected List<PeticionInscripcion> filtrarPeticionesPorComision(List<PeticionInscripcion> peticiones, Function<PeticionInscripcion, Predicate<Comision>> criterioPorPeticion) {
+    return peticiones.stream().map(p -> filtrarPeticion(p, criterioPorPeticion.apply(p)))
+                     .filter(Objects::nonNull).toList();
+  }
+
+  private PeticionInscripcion filtrarPeticion(PeticionInscripcion peticion, Predicate<Comision> criterio) {
+    List<PeticionPorMateria> materiasFiltradas = peticion.getPeticionPorMaterias().stream().map(
+      ppm -> filtrarPorMateria(ppm, criterio)).filter(Objects::nonNull).toList();
+
+    if (materiasFiltradas.isEmpty())
+      return null;
+
+    return PeticionInscripcion.builder().estudiante(peticion.getEstudiante())
+                              .peticionPorMaterias(materiasFiltradas).build();
+  }
+
+  private PeticionPorMateria filtrarPorMateria(PeticionPorMateria ppm, Predicate<Comision> criterio) {
+    List<Comision> comisionesFiltradas = ppm.getComisiones().stream().filter(criterio).toList();
+
+    if (comisionesFiltradas.isEmpty())
+      return null;
+
+    return PeticionPorMateria.builder().comisiones(comisionesFiltradas)
+                             .cumpleCorrelativa(ppm.isCumpleCorrelativa()).build();
+  }
+
+  protected List<PeticionInscripcion> filtrarPeticiones(List<PeticionInscripcion> peticiones, Predicate<PeticionInscripcion> predicate) {
+    return peticiones.stream().filter(predicate).toList();
   }
 }

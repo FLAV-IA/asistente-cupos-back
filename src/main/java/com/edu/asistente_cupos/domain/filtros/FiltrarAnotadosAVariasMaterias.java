@@ -8,25 +8,14 @@ import java.util.function.Predicate;
 /**
  * Filtra las peticiones a quienes están anotados a más de dos (configurable) materias.
  */
-public class FiltrarAnotadosAVariasMaterias implements FiltroDePeticionInscripcion {
+public class FiltrarAnotadosAVariasMaterias extends FiltroDePeticionInscripcion {
   private static final int MAX_MATERIAS = 2;
-  private FiltroDePeticionInscripcion siguiente;
 
   @Override
-  public void setFiltroSiguiente(FiltroDePeticionInscripcion siguiente) {
-    this.siguiente = siguiente;
-  }
-
-  @Override
-  public List<PeticionInscripcion> filtrar(List<PeticionInscripcion> peticiones) {
+  protected List<PeticionInscripcion> aplicarFiltro(List<PeticionInscripcion> peticiones) {
     Predicate<PeticionInscripcion> predicate = p -> !p.getEstudiante()
-                                                     .estaInscriptoEnMasDe(MAX_MATERIAS);
+                                                      .estaInscriptoEnMasDe(MAX_MATERIAS);
 
-    List<PeticionInscripcion> filtradas = filtrarPeticiones(peticiones, predicate);
-
-    if (siguiente != null) {
-      return siguiente.filtrar(filtradas);
-    }
-    return filtradas;
+    return filtrarPeticiones(peticiones, predicate);
   }
 }

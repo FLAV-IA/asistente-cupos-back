@@ -12,12 +12,9 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class ConfiguracionFiltrosInscripcion {
-
   /**
    * @return un filtro de petición de inscripción inicial que conoce su cadena de filtros.
    */
-
-
   @Bean
   public FiltroDePeticionInscripcion cadenaDeFiltros() {
     FiltroDePeticionInscripcion filtro1 = new FiltrarAnotadosAVariasMaterias();
