@@ -90,6 +90,14 @@ dependencies {
     implementation 'org.optaplanner:optaplanner-core:9.44.0.Final'
     implementation 'org.optaplanner:optaplanner-spring-boot-starter:9.44.0.Final'
     testImplementation 'org.optaplanner:optaplanner-test:9.44.0.Final'
+    testImplementation 'org.testcontainers:mysql:1.19.3'
+    testImplementation 'org.testcontainers:junit-jupiter:1.19.3'
+    implementation 'com.mysql:mysql-connector-j:8.3.0'
+    constraints {
+        implementation('org.apache.commons:commons-compress:1.27.1') {
+            because 'Fixes CVE-2024-26308 y CVE-2024-25710 en testcontainers'
+        }
+    }
 }
 
 tasks.register('setupCodeStyle', Copy) {
