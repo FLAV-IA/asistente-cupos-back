@@ -1,10 +1,11 @@
 package com.edu.asistente_cupos.seeder;
 
 import com.edu.asistente_cupos.Utils.ClasspathResourceLoader;
-import com.edu.asistente_cupos.domain.Cursada;
 import com.edu.asistente_cupos.domain.Estudiante;
 import com.edu.asistente_cupos.domain.HistoriaAcademica;
 import com.edu.asistente_cupos.domain.Materia;
+import com.edu.asistente_cupos.domain.cursada.Cursada;
+import com.edu.asistente_cupos.domain.cursada.CursadaFactory;
 import com.edu.asistente_cupos.repository.ComisionRepository;
 import com.edu.asistente_cupos.repository.EstudianteRepository;
 import com.edu.asistente_cupos.repository.MateriaRepository;
@@ -19,7 +20,6 @@ import org.springframework.core.annotation.Order;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -55,35 +55,32 @@ public class EstudianteConHistoriaAcademicaSeeder {
   private HistoriaAcademica obtenerHistoriaAcademica(String[] row) {
     Double coeficiente = Double.parseDouble(row[4].trim().equals("-") ? "0" : row[4].trim());
     int totalInscripcionesHistoricas = Integer.parseInt(row[5].trim());
-    String inscripcionesActuales = row[6].trim();
     int totalHistoricasAprobadas = 0;
 
-    Set<Materia> comisionesAnotadas = parsearMaterias(inscripcionesActuales, Collectors.toSet());
+    List<Cursada> cursadasActuales = parsearMaterias(row[6].trim(), Collectors.toList()).stream()
+                                                                                        .map(
+                                                                                          CursadaFactory::enCurso)
+                                                                                        .toList();
 
     List<Cursada> cursadasAnterioresC12024 = construirCursadas(row[7].trim(), row[8].trim());
     List<Cursada> cursadasAnterioresC22024 = construirCursadas(row[9].trim(), row[10].trim());
+
     List<Cursada> cursadasAnteriores = Stream
-      .concat(cursadasAnterioresC12024.stream(), cursadasAnterioresC22024.stream()).toList();
+      .of(cursadasAnterioresC12024, cursadasAnterioresC22024, cursadasActuales)
+      .flatMap(Collection::stream).toList();
 
     return HistoriaAcademica.builder().totalInscripcionesHistoricas(totalInscripcionesHistoricas)
                             .totalHistoricasAprobadas(totalHistoricasAprobadas)
-                            .cursadasAnteriores(cursadasAnteriores).coeficiente(coeficiente)
-                            .inscripcionesActuales(comisionesAnotadas).build();
+                            .coeficiente(coeficiente).cursadas(cursadasAnteriores).build();
   }
 
-  /**
-   * ?
-   *
-   * @param inscriptas string separado por comas que representa las materias inscriptas para un cuatrimestre
-   * @param aprobadas  string separado por comas que representa las materias aprobadas para un cuatrimestre
-   * @return la lista de cursadas
-   */
   private List<Cursada> construirCursadas(String inscriptas, String aprobadas) {
     List<Materia> materiasCursadas = parsearMaterias(inscriptas, Collectors.toList());
-    List<Materia> materiasaprobadas = parsearMaterias(aprobadas, Collectors.toList());
+    List<Materia> materiasAprobadas = parsearMaterias(aprobadas, Collectors.toList());
+
     return materiasCursadas.stream().map(
-      materia -> Cursada.builder().materia(materia).fueAprobada(materiasaprobadas.contains(materia))
-                        .build()).collect(Collectors.toList());
+      materia -> materiasAprobadas.contains(materia) ? CursadaFactory.aprobada(materia,
+        10) : CursadaFactory.desaprobada(materia, 2)).toList();
   }
 
   private <T extends Collection<Materia>> T parsearMaterias(String materias, Collector<Materia, ?, T> collector) {

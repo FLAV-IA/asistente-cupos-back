@@ -34,4 +34,8 @@ public class Estudiante {
   public boolean puedeInscribirse(Materia materia) {
     return this.historiaAcademica.cumpleCorrelativas(materia);
   }
+
+  public boolean estaInscriptoEnMasDe(int cantidad) {
+    return this.historiaAcademica.inscripcionesActuales().size() > cantidad;
+  }
 }

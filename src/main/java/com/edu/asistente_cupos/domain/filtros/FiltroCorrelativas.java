@@ -1,39 +1,16 @@
 package com.edu.asistente_cupos.domain.filtros;
 
-import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
 
 import java.util.List;
-import java.util.function.BiPredicate;
 
 /**
- * Filtra las peticiones que no cumplen correlativas y adeuda >2 materias para finalizar la carrera
+ * Filtra las peticiones que no cumplen correlativas
  */
-public class FiltroCorrelativas implements FiltroDePeticionInscripcion {
-  private FiltroDePeticionInscripcion siguiente;
-
-
+public class FiltroCorrelativas extends FiltroDePeticionInscripcion {
   @Override
-  public void setFiltroSiguiente(FiltroDePeticionInscripcion siguiente) {
-    this.siguiente = siguiente;
-  }
-
-  @Override
-  public List<PeticionInscripcion> filtrar(List<PeticionInscripcion> peticiones) {
-
-    BiPredicate<Comision, PeticionInscripcion> comisionPredicate = (c, p) -> p.getEstudiante()
-                                                                              .puedeInscribirse(
-                                                                                c.getMateria());
-
-    List<PeticionInscripcion> filtradas = filtrarPeticionesSegunPredicado(peticiones,
-      comisionPredicate);
-
-    if (siguiente != null) {
-      return siguiente.filtrar(filtradas);
-    }
-    return filtradas;
+  protected List<PeticionInscripcion> aplicarFiltro(List<PeticionInscripcion> peticiones) {
+    return filtrarPeticionesPorComision(peticiones,
+      peticion -> comision -> peticion.getEstudiante().puedeInscribirse(comision.getMateria()));
   }
 }
-
-
-
