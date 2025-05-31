@@ -13,9 +13,6 @@ public class AsignacionConstraintProvider implements ConstraintProvider {
     return new Constraint[]{cupoExcedidoPorComision(factory),       // Regla hard
       peticionNoAsignada(factory),            //️ Soft para permitir inviabilidad controlada
       prioridadAltaFavorecida(factory),       // Elegí al que mejor prioridad tiene
-      favorecerAVZ_COR_SIN(factory),          // favorecer etiquetas
-      desempatarPorCF(factory),             // mejorcoeficiente
-
     };
   }
 
@@ -34,23 +31,7 @@ public class AsignacionConstraintProvider implements ConstraintProvider {
   private Constraint prioridadAltaFavorecida(ConstraintFactory factory) {
     return factory.from(PeticionAsignableDTO.class).filter(p -> p.getComisionAsignada() != null)
                   .reward("Prioridad alta favorecida", HardSoftScore.ONE_SOFT,
-                    p -> p.getPrioridad() * p.getPrioridad());
-  }
-
-
-  @SuppressWarnings("deprecation")
-  private Constraint favorecerAVZ_COR_SIN(ConstraintFactory factory) {
-    return factory.forEach(PeticionAsignableDTO.class).filter(p -> p.getComisionAsignada() != null)
-                  .rewardConfigurable("Etiquetas AVZ, COR, SIN favorecidas", p -> {
-                    int score = 0;
-                    if (p.getEtiquetas().contains("[AVZ]"))
-                      score += 10;
-                    if (p.getEtiquetas().contains("[COR]"))
-                      score += 8;
-                    if (p.getEtiquetas().contains("[SIN]"))
-                      score += 6;
-                    return score;
-                  });
+                    PeticionAsignableDTO::getPrioridad);
   }
 
   /**
@@ -67,6 +48,4 @@ public class AsignacionConstraintProvider implements ConstraintProvider {
                     }
                   });
   }
-
-
 }
