@@ -43,6 +43,12 @@ public class HistoriaAcademica {
                                                   .toList();
   }
 
+  public List<Cursada> cursadasAnteriores() {
+    return
+      cursadas == null ? List.of() : cursadas.stream().filter(c -> !c.getEstado().estaEnCurso())
+                                             .toList();
+  }
+
   public Boolean cumpleCorrelativas(Materia materia) {
     if (cursadas == null)
       return false;
