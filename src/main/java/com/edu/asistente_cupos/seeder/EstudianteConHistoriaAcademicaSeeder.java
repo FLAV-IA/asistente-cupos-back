@@ -55,7 +55,7 @@ public class EstudianteConHistoriaAcademicaSeeder {
   private HistoriaAcademica obtenerHistoriaAcademica(String[] row) {
     Double coeficiente = Double.parseDouble(row[4].trim().equals("-") ? "0" : row[4].trim());
     int totalInscripcionesHistoricas = Integer.parseInt(row[5].trim());
-    int totalHistoricasAprobadas = 0;
+    int totalHistoricasAprobadas = Integer.parseInt((row.length==11|| row[11].trim().equals("-") ) ? "0" : row[11].trim());
 
     List<Cursada> cursadasActuales = parsearMaterias(row[6].trim(), Collectors.toList()).stream()
                                                                                         .map(

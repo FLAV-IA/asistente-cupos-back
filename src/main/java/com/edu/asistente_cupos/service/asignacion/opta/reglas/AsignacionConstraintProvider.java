@@ -33,8 +33,8 @@ public class AsignacionConstraintProvider implements ConstraintProvider {
 
   private Constraint prioridadAltaFavorecida(ConstraintFactory factory) {
     return factory.from(PeticionAsignableDTO.class).filter(p -> p.getComisionAsignada() != null)
-                  .reward("Prioridad alta favorecida", HardSoftScore.ofSoft(10),
-                    p -> 100 - p.getPrioridad());
+                  .reward("Prioridad alta favorecida", HardSoftScore.ONE_SOFT,
+                    p -> p.getPrioridad() * p.getPrioridad());
   }
 
 

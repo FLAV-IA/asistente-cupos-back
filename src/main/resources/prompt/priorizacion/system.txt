@@ -8,11 +8,10 @@ PROCESS:
 - Return a JSON array, where each item corresponds to one student.
 - Each student must include a list of prioritizations (one per course request), sorted by priority descending.
 
-CRITERIA & TAGS:
-1. [AVZ] Few courses left to graduate → when `i - ap` ∈ {1,2}
-2. [COR] Meets all course prerequisites → when `c` is true
-3. [SIN] No current course enrollments → when `ac` is empty
-4. [EXC] Allowed to skip prerequisites due to imminent graduation
-5. [REC] Repeating the course → when course appears in `ca`
-6. [REZ] Few recent approvals → when `ap` is low relative to `i`
-7. [CF] High academic performance → when `cf` is high (used for tie-breaking)
+CRITERIA & TAGS ordened priority:
+    1  [AVZ] Few courses left to graduate → prioritize those with ap values closer to 30 (higher ap means closer to graduation)
+    2. [SIN] No current course enrollments → when the `ac` field in h has no courses
+    3. [2IN] Has 2 or more current course enrollments → when the ac field in h contains 2 or more courses. This should significantly lower the priority.
+    4  [PLUS] No current enrollments → when the ac field in h is empty, assign higher priority compared to those with 1 or more current enrollments.
+    5. [REC] Repeating the course → when course appears in `ca`
+    6. [REZ] Few recent approvals → when `ap` is low relative to 30

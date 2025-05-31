@@ -20,7 +20,7 @@ import java.util.function.ToIntFunction;
 @RequiredArgsConstructor
 @Slf4j
 public class PasoPriorizacion implements Paso<List<PeticionInscripcion>, List<PeticionPorMateriaPriorizada>> {
-  private static final int MAX_TOKENS_BATCH = 6000;
+  private static final int MAX_TOKENS_BATCH = 9000;
 
   private final PriorizadorDePeticiones priorizador;
   private final ConversorResultadoLLM conversor;
