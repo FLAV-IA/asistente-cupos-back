@@ -13,7 +13,8 @@ class ComisionTest {
   void creaComisionConBuilder() {
     Materia materia = Materia.builder().codigo("MAT101").nombre("Matemática I").build();
 
-    Comision comision = Comision.builder().codigo("C1").horario(HorarioParser.parse("LUNES 10:30 a 12:30")).cupo(30)
+    Comision comision = Comision.builder().codigo("C1")
+                                .horario(HorarioParser.parse("LUNES 10:30 a 12:30")).cupo(30)
                                 .materia(materia).build();
 
     assertEquals("C1", comision.getCodigo());

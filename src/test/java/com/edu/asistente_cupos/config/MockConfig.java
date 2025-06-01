@@ -17,23 +17,19 @@ public class MockConfig {
   public LlmClient llmClient() {
     LlmClient llmClient = mock(LlmClient.class);
 
-    ArgumentMatcher<Prompt> esPromptDePriorizacion = prompt ->
-      prompt != null &&
-        prompt.getInstructions() != null &&
-        prompt.getInstructions().stream()
-              .anyMatch(msg -> msg.getText().contains("evaluate their course enrollment requests"));
+    ArgumentMatcher<Prompt> esPromptDePriorizacion = prompt -> prompt != null &&
+      prompt.getInstructions() != null && prompt.getInstructions().stream().anyMatch(
+      msg -> msg.getText().contains("evaluate their course enrollment requests"));
 
-    ArgumentMatcher<Prompt> esPromptDeTraduccion = prompt ->
-      prompt != null &&
-        prompt.getInstructions() != null &&
-        prompt.getInstructions().stream()
-              .anyMatch(msg -> msg.getText().contains("cupoAsignado"));
+    ArgumentMatcher<Prompt> esPromptDeTraduccion = prompt -> prompt != null &&
+      prompt.getInstructions() != null &&
+      prompt.getInstructions().stream().anyMatch(msg -> msg.getText().contains("cupoAsignado"));
 
-    when(llmClient.call(argThat(esPromptDePriorizacion)))
-      .thenReturn(TestDataFactory.respuestaChatResponsePriorizacion());
+    when(llmClient.call(argThat(esPromptDePriorizacion))).thenReturn(
+      TestDataFactory.respuestaChatResponsePriorizacion());
 
-    when(llmClient.call(argThat(esPromptDeTraduccion)))
-      .thenReturn(TestDataFactory.respuestaChatResponseTraduccion());
+    when(llmClient.call(argThat(esPromptDeTraduccion))).thenReturn(
+      TestDataFactory.respuestaChatResponseTraduccion());
 
     return llmClient;
   }

@@ -56,12 +56,11 @@ public class EstudianteConHistoriaAcademicaSeeder {
     Double coeficiente = Double.parseDouble(row[4].trim().equals("-") ? "0" : row[4].trim());
     int totalInscripcionesHistoricas = Integer.parseInt(row[5].trim());
     String inscripcionesActuales = row[6].trim();
-    int totalHistoricasAprobadas = Integer.parseInt((row.length==11|| row[11].trim().equals("-") ) ? "0" : row[11].trim());
+    int totalHistoricasAprobadas = Integer.parseInt(
+      (row.length == 11 || row[11].trim().equals("-")) ? "0" : row[11].trim());
 
-    List<Cursada> cursadasActuales = parsearMaterias(inscripcionesActuales, Collectors.toList()).stream()
-                                                                                        .map(
-                                                                                          CursadaFactory::enCurso)
-                                                                                        .toList();
+    List<Cursada> cursadasActuales = parsearMaterias(inscripcionesActuales, Collectors.toList())
+      .stream().map(CursadaFactory::enCurso).toList();
 
     List<Cursada> cursadasAnterioresC12024 = construirCursadas(row[7].trim(), row[8].trim());
     List<Cursada> cursadasAnterioresC22024 = construirCursadas(row[9].trim(), row[10].trim());

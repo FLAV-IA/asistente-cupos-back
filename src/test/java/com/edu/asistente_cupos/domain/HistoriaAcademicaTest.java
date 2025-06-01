@@ -14,7 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class HistoriaAcademicaTest {
   @Test
   void retornaFalseSiNoTieneCursadasEnCurso() {
-    Comision nuevaComision = Comision.builder().horario(HorarioParser.parse("LUNES 09:00 a 10:00")).build();
+    Comision nuevaComision = Comision.builder().horario(HorarioParser.parse("LUNES 09:00 a 10:00"))
+                                     .build();
     HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(List.of()).build();
 
     assertFalse(historia.haySuperposicionHoraria(nuevaComision));
@@ -24,7 +25,8 @@ class HistoriaAcademicaTest {
   void retornaTrueSiTieneCursadasEnCurso() {
     Materia inscripta = Materia.builder().codigo("MAT123").build();
     Cursada enCurso = CursadaFactory.enCurso(inscripta);
-    Comision nuevaComision = Comision.builder().horario(HorarioParser.parse("LUNES 09:00 a 10:00")).build();
+    Comision nuevaComision = Comision.builder().horario(HorarioParser.parse("LUNES 09:00 a 10:00"))
+                                     .build();
     HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(List.of(enCurso)).build();
 
     assertTrue(historia.haySuperposicionHoraria(nuevaComision));

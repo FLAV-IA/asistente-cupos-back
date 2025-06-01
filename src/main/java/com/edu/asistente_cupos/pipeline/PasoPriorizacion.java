@@ -34,11 +34,12 @@ public class PasoPriorizacion implements Paso<List<PeticionInscripcion>, List<Pe
       var batches = BatcherPorTokens.dividir(input, MAX_TOKENS_BATCH, estimadorTokens);
       log.info("Etapa priorización - Total de batches: {}", batches.size());
 
-      var resultados = paralelizador.procesar(NombresMetricas.PRIORIZACION_BATCH, batches, batch -> {
-        log.info("Etapa priorización - Batch con {} peticiones (tokens estimados: {})",
-          batch.size(), batch.stream().mapToInt(estimadorTokens).sum());
-        return priorizador.priorizar(batch);
-      });
+      var resultados = paralelizador.procesar(NombresMetricas.PRIORIZACION_BATCH, batches,
+        batch -> {
+          log.info("Etapa priorización - Batch con {} peticiones (tokens estimados: {})",
+            batch.size(), batch.stream().mapToInt(estimadorTokens).sum());
+          return priorizador.priorizar(batch);
+        });
 
       return conversor.desdeResultadosLLM(resultados.stream().flatMap(List::stream).toList(),
         input);
