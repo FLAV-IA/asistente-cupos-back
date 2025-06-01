@@ -21,13 +21,13 @@ public class MockConfig {
       prompt != null &&
         prompt.getInstructions() != null &&
         prompt.getInstructions().stream()
-              .anyMatch(msg -> msg.getText().contains("Academic Priority Evaluator"));
+              .anyMatch(msg -> msg.getText().contains("evaluate their course enrollment requests"));
 
     ArgumentMatcher<Prompt> esPromptDeTraduccion = prompt ->
       prompt != null &&
         prompt.getInstructions() != null &&
         prompt.getInstructions().stream()
-              .anyMatch(msg -> msg.getText().contains("peticion") && msg.getText().contains("cupoAsignado"));
+              .anyMatch(msg -> msg.getText().contains("cupoAsignado"));
 
     when(llmClient.call(argThat(esPromptDePriorizacion)))
       .thenReturn(TestDataFactory.respuestaChatResponsePriorizacion());
@@ -37,5 +37,4 @@ public class MockConfig {
 
     return llmClient;
   }
-
 }

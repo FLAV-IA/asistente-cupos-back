@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 @Component
 public class SugerenciaInscripcionMapper {
   public SugerenciaInscripcionDTO toDto(SugerenciaInscripcion sugerencia) {
@@ -38,7 +40,7 @@ public class SugerenciaInscripcionMapper {
   }
 
   public List<SugerenciaInscripcionDTO> toSugerenciaInscripcionDtoList(List<SugerenciaInscripcion> sugerencias) {
-    return sugerencias.stream().map(this::toDto).collect(Collectors.toList());
+    return sugerencias.stream().map(this::toDto).collect(toList());
   }
 
   public HistoriaAcademicaDTO toDto(HistoriaAcademica historiaAcademica) {
@@ -51,7 +53,7 @@ public class SugerenciaInscripcionMapper {
                                .codigosCursadasAnteriores(
                                  historiaAcademica.cursadasAnteriores().stream()
                                                   .map(c -> c.getMateria().getCodigo())
-                                                  .collect(Collectors.toList()))
+                                                  .collect(toList()))
                                .codigosInscripcionesActuales(
                                  historiaAcademica.materiasEnCurso().stream()
                                                   .map(Materia::getCodigo)

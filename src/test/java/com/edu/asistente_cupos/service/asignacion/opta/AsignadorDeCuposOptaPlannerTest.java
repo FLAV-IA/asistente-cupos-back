@@ -7,7 +7,6 @@ import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import com.edu.asistente_cupos.domain.priorizacion.PeticionPorMateriaPriorizada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAsignada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
-import com.edu.asistente_cupos.domain.sugerencia.SugerenciaRechazada;
 import com.edu.asistente_cupos.service.asignacion.AsignadorDeCupos;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,14 +56,14 @@ class AsignadorDeCuposOptaPlannerTest {
 
     assertThat(resultado).hasSize(2);
 
-    long aceptadas = resultado.stream().filter(s -> s instanceof SugerenciaAsignada).count();
-    long rechazadas = resultado.stream().filter(s -> s instanceof SugerenciaRechazada).count();
+    long aceptadas = resultado.stream().filter(SugerenciaInscripcion::fueAsignada).count();
+    long rechazadas = resultado.stream().filter(s -> !s.fueAsignada()).count();
 
     assertThat(aceptadas).isEqualTo(1);
     assertThat(rechazadas).isEqualTo(1);
 
     SugerenciaAsignada aceptada = (SugerenciaAsignada) resultado.stream().filter(
-      s -> s instanceof SugerenciaAsignada).findFirst().orElseThrow();
+      SugerenciaInscripcion::fueAsignada).findFirst().orElseThrow();
 
     assertThat(aceptada.comision().getCodigo()).isEqualTo("MAT1-A");
     assertThat(aceptada.motivo()).contains("[COR]");
@@ -104,11 +103,11 @@ class AsignadorDeCuposOptaPlannerTest {
 
     assertThat(resultado).hasSize(2);
 
-    long aceptadas = resultado.stream().filter(s -> s instanceof SugerenciaAsignada).count();
-    long rechazadas = resultado.stream().filter(s -> s instanceof SugerenciaRechazada).count();
+    long aceptadas = resultado.stream().filter(SugerenciaInscripcion::fueAsignada).count();
+    long rechazadas = resultado.stream().filter(s -> !s.fueAsignada()).count();
 
     // No debe asignar a nadie porque no hay cupo
-    assertThat(aceptadas).isEqualTo(0);
+    assertThat(aceptadas).isZero();
     assertThat(rechazadas).isEqualTo(2);
   }
 }
