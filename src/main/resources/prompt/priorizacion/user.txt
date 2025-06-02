@@ -1,32 +1,9 @@
-REQUESTS:
-{peticiones}
-
-Each item includes:
-- "a": student ID (DNI)
-- "h": academic history of the student
-- "p": list of course requests
-
-Each course request ("p") includes:
-- "n": course code
-- "m": list of requested commission codes
-- "c": whether the student meets the prerequisites for that course
-
-Each item has the following format:
+EXPECTED OUTPUT FORMAT:
 {ejemploJson}
 
-For each student, return an object with:
-- "a": student ID
-- "ep": a list of prioritizations for each course request, each with:
-  - "n": course code
-  - "p": priority score (0 to 100)
-  - "e": list of tags explaining the score
+SOLICITUDES:
+{peticiones}
 
-EXPECTED OUTPUT:
-{ejemploOutput}
-
-- Sort the list inside "ep" from highest to lowest priority ("p").
-- Do not use markdown (like ```json).
-- Do not add any explanations or comments.
+IMPORTANT:
 - Output only the raw JSON array.
-
-- no incluyas el procesamiento de los ejemplos mencionados en  EXPECTED OUTPUT ni en Each item has the following format solo tenelos en cuenta para el formato de salida
+- Do not include explanations, markdown, or commentary.

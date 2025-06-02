@@ -20,7 +20,7 @@ import java.util.function.ToIntFunction;
 @RequiredArgsConstructor
 @Slf4j
 public class PasoPriorizacion implements Paso<List<PeticionInscripcion>, List<PeticionPorMateriaPriorizada>> {
-  private static final int MAX_TOKENS_BATCH = 6000;
+  private static final int MAX_TOKENS_BATCH = 9000;
 
   private final PriorizadorDePeticiones priorizador;
   private final ConversorResultadoLLM conversor;
@@ -34,11 +34,12 @@ public class PasoPriorizacion implements Paso<List<PeticionInscripcion>, List<Pe
       var batches = BatcherPorTokens.dividir(input, MAX_TOKENS_BATCH, estimadorTokens);
       log.info("Etapa priorización - Total de batches: {}", batches.size());
 
-      var resultados = paralelizador.procesar(NombresMetricas.PRIORIZACION_BATCH, batches, batch -> {
-        log.info("Etapa priorización - Batch con {} peticiones (tokens estimados: {})",
-          batch.size(), batch.stream().mapToInt(estimadorTokens).sum());
-        return priorizador.priorizar(batch);
-      });
+      var resultados = paralelizador.procesar(NombresMetricas.PRIORIZACION_BATCH, batches,
+        batch -> {
+          log.info("Etapa priorización - Batch con {} peticiones (tokens estimados: {})",
+            batch.size(), batch.stream().mapToInt(estimadorTokens).sum());
+          return priorizador.priorizar(batch);
+        });
 
       return conversor.desdeResultadosLLM(resultados.stream().flatMap(List::stream).toList(),
         input);

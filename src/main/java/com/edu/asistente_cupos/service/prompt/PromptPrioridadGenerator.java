@@ -43,23 +43,19 @@ public class PromptPrioridadGenerator implements PromptGenerator<List<PeticionIn
     """;
   protected static final String EJEMPLO_OUTPUT = """
     [
-      {
-          "a": "12345678",
-          "ep": [
-            {
-              "n": "1035",
-              "p": 91,
-              "e": ["COR", "AVZ"]
-            },
-            {
-              "n": "1036",
-              "p": 78,
-              "e": ["REZ", "REC"]
-            }
-          ]
-        },
-    ]
-    
+       {
+         "a": "student_id",
+         "ep": [
+           {
+             "n": "course_code",
+             "p": score (0-100),
+             "e": ["TAG1", "TAG2", ...]
+           },
+           ...
+         ]
+       },
+       ...
+     ]
     """;
   private final PromptTemplateProvider templateProvider;
   private final PeticionInscripcionMapper peticionMapper;

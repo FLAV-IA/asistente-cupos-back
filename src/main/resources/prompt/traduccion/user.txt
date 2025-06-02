@@ -15,6 +15,14 @@ INPUT:
 
 GUIDELINES:
 - Replace priority tags (e.g., AVZ, COR) with short explanations.
+using
+    CRITERIA & TAGS (ordered by importance):
+    1. [AVZ] Few courses left to graduate → higher than 25 ap value means closer to finishing.
+    2. [SIN] No current course enrollments → when "ac" is empty.
+    3. [2IN] Has 2 or more current enrollments → when "ac" has 2+ items, reduce priority.
+    4. [PLUS] No current enrollments → slightly higher priority if "ac" is empty.
+    5. [REC] Repeating the course → when "n" is also in "ca".
+
 - Avoid repeating identical explanations.
 - Use Spanish only.
 - Keep it concise but human-readable.

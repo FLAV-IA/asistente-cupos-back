@@ -22,7 +22,8 @@ class AsignadorDeCuposManualTest {
   @Test
   void asignaCupoSiHayDisponibilidad() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Mat").build();
-    Comision comision = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 1, materia);
+    Comision comision = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 1,
+      materia);
 
     PeticionPorMateriaPriorizada peticion = new PeticionPorMateriaPriorizada(crearEstudianteDummy(),
       materia, List.of(comision), true, 99, "AVZ");
@@ -44,7 +45,8 @@ class AsignadorDeCuposManualTest {
   @Test
   void rechazaPeticionSiNoHayCupos() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Mat").build();
-    Comision comision = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 0, materia);
+    Comision comision = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 0,
+      materia);
 
     PeticionPorMateriaPriorizada peticion = new PeticionPorMateriaPriorizada(crearEstudianteDummy(),
       materia, List.of(comision), true, 99, "COR");
@@ -65,7 +67,8 @@ class AsignadorDeCuposManualTest {
   @Test
   void soloAsignaCupoAQuienTieneMayorPrioridad() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Mat").build();
-    Comision comision = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 1, materia);
+    Comision comision = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 1,
+      materia);
 
     PeticionPorMateriaPriorizada alta = new PeticionPorMateriaPriorizada(
       crearEstudianteDummy("111"), materia, List.of(comision), true, 100, "AVZ");

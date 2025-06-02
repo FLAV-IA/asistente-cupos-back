@@ -9,8 +9,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.util.List;
 
 public class JsonConverter {
-  private static final ObjectMapper mapper = new ObjectMapper().enable(
-    SerializationFeature.INDENT_OUTPUT).registerModule(new JavaTimeModule());
+  private static final ObjectMapper mapper = new ObjectMapper()
+    .enable(SerializationFeature.INDENT_OUTPUT).registerModule(new JavaTimeModule());
 
   public static String toJson(Object peticiones) {
     try {
