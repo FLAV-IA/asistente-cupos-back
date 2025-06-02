@@ -177,4 +177,50 @@ class HistoriaAcademicaTest {
     assertEquals(1, materias.size());
     assertTrue(materias.contains(matEnCurso));
   }
+
+  @Test
+  void cursadasAnterioresRetornaListaVaciaSiNoTieneCursadas() {
+    HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(null).build();
+
+    assertTrue(historia.cursadasAnteriores().isEmpty());
+  }
+
+  @Test
+  void cursadasAnterioresFiltraSoloMateriasNoEnCurso() {
+    Materia matA = Materia.builder().codigo("A").build();
+    Materia matB = Materia.builder().codigo("B").build();
+
+    Cursada enCurso = CursadaFactory.enCurso(matA);
+    Cursada aprobada = CursadaFactory.aprobada(matB, 9);
+
+    HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(List.of(enCurso, aprobada)).build();
+
+    List<Cursada> anteriores = historia.cursadasAnteriores();
+    assertEquals(1, anteriores.size());
+    assertTrue(anteriores.get(0).fueAprobada());
+    assertEquals(matB, anteriores.get(0).getMateria());
+  }
+
+  @Test
+  void haySuperposicionHorariaRetornaFalseSiNoHayMateriasEnCurso() {
+    Comision nuevaComision = Comision.builder().horario(HorarioParser.parse("VIERNES 08:00 a 10:00")).build();
+    HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(List.of()).build();
+
+    assertFalse(historia.haySuperposicionHoraria(nuevaComision));
+  }
+
+  @Test
+  void cumpleCorrelativasRetornaTrueSiCorrelativasEsNull() {
+    Materia destino = Materia.builder().codigo("MATX").correlativas(null).build();
+    HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(List.of()).build();
+
+    assertTrue(historia.cumpleCorrelativas(destino));
+  }
+
+  @Test
+  void materiasEnCursoRetornaListaVaciaSiCursadasEsNull() {
+    HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(null).build();
+
+    assertTrue(historia.materiasEnCurso().isEmpty());
+  }
 }
