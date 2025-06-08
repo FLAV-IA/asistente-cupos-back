@@ -4,7 +4,7 @@ import com.edu.asistente_cupos.controller.dto.HistoriaAcademicaDTO;
 import com.edu.asistente_cupos.controller.dto.SugerenciaInscripcionDTO;
 import com.edu.asistente_cupos.domain.HistoriaAcademica;
 import com.edu.asistente_cupos.domain.Materia;
-import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAsignada;
+import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAceptada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaRechazada;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Component
 public class SugerenciaInscripcionMapper {
   public SugerenciaInscripcionDTO toDto(SugerenciaInscripcion sugerencia) {
-    if (sugerencia instanceof SugerenciaAsignada asignada) {
+    if (sugerencia instanceof SugerenciaAceptada asignada) {
       return SugerenciaInscripcionDTO.builder().nombreEstudiante(asignada.estudiante().getNombre())
                                      .dniEstudiante(asignada.estudiante().getDni())
                                      .nombreMateria(asignada.materia().getNombre())

@@ -3,7 +3,7 @@ package com.edu.asistente_cupos.domain.sugerencia;
 import com.edu.asistente_cupos.domain.Estudiante;
 import com.edu.asistente_cupos.domain.Materia;
 
-public sealed interface SugerenciaInscripcion permits SugerenciaAsignada, SugerenciaRechazada {
+public sealed interface SugerenciaInscripcion permits SugerenciaAceptada, SugerenciaRechazada {
   Estudiante estudiante();
 
   Materia materia();
@@ -12,6 +12,6 @@ public sealed interface SugerenciaInscripcion permits SugerenciaAsignada, Sugere
 
   int prioridad();
 
-  boolean fueAsignada();
+  boolean fueAceptada();
 }
 

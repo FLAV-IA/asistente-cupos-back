@@ -44,7 +44,7 @@ def coberturaExcluida = [
         '**/domain/comision.class',
         '**/domain/Materia.class',
         '**/domain/cursada.class',
-        '**/domain/asignacion/**',
+        '**/domain/generacionDeSugerencias/**',
         '**/domain/sugerencia/**',
         '**/excepcion/opta/**'
 ]

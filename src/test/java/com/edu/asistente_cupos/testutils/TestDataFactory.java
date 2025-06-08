@@ -8,7 +8,7 @@ import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistente_cupos.domain.peticion.PeticionPorMateria;
 import com.edu.asistente_cupos.domain.priorizacion.PeticionPorMateriaPriorizada;
-import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAsignada;
+import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAceptada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaRechazada;
 import com.edu.asistente_cupos.service.priorizacion.dto.ResultadoPriorizacionLLM;
@@ -57,7 +57,7 @@ public class TestDataFactory {
   }
 
   public static SugerenciaInscripcion crearSugerenciaAsignadaDummy() {
-    return new SugerenciaAsignada(crearEstudianteDummy(), crearMateriaDummy(), crearComisionDummy(),
+    return new SugerenciaAceptada(crearEstudianteDummy(), crearMateriaDummy(), crearComisionDummy(),
       "Asignada [COR]", 1);
   }
 
