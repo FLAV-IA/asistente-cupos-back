@@ -6,9 +6,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring",
-  uses = {HistoriaAcademicaMapper.class, PeticionPorMateriaMapper.class})
+  uses = {HistoriaAcademicaPrevisualizacionMapper.class, PeticionPorMateriaMapper.class})
 public interface PeticionPrevisualizacionMapper {
-
   @Mapping(source = "estudiante.nombre", target = "nombre")
   @Mapping(source = "estudiante.dni", target = "dni")
   @Mapping(source = "estudiante.historiaAcademica", target = "historiaAcademica")
