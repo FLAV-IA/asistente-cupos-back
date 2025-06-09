@@ -223,4 +223,24 @@ class HistoriaAcademicaTest {
 
     assertTrue(historia.materiasEnCurso().isEmpty());
   }
+
+  @Test
+  void materiasAprobadasRetornaListaVaciaSiCursadasEsNull() {
+    HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(List.of()).build();
+    List<Materia> aprobadas = historia.materiasAprobadas();
+
+    assertTrue(aprobadas.isEmpty());
+  }
+
+  @Test
+  void materiasAprobadasPuedeTenerDuplicadosSiHayRepeticiones() {
+    Materia mat = Materia.builder().codigo("X").build();
+    Cursada c1 = CursadaFactory.aprobada(mat, 7);
+    Cursada c2 = CursadaFactory.aprobada(mat, 9);
+
+    HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(List.of(c1, c2)).build();
+
+    List<Materia> aprobadas = historia.materiasAprobadas();
+    assertEquals(2, aprobadas.size());
+  }
 }
