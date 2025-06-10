@@ -6,6 +6,7 @@ import com.edu.asistente_cupos.controller.dto.PeticionInscripcionDTO;
 import com.edu.asistente_cupos.controller.dto.SugerenciaInscripcionDTO;
 import com.edu.asistente_cupos.domain.filtros.FiltroDePeticionInscripcion;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
+import com.edu.asistente_cupos.excepcion.handler.GlobalExceptionHandler;
 import com.edu.asistente_cupos.mapper.SugerenciaInscripcionMapper;
 import com.edu.asistente_cupos.service.AsistenteDeInscripcion;
 import com.edu.asistente_cupos.service.adapter.PeticionInscripcionCsvAdapter;
@@ -48,7 +49,10 @@ public class AsistenteControllerTest {
       sugerenciaInscripcionMapper, peticionInscripcionCsvAdapter, ensambladorDePeticiones,
       filtroDePeticionInscripcion);
 
-    mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+    mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                             .setControllerAdvice(new GlobalExceptionHandler())
+                             .setMessageConverters(new MappingJackson2HttpMessageConverter())
+                             .build();
   }
 
   @Test
@@ -105,7 +109,9 @@ public class AsistenteControllerTest {
       new RuntimeException("Error forzado"));
 
     mockMvc.perform(multipart("/asistente/sugerencia-inscripcion-con-csv").file(archivo))
-           .andExpect(status().isInternalServerError());
+           .andExpect(status().isInternalServerError())
+           .andExpect(jsonPath("$.message").value("Error forzado"))
+           .andExpect(jsonPath("$.status").value(500));
   }
 
   @Test
@@ -145,10 +151,27 @@ public class AsistenteControllerTest {
 
     mockMvc.perform(MockMvcRequestBuilders.post("/asistente/consultar-sugerencia")
                                           .contentType(MediaType.APPLICATION_JSON).content("""
-        [{
-          "dniEstudiante": "1234",
-          "peticiones": []
-        }]
-        """)).andExpect(status().isInternalServerError());
+               [{
+                 "dniEstudiante": "1234",
+                 "peticiones": []
+               }]
+               """)).andExpect(status().isInternalServerError())
+           .andExpect(jsonPath("$.message").value("Error"))
+           .andExpect(jsonPath("$.status").value(500));
+  }
+
+  @Test
+  void consultarSugerenciaRetorna404SiEstudianteNoExiste() throws Exception {
+    when(ensambladorDePeticiones.ensamblarDesdeDto(any())).thenThrow(
+      new com.edu.asistente_cupos.excepcion.EstudianteNoEncontradoException("no existe"));
+
+    mockMvc.perform(MockMvcRequestBuilders.post("/asistente/consultar-sugerencia")
+                                          .contentType(MediaType.APPLICATION_JSON).content("""
+               [{
+                 "dniEstudiante": "1234",
+                 "peticiones": []
+               }]
+               """)).andExpect(status().isNotFound()).andExpect(jsonPath("$.message").value("no existe"))
+           .andExpect(jsonPath("$.status").value(404));
   }
 }

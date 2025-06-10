@@ -48,7 +48,7 @@ public class PromptBuilderTemplated {
   }
 
   private Message systemMessageDesde() {
-    if (userTemplatePath == null)
+    if (systemTemplatePath == null)
       throw new IllegalStateException("Falta el path del template system");
     return new SystemMessage(promptTemplateProvider.leerTemplateComoString(systemTemplatePath));
   }

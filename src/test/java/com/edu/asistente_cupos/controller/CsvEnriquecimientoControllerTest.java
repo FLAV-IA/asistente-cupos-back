@@ -8,11 +8,13 @@ import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Estudiante;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistente_cupos.domain.peticion.PeticionPorMateria;
+import com.edu.asistente_cupos.excepcion.handler.GlobalExceptionHandler;
 import com.edu.asistente_cupos.mapper.PeticionPrevisualizacionMapper;
 import com.edu.asistente_cupos.service.adapter.PeticionInscripcionCsvAdapter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -43,7 +45,10 @@ class CsvEnriquecimientoControllerTest {
 
     CsvEnriquecimientoController controller = new CsvEnriquecimientoController(adapter, ensamblador,
       mapper);
-    mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+    mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                             .setControllerAdvice(new GlobalExceptionHandler())
+                             .setMessageConverters(new MappingJackson2HttpMessageConverter())
+                             .build();
   }
 
   @Test
@@ -115,7 +120,23 @@ class CsvEnriquecimientoControllerTest {
 
     mockMvc.perform(
              multipart("/csv/previsualizar").file(archivo).contentType(MediaType.MULTIPART_FORM_DATA))
-           .andExpect(status().isInternalServerError());
+           .andExpect(status().isInternalServerError())
+           .andExpect(jsonPath("$.message").value("Error simulado en el adaptador"))
+           .andExpect(jsonPath("$.status").value(500));
+  }
+
+  @Test
+  void devuelve400CuandoAdapterLanzaArchivoInvalido() throws Exception {
+    MockMultipartFile archivo = new MockMultipartFile("file", "peticiones.csv", "text/csv",
+      "dni|codigos_comisiones\n1234|MAT1-01".getBytes());
+
+    when(adapter.adapt(any())).thenThrow(
+      new com.edu.asistente_cupos.excepcion.ArchivoCsvInvalidoException("inv", null));
+
+    mockMvc.perform(
+             multipart("/csv/previsualizar").file(archivo).contentType(MediaType.MULTIPART_FORM_DATA))
+           .andExpect(status().isBadRequest()).andExpect(jsonPath("$.message").value("inv"))
+           .andExpect(jsonPath("$.status").value(400));
   }
 
   @Test
@@ -129,7 +150,9 @@ class CsvEnriquecimientoControllerTest {
 
     mockMvc.perform(
              multipart("/csv/previsualizar").file(archivo).contentType(MediaType.MULTIPART_FORM_DATA))
-           .andExpect(status().isInternalServerError());
+           .andExpect(status().isInternalServerError())
+           .andExpect(jsonPath("$.message").value("Error simulado en el ensamblador"))
+           .andExpect(jsonPath("$.status").value(500));
   }
 
   @Test
@@ -146,7 +169,9 @@ class CsvEnriquecimientoControllerTest {
 
     mockMvc.perform(
              multipart("/csv/previsualizar").file(archivo).contentType(MediaType.MULTIPART_FORM_DATA))
-           .andExpect(status().isInternalServerError());
+           .andExpect(status().isInternalServerError())
+           .andExpect(jsonPath("$.message").value("Error simulado en el mapper"))
+           .andExpect(jsonPath("$.status").value(500));
   }
 
   @Test

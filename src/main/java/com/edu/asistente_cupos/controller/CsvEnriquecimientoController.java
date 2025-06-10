@@ -6,7 +6,6 @@ import com.edu.asistente_cupos.mapper.PeticionPrevisualizacionMapper;
 import com.edu.asistente_cupos.service.adapter.PeticionInscripcionCsvAdapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,19 +28,14 @@ public class CsvEnriquecimientoController {
   public ResponseEntity<List<PeticionInscripcionDTO>> previsualizarDesdeCsv(
     @RequestParam("file") MultipartFile file) {
 
-    try {
-      if (file == null || file.isEmpty()) {
-        return ResponseEntity.badRequest().body(List.of());
-      }
-
-      var peticionesCSV = peticionInscripcionCsvAdapter.adapt(file);
-      var peticiones = ensambladorDePeticiones.ensamblarDesdeCsvDto(peticionesCSV);
-      List<PeticionInscripcionDTO> dtos = peticiones.stream().map(mapper::toDto).toList();
-
-      return ResponseEntity.ok(dtos);
-    } catch (Exception e) {
-      log.error("Error previsualizando CSV", e);
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(List.of());
+    if (file == null || file.isEmpty()) {
+      return ResponseEntity.badRequest().body(List.of());
     }
+
+    var peticionesCSV = peticionInscripcionCsvAdapter.adapt(file);
+    var peticiones = ensambladorDePeticiones.ensamblarDesdeCsvDto(peticionesCSV);
+    List<PeticionInscripcionDTO> dtos = peticiones.stream().map(mapper::toDto).toList();
+
+    return ResponseEntity.ok(dtos);
   }
 }

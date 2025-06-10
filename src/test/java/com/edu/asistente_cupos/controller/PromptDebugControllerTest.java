@@ -3,6 +3,7 @@ package com.edu.asistente_cupos.controller;
 import com.edu.asistente_cupos.assembler.EnsambladorDePeticiones;
 import com.edu.asistente_cupos.controller.dto.PeticionInscripcionCsvDTO;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
+import com.edu.asistente_cupos.excepcion.handler.GlobalExceptionHandler;
 import com.edu.asistente_cupos.observacion.VistaDePrompt;
 import com.edu.asistente_cupos.service.adapter.PeticionInscripcionCsvAdapter;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +18,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class PromptDebugControllerTest {
@@ -31,7 +33,8 @@ class PromptDebugControllerTest {
     ensamblador = mock(EnsambladorDePeticiones.class);
     vista = mock(VistaDePrompt.class);
     PromptDebugController controller = new PromptDebugController(adapter, ensamblador, vista);
-    mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+    mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                             .setControllerAdvice(new GlobalExceptionHandler()).build();
   }
 
   @Test
@@ -58,6 +61,7 @@ class PromptDebugControllerTest {
 
     mockMvc.perform(multipart("/debug/prompt").file(file))
            .andExpect(status().isInternalServerError())
-           .andExpect(content().string("Error en la consulta: error"));
+           .andExpect(jsonPath("$.message").value("error"))
+           .andExpect(jsonPath("$.status").value(500));
   }
 }
