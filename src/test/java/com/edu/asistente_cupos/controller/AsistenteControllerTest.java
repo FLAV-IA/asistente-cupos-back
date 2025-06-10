@@ -2,17 +2,21 @@ package com.edu.asistente_cupos.controller;
 
 import com.edu.asistente_cupos.assembler.EnsambladorDePeticiones;
 import com.edu.asistente_cupos.controller.dto.PeticionInscripcionCsvDTO;
+import com.edu.asistente_cupos.controller.dto.PeticionInscripcionDTO;
 import com.edu.asistente_cupos.controller.dto.SugerenciaInscripcionDTO;
 import com.edu.asistente_cupos.domain.filtros.FiltroDePeticionInscripcion;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
+import com.edu.asistente_cupos.excepcion.handler.GlobalExceptionHandler;
 import com.edu.asistente_cupos.mapper.SugerenciaInscripcionMapper;
 import com.edu.asistente_cupos.service.AsistenteDeInscripcion;
 import com.edu.asistente_cupos.service.adapter.PeticionInscripcionCsvAdapter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
@@ -21,6 +25,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class AsistenteControllerTest {
@@ -44,7 +49,10 @@ public class AsistenteControllerTest {
       sugerenciaInscripcionMapper, peticionInscripcionCsvAdapter, ensambladorDePeticiones,
       filtroDePeticionInscripcion);
 
-    mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+    mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                             .setControllerAdvice(new GlobalExceptionHandler())
+                             .setMessageConverters(new MappingJackson2HttpMessageConverter())
+                             .build();
   }
 
   @Test
@@ -82,5 +90,88 @@ public class AsistenteControllerTest {
   void retorna400SiNoSeEnvioArchivo() throws Exception {
     mockMvc.perform(multipart("/asistente/sugerencia-inscripcion-con-csv"))
            .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  void retorna400SiElArchivoEstaVacio() throws Exception {
+    MockMultipartFile archivo = new MockMultipartFile("file", "vacío.csv", "text/csv", new byte[0]);
+
+    mockMvc.perform(multipart("/asistente/sugerencia-inscripcion-con-csv").file(archivo))
+           .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  void retorna500SiFallaAdaptacionCsv() throws Exception {
+    MockMultipartFile archivo = new MockMultipartFile("file", "peticiones.csv", "text/csv",
+      "dni|codigos_comisiones\n1234|MAT1-01".getBytes());
+
+    when(peticionInscripcionCsvAdapter.adapt(any())).thenThrow(
+      new RuntimeException("Error forzado"));
+
+    mockMvc.perform(multipart("/asistente/sugerencia-inscripcion-con-csv").file(archivo))
+           .andExpect(status().isInternalServerError())
+           .andExpect(jsonPath("$.message").value("Error forzado"))
+           .andExpect(jsonPath("$.status").value(500));
+  }
+
+  @Test
+  void consultarSugerenciaRetornaSugerenciasDTO() throws Exception {
+    PeticionInscripcionDTO dtoEntrada = PeticionInscripcionDTO.builder().build();
+    PeticionInscripcion peticion = PeticionInscripcion.builder().build();
+    SugerenciaInscripcionDTO dtoFinal = SugerenciaInscripcionDTO.builder().nombreEstudiante("Juan")
+                                                                .dniEstudiante("1234")
+                                                                .nombreMateria("Matemática")
+                                                                .codigoComision("MAT1-01")
+                                                                .prioridad(90).motivo("AVZ")
+                                                                .cupoAsignado(true).build();
+
+    when(ensambladorDePeticiones.ensamblarDesdeDto(any())).thenReturn(List.of(peticion));
+    when(asistenteDeInscripcion.sugerirInscripcion(any())).thenReturn(List.of());
+    when(sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(any())).thenReturn(
+      List.of(dtoFinal));
+
+    mockMvc = MockMvcBuilders.standaloneSetup(
+                               new AsistenteController(asistenteDeInscripcion, sugerenciaInscripcionMapper,
+                                 peticionInscripcionCsvAdapter, ensambladorDePeticiones, filtroDePeticionInscripcion))
+                             .setMessageConverters(new MappingJackson2HttpMessageConverter())
+                             .build();
+
+    mockMvc.perform(MockMvcRequestBuilders.post("/asistente/consultar-sugerencia")
+                                          .contentType(MediaType.APPLICATION_JSON).content("""
+        [{
+          "dniEstudiante": "1234",
+          "peticiones": []
+        }]
+        """)).andExpect(status().isOk()).andExpect(jsonPath("$[0].nombreEstudiante").value("Juan"));
+  }
+
+  @Test
+  void consultarSugerenciaRetorna500AnteError() throws Exception {
+    when(ensambladorDePeticiones.ensamblarDesdeDto(any())).thenThrow(new RuntimeException("Error"));
+
+    mockMvc.perform(MockMvcRequestBuilders.post("/asistente/consultar-sugerencia")
+                                          .contentType(MediaType.APPLICATION_JSON).content("""
+               [{
+                 "dniEstudiante": "1234",
+                 "peticiones": []
+               }]
+               """)).andExpect(status().isInternalServerError())
+           .andExpect(jsonPath("$.message").value("Error"))
+           .andExpect(jsonPath("$.status").value(500));
+  }
+
+  @Test
+  void consultarSugerenciaRetorna404SiEstudianteNoExiste() throws Exception {
+    when(ensambladorDePeticiones.ensamblarDesdeDto(any())).thenThrow(
+      new com.edu.asistente_cupos.excepcion.EstudianteNoEncontradoException("no existe"));
+
+    mockMvc.perform(MockMvcRequestBuilders.post("/asistente/consultar-sugerencia")
+                                          .contentType(MediaType.APPLICATION_JSON).content("""
+               [{
+                 "dniEstudiante": "1234",
+                 "peticiones": []
+               }]
+               """)).andExpect(status().isNotFound()).andExpect(jsonPath("$.message").value("no existe"))
+           .andExpect(jsonPath("$.status").value(404));
   }
 }

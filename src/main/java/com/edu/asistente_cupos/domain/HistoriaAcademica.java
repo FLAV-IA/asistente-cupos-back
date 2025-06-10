@@ -71,4 +71,8 @@ public class HistoriaAcademica {
     return cursadas == null ? List.of() : cursadas.stream().filter(c -> c.getEstado().estaEnCurso())
                                                   .map(Cursada::getMateria).toList();
   }
+
+  public List<Materia> materiasAprobadas() {
+    return this.cursadas.stream().filter(Cursada::fueAprobada).map(Cursada::getMateria).toList();
+  }
 }
