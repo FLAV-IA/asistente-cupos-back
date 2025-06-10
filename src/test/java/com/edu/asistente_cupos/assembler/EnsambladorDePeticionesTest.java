@@ -16,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -49,8 +50,8 @@ class EnsambladorDePeticionesTest {
     dto.setCodigosComisiones("COM1,COM2");
 
     Estudiante estudiante = Estudiante.builder().dni("123").nombre("Juan").build();
-    Comision com1 = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 30, null);
-    Comision com2 = new Comision("COM2", HorarioParser.parse("MARTES 09:00 a 10:00"), 30, null);
+    Comision com1 = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 30, null,new ArrayList<>());
+    Comision com2 = new Comision("COM2", HorarioParser.parse("MARTES 09:00 a 10:00"), 30, null,new ArrayList<>());
 
     PeticionPorMateria peticion = PeticionPorMateria.builder().comisiones(List.of(com1, com2))
                                                     .build();

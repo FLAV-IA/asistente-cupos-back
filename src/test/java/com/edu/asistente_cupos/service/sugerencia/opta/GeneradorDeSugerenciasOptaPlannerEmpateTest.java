@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +26,7 @@ class GeneradorDeSugerenciasOptaPlannerEmpateTest {
   void enEmpateDePrioridadSoloUnoEsAsignado() {
     Materia materia = Materia.builder().codigo("MAT2").nombre("Física").build();
     Comision comision = new Comision("MAT2-A", HorarioParser.parse("MARTES 10:00 a 12:00"), 1,
-      materia);
+      materia,new ArrayList<>());
 
     Estudiante e1 = Estudiante.builder().dni("300").nombre("Juan").build();
     Estudiante e2 = Estudiante.builder().dni("400").nombre("Sofi").build();
@@ -69,7 +70,7 @@ class GeneradorDeSugerenciasOptaPlannerEmpateTest {
     Materia fisica = Materia.builder().codigo("MAT2").nombre("Física").build();
 
     Comision unicaComision = new Comision("MAT2-A", HorarioParser.parse("LUNES 10:00 a 12:00"), 3,
-      fisica);
+      fisica,new ArrayList<>());
 
     Estudiante juan = Estudiante.builder().dni("300").nombre("Juan").build();
     Estudiante sofi = Estudiante.builder().dni("400").nombre("Sofi").build();

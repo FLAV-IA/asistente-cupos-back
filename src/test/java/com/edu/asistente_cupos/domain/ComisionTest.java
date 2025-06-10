@@ -3,10 +3,9 @@ package com.edu.asistente_cupos.domain;
 import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class ComisionTest {
   @Test
@@ -51,19 +50,19 @@ class ComisionTest {
 
   @Test
   void tieneCupoDevuelveTrueSiCupoMayorACero() {
-    Comision c = Comision.builder().codigo("C1").cupo(10).build();
+    Comision c = Comision.builder().codigo("C1").cupo(10).asignaciones(new ArrayList<>()).build();
     assertTrue(c.tieneCupo());
   }
 
   @Test
   void tieneCupoDevuelveFalseSiCupoEsCero() {
-    Comision c = Comision.builder().codigo("C1").cupo(0).build();
+    Comision c = Comision.builder().codigo("C1").cupo(0).asignaciones(new ArrayList<>()).build();
     assertFalse(c.tieneCupo());
   }
 
   @Test
   void tieneCupoDevuelveFalseSiCupoEsNegativo() {
-    Comision c = Comision.builder().codigo("C1").cupo(-5).build();
+    Comision c = Comision.builder().codigo("C1").cupo(-5).asignaciones(new ArrayList<>()).build();
     assertFalse(c.tieneCupo());
   }
 

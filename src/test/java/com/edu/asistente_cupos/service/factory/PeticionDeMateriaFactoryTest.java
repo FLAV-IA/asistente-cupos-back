@@ -10,6 +10,7 @@ import com.edu.asistente_cupos.excepcion.ComisionesDeDistintaMateriaException;
 import com.edu.asistente_cupos.excepcion.NoSeEspecificaronComisionesException;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,8 +28,8 @@ class PeticionDeMateriaFactoryTest {
 
     Materia materia = Materia.builder().codigo("MAT1").nombre("Matemática").build();
 
-    Comision c1 = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 30, materia);
-    Comision c2 = new Comision("COM2", HorarioParser.parse("MIERCOLES 09:00 a 10:00"), 30, materia);
+    Comision c1 = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 30, materia,new ArrayList<>());
+    Comision c2 = new Comision("COM2", HorarioParser.parse("MIERCOLES 09:00 a 10:00"), 30, materia,new ArrayList<>());
 
     Estudiante estudiante = mock(Estudiante.class);
     when(estudiante.puedeInscribirse(materia)).thenReturn(true);
@@ -47,7 +48,7 @@ class PeticionDeMateriaFactoryTest {
     dto.setCodigosComisiones("COM1, COM2");
 
     Comision c1 = new Comision("COM1", HorarioParser.parse("MARTES 09:00 a 10:00"), 30,
-      Materia.builder().codigo("MAT1").nombre("X").build());
+      Materia.builder().codigo("MAT1").nombre("X").build(),new ArrayList<>());
 
     Map<String, Comision> mapa = Map.of("COM1", c1);
     Estudiante estudiante = mock(Estudiante.class);
@@ -74,9 +75,9 @@ class PeticionDeMateriaFactoryTest {
     dto.setCodigosComisiones("COM1, COM2");
 
     Comision c1 = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 30,
-      Materia.builder().codigo("MAT1").nombre("Mate").build());
+      Materia.builder().codigo("MAT1").nombre("Mate").build(),new ArrayList<>());
     Comision c2 = new Comision("COM2", HorarioParser.parse("MIERCOLES 09:00 a 10:00"), 30,
-      Materia.builder().codigo("MAT2").nombre("Física").build());
+      Materia.builder().codigo("MAT2").nombre("Física").build(),new ArrayList<>());
 
     Map<String, Comision> mapa = Map.of("COM1", c1, "COM2", c2);
 

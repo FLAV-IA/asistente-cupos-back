@@ -10,6 +10,7 @@ import com.edu.asistente_cupos.domain.sugerencia.SugerenciaRechazada;
 import com.edu.asistente_cupos.repository.ComisionRepository;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +24,7 @@ class GeneradorDeSugerenciasDeCuposManualTest {
   void asignaCupoSiHayDisponibilidad() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Mat").build();
     Comision comision = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 1,
-      materia);
+      materia,new ArrayList<>());
 
     PeticionPorMateriaPriorizada peticion = new PeticionPorMateriaPriorizada(crearEstudianteDummy(),
       materia, List.of(comision), true, 99, "AVZ");
@@ -46,7 +47,7 @@ class GeneradorDeSugerenciasDeCuposManualTest {
   void rechazaPeticionSiNoHayCupos() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Mat").build();
     Comision comision = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 0,
-      materia);
+      materia,new ArrayList<>());
 
     PeticionPorMateriaPriorizada peticion = new PeticionPorMateriaPriorizada(crearEstudianteDummy(),
       materia, List.of(comision), true, 99, "COR");
@@ -68,7 +69,7 @@ class GeneradorDeSugerenciasDeCuposManualTest {
   void soloAsignaCupoAQuienTieneMayorPrioridad() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Mat").build();
     Comision comision = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 1,
-      materia);
+      materia,new ArrayList<>());
 
     PeticionPorMateriaPriorizada alta = new PeticionPorMateriaPriorizada(
       crearEstudianteDummy("111"), materia, List.of(comision), true, 100, "AVZ");

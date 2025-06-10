@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,7 +30,7 @@ class GeneradorDeSugerenciasOptaPlannerTest {
 
     // Comisión con solo 1 cupo
     Comision comision = new Comision("MAT1-A", HorarioParser.parse("LUNES 10:00 a 12:00"), 1,
-      materia);
+      materia,new ArrayList<>());
 
     // Estudiantes
     Estudiante e1 = Estudiante.builder().dni("100").nombre("Ana").build();
@@ -76,7 +77,7 @@ class GeneradorDeSugerenciasOptaPlannerTest {
 
     // Comisión sin cupo disponible
     Comision comision = new Comision("MAT1-A", HorarioParser.parse("LUNES 10:00 a 12:00"), 0,
-      materia);
+      materia,new ArrayList<>());
 
     // Estudiantes
     Estudiante e1 = Estudiante.builder().dni("100").nombre("Ana").build();

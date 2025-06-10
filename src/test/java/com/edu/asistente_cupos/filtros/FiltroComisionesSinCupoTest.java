@@ -8,6 +8,7 @@ import com.edu.asistente_cupos.domain.peticion.PeticionPorMateria;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -76,7 +77,7 @@ public class FiltroComisionesSinCupoTest {
   }
 
   private Comision crearComision(String codigo, int cupo) {
-    return Comision.builder().codigo(codigo).cupo(cupo).build();
+    return Comision.builder().codigo(codigo).cupo(cupo).asignaciones(new ArrayList<>()).build();
   }
 
   private PeticionPorMateria crearPeticionPorMateria(Comision... comisiones) {

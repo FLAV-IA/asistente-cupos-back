@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.edu.asistente_cupos.testutils.TestDataFactory.crearEstudianteDummy;
@@ -30,7 +31,7 @@ class PeticionInscripcionMapperTest {
   @Test
   void conviertePeticionInscripcionCorrectamente() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Algoritmos").build();
-    Comision comision = new Comision("C1", HorarioParser.parse("LUNES 10:00 a 12:00"), 10, materia);
+    Comision comision = new Comision("C1", HorarioParser.parse("LUNES 10:00 a 12:00"), 10, materia,new ArrayList<>());
 
     PeticionPorMateria peticionMateria = PeticionPorMateria.builder().comisiones(List.of(comision))
                                                            .cumpleCorrelativa(true).build();

@@ -17,6 +17,7 @@ import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.model.Generation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestDataFactory {
@@ -37,7 +38,7 @@ public class TestDataFactory {
   }
 
   public static Comision crearComisionDummy(String codigo, int cupo, Materia materia) {
-    return new Comision(codigo, HorarioParser.parse("LUNES 09:00 a 10:00"), cupo, materia);
+    return new Comision(codigo, HorarioParser.parse("LUNES 09:00 a 10:00"), cupo, materia,new ArrayList<>());
   }
 
   public static PeticionPorMateriaPriorizada crearPeticionPriorizadaDummy() {
