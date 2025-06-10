@@ -36,8 +36,8 @@ class PromptBuilderTemplatedTest {
                                                            .conUserTemplate("user.txt")
                                                            .conVariable("x", "valor");
 
-    assertThatThrownBy(builder::construir).isInstanceOf(IllegalArgumentException.class)
-                                          .hasMessageContaining("Content must not be null");
+    assertThatThrownBy(builder::construir).isInstanceOf(IllegalStateException.class)
+                                          .hasMessageContaining("Falta el path del template system");
   }
 
   @Test
