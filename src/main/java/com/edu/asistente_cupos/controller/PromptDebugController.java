@@ -6,7 +6,6 @@ import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistente_cupos.observacion.VistaDePrompt;
 import com.edu.asistente_cupos.service.adapter.PeticionInscripcionCsvAdapter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,14 +25,9 @@ public class PromptDebugController {
 
   @PostMapping("/prompt")
   public ResponseEntity<String> verPrompt(@RequestParam(required = false) MultipartFile file) {
-    try {
-      List<PeticionInscripcionCsvDTO> peticionesCSV = peticionInscripcionCsvAdapter.adapt(file);
-      List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeCsvDto(
-        peticionesCSV);
-      return ResponseEntity.ok(vistaDePrompt.mostrarPromptBonito(peticiones));
-    } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                           .body("Error en la consulta: " + e.getMessage());
-    }
+    List<PeticionInscripcionCsvDTO> peticionesCSV = peticionInscripcionCsvAdapter.adapt(file);
+    List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeCsvDto(
+      peticionesCSV);
+    return ResponseEntity.ok(vistaDePrompt.mostrarPromptBonito(peticiones));
   }
 }

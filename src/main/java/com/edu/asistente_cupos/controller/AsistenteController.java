@@ -12,7 +12,6 @@ import com.edu.asistente_cupos.service.AsistenteDeInscripcion;
 import com.edu.asistente_cupos.service.adapter.PeticionInscripcionCsvAdapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,39 +36,26 @@ public class AsistenteController {
   @PostMapping("/sugerencia-inscripcion-con-csv")
   public ResponseEntity<List<SugerenciaInscripcionDTO>> sugerirInscripcionConCsv(
     @RequestParam(value = "file", required = false) MultipartFile file) {
-    try {
-      if (file == null || file.isEmpty()) {
-        return ResponseEntity.badRequest().body(List.of());
-      }
-
-      List<PeticionInscripcionCsvDTO> peticionesCSV = peticionInscripcionCsvAdapter.adapt(file);
-      List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeCsvDto(
-        peticionesCSV);
-      List<SugerenciaInscripcion> sugerencias = asistenteDeInscripcion.sugerirInscripcion(
-        peticiones);
-      List<SugerenciaInscripcionDTO> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
-        sugerencias);
-      return ResponseEntity.ok(sugerenciasDTO);
-
-    } catch (Exception e) {
-      log.error("Error procesando CSV", e);
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(List.of());
+    if (file == null || file.isEmpty()) {
+      return ResponseEntity.badRequest().body(List.of());
     }
+
+    List<PeticionInscripcionCsvDTO> peticionesCSV = peticionInscripcionCsvAdapter.adapt(file);
+    List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeCsvDto(
+      peticionesCSV);
+    List<SugerenciaInscripcion> sugerencias = asistenteDeInscripcion.sugerirInscripcion(peticiones);
+    List<SugerenciaInscripcionDTO> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
+      sugerencias);
+    return ResponseEntity.ok(sugerenciasDTO);
   }
 
   @PostMapping("/consultar-sugerencia")
   public ResponseEntity<List<SugerenciaInscripcionDTO>> consultarSugerencia(
     @RequestBody List<PeticionInscripcionDTO> dtos) {
-    try {
-      List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeDto(dtos);
-      List<SugerenciaInscripcion> sugerencias = asistenteDeInscripcion.sugerirInscripcion(
-        peticiones);
-      List<SugerenciaInscripcionDTO> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
-        sugerencias);
-      return ResponseEntity.ok(sugerenciasDTO);
-    } catch (Exception e) {
-      log.error("Error al procesar sugerencias", e);
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(List.of());
-    }
+    List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeDto(dtos);
+    List<SugerenciaInscripcion> sugerencias = asistenteDeInscripcion.sugerirInscripcion(peticiones);
+    List<SugerenciaInscripcionDTO> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
+      sugerencias);
+    return ResponseEntity.ok(sugerenciasDTO);
   }
 }

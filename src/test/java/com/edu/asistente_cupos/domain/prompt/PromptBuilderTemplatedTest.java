@@ -37,7 +37,8 @@ class PromptBuilderTemplatedTest {
                                                            .conVariable("x", "valor");
 
     assertThatThrownBy(builder::construir).isInstanceOf(IllegalStateException.class)
-                                          .hasMessageContaining("Falta el path del template system");
+                                          .hasMessageContaining(
+                                            "Falta el path del template system");
   }
 
   @Test
