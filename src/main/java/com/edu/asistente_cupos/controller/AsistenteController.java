@@ -2,6 +2,7 @@ package com.edu.asistente_cupos.controller;
 
 import com.edu.asistente_cupos.assembler.EnsambladorDePeticiones;
 import com.edu.asistente_cupos.controller.dto.PeticionInscripcionCsvDTO;
+import com.edu.asistente_cupos.controller.dto.PeticionInscripcionDTO;
 import com.edu.asistente_cupos.controller.dto.SugerenciaInscripcionDTO;
 import com.edu.asistente_cupos.domain.filtros.FiltroDePeticionInscripcion;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,6 +53,22 @@ public class AsistenteController {
 
     } catch (Exception e) {
       log.error("Error procesando CSV", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(List.of());
+    }
+  }
+
+  @PostMapping("/consultar-sugerencia")
+  public ResponseEntity<List<SugerenciaInscripcionDTO>> consultarSugerencia(
+    @RequestBody List<PeticionInscripcionDTO> dtos) {
+    try {
+      List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeDto(dtos);
+      List<SugerenciaInscripcion> sugerencias = asistenteDeInscripcion.sugerirInscripcion(
+        peticiones);
+      List<SugerenciaInscripcionDTO> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
+        sugerencias);
+      return ResponseEntity.ok(sugerenciasDTO);
+    } catch (Exception e) {
+      log.error("Error al procesar sugerencias", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(List.of());
     }
   }

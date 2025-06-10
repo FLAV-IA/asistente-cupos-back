@@ -193,7 +193,8 @@ class HistoriaAcademicaTest {
     Cursada enCurso = CursadaFactory.enCurso(matA);
     Cursada aprobada = CursadaFactory.aprobada(matB, 9);
 
-    HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(List.of(enCurso, aprobada)).build();
+    HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(List.of(enCurso, aprobada))
+                                                  .build();
 
     List<Cursada> anteriores = historia.cursadasAnteriores();
     assertEquals(1, anteriores.size());
@@ -203,7 +204,8 @@ class HistoriaAcademicaTest {
 
   @Test
   void haySuperposicionHorariaRetornaFalseSiNoHayMateriasEnCurso() {
-    Comision nuevaComision = Comision.builder().horario(HorarioParser.parse("VIERNES 08:00 a 10:00")).build();
+    Comision nuevaComision = Comision.builder()
+                                     .horario(HorarioParser.parse("VIERNES 08:00 a 10:00")).build();
     HistoriaAcademica historia = HistoriaAcademica.builder().cursadas(List.of()).build();
 
     assertFalse(historia.haySuperposicionHoraria(nuevaComision));

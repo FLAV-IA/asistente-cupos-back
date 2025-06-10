@@ -33,8 +33,7 @@ class PasoPriorizacionTest {
     TimeTracker mockTracker = mock(TimeTracker.class);
 
     when(mockTracker.track(anyString(), any())).thenAnswer(invocation -> {
-      @SuppressWarnings(
-        "unchecked") Callable<Object> callable = invocation.getArgument(1);
+      @SuppressWarnings("unchecked") Callable<Object> callable = invocation.getArgument(1);
       return callable.call();
     });
 
