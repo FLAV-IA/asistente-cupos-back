@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.optaplanner.core.api.domain.lookup.PlanningId;
 
+import java.util.ArrayList;
+
 @EqualsAndHashCode(of = "codigo")
 @Getter
 @Setter
@@ -25,6 +27,6 @@ public class ComisionDTO {
   private int cupo;
 
   public Comision toDomain(Materia materia) {
-    return new Comision(this.codigo, HorarioParser.parse(this.horario), this.cupo, materia);
+    return new Comision(this.codigo, HorarioParser.parse(this.horario), this.cupo, materia,new ArrayList<>());
   }
 }
