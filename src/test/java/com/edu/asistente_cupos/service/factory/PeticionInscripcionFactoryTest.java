@@ -13,6 +13,7 @@ import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistente_cupos.domain.peticion.PeticionPorMateria;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,8 +28,8 @@ class PeticionInscripcionFactoryTest {
     Estudiante estudiante = Estudiante.builder().dni("123").nombre("Juan").build();
     Materia materia = Materia.builder().codigo("MAT1").nombre("Álgebra").build();
 
-    Comision com1 = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 30, materia);
-    Comision com2 = new Comision("COM2", HorarioParser.parse("MARTES 09:00 a 11:00"), 30, materia);
+    Comision com1 = new Comision("COM1", HorarioParser.parse("LUNES 09:00 a 10:00"), 30, materia,new ArrayList<>());
+    Comision com2 = new Comision("COM2", HorarioParser.parse("MARTES 09:00 a 11:00"), 30, materia,new ArrayList<>());
 
     HistoriaAcademica historia = HistoriaAcademica.builder().coeficiente(7.0)
                                                   .totalHistoricasAprobadas(5)
@@ -72,8 +73,8 @@ class PeticionInscripcionFactoryTest {
   @Test
   void crearDesdeDtoDevuelvePeticionCorrecta() {
     Materia materia = Materia.builder().codigo("MAT2").nombre("Historia").build();
-    Comision com1 = new Comision("C1", HorarioParser.parse("MIERCOLES 10:00 a 12:00"), 40, materia);
-    Comision com2 = new Comision("C2", HorarioParser.parse("VIERNES 14:00 a 16:00"), 40, materia);
+    Comision com1 = new Comision("C1", HorarioParser.parse("MIERCOLES 10:00 a 12:00"), 40, materia,new ArrayList<>());
+    Comision com2 = new Comision("C2", HorarioParser.parse("VIERNES 14:00 a 16:00"), 40, materia,new ArrayList<>());
 
     Estudiante estudiante = Estudiante.builder().dni("789").nombre("Ana").build();
     HistoriaAcademica historia = HistoriaAcademica.builder().coeficiente(8.5)
