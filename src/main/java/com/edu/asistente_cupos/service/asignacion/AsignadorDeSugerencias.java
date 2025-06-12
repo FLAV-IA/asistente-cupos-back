@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -23,5 +24,9 @@ public class AsignadorDeSugerencias {
                 .fechaAsignacion(LocalDate.now())
                 .build();
         return this.asignacionRepository.save(asignacion);
+    }
+
+    public List<Asignacion> obtenerAsignacionesParciales() {
+       return this.asignacionRepository.findAll();
     }
 }

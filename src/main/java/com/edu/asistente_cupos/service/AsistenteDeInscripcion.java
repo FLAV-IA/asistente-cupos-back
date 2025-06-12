@@ -29,7 +29,8 @@ public class AsistenteDeInscripcion {
       var filtradas = filtroPaso.ejecutar(peticiones);
       var priorizadas = priorizacionPaso.ejecutar(filtradas);
       var sugerencias = generacionDeSugerenciasPaso.ejecutar(priorizadas);
-      return traduccionYConversorPaso.ejecutar(sugerencias);
+      var sugerenciasTraducidas = traduccionYConversorPaso.ejecutar(sugerencias);
+      return sugerenciasTraducidas;
     });
   }
 }

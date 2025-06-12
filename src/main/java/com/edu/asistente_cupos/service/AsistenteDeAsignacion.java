@@ -1,7 +1,10 @@
 package com.edu.asistente_cupos.service;
 
+import com.edu.asistente_cupos.assembler.EnsambladorDeSugerenciasAceptadas;
+import com.edu.asistente_cupos.domain.Asignacion;
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAceptada;
+import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistente_cupos.repository.ComisionRepository;
 import com.edu.asistente_cupos.service.asignacion.AsignadorDeSugerencias;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +18,13 @@ public class AsistenteDeAsignacion {
     private final AsignadorDeSugerencias asignadorDeSugerencias;
     private final ComisionRepository comisionRepository;
     private final Set<Comision> comisionesModificadas = new HashSet<>();
-
+    private final EnsambladorDeSugerenciasAceptadas ensambladorDeSugerenciasAceptadas;
+    /**
+     * Asigna sugerencias aceptadas a las comisiones correspondientes.
+     * Limpia las comisiones modificadas antes de asignar nuevas sugerencias.
+     *
+     * @param sugerenciasAceptada Lista de sugerencias aceptadas a asignar.
+     */
     public void asignarSugerencias(List<SugerenciaAceptada> sugerenciasAceptada) {
         limpiarComisionesModificadas();
         sugerenciasAceptada.forEach(this::asignarSugerencia);
@@ -42,5 +51,10 @@ public class AsistenteDeAsignacion {
 
     public void limpiarComisionesModificadas() {
         comisionesModificadas.clear();
+    }
+
+    public List<SugerenciaInscripcion> obtenerSugerenciasAsignadas() {
+        List<Asignacion> asignaciones = this.asignadorDeSugerencias.obtenerAsignacionesParciales();
+        return this.ensambladorDeSugerenciasAceptadas.ensamblarSugerenciasDesdeAsignaciones(asignaciones);
     }
 }

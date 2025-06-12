@@ -1,10 +1,12 @@
 package com.edu.asistente_cupos.assembler;
 
 import com.edu.asistente_cupos.controller.dto.SugerenciaInscripcionDTO;
+import com.edu.asistente_cupos.domain.Asignacion;
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Estudiante;
 import com.edu.asistente_cupos.domain.Materia;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAceptada;
+import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistente_cupos.repository.ComisionRepository;
 import com.edu.asistente_cupos.repository.EstudianteRepository;
 import lombok.RequiredArgsConstructor;
@@ -65,4 +67,22 @@ public class EnsambladorDeSugerenciasAceptadas {
                 .orElseThrow(() -> new IllegalArgumentException("Estudiante no encontrado: " + dto.getDniEstudiante()));
     }
 
+    public SugerenciaInscripcion ensamblarSugerencia(Asignacion asignacion) {
+        Estudiante estudiante = asignacion.getEstudiante();
+        Comision comision = asignacion.getComision();
+        Materia materia = comision.getMateria();
+
+        return new SugerenciaAceptada(
+                estudiante,
+                materia,
+                comision,
+                "Asignado en etapa anterior",
+                100
+        );
+    }
+    public List<SugerenciaInscripcion> ensamblarSugerenciasDesdeAsignaciones(List<Asignacion> asignaciones) {
+        return asignaciones.stream()
+                .map(this::ensamblarSugerencia)
+                .toList();
+    }
 }

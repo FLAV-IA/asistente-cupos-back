@@ -8,6 +8,7 @@ import com.edu.asistente_cupos.domain.filtros.FiltroDePeticionInscripcion;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistente_cupos.excepcion.handler.GlobalExceptionHandler;
 import com.edu.asistente_cupos.mapper.SugerenciaInscripcionMapper;
+import com.edu.asistente_cupos.service.AsistenteDeAsignacion;
 import com.edu.asistente_cupos.service.AsistenteDeInscripcion;
 import com.edu.asistente_cupos.service.adapter.PeticionInscripcionCsvAdapter;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,6 +36,7 @@ public class AsistenteControllerTest {
   private PeticionInscripcionCsvAdapter peticionInscripcionCsvAdapter;
   private EnsambladorDePeticiones ensambladorDePeticiones;
   private FiltroDePeticionInscripcion filtroDePeticionInscripcion;
+  private AsistenteDeAsignacion asistenteDeAsignacion;
 
   @BeforeEach
   void setUp() {
@@ -43,11 +45,12 @@ public class AsistenteControllerTest {
     peticionInscripcionCsvAdapter = mock(PeticionInscripcionCsvAdapter.class);
     ensambladorDePeticiones = mock(EnsambladorDePeticiones.class);
     filtroDePeticionInscripcion = mock(FiltroDePeticionInscripcion.class);
+    asistenteDeAsignacion = mock(AsistenteDeAsignacion.class);
 
 
     AsistenteController controller = new AsistenteController(asistenteDeInscripcion,
       sugerenciaInscripcionMapper, peticionInscripcionCsvAdapter, ensambladorDePeticiones,
-      filtroDePeticionInscripcion);
+      filtroDePeticionInscripcion,asistenteDeAsignacion);
 
     mockMvc = MockMvcBuilders.standaloneSetup(controller)
                              .setControllerAdvice(new GlobalExceptionHandler())
@@ -132,7 +135,7 @@ public class AsistenteControllerTest {
 
     mockMvc = MockMvcBuilders.standaloneSetup(
                                new AsistenteController(asistenteDeInscripcion, sugerenciaInscripcionMapper,
-                                 peticionInscripcionCsvAdapter, ensambladorDePeticiones, filtroDePeticionInscripcion))
+                                 peticionInscripcionCsvAdapter, ensambladorDePeticiones, filtroDePeticionInscripcion,asistenteDeAsignacion))
                              .setMessageConverters(new MappingJackson2HttpMessageConverter())
                              .build();
 
