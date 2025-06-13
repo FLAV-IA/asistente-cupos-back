@@ -20,7 +20,7 @@ public class AsistenteDeInscripcion {
 
   private final Paso<List<PeticionInscripcion>, List<PeticionInscripcion>> filtroPaso;
   private final Paso<List<PeticionInscripcion>, List<PeticionPorMateriaPriorizada>> priorizacionPaso;
-  private final Paso<List<PeticionPorMateriaPriorizada>, List<SugerenciaInscripcion>> asignacionPaso;
+  private final Paso<List<PeticionPorMateriaPriorizada>, List<SugerenciaInscripcion>> generacionDeSugerenciasPaso;
   private final Paso<List<SugerenciaInscripcion>, List<SugerenciaInscripcion>> traduccionYConversorPaso;
   private final TimeTracker timeTracker;
 
@@ -28,8 +28,9 @@ public class AsistenteDeInscripcion {
     return timeTracker.track(NombresMetricas.ASISTENTE_SUGERENCIA_TOTAL, () -> {
       var filtradas = filtroPaso.ejecutar(peticiones);
       var priorizadas = priorizacionPaso.ejecutar(filtradas);
-      var sugerencias = asignacionPaso.ejecutar(priorizadas);
-      return traduccionYConversorPaso.ejecutar(sugerencias);
+      var sugerencias = generacionDeSugerenciasPaso.ejecutar(priorizadas);
+      var sugerenciasTraducidas = traduccionYConversorPaso.ejecutar(sugerencias);
+      return sugerenciasTraducidas;
     });
   }
 }

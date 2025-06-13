@@ -43,8 +43,9 @@ public class ConversorResultadoLLM {
       PeticionPorMateria peticionOriginal = peticionesPorCodigo.get(ep.getN());
 
       if (peticionOriginal == null) {
-        throw new IllegalArgumentException(
-          "No se encontró una petición original para la materia " + ep.getN());
+        continue;
+        // throw new IllegalArgumentException(
+         // "No se encontró una petición original para la materia " + ep.getN());
       }
 
       Materia materia = peticionOriginal.getMateria();

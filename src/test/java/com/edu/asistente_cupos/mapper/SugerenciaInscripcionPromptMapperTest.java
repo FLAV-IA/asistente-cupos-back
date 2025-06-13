@@ -1,7 +1,7 @@
 package com.edu.asistente_cupos.mapper;
 
 import com.edu.asistente_cupos.domain.prompt.optimizado.SugerenciaParaTraducir4Prompt;
-import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAsignada;
+import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAceptada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ class SugerenciaInscripcionPromptMapperTest {
     assertThat(resultado).hasSize(1);
     var prompt = resultado.get(0);
     assertThat(prompt.getA()).isEqualTo(asignada.estudiante().getDni());
-    assertThat(prompt.getM()).isEqualTo(((SugerenciaAsignada) asignada).comision().getCodigo());
+    assertThat(prompt.getM()).isEqualTo(((SugerenciaAceptada) asignada).comision().getCodigo());
     assertThat(prompt.isX()).isTrue();
     assertThat(prompt.getP()).isEqualTo(asignada.prioridad());
     assertThat(prompt.getE()).isEqualTo(asignada.motivo());

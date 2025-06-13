@@ -8,7 +8,7 @@ import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import com.edu.asistente_cupos.domain.peticion.PeticionInscripcion;
 import com.edu.asistente_cupos.domain.peticion.PeticionPorMateria;
 import com.edu.asistente_cupos.domain.priorizacion.PeticionPorMateriaPriorizada;
-import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAsignada;
+import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAceptada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaRechazada;
 import com.edu.asistente_cupos.service.priorizacion.dto.ResultadoPriorizacionLLM;
@@ -17,6 +17,7 @@ import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.model.Generation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestDataFactory {
@@ -37,7 +38,7 @@ public class TestDataFactory {
   }
 
   public static Comision crearComisionDummy(String codigo, int cupo, Materia materia) {
-    return new Comision(codigo, HorarioParser.parse("LUNES 09:00 a 10:00"), cupo, materia);
+    return new Comision(codigo, HorarioParser.parse("LUNES 09:00 a 10:00"), cupo, materia,new ArrayList<>());
   }
 
   public static PeticionPorMateriaPriorizada crearPeticionPriorizadaDummy() {
@@ -57,7 +58,7 @@ public class TestDataFactory {
   }
 
   public static SugerenciaInscripcion crearSugerenciaAsignadaDummy() {
-    return new SugerenciaAsignada(crearEstudianteDummy(), crearMateriaDummy(), crearComisionDummy(),
+    return new SugerenciaAceptada(crearEstudianteDummy(), crearMateriaDummy(), crearComisionDummy(),
       "Asignada [COR]", 1);
   }
 
@@ -96,7 +97,7 @@ public class TestDataFactory {
     Materia materia = Materia.builder().codigo("1041").nombre("Matemática II").build();
 
     Comision comision = Comision.builder().codigo("1041-1-G14").materia(materia)
-                                .horario(HorarioParser.parse("Jueves 10:00 a 12:00")).cupo(2)
+                                .horario(HorarioParser.parse("Jueves 10:00 a 12:00")).cupo(2).asignaciones(new ArrayList<>())
                                 .build();
 
     PeticionPorMateria peticionPorMateria = PeticionPorMateria.builder()

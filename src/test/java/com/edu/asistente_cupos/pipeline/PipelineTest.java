@@ -36,7 +36,7 @@ class PipelineTest {
   @Autowired
   private Paso<List<PeticionInscripcion>, List<PeticionPorMateriaPriorizada>> priorizacionPaso;
   @Autowired
-  private Paso<List<PeticionPorMateriaPriorizada>, List<SugerenciaInscripcion>> asignacionPaso;
+  private Paso<List<PeticionPorMateriaPriorizada>, List<SugerenciaInscripcion>> generacionDeSugerenciasPaso;
   @Autowired
   private Paso<List<SugerenciaInscripcion>, List<SugerenciaInscripcion>> traduccionYConversorPaso;
 
@@ -55,7 +55,7 @@ class PipelineTest {
 
     var priorizadas = priorizacionPaso.ejecutar(filtradas);
 
-    var sugerencias = asignacionPaso.ejecutar(priorizadas);
+    var sugerencias = generacionDeSugerenciasPaso.ejecutar(priorizadas);
 
     var resultado = traduccionYConversorPaso.ejecutar(sugerencias);
 

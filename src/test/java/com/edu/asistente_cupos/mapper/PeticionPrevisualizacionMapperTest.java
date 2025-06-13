@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +26,7 @@ class PeticionPrevisualizacionMapperTest {
   @Test
   void convierteCorrectamenteUnaPeticionAUnDTO() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Álgebra").build();
-    Comision comision = new Comision("C1", HorarioParser.parse("LUNES 09:00 a 11:00"), 30, materia);
+    Comision comision = new Comision("C1", HorarioParser.parse("LUNES 09:00 a 11:00"), 30, materia,new ArrayList<>());
 
     PeticionPorMateria peticionPorMateria = PeticionPorMateria.builder()
                                                               .comisiones(List.of(comision))

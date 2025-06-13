@@ -2,7 +2,7 @@ package com.edu.asistente_cupos.service.traduccion;
 
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Estudiante;
-import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAsignada;
+import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAceptada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaRechazada;
 import com.edu.asistente_cupos.repository.ComisionRepository;
@@ -39,7 +39,7 @@ class ConversorSugerenciasLLMTest {
     SugerenciaInscripcion resultado = conversor.convertir(dto);
 
 
-    assertThat(resultado).isInstanceOf(SugerenciaAsignada.class);
+    assertThat(resultado).isInstanceOf(SugerenciaAceptada.class);
     assertThat(resultado.estudiante()).isEqualTo(estudiante);
     assertThat(resultado.materia()).isEqualTo(comision.getMateria());
     assertThat(resultado.prioridad()).isEqualTo(dto.getP());
@@ -103,6 +103,6 @@ class ConversorSugerenciasLLMTest {
 
 
     assertThat(resultado).hasSize(2);
-    assertThat(resultado.get(0)).isInstanceOf(SugerenciaAsignada.class);
+    assertThat(resultado.get(0)).isInstanceOf(SugerenciaAceptada.class);
   }
 }

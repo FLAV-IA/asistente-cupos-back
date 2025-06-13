@@ -7,7 +7,7 @@ import com.edu.asistente_cupos.domain.Materia;
 public record SugerenciaRechazada(Estudiante estudiante, Materia materia, Comision comision,
                                   String motivo, int prioridad) implements SugerenciaInscripcion {
   @Override
-  public boolean fueAsignada() {
+  public boolean fueAceptada() {
     return false;
   }
 }

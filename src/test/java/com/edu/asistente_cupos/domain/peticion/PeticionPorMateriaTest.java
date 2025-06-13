@@ -5,6 +5,7 @@ import com.edu.asistente_cupos.domain.Materia;
 import com.edu.asistente_cupos.domain.horario.HorarioParser;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,7 +16,7 @@ class PeticionPorMateriaTest {
   @Test
   void retornaMateriaDesdeLaPrimeraComision() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Matemática I").build();
-    Comision comision = new Comision("C1", HorarioParser.parse("LUNES 10:00 a 12:00"), 30, materia);
+    Comision comision = new Comision("C1", HorarioParser.parse("LUNES 10:00 a 12:00"), 30, materia,new ArrayList<>());
 
     PeticionPorMateria peticion = PeticionPorMateria.builder().comisiones(List.of(comision))
                                                     .cumpleCorrelativa(true).build();

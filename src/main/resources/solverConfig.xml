@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <solver>
-    <solutionClass>com.edu.asistente_cupos.service.asignacion.opta.model.AsignacionComisionesSolution</solutionClass>
-    <entityClass>com.edu.asistente_cupos.service.asignacion.opta.model.PeticionAsignableDTO</entityClass>
-    <constraintProviderClass>com.edu.asistente_cupos.service.asignacion.opta.reglas.AsignacionConstraintProvider
+    <solutionClass>com.edu.asistente_cupos.service.sugerencia.opta.model.SugeridorComisionesSolution</solutionClass>
+    <entityClass>com.edu.asistente_cupos.service.sugerencia.opta.model.PeticionAceptableDTO</entityClass>
+    <constraintProviderClass>com.edu.asistente_cupos.service.sugerencia.opta.reglas.GeneracionSugerenciasConstraintProvider
     </constraintProviderClass>
 
     <termination>
@@ -10,7 +10,7 @@
     </termination>
 
     <scoreDirectorFactory>
-        <constraintProviderClass>com.edu.asistente_cupos.service.asignacion.opta.reglas.AsignacionConstraintProvider
+        <constraintProviderClass>com.edu.asistente_cupos.service.sugerencia.opta.reglas.GeneracionSugerenciasConstraintProvider
         </constraintProviderClass>
     </scoreDirectorFactory>
 

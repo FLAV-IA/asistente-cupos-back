@@ -8,6 +8,7 @@ import com.edu.asistente_cupos.domain.peticion.PeticionPorMateria;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,9 +20,9 @@ class PeticionPorMateriaMapperTest {
   void mapeaCorrectamentePeticionPorMateriaADTO() {
     Materia materia = Materia.builder().codigo("MAT1").nombre("Álgebra").build();
 
-    Comision com1 = new Comision("COM1", HorarioParser.parse("LUNES 10:00 a 12:00"), 30, materia);
+    Comision com1 = new Comision("COM1", HorarioParser.parse("LUNES 10:00 a 12:00"), 30, materia,new ArrayList<>());
     Comision com2 = new Comision("COM2", HorarioParser.parse("MIERCOLES 14:00 a 16:00"), 30,
-      materia);
+      materia,new ArrayList<>());
 
     PeticionPorMateria peticion = PeticionPorMateria.builder().comisiones(List.of(com1, com2))
                                                     .cumpleCorrelativa(true).build();

@@ -5,7 +5,7 @@ import com.edu.asistente_cupos.excepcion.ComisionesDeDistintaMateriaException;
 import com.edu.asistente_cupos.excepcion.EstudianteNoEncontradoException;
 import com.edu.asistente_cupos.excepcion.HorarioParseException;
 import com.edu.asistente_cupos.excepcion.NoSeEspecificaronComisionesException;
-import com.edu.asistente_cupos.excepcion.opta.ConfiguracionDeAsignacionInvalidaException;
+import com.edu.asistente_cupos.excepcion.opta.ConfiguracionDeGeneracionDeSugerenciaInvalidaException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +38,7 @@ public class ControllerDummy {
 
   @GetMapping("/lanzar-configuracion-invalida")
   public void lanzarConfiguracionDeAsignacionInvalidaException(@RequestParam String mensaje) {
-    throw new ConfiguracionDeAsignacionInvalidaException(mensaje);
+    throw new ConfiguracionDeGeneracionDeSugerenciaInvalidaException(mensaje);
   }
 
   @GetMapping("/lanzar-archivo-csv-invalido")

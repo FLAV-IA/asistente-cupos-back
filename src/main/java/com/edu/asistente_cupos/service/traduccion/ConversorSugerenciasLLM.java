@@ -2,7 +2,7 @@ package com.edu.asistente_cupos.service.traduccion;
 
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Estudiante;
-import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAsignada;
+import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAceptada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaRechazada;
 import com.edu.asistente_cupos.repository.ComisionRepository;
@@ -25,7 +25,7 @@ public class ConversorSugerenciasLLM {
     Comision comision = repoComisiones.findById(sugerenciaInscripcionLLM.getC()).orElseThrow(
       () -> new RuntimeException("Comisión no encontrada: " + sugerenciaInscripcionLLM.getC()));
     if (sugerenciaInscripcionLLM.isX()) {
-      return new SugerenciaAsignada(estudiante, comision.getMateria(), comision,
+      return new SugerenciaAceptada(estudiante, comision.getMateria(), comision,
         sugerenciaInscripcionLLM.getM(), sugerenciaInscripcionLLM.getP());
     } else {
       return new SugerenciaRechazada(estudiante, comision.getMateria(), comision,
