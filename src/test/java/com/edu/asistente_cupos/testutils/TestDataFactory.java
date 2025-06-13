@@ -97,7 +97,7 @@ public class TestDataFactory {
     Materia materia = Materia.builder().codigo("1041").nombre("Matemática II").build();
 
     Comision comision = Comision.builder().codigo("1041-1-G14").materia(materia)
-                                .horario(HorarioParser.parse("Jueves 10:00 a 12:00")).cupo(2)
+                                .horario(HorarioParser.parse("Jueves 10:00 a 12:00")).cupo(2).asignaciones(new ArrayList<>())
                                 .build();
 
     PeticionPorMateria peticionPorMateria = PeticionPorMateria.builder()
