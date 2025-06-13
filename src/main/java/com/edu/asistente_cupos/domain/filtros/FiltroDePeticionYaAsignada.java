@@ -15,7 +15,7 @@ public class FiltroDePeticionYaAsignada   extends FiltroDePeticionInscripcion{
     protected List<PeticionInscripcion> aplicarFiltro(List<PeticionInscripcion> peticiones) {
         return filtrarPeticionesPorComision(peticiones,
                 peticion -> comision ->
-                    asignacionRepository
+                    !asignacionRepository
                         .existsByEstudianteAndComision(
                                 peticion.getEstudiante(),
                                 comision

@@ -2,6 +2,7 @@ package com.edu.asistente_cupos.domain;
 
 import com.edu.asistente_cupos.domain.horario.Horario;
 import com.edu.asistente_cupos.mapper.HorarioConverter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +32,7 @@ public class Comision {
     private Materia materia;
 
     @OneToMany(mappedBy = "comision", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Asignacion> asignaciones = new ArrayList<>();
 
     public boolean tieneCupo() {

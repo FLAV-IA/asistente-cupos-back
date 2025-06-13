@@ -14,13 +14,10 @@ import com.edu.asistente_cupos.service.adapter.PeticionInscripcionCsvAdapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -56,8 +53,7 @@ public class AsistenteController {
     @RequestBody List<PeticionInscripcionDTO> dtos) {
     List<PeticionInscripcion> peticiones = ensambladorDePeticiones.ensamblarDesdeDto(dtos);
     List<SugerenciaInscripcion> sugerencias = asistenteDeInscripcion.sugerirInscripcion(peticiones);
-    List<SugerenciaInscripcionDTO> sugerenciasDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
-      sugerencias);
+    List<SugerenciaInscripcionDTO> sugerenciasDTO = new ArrayList<>(sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(sugerencias));
     List<SugerenciaInscripcion> sugerenciasParciales =asistenteDeAsignacion.obtenerSugerenciasAsignadas();
     List<SugerenciaInscripcionDTO> sugerenciasParcialesDTO = sugerenciaInscripcionMapper.toSugerenciaInscripcionDtoList(
             sugerenciasParciales);

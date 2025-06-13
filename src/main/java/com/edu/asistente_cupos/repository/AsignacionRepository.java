@@ -5,6 +5,7 @@ import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Estudiante;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AsignacionRepository {
     Asignacion save(Asignacion asignacion);
@@ -12,4 +13,6 @@ public interface AsignacionRepository {
     boolean existsByEstudianteAndComision(Estudiante estudiante, Comision comision);
 
     List<Asignacion> findAll();
+
+    Optional<Asignacion> findByEstudianteAndComision(Estudiante estudiante, Comision comision);
 }

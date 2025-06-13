@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -28,5 +29,10 @@ public class AsignacionRepositoryImpl implements AsignacionRepository {
     @Override
     public List<Asignacion> findAll() {
         return jpaRepository.findAll();
+    }
+
+    @Override
+    public Optional<Asignacion> findByEstudianteAndComision(Estudiante estudiante, Comision comision) {
+        return jpaRepository.findByEstudianteAndComision(estudiante, comision);
     }
 }

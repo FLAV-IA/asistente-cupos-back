@@ -26,7 +26,7 @@ public class ConfiguracionFiltrosInscripcion {
     FiltroDePeticionInscripcion filtro4 = new FiltroDePeticionYaAsignada(asignacionRepository);
     filtro3.setFiltroSiguiente(filtro4);
     filtro2.setFiltroSiguiente(filtro3);
-    filtro1.setFiltroSiguiente(filtro2);
+    filtro1.setFiltroSiguiente(filtro4);
 
     return filtro1;
   }
