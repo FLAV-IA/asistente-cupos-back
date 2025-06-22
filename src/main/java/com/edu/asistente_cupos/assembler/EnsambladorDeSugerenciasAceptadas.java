@@ -5,8 +5,10 @@ import com.edu.asistente_cupos.domain.Asignacion;
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Estudiante;
 import com.edu.asistente_cupos.domain.Materia;
+import com.edu.asistente_cupos.domain.sugerencia.FabricaSugerencia;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAceptada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
+import com.edu.asistente_cupos.domain.sugerencia.SugerenciaRechazada;
 import com.edu.asistente_cupos.repository.ComisionRepository;
 import com.edu.asistente_cupos.repository.EstudianteRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +24,7 @@ public class EnsambladorDeSugerenciasAceptadas {
     private final EstudianteRepository estudianteRepository;
     private final ComisionRepository comisionRepository;
 
-    public List<SugerenciaAceptada> ensamblarSugerencias(List<SugerenciaInscripcionDTO> dtos) {
+    public List<SugerenciaInscripcion> ensamblarSugerencias(List<SugerenciaInscripcionDTO> dtos) {
         return dtos.stream()
                 .map(sugerenciaInscripcionDTO -> {
                     validarSugerencia(sugerenciaInscripcionDTO);
@@ -38,7 +40,6 @@ public class EnsambladorDeSugerenciasAceptadas {
                 "El código de comisión no puede estar vacío.");
         validar(dto.getDniEstudiante() == null || dto.getDniEstudiante().trim().isEmpty(),
                 "El DNI del estudiante no puede estar vacío.");
-        validar(!dto.isCupoAsignado(), "No es una sugerencia asignable.");
     }
 
     private void validar(boolean condicion, String mensajeError) {
@@ -47,14 +48,12 @@ public class EnsambladorDeSugerenciasAceptadas {
         }
     }
 
-    private SugerenciaAceptada crearSugerencia(SugerenciaInscripcionDTO sugerenciaInscripcionDTO, Estudiante estudiante, Comision comision, Materia materia) {
-        return new SugerenciaAceptada(
-                estudiante,
-                materia,
-                comision,
-                sugerenciaInscripcionDTO.getMotivo(),
-                sugerenciaInscripcionDTO.getPrioridad()
-        );
+    private SugerenciaInscripcion crearSugerencia(SugerenciaInscripcionDTO sugerenciaInscripcionDTO, Estudiante estudiante, Comision comision, Materia materia) {
+        FabricaSugerencia fabrica = sugerenciaInscripcionDTO.isCupoAsignado()
+                ? SugerenciaAceptada::new
+                : SugerenciaRechazada::new;
+        return fabrica.crear(estudiante, materia, comision, sugerenciaInscripcionDTO.getMotivo(), sugerenciaInscripcionDTO.getPrioridad());
+
     }
 
     private Comision obtenerComision(SugerenciaInscripcionDTO sugerenciaInscripcionDTO) {

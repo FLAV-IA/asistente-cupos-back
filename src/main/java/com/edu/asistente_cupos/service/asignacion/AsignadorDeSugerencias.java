@@ -3,7 +3,7 @@ package com.edu.asistente_cupos.service.asignacion;
 import com.edu.asistente_cupos.domain.Asignacion;
 import com.edu.asistente_cupos.domain.Comision;
 import com.edu.asistente_cupos.domain.Estudiante;
-import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAceptada;
+import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistente_cupos.repository.AsignacionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,13 +20,13 @@ public class AsignadorDeSugerencias {
     private final AsignacionRepository asignacionRepository;
 
 
-    public Asignacion asignarSugerencia(SugerenciaAceptada sugerenciaRecomendada) {
-        Estudiante estudiante = sugerenciaRecomendada.estudiante();
-        Comision comision = sugerenciaRecomendada.comision();
+    public Asignacion asignarSugerencia(SugerenciaInscripcion sugerenciaInscripcion) {
+        Estudiante estudiante = sugerenciaInscripcion.estudiante();
+        Comision comision = sugerenciaInscripcion.comision();
         Optional<Asignacion> byEstudianteAndComision = this.asignacionRepository.findByEstudianteAndComision(estudiante, comision);
-
+        this.asignacionRepository.findAsignacionAMateriaDeEstudiante(estudiante, comision.getMateria());
         if(byEstudianteAndComision.isPresent()) {
-            log.info("La asignación ya existe para el estudiante {} y la comisión {}", estudiante.getDni(), comision.getCodigo());
+            log.info("Ya existe una  asignación  para el estudiante {} y la materia {}", estudiante.getDni(), comision.getMateria().getNombre());
             return byEstudianteAndComision.get();
         }
 

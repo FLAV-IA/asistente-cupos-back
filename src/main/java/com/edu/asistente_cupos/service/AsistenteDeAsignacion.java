@@ -3,14 +3,15 @@ package com.edu.asistente_cupos.service;
 import com.edu.asistente_cupos.assembler.EnsambladorDeSugerenciasAceptadas;
 import com.edu.asistente_cupos.domain.Asignacion;
 import com.edu.asistente_cupos.domain.Comision;
-import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAceptada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistente_cupos.repository.ComisionRepository;
 import com.edu.asistente_cupos.service.asignacion.AsignadorDeSugerencias;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -23,14 +24,14 @@ public class AsistenteDeAsignacion {
      * Asigna sugerencias aceptadas a las comisiones correspondientes.
      * Limpia las comisiones modificadas antes de asignar nuevas sugerencias.
      *
-     * @param sugerenciasAceptada Lista de sugerencias aceptadas a asignar.
+     * @param sugerenciaInscripcionList Lista de sugerencias de inscripcion a asignar.
      */
-    public void asignarSugerencias(List<SugerenciaAceptada> sugerenciasAceptada) {
+    public void asignarSugerencias(List<SugerenciaInscripcion> sugerenciaInscripcionList) {
         limpiarComisionesModificadas();
-        sugerenciasAceptada.forEach(this::asignarSugerencia);
+        sugerenciaInscripcionList.forEach(this::asignarSugerencia);
     }
 
-    private void asignarSugerencia(SugerenciaAceptada sugerencia) {
+    private void asignarSugerencia(SugerenciaInscripcion sugerencia) {
         Comision comision = obtenerComision(sugerencia);
         if (comision.tieneCupo()) {
             asignadorDeSugerencias.asignarSugerencia(sugerencia);
@@ -39,7 +40,7 @@ public class AsistenteDeAsignacion {
         }
     }
 
-    private Comision obtenerComision(SugerenciaAceptada sugerencia) {
+    private Comision obtenerComision(SugerenciaInscripcion sugerencia) {
         return comisionRepository.findById(sugerencia.comision().getCodigo())
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Comision no encontrada: " + sugerencia.comision().getCodigo()));

@@ -3,7 +3,7 @@ package com.edu.asistente_cupos.controller;
 import com.edu.asistente_cupos.assembler.EnsambladorDeSugerenciasAceptadas;
 import com.edu.asistente_cupos.controller.dto.SugerenciaInscripcionDTO;
 import com.edu.asistente_cupos.domain.Comision;
-import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAceptada;
+import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistente_cupos.mapper.ComisionMapper;
 import com.edu.asistente_cupos.service.AsistenteDeAsignacion;
 import com.edu.asistente_cupos.service.sugerencia.opta.model.ComisionDTO;
@@ -32,8 +32,8 @@ public class AsignadorController {
     public ResponseEntity<Set<ComisionDTO>> confirmarAsignaciones(
             @RequestBody List<SugerenciaInscripcionDTO> sugerenciasInscripcionAsignableDto) {
         try {
-            List<SugerenciaAceptada> sugerenciaAceptadas = ensambladorDeSugerenciasAceptadas.ensamblarSugerencias(sugerenciasInscripcionAsignableDto);
-            asistenteDeAsignacion.asignarSugerencias(sugerenciaAceptadas);
+            List<SugerenciaInscripcion> sugerenciaInscripcionList = ensambladorDeSugerenciasAceptadas.ensamblarSugerencias(sugerenciasInscripcionAsignableDto);
+            asistenteDeAsignacion.asignarSugerencias(sugerenciaInscripcionList);
             Set<Comision> comisionesModificadas = asistenteDeAsignacion.obtenerComisionesModificadas();
             Set<ComisionDTO> comisionDtoList = comisionMapper.toDtoList(comisionesModificadas);
             return ResponseEntity.ok(comisionDtoList);
