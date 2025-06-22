@@ -1,7 +1,7 @@
 package com.edu.asistente_cupos.mapper;
 
 import com.edu.asistente_cupos.domain.prompt.optimizado.SugerenciaParaTraducir4Prompt;
-import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAsignada;
+import com.edu.asistente_cupos.domain.sugerencia.SugerenciaAceptada;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaInscripcion;
 import com.edu.asistente_cupos.domain.sugerencia.SugerenciaRechazada;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ public class SugerenciaInscripcionPromptMapper {
   }
 
   private SugerenciaParaTraducir4Prompt toPromptFormat(SugerenciaInscripcion sugerencia) {
-    if (sugerencia instanceof SugerenciaAsignada asignada) {
+    if (sugerencia instanceof SugerenciaAceptada asignada) {
       return SugerenciaParaTraducir4Prompt.builder().a(asignada.estudiante().getDni())
                                           .m(asignada.comision().getCodigo()).x(true)
                                           .p(asignada.prioridad()).e(asignada.motivo()).build();

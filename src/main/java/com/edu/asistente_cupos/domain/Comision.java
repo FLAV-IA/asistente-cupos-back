@@ -2,16 +2,15 @@ package com.edu.asistente_cupos.domain;
 
 import com.edu.asistente_cupos.domain.horario.Horario;
 import com.edu.asistente_cupos.mapper.HorarioConverter;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,34 +19,44 @@ import java.util.Objects;
 @AllArgsConstructor
 @Builder
 public class Comision {
-  @Id
-  private String codigo;
+    @Id
+    private String codigo;
 
-  @Convert(converter = HorarioConverter.class)
-  private Horario horario;
+    @Convert(converter = HorarioConverter.class)
+    private Horario horario;
 
-  private int cupo;
+    private int cupo;
 
-  @ManyToOne
-  @JoinColumn(name = "codigo-materia", referencedColumnName = "codigo")
-  private Materia materia;
+    @ManyToOne
+    @JoinColumn(name = "codigo-materia", referencedColumnName = "codigo")
+    private Materia materia;
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(codigo);
-  }
+    @OneToMany(mappedBy = "comision", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Asignacion> asignaciones = new ArrayList<>();
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (o == null || getClass() != o.getClass())
-      return false;
-    Comision that = (Comision) o;
-    return Objects.equals(codigo, that.codigo);
-  }
+    public boolean tieneCupo() {
+        return this.cupo - estudiantesInscriptos().size() > 0;
+    }
 
-  public boolean tieneCupo() {
-    return this.cupo > 0;
-  }
+    public List<Estudiante> estudiantesInscriptos() {
+        return asignaciones.stream()
+                .map(Asignacion::getEstudiante)
+                .toList();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigo);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Comision that = (Comision) o;
+        return Objects.equals(codigo, that.codigo);
+    }
 }
