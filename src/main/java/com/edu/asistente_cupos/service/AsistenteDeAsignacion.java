@@ -58,4 +58,11 @@ public class AsistenteDeAsignacion {
         List<Asignacion> asignaciones = this.asignadorDeSugerencias.obtenerAsignacionesParciales();
         return this.ensambladorDeSugerenciasAceptadas.ensamblarSugerenciasDesdeAsignaciones(asignaciones);
     }
+
+    public void eliminarAsignacion(String codComision, String dniEstudiante) {
+        Comision comision = comisionRepository.findById(codComision)
+                .orElseThrow(() -> new IllegalArgumentException("Comisión no encontrada: " + codComision));
+        asignadorDeSugerencias.eliminarAsignacion(comision, dniEstudiante);
+        comisionesModificadas.add(comision);
+    }
 }

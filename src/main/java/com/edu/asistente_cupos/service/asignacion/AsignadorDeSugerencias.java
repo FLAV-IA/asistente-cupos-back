@@ -41,4 +41,15 @@ public class AsignadorDeSugerencias {
     public List<Asignacion> obtenerAsignacionesParciales() {
        return this.asignacionRepository.findAll();
     }
+
+    public void eliminarAsignacion(Comision comision, String dniEstudiante) {
+        Estudiante estudiante = Estudiante.builder().dni(dniEstudiante).build();
+        Optional<Asignacion> asignacion = this.asignacionRepository.findByEstudianteAndComision(estudiante, comision);
+        if (asignacion.isPresent()) {
+            this.asignacionRepository.delete(asignacion.get());
+            log.info("Asignación eliminada para el estudiante {} en la comisión {}", dniEstudiante, comision.getCodigo());
+        } else {
+            log.warn("No se encontró una asignación para el estudiante {} en la comisión {}", dniEstudiante, comision.getCodigo());
+        }
+    }
 }

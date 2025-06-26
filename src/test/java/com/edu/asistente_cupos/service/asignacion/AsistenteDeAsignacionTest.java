@@ -180,4 +180,30 @@ class AsistenteDeAsignacionTest {
         assertEquals(1, resultado.size());
         assertEquals(sugerenciaMock, resultado.get(0));
     }
+    @Test
+    void eliminarAsignacionExistenteEliminaCorrectamente() {
+        Comision comisionMock = mock(Comision.class);
+        when(comisionMock.getCodigo()).thenReturn("C1");
+        when(comisionRepository.findById("C1")).thenReturn(Optional.of(comisionMock));
+
+        asistenteDeAsignacion.eliminarAsignacion("C1", "123");
+
+        verify(asignadorDeSugerencias).eliminarAsignacion(comisionMock, "123");
+        Set<Comision> modificadas = asistenteDeAsignacion.obtenerComisionesModificadas();
+        assertEquals(1, modificadas.size());
+        assertTrue(modificadas.contains(comisionMock));
+    }
+    @Test
+    void alEliminarAsignacionConComisionInexistentelanzaExcepcionSiComisionNoExiste() {
+        when(comisionRepository.findById("INEXISTENTE")).thenReturn(Optional.empty());
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                asistenteDeAsignacion.eliminarAsignacion("INEXISTENTE", "123"));
+
+        assertTrue(exception.getMessage().contains("Comisión no encontrada"));
+        verify(asignadorDeSugerencias, never()).eliminarAsignacion(any(), any());
+        assertTrue(asistenteDeAsignacion.obtenerComisionesModificadas().isEmpty());
+    }
+
+
 }
