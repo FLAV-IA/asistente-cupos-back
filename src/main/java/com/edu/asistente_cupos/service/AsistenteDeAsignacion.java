@@ -61,7 +61,7 @@ public class AsistenteDeAsignacion {
 
     public void eliminarAsignacion(String codComision, String dniEstudiante) {
         Comision comision = comisionRepository.findById(codComision)
-                .orElseThrow(() -> new IllegalArgumentException("Comisión no encontrada: " + codComision));
+                .orElseThrow(() -> new IllegalArgumentException("Comision no encontrada: " + codComision));
         asignadorDeSugerencias.eliminarAsignacion(comision, dniEstudiante);
         comisionesModificadas.add(comision);
     }

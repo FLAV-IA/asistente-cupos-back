@@ -200,7 +200,7 @@ class AsistenteDeAsignacionTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 asistenteDeAsignacion.eliminarAsignacion("INEXISTENTE", "123"));
 
-        assertTrue(exception.getMessage().contains("Comisión no encontrada"));
+        assertTrue(exception.getMessage().contains("Comision no encontrada"));
         verify(asignadorDeSugerencias, never()).eliminarAsignacion(any(), any());
         assertTrue(asistenteDeAsignacion.obtenerComisionesModificadas().isEmpty());
     }

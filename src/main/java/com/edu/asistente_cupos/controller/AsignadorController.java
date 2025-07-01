@@ -47,7 +47,7 @@ public class AsignadorController {
             asistenteDeAsignacion.eliminarAsignacion(codComision, dniEstudiante);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            log.error("Error eliminando asignación", e);
+            log.error("Error eliminando asignacion", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
