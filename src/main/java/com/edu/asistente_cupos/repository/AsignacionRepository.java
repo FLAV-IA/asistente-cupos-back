@@ -18,4 +18,6 @@ public interface AsignacionRepository {
     Optional<Asignacion> findByEstudianteAndComision(Estudiante estudiante, Comision comision);
 
     Optional<Asignacion> findAsignacionAMateriaDeEstudiante(Estudiante estudiante, Materia materia);
+
+    void delete(Asignacion asignacion);
 }

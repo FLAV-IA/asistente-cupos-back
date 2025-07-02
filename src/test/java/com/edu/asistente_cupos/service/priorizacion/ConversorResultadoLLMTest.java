@@ -11,6 +11,7 @@ import static com.edu.asistente_cupos.testutils.TestDataFactory.crearPeticionIns
 import static com.edu.asistente_cupos.testutils.TestDataFactory.crearResultadoPriorizacionLLMDummy;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ConversorResultadoLLMTest {
   private final ConversorResultadoLLM conversor = new ConversorResultadoLLM();
@@ -44,14 +45,14 @@ class ConversorResultadoLLMTest {
   }
 
   @Test
-  void lanzaExcepcionSiNoSeEncuentraMateriaEnInscripcion() {
+  void retornaListaVaciaSiNoSeEncuentraMateriaEnInscripcion() {
     PeticionInscripcion inscripcion = crearPeticionInscripcionDummy();
     ResultadoPriorizacionLLM resultado = crearResultadoPriorizacionLLMDummy();
     resultado.getEp().get(0).setN("CODIGO_INEXISTENTE");
 
-    var ex = assertThrows(IllegalArgumentException.class,
-      () -> conversor.desdeResultadosLLM(List.of(resultado), List.of(inscripcion)));
+    List<PeticionPorMateriaPriorizada> resultadoFinal = conversor.desdeResultadosLLM(List.of(resultado), List.of(inscripcion));
 
-    assertThat(ex.getMessage()).contains("No se encontró una petición original para la materia");
+    assertTrue(resultadoFinal.isEmpty(), "Se esperaba una lista vacía cuando no se encuentra la materia");
   }
+
 }
