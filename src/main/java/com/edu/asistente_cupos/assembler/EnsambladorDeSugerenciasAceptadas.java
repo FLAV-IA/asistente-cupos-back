@@ -37,9 +37,9 @@ public class EnsambladorDeSugerenciasAceptadas {
 
     private void validarSugerencia(SugerenciaInscripcionDTO dto) {
         validar(dto.getCodigoComision() == null || dto.getCodigoComision().trim().isEmpty(),
-                "El código de comisión no puede estar vacío.");
+                "El codigo de comision no puede estar vacio.");
         validar(dto.getDniEstudiante() == null || dto.getDniEstudiante().trim().isEmpty(),
-                "El DNI del estudiante no puede estar vacío.");
+                "El DNI del estudiante no puede estar vacio.");
     }
 
     private void validar(boolean condicion, String mensajeError) {

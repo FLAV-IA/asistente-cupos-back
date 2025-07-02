@@ -41,4 +41,9 @@ public class AsignacionRepositoryImpl implements AsignacionRepository {
     public Optional<Asignacion> findAsignacionAMateriaDeEstudiante(@Param("estudiante") Estudiante estudiante, @Param("materia") Materia materia) {
         return jpaRepository.findAsignacionAMateriaDeEstudiante(estudiante, materia);
     }
+
+    @Override
+    public void delete(Asignacion asignacion) {
+        jpaRepository.delete(asignacion);
+    }
 }

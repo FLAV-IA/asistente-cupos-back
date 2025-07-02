@@ -87,4 +87,24 @@ public class AsistenteAsignacionControllerTest {
                         """))
                 .andExpect(status().isInternalServerError());
     }
+    @Test
+    void eliminarAsignacionRetorna200CuandoEsExitosa() throws Exception {
+        doNothing().when(asistenteDeAsignacion).eliminarAsignacion("MAT1-01", "1234");
+
+        mockMvc.perform(post("/asignador/eliminar-asignacion")
+                .param("codComision", "MAT1-01")
+                .param("dniEstudiante", "1234"))
+                .andExpect(status().isOk());
+    }
+    @Test
+    void eliminarAsignacionRetorna500SiOcurreError() throws Exception {
+        doThrow(new RuntimeException("fallo interno")).when(asistenteDeAsignacion)
+                .eliminarAsignacion("MAT1-01", "1234");
+
+        mockMvc.perform(post("/asignador/eliminar-asignacion")
+                .param("codComision", "MAT1-01")
+                .param("dniEstudiante", "1234"))
+                .andExpect(status().isInternalServerError());
+    }
+
 }
